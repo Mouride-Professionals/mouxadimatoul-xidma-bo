@@ -6,7 +6,7 @@ import { InitialDataResolver } from 'app/app.resolvers';
 /* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 export const appRoutes: Route[] = [
-    { path: '', pathMatch: 'full', redirectTo: 'home' },
+    { path: '', pathMatch: 'full', redirectTo: 'dashbord' },
 
     {
         path: '',
@@ -14,11 +14,30 @@ export const appRoutes: Route[] = [
         resolve: { initialData: InitialDataResolver },
         children: [
             {
-                path: 'home',
+                path: 'dashbord',
                 loadChildren: () =>
-                    import('./modules/home/home.module').then(
-                        (m) => m.HomeModule
+                    import('./modules/dashboard/dashboard.module').then(
+                        (m) => m.DashboardModule
                     ),
+            },
+            {
+                path: 'admin',
+                loadChildren: () =>
+                    import('./modules/admin/admin.module').then(
+                        (m) => m.AdminModule
+                    ),
+            },
+            {
+                path: 'residences',
+                loadChildren: () =>
+                    import('./modules/residence/residence.module').then(
+                        (m) => m.ResidenceModule
+                    ),
+            },
+            {
+                path: 'dons',
+                loadChildren: () =>
+                    import('./modules/don/don.module').then((m) => m.DonModule),
             },
         ],
     },
