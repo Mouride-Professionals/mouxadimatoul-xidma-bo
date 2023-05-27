@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>Ajouter un événement</h2>
+<mat-dialog-content class="mat-typography">
+<form [formGroup]="form" class="flex flex-col mt-8 p-8 pb-4 bg-card rounded-2xl shadow overflow-hidden">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <mat-form-field
+            [ngClass]="formFieldHelpers"
+            class="col-span-1 gt-xs:pr-3">
+            <mat-label>Nom de l'événement</mat-label>
+            <input matInput name="libelle" formControlName="libelle">
+            <mat-icon
+                class="icon-size-5"
+                matSuffix
+                [svgIcon]="'event'">
+            </mat-icon>
+            <mat-error *ngIf="formEvent.libelle.touched && formEvent.libelle.errors?.required" class="error-message">
+                le nom est obligatoire!
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <mat-dialog-actions align="">
+        <button mat-flat-button mat-dialog-close>Annuler</button>
+        <button mat-flat-button [disabled]="form.invalid" [mat-dialog-close]="true" (click)="saveEvent()" >Enregistrer</button>
+    </mat-dialog-actions>
+</form>
+</mat-dialog-content>

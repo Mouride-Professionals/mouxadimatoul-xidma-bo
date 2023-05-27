@@ -1,0 +1,57 @@
+<h2 mat-dialog-title>Ajouter un invité</h2>
+<mat-dialog-content class="mat-typography">
+<form [formGroup]="form" class="flex flex-col mt-8 p-8 pb-4 bg-card rounded-2xl shadow overflow-hidden">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <mat-form-field
+            [ngClass]="formFieldHelpers"
+            class="col-span-1 gt-xs:pr-3">
+            <mat-label>Prénom</mat-label>
+            <input matInput name="prenom" formControlName="prenom">
+            <mat-icon
+                class="icon-size-5"
+                matSuffix
+                [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+        </mat-form-field>
+        <mat-form-field
+            [ngClass]="formFieldHelpers"
+            class="col-span-1 gt-xs:pl-3">
+            <mat-label>Nom</mat-label>
+            <input matInput name="nom" formControlName="nom">
+            <mat-icon
+                class="icon-size-5"
+                matSuffix
+                [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+        </mat-form-field>       
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <mat-form-field
+            [ngClass]="formFieldHelpers"
+            class="flex-auto">
+            <mat-label>Téléphone</mat-label>
+            <input
+                matInput
+                maxlength="9" name="telephone" formControlName="telephone"
+                #postalCode>
+            <mat-hint align="end">{{postalCode.value.length}} / 9</mat-hint>
+            <mat-icon
+                class="icon-size-5"
+                matSuffix
+                [svgIcon]="'heroicons_solid:phone'"></mat-icon>
+        </mat-form-field>
+        <mat-form-field
+            [ngClass]="formFieldHelpers"
+            class="col-span-1 gt-xs:pl-3">
+            <mat-label>Adresse</mat-label>
+            <input matInput name="adresse" formControlName="adresse">
+            <mat-icon
+                class="icon-size-5"
+                matSuffix
+                [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+        </mat-form-field>
+    </div>
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Annuler</button>
+        <button mat-button [mat-dialog-close]="true" (click)="saveInvit()">Enregistrer</button>
+    </mat-dialog-actions>
+</form>
+</mat-dialog-content>

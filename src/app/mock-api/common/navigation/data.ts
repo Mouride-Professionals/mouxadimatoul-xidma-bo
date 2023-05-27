@@ -23,30 +23,56 @@ export const defaultNavigation: FuseNavigationItem[] = [
         icon: 'mat_solid:home',
         children: [
             {
-                id: 'residences-dashbord',
+                id: 'dashbord',
                 title: 'Tableau de bord',
                 type: 'basic',
                 link: 'residences/dashboard',
             },
             {
+                id: '/reservation',
+                title: 'Réservations',
+                type: 'basic',
+                link: 'residences/reservation',
+            },
+            {
+                id: '/chambre',
+                title: 'Chambres',
+                type: 'basic',
+                link: 'residences/chambre',
+            },  
+            {
                 id: 'residences-listes',
-                title: 'Voir la liste',
+                title: 'liste des résidences',
                 type: 'basic',
                 link: 'residences',
             },
             {
-                id: 'residences-reservations',
-                title: 'Réservations',
+                id: '/pavillon',
+                title: 'Pavillons',
                 type: 'basic',
-                link: 'residences/reservations',
-            },
+                link: 'residences/pavillon',
+            }
         ],
     },
     {
+        id: 'evenements',
+        title: 'Événements',
+        type: 'basic',
+        icon: 'event',
+        link: '/evenements',
+    },
+    {
+        id: 'invites',
+        title: 'Invités',
+        type: 'basic',
+        icon: 'heroicons_outline:user-group',
+        link: '/invites',
+    },
+    /*{
         id: 'dons',
         title: 'Gestion des dons',
         type: 'basic',
         icon: 'mat_solid:money',
         link: '/dons',
-    },
+    },*/
 ];
