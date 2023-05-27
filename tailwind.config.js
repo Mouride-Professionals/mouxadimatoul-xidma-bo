@@ -10,8 +10,10 @@ const generatePalette = require(path.resolve(__dirname, ('src/@fuse/tailwind/uti
  * Tailwind-like color palettes automatically
  */
 const customPalettes = {
-    jaune: generatePalette('#FFCC00'),
-    bleu: generatePalette('#0A84FF'),
+    jaune: generatePalette('#F1BC7E'),
+    // jaune: generatePalette('#FFCC00'),
+    // bleu: generatePalette('#0A84FF'),
+    vert: generatePalette('#0F7F4C'),
 };
 
 /**
@@ -21,7 +23,7 @@ const themes = {
     // Default theme is required for theming system to work correctly
     'default': {
         primary  : customPalettes.jaune,
-        secondary: customPalettes.bleu,
+        secondary: customPalettes.vert,
         accent   : {
             ...colors.slate,
             DEFAULT: colors.slate[800]

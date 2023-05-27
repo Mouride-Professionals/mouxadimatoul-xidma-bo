@@ -10,30 +10,11 @@ export const defaultNavigation: FuseNavigationItem[] = [
         link: '/dashboard',
     },
     {
-        id: 'admin',
-        title: 'Administration',
-        type: 'collapsable',
+        id: 'utilisateurs',
+        title: 'Gestion des utilisateurs',
+        type: 'basic',
         icon: 'heroicons_solid:users',
-        children: [
-            {
-                id: 'admin-users',
-                title: 'Utilisateurs',
-                type: 'basic',
-                link: 'admin/users',
-            },
-            {
-                id: 'admin-roles',
-                title: 'Roles',
-                type: 'basic',
-                link: 'admin/roles',
-            },
-            {
-                id: 'admin-acces',
-                title: "Droits d'accès",
-                type: 'basic',
-                link: 'admin/acces',
-            },
-        ],
+        link: 'utilisateurs',
     },
     {
         id: 'residences',

@@ -2,3 +2,33 @@
 /*  @ Import/write your custom styles here.
 /*  @ Styles from this file will override 'vendors.scss' and Fuse's base styles.
 /* ----------------------------------------------------------------------------------------------------- */
+
+
+.responsive-table {
+    @apply relative overflow-x-auto rounded-lg;
+}
+
+.mat-form-field-required-marker { color: red !important }
+
+.table {
+    border-spacing: 0 8px;
+    @apply min-w-full border-separate text-sm text-left text-gray-500 dark:text-gray-400;
+    tr {
+        @apply rounded-md;
+    }
+    tr td:last-child, tr th:last-child {
+        @apply rounded-r-md;
+    }
+    tr td:first-child, tr th:first-child {
+        @apply rounded-l-md;
+    }
+    thead {
+        @apply text-md shadow-md text-primary-500 uppercase bg-white border-b;
+    }
+    tbody tr {
+        @apply bg-white shadow-md border-b dark:bg-gray-800 dark:border-gray-700;
+    }
+    th, td {
+        @apply px-6 py-3;
+    }
+}
