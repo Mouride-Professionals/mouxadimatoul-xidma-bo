@@ -32,7 +32,8 @@ export const appRoutes: Route[] = [
                 loadChildren: () =>
                     import('./modules/residence/residence.module').then(
                         (m) => m.ResidenceModule
-                    ),
+                    )
+                
             },
             {
                 path: 'evenements',

@@ -23,22 +23,22 @@ export const defaultNavigation: FuseNavigationItem[] = [
         icon: 'mat_solid:home',
         children: [
             {
-                id: 'residences-dashbord',
+                id: 'dashbord',
                 title: 'Tableau de bord',
                 type: 'basic',
                 link: 'residences/dashboard',
             },
             {
-                id: 'residences-reservations',
+                id: '/reservation',
                 title: 'Réservations',
                 type: 'basic',
-                link: 'residences/reservations',
+                link: 'residences/reservation',
             },
             {
-                id: 'residences-reservations',
+                id: '/chambre',
                 title: 'Chambres',
                 type: 'basic',
-                link: 'residences/reservations',
+                link: 'residences/chambre',
             },  
             {
                 id: 'residences-listes',
@@ -47,10 +47,10 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 link: 'residences',
             },
             {
-                id: 'a-reservations',
+                id: '/pavillon',
                 title: 'Pavillons',
                 type: 'basic',
-                link: 'h/reservations',
+                link: 'residences/pavillon',
             }
         ],
     },
