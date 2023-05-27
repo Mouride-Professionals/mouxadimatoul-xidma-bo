@@ -33,23 +33,15 @@
     </div>
 
     <div class="w-full grid grid-cols-4 gap-6">
-        <fuse-card class="col-span-1 flex space-x-3 items-center justify-between p-3">
+        <fuse-card *ngFor="let event of events$ | async" class="col-span-1 flex space-x-3 items-center justify-between p-3">
             <mat-icon [svgIcon]="'event'"></mat-icon>
             <div class="flex-1">
-                <span>Magal Touba</span>
+                <span>{{ event.libelle }}</span>
             </div>
             <button>
-                <mat-icon svgIcon="heroicons_solid:dots-vertical"></mat-icon>
-            </button>
-        </fuse-card>
-        <fuse-card class="col-span-1 flex space-x-3 items-center justify-between p-3">
-            <mat-icon [svgIcon]="'event'"></mat-icon>
-            <div class="flex-1">
-                <span>Ziar</span>
-            </div>
-            <button>
-                <mat-icon svgIcon="heroicons_solid:dots-vertical"></mat-icon>
+                <mat-icon type="submit" svgIcon="heroicons_solid:dots-vertical"></mat-icon>
             </button>
         </fuse-card>
     </div>
 </div>
+    

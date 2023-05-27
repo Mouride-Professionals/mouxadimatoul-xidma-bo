@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Evenement } from '@core/model/evenement.model';
+import { EvenementService } from '@core/service/evenement.service';
 
 @Component({
   selector: 'app-form-evenement',
@@ -9,18 +11,28 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class FormEvenementComponent implements OnInit {
   formFieldHelpers: string[] = [''];
   form: FormGroup;
-  constructor() {
+  constructor(private _eventService: EvenementService) {
   }
+  
+  public get formEvent() {
+    return this.form.controls;
+  }
+  
   ngOnInit(): void {
       this.eventForm();
   }
+
   eventForm(): void {
       this.form = new FormGroup({
-        event: new FormControl('', Validators.required),
+        libelle: new FormControl('', Validators.required),
       });
   }
 
   saveEvent() {
-      console.log('form event', this.form.value);
+      this._eventService.createEvent(this.form.value).subscribe((
+        response: Evenement) => {    
+          console.log(response);
+        });
+      location.reload();
   }
 }
