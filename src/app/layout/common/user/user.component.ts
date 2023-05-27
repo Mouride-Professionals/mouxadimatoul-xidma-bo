@@ -10,6 +10,9 @@ import {
 import { Router } from '@angular/router';
 import { BooleanInput } from '@angular/cdk/coercion';
 import { Subject, takeUntil } from 'rxjs';
+import { Utilisateur } from '@core/model/utilisateur.model';
+import { UtilisateurService } from '@core/service/utilisateur.service';
+import { AuthService } from '@core/auth/auth.service';
 
 @Component({
     selector: 'user',
@@ -20,13 +23,24 @@ import { Subject, takeUntil } from 'rxjs';
 })
 export class UserComponent implements OnInit, OnDestroy {
     @Input() showAvatar: boolean = true;
-    // user: User;
+    user: Utilisateur;
 
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
-    constructor(private _router: Router) {}
+    constructor(
+        private _router: Router,
+        private _utilisateurService: UtilisateurService,
+        private _authService: AuthService
+    ) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        // Subscribe to navigation data
+        this._utilisateurService.user$
+            .pipe(takeUntil(this._unsubscribeAll))
+            .subscribe((user: Utilisateur) => {
+                this.user = user;
+            });
+    }
 
     /**
      * On destroy
@@ -40,6 +54,8 @@ export class UserComponent implements OnInit, OnDestroy {
      * Sign out
      */
     signOut(): void {
-        this._router.navigate(['/deconnexion']);
+        this._authService.signOut().subscribe(() => {
+            this._router.navigate(['/connexion']);
+        });
     }
 }

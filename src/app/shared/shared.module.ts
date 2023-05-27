@@ -7,7 +7,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { FuseConfirmationModule } from '@fuse/services/confirmation';
 import { FuseCardModule } from '@fuse/components/card';
+
 
 const LIST_MODULES = [
     MatButtonModule,
@@ -16,7 +19,9 @@ const LIST_MODULES = [
     MatInputModule,
     MatDialogModule,
     MatSelectModule,
-    FuseCardModule
+    FuseCardModule,
+    MatSlideToggleModule,
+    FuseConfirmationModule
 ];
 
 @NgModule({
