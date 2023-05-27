@@ -4,6 +4,8 @@ import { Utilisateur } from '@core/model/utilisateur.model';
 import { Observable, ReplaySubject, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { environment } from 'environments/environment';
+import {RequestParams} from "@core/model/params.model";
+import {Pagination} from "@core/model/pagination.model";
 
 const API_URL = environment.apiUrl + '/utilisateurs';
 
@@ -27,11 +29,30 @@ export class UtilisateurService {
 
     // ajout utilisateur
     createUser(user: Utilisateur): Observable<Utilisateur> {
+        console.log('utilisateur form', user);
         return this._http
-            .post<Utilisateur>(API_URL, user)
+            .post<Utilisateur>(`${environment.apiUrl}/utilisateurs`, user)
             .pipe(
                 catchError(
                     this.handleError<Utilisateur>('Ajout utilisateur echoué')
+                )
+            );
+    }
+    updateUser(user: Utilisateur): Observable<Utilisateur> {
+        return this._http
+            .put<Utilisateur>(`${environment.apiUrl}/utilisateurs`, user)
+            .pipe(
+                catchError(
+                    this.handleError<Utilisateur>('Modification utilisateur echoué')
+                )
+            );
+    }
+    updateStatutUser(id: number): Observable<Utilisateur> {
+        return this._http
+            .put<Utilisateur>(`${environment.apiUrl}/utilisateurs/statut/${id}`, {})
+            .pipe(
+                catchError(
+                    this.handleError<Utilisateur>('Modification utilisateur echoué')
                 )
             );
     }
@@ -47,10 +68,10 @@ export class UtilisateurService {
     }
 
     // liste de tous les utilisateurs
-    getAllUsers(): Observable<Utilisateur[]> {
-        return this._http.get<Utilisateur[]>(API_URL).pipe(
+    getAllUsers(params: RequestParams): Observable<Pagination<Utilisateur>> {
+        return this._http.get<Pagination<Utilisateur>>(API_URL).pipe(
             tap((users) => console.log('Liste utilisateur fetched!', users)),
-            catchError(this.handleError<Utilisateur[]>('list utilisateur', []))
+            catchError(this.handleError<Pagination<Utilisateur>>('list utilisateur', null))
         );
     }
     private handleError<T>(operation = 'operation', result?: T) {

@@ -1,33 +1,39 @@
-<h2 mat-dialog-title>Ajouter un utilisateur</h2>
+<h2 mat-dialog-title>{{tite}}</h2>
 <mat-dialog-content class="mat-typography">
-<form [formGroup]="form" class="flex flex-col mt-8 p-8 pb-4 bg-card rounded-2xl shadow overflow-hidden">
+<form [formGroup]="form" (ngSubmit)="saveUser()" class="flex flex-col mt-8 p-8 pb-4 bg-card rounded-2xl shadow overflow-hidden">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <mat-form-field
             [ngClass]="formFieldHelpers"
             class="col-span-1 gt-xs:pr-3">
-            <mat-label>Prénom</mat-label>
+            <mat-label for="prenom">Prénom</mat-label>
             <input matInput name="prenom" formControlName="prenom">
             <mat-icon
                 class="icon-size-5"
                 matSuffix
                 [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+            <mat-error *ngIf="formUser.prenom.touched && formUser.prenom.errors?.required" class="error-message">
+                Le prénom est obligatoire.
+            </mat-error>
         </mat-form-field>
         <mat-form-field
             [ngClass]="formFieldHelpers"
             class="col-span-1 gt-xs:pl-3">
-            <mat-label>Nom</mat-label>
+            <mat-label for="nom">Nom</mat-label>
             <input matInput name="nom" formControlName="nom">
             <mat-icon
                 class="icon-size-5"
                 matSuffix
                 [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+            <mat-error *ngIf="formUser.nom.touched && formUser.nom.errors?.required" class="error-message">
+                Le nom est obligatoire.
+            </mat-error>
         </mat-form-field>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <mat-form-field
             [ngClass]="formFieldHelpers"
             class="flex-auto">
-            <mat-label>Téléphone</mat-label>
+            <mat-label for="telephone">Téléphone</mat-label>
             <input
                 matInput
                 maxlength="9" name="telephone" formControlName="telephone"
@@ -37,22 +43,27 @@
                 class="icon-size-5"
                 matSuffix
                 [svgIcon]="'heroicons_solid:phone'"></mat-icon>
+            <mat-error *ngIf="formUser.telephone.touched && formUser.telephone.errors?.required" class="error-message">
+                Le télephone est obligatoire.
+            </mat-error>
         </mat-form-field>
         <mat-form-field class="col-span-1 gt-xs:pl-3">
-            <mat-label>Rôle</mat-label>
+            <mat-label for="role">Rôle</mat-label>
             <mat-select [placeholder]="'Rôle'" formControlName="role">
-                <mat-option value="ADMIN">ADMIN</mat-option>
-                <mat-option value="RESPONSABLE">RESPONSABLE</mat-option>
+                <mat-option *ngFor="let role of roles$ | async" [value]="role">{{role.libelle}}</mat-option>
             </mat-select>
             <mat-icon
                 class="icon-size-5"
                 matPrefix
                 [svgIcon]="'heroicons_solid:user'"></mat-icon>
+            <mat-error *ngIf="formUser.role.touched && formUser.role.errors?.required" class="error-message">
+                Le role est obligatoire.
+            </mat-error>
         </mat-form-field>
     </div>
     <mat-dialog-actions align="end">
-        <button mat-button mat-dialog-close>Annuler</button>
-        <button mat-button [mat-dialog-close]="true" (click)="saveUser()">Enregistrer</button>
+        <button mat-flat-button mat-dialog-close class="bg-red-600 text-white">Annuler</button>
+        <button mat-flat-button [disabled]="form.invalid" [mat-dialog-close]="true" color="primary">Enregistrer</button>
     </mat-dialog-actions>
 </form>
 </mat-dialog-content>

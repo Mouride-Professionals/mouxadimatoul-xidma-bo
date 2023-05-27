@@ -22,7 +22,7 @@
         <button
             class="ml-4 px-1 sm:px-4 min-w-10 text-white"
             mat-flat-button
-            [color]="'primary'" (click)="addNewUser()"
+            [color]="'primary'" (click)="openModal()"
         >
             <mat-icon
                 class="icon-size-5"
@@ -41,18 +41,24 @@
                     <th>Nom</th>
                     <th>Téléphone</th>
                     <th>Role</th>
+                    <th>Statut</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Cheikh</td>
-                    <td>Sow</td>
-                    <td>778889988</td>
-                    <td>Admin</td>
+                <tr *ngFor="let user of (data$ | async)?.content">
+                    <td>{{user.id}}</td>
+                    <td>{{user.prenom}}</td>
+                    <td>{{user.nom}}</td>
+                    <td>{{user.telephone}}</td>
+                    <td>{{user.role.libelle}}</td>
                     <td>
-                        <button></button>
+                        <mat-slide-toggle (click)="confirmStatut(user.id)" [(ngModel)]="user.statut" color="primary"></mat-slide-toggle>
+                    </td>
+                    <td>
+                        <button mat-icon-button (click)="openModal(user)">
+                            <mat-icon svgIcon="heroicons_solid:pencil-alt"></mat-icon>
+                        </button>
                     </td>
                 </tr>
             </tbody>
