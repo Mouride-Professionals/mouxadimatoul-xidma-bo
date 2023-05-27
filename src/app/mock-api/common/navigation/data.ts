@@ -29,24 +29,50 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 link: 'residences/dashboard',
             },
             {
-                id: 'residences-listes',
-                title: 'Voir la liste',
-                type: 'basic',
-                link: 'residences',
-            },
-            {
                 id: 'residences-reservations',
                 title: 'Réservations',
                 type: 'basic',
                 link: 'residences/reservations',
             },
+            {
+                id: 'residences-reservations',
+                title: 'Chambres',
+                type: 'basic',
+                link: 'residences/reservations',
+            },  
+            {
+                id: 'residences-listes',
+                title: 'liste des résidences',
+                type: 'basic',
+                link: 'residences',
+            },
+            {
+                id: 'a-reservations',
+                title: 'Pavillons',
+                type: 'basic',
+                link: 'h/reservations',
+            }
         ],
     },
     {
+        id: 'evenements',
+        title: 'Événements',
+        type: 'basic',
+        icon: 'event',
+        link: '/evenements',
+    },
+    {
+        id: 'invites',
+        title: 'Invités',
+        type: 'basic',
+        icon: 'heroicons_outline:user-group',
+        link: '/invites',
+    },
+    /*{
         id: 'dons',
         title: 'Gestion des dons',
         type: 'basic',
         icon: 'mat_solid:money',
         link: '/dons',
-    },
+    },*/
 ];

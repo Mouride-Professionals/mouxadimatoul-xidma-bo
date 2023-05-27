@@ -1,0 +1,55 @@
+<div class="p-6 w-full h-full flex flex-col space-y-4">
+    <h2 class="text-2xl font-semibold">Gestion des événements</h2>
+
+    <!-- Search -->
+    <div class="flex items-center justify-between">
+        <mat-form-field
+            class="w-full max-w-120 fuse-mat-rounded fuse-mat-dense fuse-mat-no-subscript ml-4 lg:ml-0"
+        >
+            <mat-icon
+                class="icon-size-5"
+                [svgIcon]="'heroicons_solid:search'"
+                matPrefix
+            ></mat-icon>
+            <input
+                matInput
+                [autocomplete]="'off'"
+                [placeholder]="'Search notes'"
+                #searchInput
+            />
+        </mat-form-field>
+        <!-- New user -->
+        <button
+            class="ml-4 px-1 sm:px-4 min-w-10 text-white"
+            mat-flat-button
+            [color]="'primary'" (click)="addNewEvent()"
+        >
+            <mat-icon
+                class="icon-size-5"
+                [svgIcon]="'heroicons_solid:plus-circle'"
+            ></mat-icon>
+            <span class="hidden sm:inline-block ml-2">Ajouter</span>
+        </button>
+    </div>
+
+    <div class="w-full grid grid-cols-4 gap-6">
+        <fuse-card class="col-span-1 flex space-x-3 items-center justify-between p-3">
+            <mat-icon [svgIcon]="'event'"></mat-icon>
+            <div class="flex-1">
+                <span>Magal Touba</span>
+            </div>
+            <button>
+                <mat-icon svgIcon="heroicons_solid:dots-vertical"></mat-icon>
+            </button>
+        </fuse-card>
+        <fuse-card class="col-span-1 flex space-x-3 items-center justify-between p-3">
+            <mat-icon [svgIcon]="'event'"></mat-icon>
+            <div class="flex-1">
+                <span>Ziar</span>
+            </div>
+            <button>
+                <mat-icon svgIcon="heroicons_solid:dots-vertical"></mat-icon>
+            </button>
+        </fuse-card>
+    </div>
+</div>
