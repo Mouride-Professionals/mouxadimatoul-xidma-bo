@@ -69,7 +69,7 @@ export class UtilisateurService {
 
     // liste de tous les utilisateurs
     getAllUsers(params: RequestParams): Observable<Pagination<Utilisateur>> {
-        return this._http.get<Pagination<Utilisateur>>(API_URL).pipe(
+        return this._http.get<Pagination<Utilisateur>>(API_URL, {params: {...params}}).pipe(
             tap((users) => console.log('Liste utilisateur fetched!', users)),
             catchError(this.handleError<Pagination<Utilisateur>>('list utilisateur', null))
         );

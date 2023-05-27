@@ -14,7 +14,7 @@
             <input
                 matInput
                 [autocomplete]="'off'"
-                [placeholder]="'Search notes'"
+                [placeholder]="'Search notes'" [(ngModel)]="search" (ngModelChange)="getAllUsers()"
                 #searchInput
             />
         </mat-form-field>
