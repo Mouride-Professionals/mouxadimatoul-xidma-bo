@@ -10,6 +10,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { FuseConfirmationModule } from '@fuse/services/confirmation';
 import { FuseCardModule } from '@fuse/components/card';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatToolbarModule} from "@angular/material/toolbar";
 
 
 const LIST_MODULES = [
@@ -21,7 +23,9 @@ const LIST_MODULES = [
     MatSelectModule,
     FuseCardModule,
     MatSlideToggleModule,
-    FuseConfirmationModule
+    FuseConfirmationModule,
+    MatSnackBarModule,
+    MatToolbarModule
 ];
 
 @NgModule({

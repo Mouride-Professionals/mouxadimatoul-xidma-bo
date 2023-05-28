@@ -5,8 +5,8 @@ import {Utilisateur} from '@core/model/utilisateur.model';
 import {RoleService} from '@core/service/role.service';
 import {Role} from '@core/model/role.model';
 import {Observable} from 'rxjs';
-import {MAT_DIALOG_DATA} from '@angular/material/dialog';
-
+import {MAT_DIALOG_DATA, matDialogAnimations} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
 @Component({
   selector: 'app-utilisateur-forme',
   templateUrl: './utilisateur-forme.component.html',
@@ -22,7 +22,8 @@ export class UtilisateurFormeComponent implements OnInit{
     constructor(
         private _utilisateurService: UtilisateurService,
         private _roleService: RoleService,
-        @Inject(MAT_DIALOG_DATA) private data: Utilisateur
+        @Inject(MAT_DIALOG_DATA) private data: Utilisateur,
+        private _snackBar: MatSnackBar
     ) {
     }
     ngOnInit(): void {
@@ -32,7 +33,7 @@ export class UtilisateurFormeComponent implements OnInit{
             this.isEdit = true;
             this.tite = 'Modifier un utilisateur';
         }
-
+        console.log("data", this.data, this.isEdit);
     }
     // Convenience getter for easy access to form fields
     get formUser() { return this.form.controls; }
@@ -49,9 +50,12 @@ export class UtilisateurFormeComponent implements OnInit{
         if (this.form.invalid) {
             return;
         }
+        console.log(!this.isEdit);
         if (!this.isEdit) {
             this._utilisateurService.createUser(this.form.value).subscribe((res: Utilisateur) => {
-                console.log('res', res);
+                this.openSnackBar('Utilisateur ajouté avec succés!', 'fermer');
+                this.form.reset();
+                window.location.reload();
             });
         } else  {
             const _data: Utilisateur = {
@@ -67,5 +71,8 @@ export class UtilisateurFormeComponent implements OnInit{
     // Get all Roles
     getRoles(): void {
         this.roles$ = this._roleService.getAllRoles();
+    }
+    openSnackBar(message: string, action: string): void {
+        this._snackBar.open(message, action);
     }
 }

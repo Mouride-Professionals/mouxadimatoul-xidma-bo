@@ -39,12 +39,12 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 title: 'Chambres',
                 type: 'basic',
                 link: 'residences/chambre',
-            },  
+            },
             {
-                id: 'residences-listes',
+                id: '/liste-residences',
                 title: 'liste des résidences',
                 type: 'basic',
-                link: 'residences',
+                link: 'residences/liste-residences',
             },
             {
                 id: '/pavillon',
