@@ -23,13 +23,15 @@ export class EvenementComponent implements OnInit{
 
   onSearch(): void {}
 
-  addNewEvent(): void {
+  addNewEvent(event?: Evenement): void {
       this._matDialog.open(FormEvenementComponent, {
           autoFocus: false,
-          panelClass: 'w-300',
-          data     : {
-              user: {}
-          }
+          panelClass: ['w-full', 'max-w-120'],
+          data     : event
+      }).afterClosed().subscribe(reload => {
+        if(reload) {
+          this.getAllEvents();
+        }
       });
   }
 

@@ -11,20 +11,20 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ListeResidenceComponent } from './liste-residence/liste-residence.component';
 import { FormResidenceComponent } from './form-residence/form-residence.component';
 
-
-
 @NgModule({
-  declarations: [
-    ResidenceComponent,
-    ChambreComponent,
-    PavillonComponent,
-    ReservationComponent,
-    DashboardComponent,
-    ListeResidenceComponent,
-    FormResidenceComponent,
-  ],
-  imports: [
-    CommonModule,SharedModule, RouterModule.forChild(residenceRoutes)
-  ]
+    declarations: [
+        ResidenceComponent,
+        ChambreComponent,
+        PavillonComponent,
+        ReservationComponent,
+        DashboardComponent,
+        ListeResidenceComponent,
+        FormResidenceComponent,
+    ],
+    imports: [
+        CommonModule,
+        SharedModule,
+        RouterModule.forChild(residenceRoutes),
+    ],
 })
-export class ResidenceModule { }
+export class ResidenceModule {}

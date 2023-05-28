@@ -38,6 +38,7 @@ export class UtilisateurService {
                 )
             );
     }
+
     updateUser(user: Utilisateur): Observable<Utilisateur> {
         return this._http
             .put<Utilisateur>(`${environment.apiUrl}/utilisateurs`, user)
@@ -49,6 +50,7 @@ export class UtilisateurService {
                 )
             );
     }
+
     updateStatutUser(id: number): Observable<Utilisateur> {
         return this._http
             .put<Utilisateur>(

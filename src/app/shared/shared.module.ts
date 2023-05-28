@@ -12,6 +12,8 @@ import { FuseConfirmationModule } from '@fuse/services/confirmation';
 import { FuseCardModule } from '@fuse/components/card';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatToolbarModule} from "@angular/material/toolbar";
+import { MatMenuModule } from '@angular/material/menu';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 
 const LIST_MODULES = [
@@ -26,6 +28,8 @@ const LIST_MODULES = [
     FuseConfirmationModule,
     MatSnackBarModule,
     MatToolbarModule
+    MatMenuModule,
+    NgApexchartsModule
 ];
 
 @NgModule({

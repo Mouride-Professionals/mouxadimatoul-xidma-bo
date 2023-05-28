@@ -1,1 +1,124 @@
-<p>dashboard works!</p>
+<div class="p-6 w-full h-full flex flex-col space-y-4">
+    <h2 class="text-2xl font-semibold">Dashboard</h2>
+
+    <!-- Header -->
+    <div class="bg-card">
+        <div class="flex flex-col w-full max-w-screen-xl mx-auto px-6 sm:px-3">
+            <h1>RÉSIDENCE KHADIM RASSOUL DAAROU MARNANE</h1>
+          
+        </div>
+    </div>
+
+    <div class="responsive-table grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 w-full min-w-0">
+        
+        <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+            <div class="flex items-start justify-between">
+                <div class="text-lg font-medium tracking-tight leading-6 truncate">Pavillon A</div>
+                <div class="ml-2 -mt-2 -mr-3">
+                    <button
+                        mat-icon-button
+                        [matMenuTriggerFor]="summaryMenu">
+                        <mat-icon
+                            class="icon-size-5"
+                            [svgIcon]="'heroicons_solid:dots-vertical'"></mat-icon>
+                    </button>
+                    <mat-menu #summaryMenu="matMenu">
+                        <button mat-menu-item>faire une réservation</button>
+                        <button mat-menu-item>etat des chambres</button>
+                    </mat-menu>
+                </div>
+            </div>
+            <div class="flex flex-col items-center mt-2">
+                <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-green-500">12</div>
+                <div class="text-lg font-medium text-green-600 dark:text-blue-500">Chambres disponibles</div>
+                <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
+                    <div class="text-md font-medium truncate">Complète</div>
+                    <div class="ml-1.5 text-lg font-semibold">88</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+            <div class="flex items-start justify-between">
+                <div class="text-lg font-medium tracking-tight leading-6 truncate">Pavillon B</div>
+                <div class="ml-2 -mt-2 -mr-3">
+                    <button
+                        mat-icon-button
+                        [matMenuTriggerFor]="summaryMenu">
+                        <mat-icon
+                            class="icon-size-5"
+                            [svgIcon]="'heroicons_solid:dots-vertical'"></mat-icon>
+                    </button>
+                    <mat-menu #summaryMenu="matMenu">
+                        <button mat-menu-item>faire une réservation</button>
+                        <button mat-menu-item>etat des chambres</button>
+                    </mat-menu>
+                </div>
+            </div>
+            <div class="flex flex-col items-center mt-2">
+                <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-red-500">37</div>
+                <div class="text-lg font-medium text-red-600 dark:text-blue-500">Chambres disponibles</div>
+                <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
+                    <div class="text-md font-medium truncate">Complète</div>
+                    <div class="ml-1.5 text-lg font-semibold">63</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+            <div class="flex items-start justify-between">
+                <div class="text-lg font-medium tracking-tight leading-6 truncate">Pavillon C</div>
+                <div class="ml-2 -mt-2 -mr-3">
+                    <button
+                        mat-icon-button
+                        [matMenuTriggerFor]="summaryMenu">
+                        <mat-icon
+                            class="icon-size-5"
+                            [svgIcon]="'heroicons_solid:dots-vertical'"></mat-icon>
+                    </button>
+                    <mat-menu #summaryMenu="matMenu">
+                        <button mat-menu-item>faire une réservation</button>
+                        <button mat-menu-item>etat des chambres</button>
+                    </mat-menu>
+                </div>
+            </div>
+            <div class="flex flex-col items-center mt-2">
+                <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-amber-500">75</div>
+                <div class="text-lg font-medium text-amber-600 dark:text-amber-500">Chambres disponibles</div>
+                <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
+                    <div class="text-md font-medium truncate">Complète</div>
+                    <div class="ml-1.5 text-lg font-semibold">25</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+            <div class="flex items-start justify-between">
+                <div class="text-lg font-medium tracking-tight leading-6 truncate">Pavillon D</div>
+                <div class="ml-2 -mt-2 -mr-3">
+                    <button
+                        mat-icon-button
+                        [matMenuTriggerFor]="summaryMenu">
+                        <mat-icon
+                            class="icon-size-5"
+                            [svgIcon]="'heroicons_solid:dots-vertical'"></mat-icon>
+                    </button>
+                    <mat-menu #summaryMenu="matMenu">
+                        <button mat-menu-item>faire une réservation</button>
+                        <button mat-menu-item>etat des chambres</button>
+                    </mat-menu>
+                </div>
+            </div>
+            <div class="flex flex-col items-center mt-2">
+                <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-blue-500">59</div>
+                <div class="text-lg font-medium text-blue-600 dark:text-blue-500">Chambres disponibles</div>
+                <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
+                    <div class="text-md font-medium truncate">Complète</div>
+                    <div class="ml-1.5 text-lg font-semibold">41</div>
+                </div>
+            </div>
+        </div>
+        
+
+    </div>   
+</div>

@@ -13,7 +13,8 @@ import { LayoutModule } from 'app/layout/layout.module';
 import { AppComponent } from 'app/app.component';
 import { appRoutes } from 'app/app.routing';
 import { HttpClientModule } from '@angular/common/http';
-import { InviteComponent } from './modules/invite/invite.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
 
 const routerConfig: ExtraOptions = {
     preloadingStrategy: PreloadAllModules,

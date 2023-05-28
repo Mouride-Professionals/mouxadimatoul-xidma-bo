@@ -4,7 +4,7 @@ import { ChambreComponent } from './chambre/chambre.component';
 import { PavillonComponent } from './pavillon/pavillon.component';
 import { ReservationComponent } from './reservation/reservation.component';
 import { DashboardComponent } from '@modules/dashboard/dashboard.component';
-import {ListeResidenceComponent} from '../residence/liste-residence/liste-residence.component';
+import { ListeResidenceComponent } from '../residence/liste-residence/liste-residence.component';
 
 export const residenceRoutes: Routes = [
     {
@@ -13,25 +13,24 @@ export const residenceRoutes: Routes = [
         children: [
             {
                 path: 'dashboard',
-                component: DashboardComponent
+                component: DashboardComponent,
             },
             {
                 path: 'chambre',
-                component: ChambreComponent
+                component: ChambreComponent,
             },
             {
                 path: 'pavillon',
-                component: PavillonComponent
+                component: PavillonComponent,
             },
             {
                 path: 'reservation',
-                component: ReservationComponent
+                component: ReservationComponent,
             },
             {
                 path: 'liste-residences',
-                component: ListeResidenceComponent
+                component: ListeResidenceComponent,
             },
-        ]
-
+        ],
     },
 ];
