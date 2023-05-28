@@ -71,10 +71,7 @@ getInfo(): Observable<Reservation> {
 
 // liste de tous les Reservations
 getAllReserve(params: RequestParams): Observable<Pagination<Reservation>> {
-    return this._http.get<Pagination<Reservation>>(API_URL).pipe(
-        tap((reserves) => console.log('Liste réservation fetched!', reserves)),
-        catchError(this.handleError<Pagination<Reservation>>('list Reservation', null))
-    );
+    return ;
 }
 private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
