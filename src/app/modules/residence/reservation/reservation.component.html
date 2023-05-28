@@ -1,5 +1,5 @@
 <div class="p-6 w-full h-full flex flex-col space-y-4">
-    <h2 class="text-2xl font-semibold">Gestion des utilisateurs</h2>
+    <h2 class="text-2xl font-semibold">Gestion des réservations</h2>
 
     <!-- Search -->
     <div class="flex items-center justify-between">
@@ -45,16 +45,38 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let reserve of (data$ | async)?.content">
-                    <td>{{reserve.id}}</td>
-                    <td>{{reserve.prenom}}</td>
-                    <td>{{reserve.nom}}</td>
-                    <td>{{reserve.role.libelle}}</td>
+                <tr>
+                    <td>Papa Djiby Niang</td>
+                    <td>Pavillon A n°303</td>
+                    <td>77 650 50 50</td>
+                    <td>26-05-2023</td>
+                    <td>28-05-2023</td>
                     <td>
-                        <mat-slide-toggle (click)="confirmStatut(reserve.id)" [(ngModel)]="reserve.statut" color="primary"></mat-slide-toggle>
+                        <button mat-icon-button>
+                            <mat-icon svgIcon="heroicons_solid:pencil-alt"></mat-icon>
+                        </button>
                     </td>
+                </tr>
+                <tr>
+                    <td>Cheikh Ibra Fall</td>
+                    <td>Pavillon B n°207</td>
+                    <td>77 650 50 50</td>
+                    <td>26-05-2023</td>
+                    <td>28-05-2023</td>
                     <td>
-                        <button mat-icon-button (click)="openModal(reserve)">
+                        <button mat-icon-button>
+                            <mat-icon svgIcon="heroicons_solid:pencil-alt"></mat-icon>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Serign Cheikh SOW</td>
+                    <td>Pavillon A n°117</td>
+                    <td>77 650 50 50</td>
+                    <td>26-05-2023</td>
+                    <td>28-05-2023</td>
+                    <td>
+                        <button mat-icon-button>
                             <mat-icon svgIcon="heroicons_solid:pencil-alt"></mat-icon>
                         </button>
                     </td>

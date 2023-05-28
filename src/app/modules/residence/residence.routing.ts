@@ -3,7 +3,7 @@ import { ResidenceComponent } from './residence.component';
 import { ChambreComponent } from './chambre/chambre.component';
 import { PavillonComponent } from './pavillon/pavillon.component';
 import { ReservationComponent } from './reservation/reservation.component';
-import { DashboardComponent } from '@modules/dashboard/dashboard.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 export const residenceRoutes: Routes = [
     {

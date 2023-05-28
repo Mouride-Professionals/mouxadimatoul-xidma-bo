@@ -23,7 +23,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
         icon: 'mat_solid:home',
         children: [
             {
-                id: 'dashbord',
+                id: '/dashbord',
                 title: 'Tableau de bord',
                 type: 'basic',
                 link: 'residences/dashboard',
