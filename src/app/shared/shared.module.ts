@@ -11,6 +11,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { FuseConfirmationModule } from '@fuse/services/confirmation';
 import { FuseCardModule } from '@fuse/components/card';
 import { MatMenuModule } from '@angular/material/menu';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 
 const LIST_MODULES = [
@@ -23,7 +24,8 @@ const LIST_MODULES = [
     FuseCardModule,
     MatSlideToggleModule,
     FuseConfirmationModule,
-    MatMenuModule
+    MatMenuModule,
+    NgApexchartsModule
 ];
 
 @NgModule({
