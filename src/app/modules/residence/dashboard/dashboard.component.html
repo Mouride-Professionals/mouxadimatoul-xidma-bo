@@ -1,1 +1,38 @@
-<p>dashboard works!</p>
+<div class="p-6 w-full h-full flex flex-col space-y-4">
+    <h2 class="text-2xl font-semibold">Gestion des utilisateurs</h2>
+
+    <!-- Search -->
+    <div class="flex items-center justify-between">
+        <mat-form-field
+            class="w-full max-w-120 fuse-mat-rounded fuse-mat-dense fuse-mat-no-subscript ml-4 lg:ml-0"
+        >
+            <mat-icon
+                class="icon-size-5"
+                [svgIcon]="'heroicons_solid:search'"
+                matPrefix
+            ></mat-icon>
+            <input
+                matInput
+                [autocomplete]="'off'"
+                [placeholder]="'Search notes'"
+                #searchInput
+            />
+        </mat-form-field>
+        <!-- New reserve -->
+        <button
+            class="ml-4 px-1 sm:px-4 min-w-10 text-white"
+            mat-flat-button
+            [color]="'primary'"
+        >
+            <mat-icon
+                class="icon-size-5"
+                [svgIcon]="'heroicons_solid:plus-circle'"
+            ></mat-icon>
+            <span class="hidden sm:inline-block ml-2">Ajouter</span>
+        </button>
+    </div>
+
+    <div class="responsive-table">
+
+    </div>
+</div>

@@ -8,6 +8,7 @@ import { ChambreComponent } from './chambre/chambre.component';
 import { PavillonComponent } from './pavillon/pavillon.component';
 import { ReservationComponent } from './reservation/reservation.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { FormReservationComponent } from './reservation/form-reservation/form-reservation.component';
 
 
 
@@ -18,6 +19,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     PavillonComponent,
     ReservationComponent,
     DashboardComponent,
+    FormReservationComponent,
   ],
   imports: [
     CommonModule,SharedModule, RouterModule.forChild(residenceRoutes)
