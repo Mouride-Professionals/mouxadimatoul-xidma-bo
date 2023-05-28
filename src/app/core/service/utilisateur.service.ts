@@ -4,8 +4,8 @@ import { Utilisateur } from '@core/model/utilisateur.model';
 import { Observable, ReplaySubject, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { environment } from 'environments/environment';
-import {RequestParams} from "@core/model/params.model";
-import {Pagination} from "@core/model/pagination.model";
+import { RequestParams } from '@core/model/params.model';
+import { Pagination } from '@core/model/pagination.model';
 
 const API_URL = environment.apiUrl + '/utilisateurs';
 
@@ -43,16 +43,23 @@ export class UtilisateurService {
             .put<Utilisateur>(`${environment.apiUrl}/utilisateurs`, user)
             .pipe(
                 catchError(
-                    this.handleError<Utilisateur>('Modification utilisateur echoué')
+                    this.handleError<Utilisateur>(
+                        'Modification utilisateur echoué'
+                    )
                 )
             );
     }
     updateStatutUser(id: number): Observable<Utilisateur> {
         return this._http
-            .put<Utilisateur>(`${environment.apiUrl}/utilisateurs/statut/${id}`, {})
+            .put<Utilisateur>(
+                `${environment.apiUrl}/utilisateurs/statut/${id}`,
+                {}
+            )
             .pipe(
                 catchError(
-                    this.handleError<Utilisateur>('Modification utilisateur echoué')
+                    this.handleError<Utilisateur>(
+                        'Modification utilisateur echoué'
+                    )
                 )
             );
     }
@@ -68,11 +75,25 @@ export class UtilisateurService {
     }
 
     // liste de tous les utilisateurs
-    getAllUsers(params: RequestParams): Observable<Pagination<Utilisateur>> {
-        return this._http.get<Pagination<Utilisateur>>(API_URL, {params: {...params}}).pipe(
-            tap((users) => console.log('Liste utilisateur fetched!', users)),
-            catchError(this.handleError<Pagination<Utilisateur>>('list utilisateur', null))
-        );
+    getAllUsers(
+        params: RequestParams,
+        role: string
+    ): Observable<Pagination<Utilisateur>> {
+        return this._http
+            .get<Pagination<Utilisateur>>(API_URL, {
+                params: { ...params, role },
+            })
+            .pipe(
+                tap((users) =>
+                    console.log('Liste utilisateur fetched!', users)
+                ),
+                catchError(
+                    this.handleError<Pagination<Utilisateur>>(
+                        'list utilisateur',
+                        null
+                    )
+                )
+            );
     }
     private handleError<T>(operation = 'operation', result?: T) {
         return (error: any): Observable<T> => {

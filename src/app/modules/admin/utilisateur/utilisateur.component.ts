@@ -1,13 +1,15 @@
-import {Component, OnInit} from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
-import {UtilisateurFormeComponent} from '@modules/admin/utilisateur/utilisateur-forme/utilisateur-forme.component';
-import {UtilisateurService} from '@core/service/utilisateur.service';
-import {Observable} from 'rxjs';
-import {Utilisateur} from '@core/model/utilisateur.model';
-import {Pagination} from '@core/model/pagination.model';
-import {RequestParams} from '@core/model/params.model';
-import {FuseConfirmationConfig, FuseConfirmationService} from '@fuse/services/confirmation';
-
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { UtilisateurFormeComponent } from '@modules/admin/utilisateur/utilisateur-forme/utilisateur-forme.component';
+import { UtilisateurService } from '@core/service/utilisateur.service';
+import { Observable } from 'rxjs';
+import { Utilisateur } from '@core/model/utilisateur.model';
+import { Pagination } from '@core/model/pagination.model';
+import { RequestParams } from '@core/model/params.model';
+import {
+    FuseConfirmationConfig,
+    FuseConfirmationService,
+} from '@fuse/services/confirmation';
 
 @Component({
     selector: 'app-utilisateur',
@@ -18,65 +20,87 @@ export class UtilisateurComponent implements OnInit {
     search: string = '';
     data$: Observable<Pagination<Utilisateur>>;
 
+    roleItems: { name: string; value: string }[] = [
+        { name: 'Tous', value: '' },
+        { name: 'Admin', value: 'admin' },
+        { name: 'Responsable', value: 'responsable' },
+    ];
+
+    role: string = '';
     page = 1;
     pageSize = 20;
 
-    constructor(private _matDialog: MatDialog,
-                private _utilisateurService: UtilisateurService,
-                private _fuseConfirmation: FuseConfirmationService) {
-    }
+    constructor(
+        private _matDialog: MatDialog,
+        private _utilisateurService: UtilisateurService,
+        private _fuseConfirmation: FuseConfirmationService
+    ) {}
 
     ngOnInit(): void {
         this.getAllUsers();
     }
 
-    onSearch(): void {
+    onFilterByRole(value: string): void {
+        this.role = value;
+        this.getAllUsers();
     }
 
+    onSearch(): void {}
+
     openModal(user?: Utilisateur): void {
-        this._matDialog.open(UtilisateurFormeComponent, {
-            autoFocus: false,
-            panelClass: 'w-full',
-            data: user
-        });
+        this._matDialog
+            .open(UtilisateurFormeComponent, {
+                autoFocus: false,
+                panelClass: 'w-full',
+                data: user,
+            })
+            .afterClosed()
+            .subscribe((reload) => {
+                if (reload) {
+                    this.getAllUsers();
+                }
+            });
     }
 
     getAllUsers(): void {
         const params: RequestParams = {
             page: this.page - 1,
             size: this.pageSize,
-            search: this.search
+            search: this.search,
         };
-        this.data$ = this._utilisateurService.getAllUsers(params);
+        this.data$ = this._utilisateurService.getAllUsers(params, this.role);
     }
 
     confirmStatut(id: number): void {
-        this._fuseConfirmation.open(
-            {
+        this._fuseConfirmation
+            .open({
                 title: 'confirmation',
-                message: 'Voulez-vous changer le statut de l\'utilisateur',
+                message: "Voulez-vous changer le statut de l'utilisateur",
                 icon: {
                     show: true,
                     name: 'heroicons_solid:question-mark-circle',
-                    color: 'primary'
+                    color: 'primary',
                 },
                 actions: {
                     confirm: {
                         label: 'OUI',
-                        color: 'primary'
+                        color: 'primary',
                     },
                     cancel: {
                         label: 'NON',
-                    }
+                    },
+                },
+            })
+            .afterClosed()
+            .subscribe((res) => {
+                console.log('res', res);
+                if (res === 'confirmed') {
+                    this._utilisateurService
+                        .updateStatutUser(id)
+                        .subscribe((response) => {
+                            console.log('response', response);
+                        });
                 }
-            }
-        ).afterClosed().subscribe((res) => {
-            console.log('res', res);
-            if (res === 'confirmed') {
-                this._utilisateurService.updateStatutUser(id).subscribe((response) => {
-                    console.log('response', response);
-                });
-            }
-        });
+            });
     }
 }
