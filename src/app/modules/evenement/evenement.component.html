@@ -32,15 +32,19 @@
         </button>
     </div>
 
-    <div class="w-full grid grid-cols-4 gap-6">
+    <div class="w-full grid grid-cols-3 gap-6">
         <fuse-card *ngFor="let event of events$ | async" class="col-span-1 flex space-x-3 items-center justify-between p-3">
             <mat-icon [svgIcon]="'event'"></mat-icon>
             <div class="flex-1">
                 <span>{{ event.libelle }}</span>
             </div>
-            <button>
-                <mat-icon type="submit" svgIcon="heroicons_solid:dots-vertical"></mat-icon>
+            <button mat-button [matMenuTriggerFor]="menu" >
+                <mat-icon svgIcon="heroicons_solid:dots-vertical"></mat-icon>
             </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="addNewEvent(event)">Éditer</button>
+                <button mat-menu-item>Supprimer</button>
+            </mat-menu>
         </fuse-card>
     </div>
 </div>

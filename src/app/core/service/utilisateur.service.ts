@@ -38,15 +38,17 @@ export class UtilisateurService {
                 )
             );
     }
+
     updateUser(user: Utilisateur): Observable<Utilisateur> {
         return this._http
             .put<Utilisateur>(`${environment.apiUrl}/utilisateurs`, user)
             .pipe(
                 catchError(
-                    this.handleError<Utilisateur>('Modification utilisateur echoué')
+                    this.handleError<Utilisateur>('Modification utilisateur échoué')
                 )
             );
     }
+    
     updateStatutUser(id: number): Observable<Utilisateur> {
         return this._http
             .put<Utilisateur>(`${environment.apiUrl}/utilisateurs/statut/${id}`, {})

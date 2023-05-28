@@ -31,11 +31,12 @@ export class EvenementService {
   }
   
   updateEvent(event: Evenement): Observable<Evenement> {
+    console.log('Evenement form', event);
       return this._http
-          .put<Evenement>(`${environment.apiUrl}/evenements`, event)
+          .post<Evenement>(`${environment.apiUrl}/evenements`, event)
           .pipe(
               catchError(
-                  this.handleError<Evenement>('Modification Evenement echoué')
+                  this.handleError<Evenement>('Modification Événement échoué')
               )
           );
   }
