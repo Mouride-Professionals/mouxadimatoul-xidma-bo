@@ -19,41 +19,55 @@ export const defaultNavigation: FuseNavigationItem[] = [
     {
         id: 'residences',
         title: 'Résidences',
-        type: 'collapsable',
+        type: 'basic',
         icon: 'mat_solid:home',
-        children: [
-            {
-                id: '/dashbord',
-                title: 'Tableau de bord',
-                type: 'basic',
-                link: 'residences/dashboard',
-            },
-            {
-                id: '/reservation',
-                title: 'Réservations',
-                type: 'basic',
-                link: 'residences/reservation',
-            },
-            {
-                id: '/chambre',
-                title: 'Chambres',
-                type: 'basic',
-                link: 'residences/chambre',
-            },
-            {
-                id: '/liste-residences',
-                title: 'liste des résidences',
-                type: 'basic',
-                link: 'residences/liste-residences',
-            },
-            {
-                id: '/pavillon',
-                title: 'Pavillons',
-                type: 'basic',
-                link: 'residences/pavillon',
-            }
-        ],
+        link: 'residences',
     },
+    {
+        id: 'reservations',
+        title: 'Réservations',
+        type: 'basic',
+        icon: 'heroicons_solid:bookmark',
+        link: 'reservations',
+    },
+    // {
+    //     id: 'residences',
+    //     title: 'Résidences',
+    //     type: 'collapsable',
+    //     icon: 'mat_solid:home',
+    //     children: [
+    //         {
+    //             id: '/dashbord',
+    //             title: 'Tableau de bord',
+    //             type: 'basic',
+    //             link: 'residences/dashboard',
+    //         },
+    //         {
+    //             id: '/reservation',
+    //             title: 'Réservations',
+    //             type: 'basic',
+    //             link: 'residences/reservation',
+    //         },
+    //         {
+    //             id: '/chambre',
+    //             title: 'Chambres',
+    //             type: 'basic',
+    //             link: 'residences/chambre',
+    //         },
+    //         {
+    //             id: '/liste-residences',
+    //             title: 'liste des résidences',
+    //             type: 'basic',
+    //             link: 'residences/liste-residences',
+    //         },
+    //         {
+    //             id: '/pavillon',
+    //             title: 'Pavillons',
+    //             type: 'basic',
+    //             link: 'residences/pavillon',
+    //         }
+    //     ],
+    // },
     {
         id: 'evenements',
         title: 'Événements',

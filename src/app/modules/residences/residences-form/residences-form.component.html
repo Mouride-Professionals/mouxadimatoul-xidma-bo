@@ -1,0 +1,182 @@
+<div class="p-6 w-full h-full flex flex-col space-y-6">
+    <div class="w-full flex justify-between items-center">
+        <h2 class="text-4xl font-semibold">Ajouter une résidence</h2>
+        <button
+            class="ml-4 px-1 sm:px-4 min-w-10 text-white"
+            mat-flat-button
+            [color]="'primary'"
+            [routerLink]="['/residences']"
+        >
+            <mat-icon
+                class="icon-size-5"
+                [svgIcon]="'heroicons_solid:arrow-left'"
+            ></mat-icon>
+            <span class="hidden sm:inline-block ml-2"
+                >Listes des résidences</span
+            >
+        </button>
+    </div>
+
+    <form [formGroup]="residenceForm" (ngSubmit)="saveResidence()">
+        <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-6 min-w-0">
+            <fuse-card class="col-span-1 p-4 w-full flex flex-col space-y-4">
+                <mat-form-field class="w-full" appearance="fill">
+                    <mat-label for="libelle">Nom résidence</mat-label>
+                    <input matInput name="libelle" formControlName="libelle" />
+                    <mat-icon
+                        class="icon-size-5"
+                        matSuffix
+                        [svgIcon]="'heroicons_solid:home'"
+                    ></mat-icon>
+                    <mat-error
+                        *ngIf="f.libelle.touched && f.libelle.errors?.required"
+                        class="error-message"
+                    >
+                        Le nom est obligatoire.
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="w-full" appearance="fill">
+                    <mat-label for="adresse">Adresse</mat-label>
+                    <input matInput name="adresse" formControlName="adresse" />
+                    <mat-icon
+                        class="icon-size-5"
+                        matSuffix
+                        [svgIcon]="'heroicons_solid:map'"
+                    ></mat-icon>
+                    <mat-error
+                        *ngIf="f.adresse.touched && f.adresse.errors?.required"
+                        class="error-message"
+                    >
+                        L'adresse est obligatoire.
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="w-full" appearance="fill">
+                    <mat-label for="telephoneResidence"
+                        >Téléphone résidence</mat-label
+                    >
+                    <input
+                        matInput
+                        maxlength="9"
+                        name="telephoneResidence"
+                        formControlName="telephoneResidence"
+                        #postalCode
+                    />
+                    <mat-hint align="end"
+                        >{{ postalCode.value.length }} / 9</mat-hint
+                    >
+                    <mat-icon
+                        class="icon-size-5"
+                        matSuffix
+                        [svgIcon]="'heroicons_solid:phone'"
+                    ></mat-icon>
+                    <mat-error
+                        *ngIf="
+                            f.telephoneResidence.touched &&
+                            f.telephoneResidence.errors?.required
+                        "
+                        class="error-message"
+                    >
+                        Le télephone est obligatoire.
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="w-full" appearance="fill">
+                    <mat-label for="role">Responsable résidence</mat-label>
+                    <mat-select
+                        [placeholder]="'Responsable'"
+                        formControlName="responsable"
+                    >
+                        <mat-option
+                            *ngFor="let res of users"
+                            [value]="res.telephone"
+                        >
+                            {{ res.prenom | titlecase }}
+                            {{ res.nom | uppercase }}</mat-option
+                        >
+                    </mat-select>
+                    <mat-icon
+                        class="icon-size-5"
+                        matPrefix
+                        [svgIcon]="'heroicons_solid:user'"
+                    ></mat-icon>
+                    <mat-error
+                        *ngIf="
+                            f.responsable.touched &&
+                            f.responsable.errors?.required
+                        "
+                        class="error-message"
+                    >
+                        Le responsable est obligatoire.
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field
+                    class="w-full fuse-mat-textarea"
+                    appearance="fill"
+                >
+                    <mat-label for="description">Description</mat-label>
+                    <textarea
+                        matInput
+                        name="description"
+                        formControlName="description"
+                        [rows]="3"
+                        matTextareaAutosize
+                    ></textarea>
+                    <mat-icon
+                        class="icon-size-5"
+                        matSuffix
+                        [svgIcon]="'heroicons_solid:location-marker'"
+                    ></mat-icon>
+                </mat-form-field>
+            </fuse-card>
+            <div class="col-span-1 flex flex-col space-y-6">
+                <fuse-card class="w-full flex flex-col overflow-hidden">
+                    <div class="w-full p-3">
+                        <button
+                            *ngIf="!isImage"
+                            mat-flat-button
+                            type="button"
+                            class="bg-secondary text-white"
+                            (click)="fileInput.click()"
+                        >
+                            Choisir image
+                        </button>
+                        <button
+                            *ngIf="isImage"
+                            mat-flat-button
+                            type="button"
+                            class="bg-red-600 text-white"
+                            (click)="removeImage()"
+                        >
+                            Effacer image
+                        </button>
+                    </div>
+                    <input
+                        type="file"
+                        class="hidden"
+                        #fileInput
+                        (change)="fileChangeEvent($event)"
+                    />
+                    <div class="w-full min-h-80 max-h-100">
+                        <img
+                            class="object-cover w-full h-full"
+                            [src]="imageResidence"
+                            alt=""
+                        />
+                    </div>
+                </fuse-card>
+                <fuse-card class="w-full p-4 flex items-center space-x-4">
+                    <button type="submit" mat-flat-button color="primary">
+                        Enregistrer
+                    </button>
+                    <button
+                        mat-flat-button
+                        mat-dialog-close
+                        type="button"
+                        class="bg-red-600 text-white"
+                    >
+                        Annuler
+                    </button>
+                </fuse-card>
+            </div>
+        </div>
+    </form>
+</div>

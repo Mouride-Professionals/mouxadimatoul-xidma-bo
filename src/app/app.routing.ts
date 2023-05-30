@@ -56,22 +56,25 @@ export const appRoutes: Route[] = [
             {
                 path: 'residences',
                 loadChildren: () =>
-                    import('./modules/residence/residence.module').then(
-                        (m) => m.ResidenceModule
-                    )
-                
+                    import('./modules/residences/residences.module').then(
+                        (m) => m.ResidencesModule
+                    ),
             },
             {
                 path: 'evenements',
                 loadChildren: () =>
-                    import('./modules/evenement/evenement.module').then((m) => m.EvenementModule),
+                    import('./modules/evenement/evenement.module').then(
+                        (m) => m.EvenementModule
+                    ),
             },
             {
                 path: 'invites',
                 loadChildren: () =>
-                    import('./modules/invite/invite.module').then((m) => m.InviteModule),
+                    import('./modules/invite/invite.module').then(
+                        (m) => m.InviteModule
+                    ),
             },
-           /**  {
+            /**  {
                 path: 'dons',
                 loadChildren: () =>
                     import('./modules/don/don.module').then((m) => m.DonModule),

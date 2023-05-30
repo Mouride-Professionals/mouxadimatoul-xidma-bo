@@ -22,7 +22,10 @@ const customPalettes = {
 const themes = {
     // Default theme is required for theming system to work correctly
     'default': {
-        primary  : customPalettes.jaune,
+        primary: {
+            ...colors.amber,
+            DEFAULT: colors.amber[500]
+        },
         secondary: customPalettes.vert,
         accent   : {
             ...colors.slate,
