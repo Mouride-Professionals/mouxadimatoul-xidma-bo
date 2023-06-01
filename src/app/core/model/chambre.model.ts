@@ -1,7 +1,9 @@
+import { Pavillon } from './pavillon.model';
+
 export type Chambre = {
     id: number;
-    numeroChambre: number;
-    description: string;
-    statut: boolean;
-    nbrPlace: number;
+    numero: number;
+    nombrePlace: number;
+    reference: string;
+    pavillon: Pavillon;
 };

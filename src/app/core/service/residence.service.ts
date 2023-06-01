@@ -33,14 +33,19 @@ export class ResidenceService {
                 )
             );
     }
-    getAllResidences(): Observable<Residence[]> {
-        return this._http.get<Residence[]>(API_URL).pipe(
-            tap((residences) =>
-                console.log('Liste Residence fetched!', residences)
-            ),
-            catchError(this.handleError<Residence[]>('list Residences', []))
-        );
+
+    updateResidence(res: Residence): Observable<Residence> {
+        return this._http.put<Residence>(API_URL, res);
     }
+
+    getAllResidences(): Observable<Residence[]> {
+        return this._http.get<Residence[]>(API_URL);
+    }
+
+    getResidenceById(id: number): Observable<Residence> {
+        return this._http.get<Residence>(`${API_URL}/${id}`);
+    }
+
     private handleError<T>(operation = 'operation', result?: T) {
         return (error: any): Observable<T> => {
             console.error(error);

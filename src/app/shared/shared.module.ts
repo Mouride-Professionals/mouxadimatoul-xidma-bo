@@ -15,6 +15,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { SummarizePipe } from './pipes/summarize/summarize.pipe';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 const LIST_MODULES = [
     MatButtonModule,
@@ -29,6 +30,7 @@ const LIST_MODULES = [
     MatSnackBarModule,
     MatToolbarModule,
     MatMenuModule,
+    MatTooltipModule,
     NgApexchartsModule,
 ];
 

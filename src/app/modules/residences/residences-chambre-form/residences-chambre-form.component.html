@@ -1,0 +1,40 @@
+<h2 mat-dialog-title class="text-2xl font-semibold">{{ title }}</h2>
+<div mat-dialog-content>
+    <form [formGroup]="chambreForm" (ngSubmit)="onSubmit()">
+        <div class="w-full flex flex-col space-y-4 py-2">
+            <mat-form-field class="w-full" appearance="fill">
+                <mat-label>Pavillon</mat-label>
+                <mat-select
+                    formControlName="pavillon"
+                    [compareWith]="onComparePavillon"
+                >
+                    <mat-option *ngFor="let p of pavillons" [value]="p">{{
+                        p.libelle
+                    }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="w-full" appearance="fill">
+                <mat-label>Numéro de chambre</mat-label>
+                <input matInput type="text" formControlName="numero" />
+            </mat-form-field>
+
+            <mat-form-field class="w-full" appearance="fill">
+                <mat-label>Nombre de places</mat-label>
+                <input matInput type="text" formControlName="nombrePlace" />
+            </mat-form-field>
+
+            <div class="w-full flex items-center space-x-4">
+                <button mat-raised-button color="primary">Enregistrer</button>
+                <button
+                    mat-raised-button
+                    color="warn"
+                    type="button"
+                    (click)="onReset()"
+                >
+                    Annuler
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

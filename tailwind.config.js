@@ -13,7 +13,8 @@ const customPalettes = {
     jaune: generatePalette('#F1BC7E'),
     // jaune: generatePalette('#FFCC00'),
     // bleu: generatePalette('#0A84FF'),
-    vert: generatePalette('#0F7F4C'),
+    primary: generatePalette('#0F7F4C'),
+    secondary: generatePalette('#F1BC7E'),
 };
 
 /**
@@ -22,11 +23,8 @@ const customPalettes = {
 const themes = {
     // Default theme is required for theming system to work correctly
     'default': {
-        primary: {
-            ...colors.amber,
-            DEFAULT: colors.amber[500]
-        },
-        secondary: customPalettes.vert,
+        primary: customPalettes.primary,
+        secondary: customPalettes.secondary,
         accent   : {
             ...colors.slate,
             DEFAULT: colors.slate[800]

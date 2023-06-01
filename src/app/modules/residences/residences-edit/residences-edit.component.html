@@ -1,0 +1,118 @@
+<h2 mat-dialog-title class="text-2xl font-semibold">Modifier la résidence</h2>
+<div mat-dialog-content>
+    <form [formGroup]="residenceForm" (ngSubmit)="onSubmit()">
+        <div class="w-full flex flex-col space-y-4">
+            <mat-form-field class="w-full" appearance="fill">
+                <mat-label for="libelle">Nom résidence</mat-label>
+                <input matInput name="libelle" formControlName="libelle" />
+                <mat-icon
+                    class="icon-size-5"
+                    matSuffix
+                    [svgIcon]="'heroicons_solid:home'"
+                ></mat-icon>
+                <mat-error
+                    *ngIf="f.libelle.touched && f.libelle.errors?.required"
+                    class="error-message"
+                >
+                    Le nom est obligatoire.
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-full" appearance="fill">
+                <mat-label for="adresse">Adresse</mat-label>
+                <input matInput name="adresse" formControlName="adresse" />
+                <mat-icon
+                    class="icon-size-5"
+                    matSuffix
+                    [svgIcon]="'heroicons_solid:map'"
+                ></mat-icon>
+                <mat-error
+                    *ngIf="f.adresse.touched && f.adresse.errors?.required"
+                    class="error-message"
+                >
+                    L'adresse est obligatoire.
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-full" appearance="fill">
+                <mat-label for="telephoneResidence"
+                    >Téléphone résidence</mat-label
+                >
+                <input
+                    matInput
+                    maxlength="9"
+                    name="telephoneResidence"
+                    formControlName="telephoneResidence"
+                    #postalCode
+                />
+                <mat-hint align="end"
+                    >{{ postalCode.value.length }} / 9</mat-hint
+                >
+                <mat-icon
+                    class="icon-size-5"
+                    matSuffix
+                    [svgIcon]="'heroicons_solid:phone'"
+                ></mat-icon>
+                <mat-error
+                    *ngIf="
+                        f.telephoneResidence.touched &&
+                        f.telephoneResidence.errors?.required
+                    "
+                    class="error-message"
+                >
+                    Le télephone est obligatoire.
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-full" appearance="fill">
+                <mat-label for="role">Responsable résidence</mat-label>
+                <mat-select
+                    [placeholder]="'Responsable'"
+                    formControlName="responsable"
+                    [compareWith]="onCompareUser"
+                >
+                    <mat-option *ngFor="let res of users" [value]="res">
+                        {{ res.prenom | titlecase }}
+                        {{ res.nom | uppercase }}</mat-option
+                    >
+                </mat-select>
+                <mat-icon
+                    class="icon-size-5"
+                    matPrefix
+                    [svgIcon]="'heroicons_solid:user'"
+                ></mat-icon>
+                <mat-error
+                    *ngIf="
+                        f.responsable.touched && f.responsable.errors?.required
+                    "
+                    class="error-message"
+                >
+                    Le responsable est obligatoire.
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-full fuse-mat-textarea" appearance="fill">
+                <mat-label for="description">Description</mat-label>
+                <textarea
+                    matInput
+                    name="description"
+                    formControlName="description"
+                    [rows]="3"
+                    matTextareaAutosize
+                ></textarea>
+                <mat-icon
+                    class="icon-size-5"
+                    matSuffix
+                    [svgIcon]="'heroicons_solid:location-marker'"
+                ></mat-icon>
+            </mat-form-field>
+            <div class="w-full flex items-center space-x-4">
+                <button mat-raised-button color="primary">Enregistrer</button>
+                <button
+                    mat-raised-button
+                    color="warn"
+                    type="button"
+                    (click)="onReset()"
+                >
+                    Annuler
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

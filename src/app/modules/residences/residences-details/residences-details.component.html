@@ -1,1 +1,182 @@
-<p>residences-details works!</p>
+<div class="w-full h-full flex flex-col flex-auto">
+    <div class="w-full h-90 overflow-hidden relative group/header">
+        <img
+            [src]="imageResidence"
+            alt="Cover"
+            class="absolute inset-0 z-0 w-full h-full object-cover"
+        />
+        <div class="bg-gray-900/50 absolute inset-0 w-full h-full"></div>
+        <div
+            class="absolute top-0 inset-x-0 p-6 flex items-center justify-between space-x-4"
+        >
+            <div class="flex-1">
+                <button mat-flat-button class="" [routerLink]="['/residences']">
+                    <mat-icon
+                        class="icon-size-4"
+                        svgIcon="heroicons_solid:arrow-left"
+                    ></mat-icon>
+                    <span>Retour</span>
+                </button>
+            </div>
+            <button
+                mat-icon-button
+                matTooltip="Modifier l'image de la résidence"
+                (click)="onOpenResidenceImage()"
+            >
+                <mat-icon
+                    svgIcon="mat_solid:insert_photo"
+                    class="text-white"
+                ></mat-icon>
+            </button>
+            <button
+                mat-icon-button
+                matTooltip="Modifier les infos de la résidence"
+                (click)="onOpenEditResidence()"
+            >
+                <mat-icon
+                    svgIcon="heroicons_solid:pencil-alt"
+                    class="text-white"
+                ></mat-icon>
+            </button>
+        </div>
+        <div
+            class="absolute inset-0 w-full h-full p-8 flex justify-between items-center gap-6 text-white"
+        >
+            <div class="max-w-128 w-full flex flex-col">
+                <h2 class="text-4xl font-semibold">
+                    {{ residence?.libelle | titlecase }}
+                </h2>
+                <p>
+                    {{ residence?.description | summarize : 120 }}
+                </p>
+            </div>
+            <div class="flex flex-col space-y-4">
+                <div class="flex items-center space-x-4">
+                    <mat-icon
+                        class="icon-size-6 text-white"
+                        [svgIcon]="'heroicons_solid:map'"
+                    ></mat-icon>
+                    <span class="text-lg font-semibold">{{
+                        residence?.adresse
+                    }}</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <mat-icon
+                        class="icon-size-6 text-white"
+                        [svgIcon]="'heroicons_solid:phone'"
+                    ></mat-icon>
+                    <span class="text-lg font-semibold">{{
+                        residence?.telephoneResidence
+                    }}</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <mat-icon
+                        class="icon-size-6 text-white"
+                        [svgIcon]="'heroicons_solid:user'"
+                    ></mat-icon>
+                    <span class="text-lg font-semibold"
+                        >{{ residence?.responsable.prenom | titlecase }}
+                        {{ residence?.responsable.nom | uppercase }}</span
+                    >
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="w-full p-6 grid grid-cols-4 gap-6">
+        <div class="col-span-1 flex flex-col space-y-4">
+            <fuse-card
+                class="p-3 w-full flex items-center justify-center space-x-4"
+                *ngIf="pavillons.length <= 0"
+            >
+                <span>Pas de pavillon</span>
+            </fuse-card>
+            <fuse-card
+                class="p-3 w-full flex items-center justify-between space-x-4 cursor-pointer"
+                [ngClass]="{
+                    'bg-secondary text-white': p.id === pavillonSelected?.id
+                }"
+                *ngFor="let p of pavillons"
+                (click)="onChangePavillon(p)"
+            >
+                <span>{{ p.libelle | titlecase }}</span>
+            </fuse-card>
+            <button
+                mat-stroked-button
+                color="primary"
+                (click)="onOpenPavillonModal()"
+            >
+                <mat-icon
+                    svgIcon="heroicons_solid:plus"
+                    class="text-white"
+                ></mat-icon>
+                <span>Ajouter pavillon</span>
+            </button>
+        </div>
+        <fuse-card class="col-span-3 w-full p-4 flex flex-col space-y-4">
+            <div class="w-full flex items-center justify-between">
+                <h2 class="text-2xl font-serif">Chambres</h2>
+                <button
+                    mat-raised-button
+                    color="primary"
+                    *ngIf="pavillons.length > 0"
+                    (click)="onOpenChambreModal()"
+                >
+                    <mat-icon svgIcon="heroicons_solid:plus"></mat-icon>
+                    <span>Nouveau</span>
+                </button>
+            </div>
+            <div class="w-full grid grid-cols-3 gap-4">
+                <fuse-card
+                    *ngIf="chambres.length <= 0"
+                    class="col-span-full w-full p-3 flex justify-center items-center"
+                >
+                    <span>Pas de chambres</span>
+                </fuse-card>
+                <fuse-card
+                    class="col-span-1 w-full p-3 flex flex-col space-y-2"
+                    *ngFor="let c of chambres"
+                >
+                    <div class="flex justify-between items-center space-x-4">
+                        <span class="text-lg font-medium">{{ c.numero }}</span>
+                        <button
+                            mat-icon-button
+                            [matMenuTriggerFor]="menuChambre"
+                            [matMenuTriggerData]="{ chambre: c }"
+                        >
+                            <mat-icon
+                                svgIcon="heroicons_solid:dots-vertical"
+                            ></mat-icon>
+                        </button>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <mat-icon
+                            svgIcon="heroicons_solid:home"
+                            class="icon-size-5"
+                        ></mat-icon>
+                        <span class="text-lg font-light">{{
+                            c.pavillon.libelle | titlecase
+                        }}</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <mat-icon
+                            svgIcon="heroicons_solid:users"
+                            class="icon-size-5"
+                        ></mat-icon>
+                        <span class="text-lg font-light"
+                            >{{ c.nombrePlace }} personne{{
+                                c.nombrePlace ? "s" : ""
+                            }}</span
+                        >
+                    </div>
+                </fuse-card>
+            </div>
+        </fuse-card>
+    </div>
+</div>
+
+<mat-menu #menuChambre="matMenu">
+    <ng-template matMenuContent let-c="chambre">
+        <button mat-menu-item (click)="onOpenChambreModal(c)">Modifier</button>
+        <button mat-menu-item>Bloquer</button>
+    </ng-template>
+</mat-menu>

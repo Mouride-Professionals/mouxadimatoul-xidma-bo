@@ -1,8 +1,10 @@
-import {Chambre} from '@core/model/chambre.model';
+import { Chambre } from '@core/model/chambre.model';
+import { Residence } from './residence.model';
 
 export type Pavillon = {
     id: number;
     libelle: string;
-    statut: boolean;
-    chambre: Chambre;
+    niveau: number;
+    residence: Residence;
+    chambres: Chambre[];
 };

@@ -1,6 +1,6 @@
 <div class="p-6 w-full h-full flex flex-col space-y-6">
     <div class="w-full flex justify-between items-center">
-        <h2 class="text-4xl font-semibold">Keur Serigne Akhmadou Bamba</h2>
+        <h2 class="text-4xl font-semibold">Résidences</h2>
         <button
             class="ml-4 px-1 sm:px-4 min-w-10 text-white"
             mat-flat-button
@@ -92,8 +92,7 @@
                     <div class="text-secondary mx-2">&bull;</div> -->
                     <div class="text-secondary">
                         {{ residence.pavillons.length }}
-                        pavillon
-                        {{ residence.pavillons.length > 1 ? +"s" : "" }}
+                        pavillon{{ residence.pavillons.length > 1 ? "s" : "" }}
                     </div>
                 </div>
                 <div class="flex-1 mt-6">
