@@ -68,17 +68,19 @@ export const appRoutes: Route[] = [
                     ),
             },
             {
+                path: 'reservations',
+                loadChildren: () =>
+                    import('./modules/reservations/reservations.module').then(
+                        (m) => m.ReservationsModule
+                    ),
+            },
+            {
                 path: 'invites',
                 loadChildren: () =>
                     import('./modules/invite/invite.module').then(
                         (m) => m.InviteModule
                     ),
             },
-            /**  {
-                path: 'dons',
-                loadChildren: () =>
-                    import('./modules/don/don.module').then((m) => m.DonModule),
-            },*/
         ],
     },
 ];

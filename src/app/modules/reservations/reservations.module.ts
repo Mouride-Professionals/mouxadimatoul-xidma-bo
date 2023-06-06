@@ -1,15 +1,18 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ReservationsComponent } from './reservations.component';
-
-
+import { SharedModule } from '@shared/shared.module';
+import { RouterModule } from '@angular/router';
+import { reservationRoutes } from './reservations.routing';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { ReservationListComponent } from './reservation-list/reservation-list.component';
+import { ReservationFormComponent } from './reservation-form/reservation-form.component';
 
 @NgModule({
-  declarations: [
-    ReservationsComponent
-  ],
-  imports: [
-    CommonModule
-  ]
+    declarations: [ReservationsComponent, ReservationListComponent, ReservationFormComponent],
+    imports: [
+        SharedModule,
+        MatButtonToggleModule,
+        RouterModule.forChild(reservationRoutes),
+    ],
 })
-export class ReservationsModule { }
+export class ReservationsModule {}

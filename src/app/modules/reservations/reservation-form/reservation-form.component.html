@@ -1,0 +1,206 @@
+<div class="p-6 w-full content-container flex flex-col space-y-4">
+    <div class="w-full flex justify-between items-center">
+        <h2 class="text-4xl font-semibold">Nouvelle réservation</h2>
+        <!-- New user -->
+        <button
+            class="ml-4 px-1 sm:px-4 min-w-10 text-white"
+            mat-flat-button
+            [routerLink]="['/reservations']"
+            [color]="'warn'"
+        >
+            <mat-icon
+                class="icon-size-5"
+                svgIcon="mat_solid:arrow_back"
+            ></mat-icon>
+            <span class="hidden sm:inline-block ml-2">Annuler</span>
+        </button>
+    </div>
+
+    <fuse-card class="w-full flex-1 h-full overflow-y-scroll p-4">
+        <form
+            class="w-full"
+            [formGroup]="reservationForm"
+            (ngSubmit)="onSubmit()"
+        >
+            <div class="w-full grid grid-cols-2 gap-6">
+                <!-- Info réservation -->
+                <div class="col-span-2 w-full flex space-x-2 items-center">
+                    <h2 class="text-xl font-semibold">
+                        Information de la reservation
+                    </h2>
+                    <div class="flex-1">
+                        <mat-divider></mat-divider>
+                    </div>
+                </div>
+                <div class="col-span-1 w-full">
+                    <mat-form-field class="w-full" appearance="fill">
+                        <mat-label>Période de séjour</mat-label>
+                        <mat-date-range-input
+                            formGroupName="date"
+                            [rangePicker]="picker"
+                        >
+                            <input
+                                matStartDate
+                                formControlName="entree"
+                                placeholder="Date d'entrée"
+                            />
+                            <input
+                                matEndDate
+                                formControlName="sortie"
+                                placeholder="Date de sortie"
+                            />
+                        </mat-date-range-input>
+                        <mat-hint>
+                            Du
+                            {{
+                                f.date.controls.entree.value
+                                    | date : "dd MMM yyyy"
+                            }}
+                            Au
+                            {{
+                                f.date.controls.sortie.value
+                                    | date : "dd MMM yyyy"
+                            }}
+                        </mat-hint>
+                        <mat-datepicker-toggle
+                            matIconSuffix
+                            [for]="picker"
+                        ></mat-datepicker-toggle>
+                        <mat-date-range-picker #picker></mat-date-range-picker>
+                    </mat-form-field>
+                </div>
+                <div class="col-span-1 w-full">
+                    <mat-form-field class="w-full" appearance="fill">
+                        <mat-label>Evénement</mat-label>
+                        <mat-select formControlName="evenement">
+                            <mat-option
+                                *ngFor="let e of events$ | async"
+                                [value]="e"
+                                >{{ e.libelle }}</mat-option
+                            >
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <ng-container formArrayName="invites">
+                    <ng-container
+                        *ngFor="
+                            let guestForm of invites.controls;
+                            let i = index;
+                            let first = first
+                        "
+                        [formGroup]="guestForm"
+                    >
+                        <div
+                            class="col-span-2 w-full flex space-x-2 items-center"
+                        >
+                            <h2 class="text-xl font-semibold">
+                                Invité {{ i + 1 }}
+                            </h2>
+                            <div class="flex-1">
+                                <mat-divider></mat-divider>
+                            </div>
+                            <button
+                                type="button"
+                                mat-icon-button
+                                color="warn"
+                                (click)="removeGuest(i)"
+                                *ngIf="!first"
+                            >
+                                <mat-icon
+                                    svgIcon="heroicons_solid:trash"
+                                ></mat-icon>
+                            </button>
+                        </div>
+                        <div class="col-span-1 w-full">
+                            <mat-form-field class="w-full" appearance="fill">
+                                <mat-label>Prénom</mat-label>
+                                <input
+                                    matInput
+                                    formControlName="prenom"
+                                    type="text"
+                                    [placeholder]="'prénom invité ' + (i + 1)"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div class="col-span-1 w-full">
+                            <mat-form-field class="w-full" appearance="fill">
+                                <mat-label>Nom</mat-label>
+                                <input
+                                    matInput
+                                    formControlName="nom"
+                                    type="text"
+                                    [placeholder]="'nom invité ' + (i + 1)"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div class="col-span-1 w-full">
+                            <mat-form-field class="w-full" appearance="fill">
+                                <mat-label>Téléphone</mat-label>
+                                <input
+                                    matInput
+                                    formControlName="telephone"
+                                    type="text"
+                                    [placeholder]="
+                                        'téléphone invité ' + (i + 1)
+                                    "
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div class="col-span-1 w-full">
+                            <mat-form-field class="w-full" appearance="fill">
+                                <mat-label>Adresse</mat-label>
+                                <input
+                                    matInput
+                                    formControlName="adresse"
+                                    type="text"
+                                    [placeholder]="'adresse invité ' + (i + 1)"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div class="col-span-1 w-full">
+                            <mat-form-field class="w-full" appearance="fill">
+                                <mat-label>Email</mat-label>
+                                <input
+                                    matInput
+                                    formControlName="email"
+                                    type="email"
+                                    [placeholder]="'email invité ' + (i + 1)"
+                                />
+                            </mat-form-field>
+                        </div>
+                    </ng-container>
+                </ng-container>
+
+                <div
+                    class="col-span-full flex items-center"
+                    *ngIf="!invites.errors?.maxLength"
+                >
+                    <button
+                        mat-flat-button
+                        type="button"
+                        class="bg-secondary text-white flex items-center"
+                        (click)="addGuest()"
+                    >
+                        <mat-icon
+                            svgIcon="mat_solid:person_add_alt"
+                            class="text-white icon-size-4 mr-2"
+                        ></mat-icon>
+                        <span>Ajouter invité</span>
+                    </button>
+                </div>
+
+                <div class="col-span-full mb-4 flex w-full items-center">
+                    <button
+                        mat-raised-button
+                        class="w-full max-w-60"
+                        color="primary"
+                        [disabled]="reservationForm.invalid"
+                    >
+                        Enregistrer
+                    </button>
+                </div>
+            </div>
+        </form>
+    </fuse-card>
+</div>

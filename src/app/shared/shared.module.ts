@@ -16,6 +16,18 @@ import { MatMenuModule } from '@angular/material/menu';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { SummarizePipe } from './pipes/summarize/summarize.pipe';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import {
+    MAT_MOMENT_DATE_FORMATS,
+    MomentDateAdapter,
+    MAT_MOMENT_DATE_ADAPTER_OPTIONS,
+} from '@angular/material-moment-adapter';
+import {
+    DateAdapter,
+    MAT_DATE_FORMATS,
+    MAT_DATE_LOCALE,
+} from '@angular/material/core';
 
 const LIST_MODULES = [
     MatButtonModule,
@@ -31,6 +43,8 @@ const LIST_MODULES = [
     MatToolbarModule,
     MatMenuModule,
     MatTooltipModule,
+    MatDividerModule,
+    MatDatepickerModule,
     NgApexchartsModule,
 ];
 
@@ -44,5 +58,14 @@ const LIST_MODULES = [
         ...LIST_MODULES,
     ],
     declarations: [SummarizePipe],
+    providers: [
+        { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
+        {
+            provide: DateAdapter,
+            useClass: MomentDateAdapter,
+            deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS],
+        },
+        { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
+    ],
 })
 export class SharedModule {}
