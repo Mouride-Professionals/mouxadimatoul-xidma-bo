@@ -9,7 +9,7 @@ import {
 } from '@fuse/components/navigation';
 import { NavigationService } from '@core/navigation/navigation.service';
 import { Utilisateur } from '@core/model/utilisateur.model';
-import { UtilisateurService } from '@core/service/utilisateur.service';
+import { UtilisateurService } from '@core/service/utilisateur/utilisateur.service';
 
 @Component({
     selector: 'classic-layout',

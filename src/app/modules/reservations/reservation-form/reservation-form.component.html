@@ -36,16 +36,21 @@
                     <mat-form-field class="w-full" appearance="fill">
                         <mat-label>Période de séjour</mat-label>
                         <mat-date-range-input
-                            formGroupName="date"
+                            formGroupName="period"
                             [rangePicker]="picker"
                         >
                             <input
                                 matStartDate
+                                (dateChange)="
+                                    f.period.controls.sortie.reset();
+                                    onLoadChambre()
+                                "
                                 formControlName="entree"
                                 placeholder="Date d'entrée"
                             />
                             <input
                                 matEndDate
+                                (dateChange)="onLoadChambre()"
                                 formControlName="sortie"
                                 placeholder="Date de sortie"
                             />
@@ -53,12 +58,12 @@
                         <mat-hint>
                             Du
                             {{
-                                f.date.controls.entree.value
+                                f.period.controls.entree.value
                                     | date : "dd MMM yyyy"
                             }}
                             Au
                             {{
-                                f.date.controls.sortie.value
+                                f.period.controls.sortie.value
                                     | date : "dd MMM yyyy"
                             }}
                         </mat-hint>
@@ -77,6 +82,22 @@
                                 *ngFor="let e of events$ | async"
                                 [value]="e"
                                 >{{ e.libelle }}</mat-option
+                            >
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-span-1 w-full">
+                    <mat-form-field class="w-full" appearance="fill">
+                        <mat-label>Résidence</mat-label>
+                        <mat-select
+                            (ngModelChange)="onLoadChambre()"
+                            #residenceSelect
+                            formControlName="residence"
+                        >
+                            <mat-option
+                                *ngFor="let r of residences$ | async"
+                                [value]="r.id"
+                                >{{ r.libelle }}</mat-option
                             >
                         </mat-select>
                     </mat-form-field>
@@ -169,13 +190,31 @@
                                 />
                             </mat-form-field>
                         </div>
+                        <div class="w-full col-span-1">
+                            <mat-form-field class="w-full" appearance="fill">
+                                <mat-label>Chambre</mat-label>
+                                <mat-select
+                                    [placeholder]="'Chambre invité ' + (i + 1)"
+                                    formControlName="chambre"
+                                    (ngModelChange)="onChoiceChambre($event)"
+                                >
+                                    <mat-option
+                                        *ngFor="let c of chambres$ | async"
+                                        [disabled]="isUnvalaible(c.id)"
+                                        [value]="c"
+                                    >
+                                        {{ c.pavillon.libelle }} -
+                                        {{ c.numero }} -
+                                        {{ c.nombrePlace - c.placeReservee }}
+                                        place(s) disponible(s)
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
                     </ng-container>
                 </ng-container>
 
-                <div
-                    class="col-span-full flex items-center"
-                    *ngIf="!invites.errors?.maxLength"
-                >
+                <div class="col-span-full flex items-center">
                     <button
                         mat-flat-button
                         type="button"

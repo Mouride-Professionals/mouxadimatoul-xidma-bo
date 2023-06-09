@@ -4,6 +4,7 @@ export type Chambre = {
     id: number;
     numero: number;
     nombrePlace: number;
+    placeReservee: number;
     reference: string;
     pavillon: Pavillon;
 };

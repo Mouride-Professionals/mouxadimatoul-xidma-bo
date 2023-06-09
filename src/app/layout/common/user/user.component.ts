@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 import { BooleanInput } from '@angular/cdk/coercion';
 import { Subject, takeUntil } from 'rxjs';
 import { Utilisateur } from '@core/model/utilisateur.model';
-import { UtilisateurService } from '@core/service/utilisateur.service';
+import { UtilisateurService } from '@core/service/utilisateur/utilisateur.service';
 import { AuthService } from '@core/auth/auth.service';
 
 @Component({

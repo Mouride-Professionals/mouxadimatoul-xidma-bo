@@ -3,14 +3,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Residence } from '@core/model/residence.model';
-import { ResidenceService } from '@core/service/residence.service';
+import { ResidenceService } from '@core/service/residence/residence.service';
 import { ResidencesPavillonAddComponent } from '../residences-pavillon-add/residences-pavillon-add.component';
 import { ResidencesChambreFormComponent } from '../residences-chambre-form/residences-chambre-form.component';
 import { ResidencesEditComponent } from '../residences-edit/residences-edit.component';
 import { ResidencesEditImageComponent } from '../residences-edit-image/residences-edit-image.component';
 import { Chambre } from '@core/model/chambre.model';
 import { Pavillon } from '@core/model/pavillon.model';
-import { ChambreService } from '@core/service/chambre.service';
+import { ChambreService } from '@core/service/chambre/chambre.service';
 import { Pagination } from '@core/model/pagination.model';
 
 @Component({

@@ -4,8 +4,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Residence } from '@core/model/residence.model';
 import { Utilisateur } from '@core/model/utilisateur.model';
-import { ResidenceService } from '@core/service/residence.service';
-import { UtilisateurService } from '@core/service/utilisateur.service';
+import { ResidenceService } from '@core/service/residence/residence.service';
+import { UtilisateurService } from '@core/service/utilisateur/utilisateur.service';
 
 @Component({
     selector: 'app-residences-edit',

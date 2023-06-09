@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { UtilisateurFormeComponent } from '@modules/admin/utilisateur/utilisateur-forme/utilisateur-forme.component';
-import { UtilisateurService } from '@core/service/utilisateur.service';
+import { UtilisateurService } from '@core/service/utilisateur/utilisateur.service';
 import { Observable } from 'rxjs';
 import { Utilisateur } from '@core/model/utilisateur.model';
 import { Pagination } from '@core/model/pagination.model';

@@ -5,7 +5,7 @@ import {
     RouterStateSnapshot,
 } from '@angular/router';
 import { NavigationService } from '@core/navigation/navigation.service';
-import { UtilisateurService } from '@core/service/utilisateur.service';
+import { UtilisateurService } from '@core/service/utilisateur/utilisateur.service';
 import { forkJoin, Observable } from 'rxjs';
 
 @Injectable({

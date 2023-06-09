@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Residence } from '@core/model/residence.model';
-import { ResidenceService } from '@core/service/residence.service';
+import { ResidenceService } from '@core/service/residence/residence.service';
 import { Observable } from 'rxjs';
 
 @Component({

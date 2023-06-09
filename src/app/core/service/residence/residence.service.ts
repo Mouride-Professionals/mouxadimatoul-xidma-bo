@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { Residence } from '@core/model/residence.model';
-import { environment } from '../../../environments/environment';
+import { environment } from 'environments/environment';
 
 const API_URL = environment.apiUrl + '/residences';
 
@@ -25,13 +24,7 @@ export class ResidenceService {
         if (image) {
             formData.append('image', image);
         }
-        return this._http
-            .post<Residence>(`${environment.apiUrl}/residences`, formData)
-            .pipe(
-                catchError(
-                    this.handleError<Residence>('Ajout Residence echoué')
-                )
-            );
+        return this._http.post<Residence>(API_URL, formData);
     }
 
     updateResidence(res: Residence): Observable<Residence> {
@@ -44,13 +37,5 @@ export class ResidenceService {
 
     getResidenceById(id: number): Observable<Residence> {
         return this._http.get<Residence>(`${API_URL}/${id}`);
-    }
-
-    private handleError<T>(operation = 'operation', result?: T) {
-        return (error: any): Observable<T> => {
-            console.error(error);
-            console.log(`${operation} failed: ${error.message}`);
-            return of(result as T);
-        };
     }
 }

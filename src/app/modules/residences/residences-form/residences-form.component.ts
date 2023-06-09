@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Utilisateur } from '@core/model/utilisateur.model';
-import { ResidenceService } from '@core/service/residence.service';
-import { UtilisateurService } from '@core/service/utilisateur.service';
+import { ResidenceService } from '@core/service/residence/residence.service';
+import { UtilisateurService } from '@core/service/utilisateur/utilisateur.service';
 
 @Component({
     selector: 'app-residences-form',

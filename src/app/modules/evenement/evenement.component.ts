@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FormEvenementComponent } from './form-evenement/form-evenement.component';
 import { Evenement } from '@core/model/evenement.model';
-import { EvenementService } from '@core/service/evenement.service';
+import { EvenementService } from '@core/service/evenement/evenement.service';
 import { Observable } from 'rxjs';
 
 @Component({

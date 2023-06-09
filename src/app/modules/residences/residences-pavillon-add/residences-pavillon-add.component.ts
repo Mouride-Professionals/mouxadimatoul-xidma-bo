@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Pavillon } from '@core/model/pavillon.model';
 import { Residence } from '@core/model/residence.model';
-import { PavillonService } from '@core/service/pavillon.service';
+import { PavillonService } from '@core/service/pavillon/pavillon.service';
 
 @Component({
     selector: 'app-residences-pavillon-add',

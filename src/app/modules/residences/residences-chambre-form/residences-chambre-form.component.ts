@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Chambre } from '@core/model/chambre.model';
 import { Pavillon } from '@core/model/pavillon.model';
-import { ChambreService } from '@core/service/chambre.service';
+import { ChambreService } from '@core/service/chambre/chambre.service';
 
 @Component({
     selector: 'app-residences-chambre-form',

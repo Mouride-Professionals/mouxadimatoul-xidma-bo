@@ -26,6 +26,16 @@ export class ChambreService {
         return this._httpClient.get<Chambre>(`${API_URL}/${id}`);
     }
 
+    getAllDisponibleByResidence(
+        residence: number,
+        debut: Date,
+        fin: Date
+    ): Observable<Chambre[]> {
+        return this._httpClient.get<Chambre[]>(
+            `${API_URL}/residence/${residence}/disponible/${debut}/${fin}`
+        );
+    }
+
     getChambreByPavillon(
         idPavillon: number,
         params: RequestParams

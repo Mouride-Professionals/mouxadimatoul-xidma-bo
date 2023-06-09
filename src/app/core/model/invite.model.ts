@@ -1,9 +1,11 @@
+import { Reservation } from './reservation.model';
+
 export type Invite = {
     id: number;
-    nom: string;
     prenom: string;
-    telephone?: string;
-    adresse?: string;
-    email?: string;
-    statut: boolean;
+    nom: string;
+    telephone: string;
+    adresse: string;
+    email: string;
+    reservations: Reservation[];
 };
