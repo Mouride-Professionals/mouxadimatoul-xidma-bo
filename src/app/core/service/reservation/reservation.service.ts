@@ -12,8 +12,17 @@ const API_URL = environment.apiUrl + '/reservations';
 export class ReservationService {
     constructor(private _httpClient: HttpClient) {}
 
-    // ajout Reservation
     addReservations(reservation: any): Observable<Reservation[]> {
         return this._httpClient.post<Reservation[]>(API_URL, reservation);
+    }
+
+    getAllByPeriodAndPavillon(
+        debut: Date,
+        fin: Date,
+        idPav: number
+    ): Observable<Reservation[]> {
+        return this._httpClient.get<Reservation[]>(
+            `${API_URL}/pavillon/${idPav}/${debut}/${fin}`
+        );
     }
 }

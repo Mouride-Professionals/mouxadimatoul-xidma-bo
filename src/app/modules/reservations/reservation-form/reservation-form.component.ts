@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { Chambre } from '@core/model/chambre.model';
 import { Evenement } from '@core/model/evenement.model';
 import { Residence } from '@core/model/residence.model';
@@ -41,7 +43,9 @@ export class ReservationFormComponent implements OnInit {
         private _eventService: EvenementService,
         private _residenceService: ResidenceService,
         private _chambreService: ChambreService,
-        private _reservationService: ReservationService
+        private _reservationService: ReservationService,
+        private _router: Router,
+        private _snackBar: MatSnackBar
     ) {}
 
     get f(): any {
@@ -66,11 +70,24 @@ export class ReservationFormComponent implements OnInit {
             .addReservations(this.reservationForm.value)
             .subscribe({
                 next: (res) => {
-                    console.log(res);
-                    this.reservationForm.reset();
+                    this._snackBar.open(
+                        `${res.length} réservation${
+                            res.length > 1 ? 's' : ''
+                        } effectuée${res.length > 1 ? 's' : ''}`,
+                        '',
+                        {
+                            panelClass: ['bg-green-600', 'text-white'],
+                            duration: 3000,
+                        }
+                    );
+                    this._router.navigate(['/reservations']);
                 },
                 error: (err) => {
                     console.log(err);
+                    this._snackBar.open(err.error.message, '', {
+                        panelClass: ['bg-red-600', 'text-white'],
+                        duration: 3500,
+                    });
                 },
             });
     }
