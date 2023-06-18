@@ -1,3 +1,4 @@
+import fr from '@angular/common/locales/fr';
 import { Component, OnInit } from '@angular/core';
 import { Pavillon } from '@core/model/pavillon.model';
 import { Reservation } from '@core/model/reservation.model';
@@ -18,7 +19,7 @@ import {
     subWeeks,
 } from 'date-fns';
 
-import fr from 'date-fns/locale/fr';
+
 import { Observable, tap } from 'rxjs';
 
 type CalendarReservationType = {
@@ -93,7 +94,7 @@ export class ReservationListComponent implements OnInit {
         const numberOfDays: number =
             this.type === 'week' ? 7 : getDaysInMonth(this.current);
         this.arraDays = Array.from(Array(numberOfDays)).map((e, i) =>
-            format(addDays(this.startDate, i), 'eeee dd', { locale: fr })
+            format(addDays(this.startDate, i), 'eeee dd', { locale: "fr" } as any)
         );
     }
 
