@@ -16,7 +16,44 @@
         </button>
     </div>
 
-    <div class="w-full flex justify-between items-center space-x-4">
+    <div class="responsive-table">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Invité</th>
+                    <th>Chambre</th>
+                    <th>Période</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let res of (data$ | async)?.content">
+                    <td>
+                        {{ res.invite.prenom | titlecase }}
+                        {{ res.invite.nom | uppercase }}
+                    </td>
+                    <td>
+                        {{ res.chambre.pavillon.libelle }} —
+                        {{ res.chambre.numero }}
+                    </td>
+                    <td>
+                        {{ res.dateEntree | date : "dd/MM/yyyy" }} —
+                        {{ res.dateSortie | date : "dd/MM/yyyy" }}
+                    </td>
+                    <td>
+                        <button mat-icon-button>
+                            <mat-icon
+                                svgIcon="heroicons_solid:pencil-alt"
+                                class="icon-size-4"
+                            ></mat-icon>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- <div class="w-full flex justify-between items-center space-x-4">
         <div class="w-full max-w-72">
             <mat-form-field
                 class="w-full fuse-mat-rounded fuse-mat-dense fuse-mat-no-subscript"
@@ -99,5 +136,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
