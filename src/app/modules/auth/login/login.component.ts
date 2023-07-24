@@ -13,13 +13,7 @@ import { FuseAlertType } from '@fuse/components/alert';
 })
 export class LoginComponent implements OnInit {
     @ViewChild('loginNgForm') loginNgForm: NgForm;
-    loginForm: FormGroup = new FormGroup({
-        username: new FormControl('776543212', [
-            Validators.required,
-            Validators.pattern(/^(77|78|75|70|76)\d{7}$/gm),
-        ]),
-        password: new FormControl('admin', Validators.required),
-    });
+    loginForm: FormGroup;
 
     alert: { type: FuseAlertType; message: string } = {
         type: 'success',
@@ -31,7 +25,16 @@ export class LoginComponent implements OnInit {
         private _authService: AuthService,
         private _activatedRoute: ActivatedRoute,
         private _router: Router
-    ) {}
+    ) {
+
+        this.loginForm = new FormGroup({
+            username: new FormControl('', [
+                Validators.required,
+                Validators.pattern(/^(77|78|75|70|76)\d{7}$/gm),
+            ]),
+            password: new FormControl('', Validators.required),
+        })
+    }
 
     ngOnInit(): void {}
 
