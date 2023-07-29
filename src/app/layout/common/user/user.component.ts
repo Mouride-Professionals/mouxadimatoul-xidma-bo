@@ -58,4 +58,7 @@ export class UserComponent implements OnInit, OnDestroy {
             this._router.navigate(['/connexion']);
         });
     }
+    showProfile(): void {
+        this._router.navigate(['/profiles']);
+    }
 }
