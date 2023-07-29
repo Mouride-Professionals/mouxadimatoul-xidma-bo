@@ -14,7 +14,7 @@ import { AppComponent } from 'app/app.component';
 import { appRoutes } from 'app/app.routing';
 import { HttpClientModule } from '@angular/common/http';
 
-import localeFr from '@angular/common/locales/fr';
+import localeFr from '@angular/common/locales/fr'; 
 import { registerLocaleData } from '@angular/common';
 
 // the second parameter 'fr' is optional
@@ -31,7 +31,6 @@ const routerConfig: ExtraOptions = {
         BrowserModule,
         BrowserAnimationsModule,
         RouterModule.forRoot(appRoutes, routerConfig),
-
         HttpClientModule,
 
         // Fuse, FuseConfig & FuseMockAPI

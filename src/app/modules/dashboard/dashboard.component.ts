@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Residence } from '@core/model/residence.model';
+import { ResidenceService } from '@core/service/residence/residence.service';
 import { ApexAxisChartSeries, ApexChart, ApexTitleSubtitle, ApexXAxis } from 'ng-apexcharts';
+import { Observable } from 'rxjs';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -15,9 +19,11 @@ export type ChartOptions = {
 })
 
 
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
+  residences$: Observable<Residence[]>;
   public chartOptions: Partial<ChartOptions>;
-  constructor() {
+  constructor(
+    private _residenceService: ResidenceService) {
     this.chartOptions = {
       series: [
         {
@@ -36,5 +42,13 @@ export class DashboardComponent {
         categories: ["Pavillon A", "Pavillon B",  "Pavillon C",  "Pavillon D"]
       }
     };
+  }
+  ngOnInit(): void {
+    this.getCountResidences();
+
+  }
+
+  getCountResidences(): void {
+    this.residences$ = this._residenceService.getAllResidences();
   }
 }

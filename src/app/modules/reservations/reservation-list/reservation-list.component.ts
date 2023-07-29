@@ -1,3 +1,4 @@
+import fr from '@angular/common/locales/fr';
 import { Component, OnInit } from '@angular/core';
 import { Pagination } from '@core/model/pagination.model';
 import { Pavillon } from '@core/model/pavillon.model';
@@ -19,7 +20,7 @@ import {
     subWeeks,
 } from 'date-fns';
 
-import fr from 'date-fns/locale/fr';
+
 import { Observable, tap } from 'rxjs';
 
 type CalendarReservationType = {
