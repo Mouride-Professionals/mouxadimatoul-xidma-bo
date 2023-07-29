@@ -90,36 +90,42 @@ export class ReservationFormComponent implements OnInit {
         if (this.reservationForm.invalid) {
             return;
         }
-        this._reservationService
-            .addReservations(this.reservationForm.value)
-            .subscribe({
-                next: (res) => {
-                    this._snackBar.open(
-                        `${res.length} réservation${
-                            res.length > 1 ? 's' : ''
-                        } effectuée${res.length > 1 ? 's' : ''}`,
-                        '',
-                        {
-                            panelClass: ['bg-green-600', 'text-white'],
-                            duration: 3000,
-                        }
-                    );
-                    this._router.navigate(['/reservations']);
-                },
-                error: (err) => {
-                    console.log(err);
-                    this._snackBar.open(err.error.message, '', {
-                        panelClass: ['bg-red-600', 'text-white'],
-                        duration: 3500,
-                    });
-                },
-            });
+        const reservation = {
+            ...this.reservationForm.value,
+            invites: this.reservationForm.value.invites.filter(
+                (i: any) => i.checked
+            ),
+        };
+        this._reservationService.addReservations(reservation).subscribe({
+            next: (res) => {
+                this._snackBar.open(
+                    `${res.length} réservation${
+                        res.length > 1 ? 's' : ''
+                    } effectuée${res.length > 1 ? 's' : ''}`,
+                    '',
+                    {
+                        panelClass: ['bg-green-600', 'text-white'],
+                        duration: 3000,
+                    }
+                );
+                this._router.navigate(['/reservations']);
+            },
+            error: (err) => {
+                console.log(err);
+                this._snackBar.open(err.error.message, '', {
+                    panelClass: ['bg-red-600', 'text-white'],
+                    duration: 3500,
+                });
+            },
+        });
     }
 
     onChoiceChambre(chambre: Chambre): void {
         if (chambre) {
+            console.log(chambre);
+
             const chambreSelected: number[] = this.invites.value.map(
-                (i: any) => i.chambre.id
+                (i: any) => i.chambre?.id
             );
             const idSelected: { [key: number]: number } =
                 chambreSelected.reduce(

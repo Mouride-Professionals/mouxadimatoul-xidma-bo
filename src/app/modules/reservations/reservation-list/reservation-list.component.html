@@ -16,6 +16,25 @@
         </button>
     </div>
 
+    <!-- Search -->
+    <fuse-card class="flex rounded-md items-center p-2 justify-end">
+        <mat-form-field
+            class="w-full max-w-80 fuse-mat-rounded fuse-mat-dense fuse-mat-no-subscript"
+            appearance="fill"
+        >
+            <mat-select
+                [placeholder]="'Chambre invité'"
+                [(ngModel)]="event"
+                (ngModelChange)="loadReservations()"
+            >
+                <mat-option>---</mat-option>
+                <mat-option *ngFor="let e of events$ | async" [value]="e.id">
+                    {{ e.libelle }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </fuse-card>
+
     <div class="responsive-table" *ngIf="data$ | async as data">
         <table class="table">
             <thead>

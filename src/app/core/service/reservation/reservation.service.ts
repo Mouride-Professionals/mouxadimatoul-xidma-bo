@@ -20,7 +20,13 @@ export class ReservationService {
     getReservations(params: {
         page: number;
         size: number;
+        event?: number;
     }): Observable<Pagination<Reservation>> {
+        Object.entries(params).forEach(([key, value]) => {
+            if (!value) {
+                delete params[key];
+            }
+        });
         return this._httpClient.get<Pagination<Reservation>>(API_URL, {
             params: { ...params },
         });
