@@ -103,7 +103,39 @@
                     </mat-form-field>
                 </div>
 
-                <ng-container formArrayName="invites">
+                <!-- Info réservation -->
+                <div class="col-span-2 w-full flex space-x-2 items-center">
+                    <h2 class="text-xl font-semibold">
+                        Informations des invités
+                    </h2>
+                    <div class="flex-1">
+                        <mat-divider></mat-divider>
+                    </div>
+                </div>
+                <div class="col-span-1 w-full">
+                    <mat-form-field class="w-full" appearance="fill">
+                        <mat-label>Délégation</mat-label>
+                        <mat-select formControlName="delegation">
+                            <mat-option
+                                *ngFor="let d of delegations$ | async"
+                                [value]="d"
+                                >{{ d.nom }}</mat-option
+                            >
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-span-1 w-full flex items-center">
+                    <button
+                        mat-raised-button
+                        color="primary"
+                        class=""
+                        (click)="addNewDelegation()"
+                    >
+                        Nouvelle délégation
+                    </button>
+                </div>
+
+                <!-- <ng-container formArrayName="invites">
                     <ng-container
                         *ngFor="
                             let guestForm of invites.controls;
@@ -227,7 +259,7 @@
                         ></mat-icon>
                         <span>Ajouter invité</span>
                     </button>
-                </div>
+                </div> -->
 
                 <div class="col-span-full mb-4 flex w-full items-center">
                     <button

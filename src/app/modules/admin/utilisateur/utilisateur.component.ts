@@ -51,7 +51,7 @@ export class UtilisateurComponent implements OnInit {
         this._matDialog
             .open(UtilisateurFormeComponent, {
                 autoFocus: false,
-                panelClass: 'w-full',
+                panelClass: ['w-full', 'md:w-160'],
                 data: user,
             })
             .afterClosed()

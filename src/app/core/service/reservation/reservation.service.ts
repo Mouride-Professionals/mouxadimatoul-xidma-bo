@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Pagination } from '@core/model/pagination.model';
 import { Reservation } from '@core/model/reservation.model';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
@@ -14,6 +15,15 @@ export class ReservationService {
 
     addReservations(reservation: any): Observable<Reservation[]> {
         return this._httpClient.post<Reservation[]>(API_URL, reservation);
+    }
+
+    getReservations(params: {
+        page: number;
+        size: number;
+    }): Observable<Pagination<Reservation>> {
+        return this._httpClient.get<Pagination<Reservation>>(API_URL, {
+            params: { ...params },
+        });
     }
 
     getAllByPeriodAndPavillon(

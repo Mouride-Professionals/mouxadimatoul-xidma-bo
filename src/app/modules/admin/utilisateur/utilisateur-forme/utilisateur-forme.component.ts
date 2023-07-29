@@ -17,7 +17,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     styleUrls: ['./utilisateur-forme.component.scss'],
 })
 export class UtilisateurFormeComponent implements OnInit {
-    formFieldHelpers: string[] = [''];
     form: FormGroup;
     user: Utilisateur;
     roles$: Observable<Role[]>;

@@ -75,10 +75,17 @@ export const appRoutes: Route[] = [
                     ),
             },
             {
-                path: 'invites',
+                path: 'delegations',
                 loadChildren: () =>
-                    import('./modules/invite/invite.module').then(
-                        (m) => m.InviteModule
+                    import('./modules/delegation/delegation.module').then(
+                        (m) => m.DelegationModule
+                    ),
+            },
+            {
+                path: 'accueillants',
+                loadChildren: () =>
+                    import('./modules/accueillant/accueillant.module').then(
+                        (m) => m.AccueillantModule
                     ),
             },
         ],
