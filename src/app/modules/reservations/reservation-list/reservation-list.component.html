@@ -22,8 +22,9 @@
                 <tr>
                     <th>Invité</th>
                     <th>Chambre</th>
-                    <th>Période</th>
-                    <th>Actions</th>
+                    <th>Date d'entrée</th>
+                    <th>Date de sortie</th>
+                    <!-- <th>Actions</th> -->
                 </tr>
             </thead>
             <tbody>
@@ -37,17 +38,19 @@
                         {{ res.chambre.numero }}
                     </td>
                     <td>
-                        {{ res.dateEntree | date : "dd/MM/yyyy" }} —
-                        {{ res.dateSortie | date : "dd/MM/yyyy" }}
+                        {{ res.dateEntree | date : "dd/MM/yyyy" }}
                     </td>
                     <td>
+                        {{ res.dateSortie | date : "dd/MM/yyyy" }}
+                    </td>
+                    <!-- <td>
                         <button mat-icon-button>
                             <mat-icon
                                 svgIcon="heroicons_solid:pencil-alt"
                                 class="icon-size-4"
                             ></mat-icon>
                         </button>
-                    </td>
+                    </td> -->
                 </tr>
             </tbody>
         </table>

@@ -76,11 +76,18 @@ export const defaultNavigation: FuseNavigationItem[] = [
         link: '/evenements',
     },
     {
-        id: 'invites',
-        title: 'Invités',
+        id: 'delegations',
+        title: 'Délégations',
         type: 'basic',
         icon: 'heroicons_outline:user-group',
-        link: '/invites',
+        link: '/delegations',
+    },
+    {
+        id: 'accueillants',
+        title: 'Accueillants',
+        type: 'basic',
+        icon: 'heroicons_outline:user-group',
+        link: '/accueillants',
     },
     /*{
         id: 'dons',

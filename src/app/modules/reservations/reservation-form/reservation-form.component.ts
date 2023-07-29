@@ -3,13 +3,15 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Chambre } from '@core/model/chambre.model';
+import { Delegation } from '@core/model/delegation.model';
 import { Evenement } from '@core/model/evenement.model';
 import { Residence } from '@core/model/residence.model';
 import { ChambreService } from '@core/service/chambre/chambre.service';
+import { DelegationService } from '@core/service/delegation/delegation.service';
 import { EvenementService } from '@core/service/evenement/evenement.service';
 import { ReservationService } from '@core/service/reservation/reservation.service';
 import { ResidenceService } from '@core/service/residence/residence.service';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 @Component({
     selector: 'app-reservation-form',
@@ -27,6 +29,7 @@ export class ReservationFormComponent implements OnInit {
         ),
         evenement: new FormControl(null, [Validators.required]),
         residence: new FormControl(null, [Validators.required]),
+        delegation: new FormGroup({}),
         invites: new FormArray(
             [],
             [Validators.required, Validators.minLength(1)]
@@ -34,6 +37,7 @@ export class ReservationFormComponent implements OnInit {
     });
 
     events$: Observable<Evenement[]>;
+    delegations$: Observable<Delegation[]>;
     residences$: Observable<Residence[]>;
     chambres$: Observable<Chambre[]>;
     chambresIndisponibles: number[] = [];
@@ -44,6 +48,7 @@ export class ReservationFormComponent implements OnInit {
         private _residenceService: ResidenceService,
         private _chambreService: ChambreService,
         private _reservationService: ReservationService,
+        private _delagationService: DelegationService,
         private _router: Router,
         private _snackBar: MatSnackBar
     ) {}
@@ -57,6 +62,9 @@ export class ReservationFormComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.delegations$ = this._delagationService
+            .getAllDelagations({ page: 0, size: 1000 })
+            .pipe(map((data) => data.content));
         this.events$ = this._eventService.getAllEvent();
         this.residences$ = this._residenceService.getAllResidences();
         this.addGuest();
@@ -136,6 +144,7 @@ export class ReservationFormComponent implements OnInit {
             this.reservationForm.get('period').get('entree').value,
             this.reservationForm.get('period').get('sortie').value
         );
+        this.chambres$.subscribe((res) => console.log(res));
         this.resetChambre();
     }
 
@@ -171,4 +180,6 @@ export class ReservationFormComponent implements OnInit {
             })
         );
     }
+
+    addNewDelegation(): void {}
 }
