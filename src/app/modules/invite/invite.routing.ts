@@ -5,6 +5,5 @@ export const inviteRoutes: Routes = [
     {
         path: '',
         component: InviteComponent,
-        
     },
 ];

@@ -1,0 +1,162 @@
+<div class="p-6 w-full h-full flex flex-col space-y-4">
+
+    <fuse-card  class="flex flex-col w-full p-6 sm:p-8 pb-6">
+        <!-- Form -->
+        <form
+            [formGroup]="profileForm">
+            <!-- Section -->
+            <div class="w-full">
+                <div class="text-xl">Information Personnelle</div>
+                <div class="text-secondary">Profile de l'utilisateur.</div>
+            </div>
+            <div class="grid sm:grid-cols-4 gap-6 w-full mt-8">
+                <!-- Prénom -->
+                <div class="sm:col-span-2">
+                    <mat-form-field class="fuse-mat-no-subscript w-full">
+                        <mat-label>Prénom</mat-label>
+                        <mat-icon
+                            class="icon-size-5"
+                            [svgIcon]="'heroicons_solid:user'"
+                            matPrefix></mat-icon>
+                        <input
+                            [formControlName]="'prenom'"
+                            matInput>
+                    </mat-form-field>
+                </div>
+                <!-- Nom -->
+                <div class="sm:col-span-2">
+                    <mat-form-field class="fuse-mat-no-subscript w-full">
+                        <mat-label>Nom</mat-label>
+                        <mat-icon
+                            class="icon-size-5"
+                            [svgIcon]="'heroicons_solid:user'"
+                            matPrefix></mat-icon>
+                        <input
+                            [formControlName]="'nom'"
+                            matInput>
+                    </mat-form-field>
+                </div>
+                <!-- Phone -->
+                <div class="sm:col-span-2">
+                    <mat-form-field class="fuse-mat-no-subscript w-full">
+                        <mat-label>Téléphone</mat-label>
+                        <mat-icon
+                            class="icon-size-5"
+                            [svgIcon]="'heroicons_solid:phone'"
+                            matPrefix></mat-icon>
+                        <input
+                            [formControlName]="'telephone'"
+                            matInput>
+                    </mat-form-field>
+                </div>
+                <!-- Country -->
+                <div class="sm:col-span-2">
+                    <mat-form-field class="fuse-mat-no-subscript w-full">
+                        <mat-label>Rôle</mat-label>
+                        <mat-icon
+                            class="icon-size-5"
+                            [svgIcon]="'heroicons_solid:location-marker'"
+                            matPrefix></mat-icon>
+                        <mat-select [formControlName]="'role'" disabled>
+                            <mat-option [value]="'usa'">United States</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <!-- Actions -->
+            <div class="flex items-center justify-end my-4">
+                <button
+                    mat-stroked-button
+                    type="button">
+                    Annuler
+                </button>
+                <button
+                    class="ml-4"
+                    mat-flat-button
+                    type="button"
+                    [color]="'primary'">Enregistrer
+                </button>
+            </div>
+
+        </form>
+    </fuse-card>
+    <!-- Divider -->
+    <div class="mt-11 mb-10 border-t"></div>
+    <fuse-card class="flex flex-col w-full p-6 sm:p-8 pb-6">
+        <!-- Alert -->
+        <fuse-alert
+            class="mt-8 -mb-4"
+            *ngIf="showAlert"
+            [appearance]="'outline'"
+            [showIcon]="false"
+            [type]="alert.type"
+            [@shake]="alert.type === 'error'">
+            {{alert.message}}
+        </fuse-alert>
+        <!-- Form Changer mot de passe -->
+        <form
+            [formGroup]="resetPasswordForm"
+            #resetPasswordNgForm="ngForm">
+            <!-- Section -->
+            <div class="w-full">
+                <div class="text-secondary">Changer mot de passe.</div>
+            </div>
+            <!-- Actions -->
+            <div class="flex items-end space-x-4 justify-between">
+                <!-- Prénom -->
+                <div class="w-full">
+                    <mat-form-field class="fuse-mat-no-subscript w-full">
+                        <mat-label>nouveau mot de passe</mat-label>
+                        <mat-icon
+                            class="icon-size-5"
+                            [svgIcon]="'heroicons_solid:eye'"
+                            matPrefix></mat-icon>
+                        <input
+                            id="password"
+                            matInput
+                            type="password"
+                            [formControlName]="'password'"
+                            #passwordField
+                            matInput>
+                        <mat-error>
+                            le mot de passe est obligatoire
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <!-- Nom -->
+                <div class="w-full">
+                    <mat-form-field class="fuse-mat-no-subscript w-full">
+                        <mat-label>Confirme mot de passe</mat-label>
+                        <mat-icon
+                            class="icon-size-5"
+                            [svgIcon]="'heroicons_solid:eye'"
+                            matPrefix></mat-icon>
+                        <input
+                            id="password-confirm"
+                            matInput
+                            type="password"
+                            [formControlName]="'passwordConfirm'"
+                            #passwordConfirmField
+                            matInput>
+                        <mat-error *ngIf="resetPasswordForm.get('passwordConfirm').hasError('required')">
+                            La confirmation du mot de passe est requise
+                        </mat-error>
+                        <mat-error *ngIf="resetPasswordForm.get('passwordConfirm').hasError('mustMatch')">
+                            Les mots de passe doivent correspondre
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <button
+                    class="ml-4 min-w-40 rounded-xl mb-1.5"
+                    mat-flat-button
+                    type="button"
+                    [disabled]="resetPasswordForm.disabled"
+                    (click)="resetPassword()"
+                    [color]="'primary'">Modifier
+                </button>
+            </div>
+
+        </form>
+    </fuse-card>
+
+</div>

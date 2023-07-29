@@ -88,6 +88,13 @@ export const appRoutes: Route[] = [
                         (m) => m.AccueillantModule
                     ),
             },
+            {
+                path: 'profiles',
+                loadChildren: () =>
+                    import('./modules/profile/profile.module').then(
+                        (m) => m.ProfileModule
+                    ),
+            },
         ],
     },
 ];
