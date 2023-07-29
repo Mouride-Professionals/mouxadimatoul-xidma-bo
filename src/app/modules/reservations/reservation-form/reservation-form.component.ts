@@ -1,11 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+    AbstractControl,
+    FormArray,
+    FormControl,
+    FormGroup,
+    Validators,
+} from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Accueillant } from '@core/model/accueillant.model';
 import { Chambre } from '@core/model/chambre.model';
 import { Delegation } from '@core/model/delegation.model';
 import { Evenement } from '@core/model/evenement.model';
+import { Invite } from '@core/model/invite.model';
 import { Residence } from '@core/model/residence.model';
+import { AccueillantService } from '@core/service/accueillant/accueillant.service';
 import { ChambreService } from '@core/service/chambre/chambre.service';
 import { DelegationService } from '@core/service/delegation/delegation.service';
 import { EvenementService } from '@core/service/evenement/evenement.service';
@@ -20,6 +29,8 @@ import { Observable, map } from 'rxjs';
 })
 export class ReservationFormComponent implements OnInit {
     reservationForm: FormGroup = new FormGroup({
+        checkAll: new FormControl(false),
+        ceremonie: new FormControl(),
         period: new FormGroup(
             {
                 entree: new FormControl(null, [Validators.required]),
@@ -29,7 +40,7 @@ export class ReservationFormComponent implements OnInit {
         ),
         evenement: new FormControl(null, [Validators.required]),
         residence: new FormControl(null, [Validators.required]),
-        delegation: new FormGroup({}),
+        delegation: new FormControl(),
         invites: new FormArray(
             [],
             [Validators.required, Validators.minLength(1)]
@@ -39,14 +50,17 @@ export class ReservationFormComponent implements OnInit {
     events$: Observable<Evenement[]>;
     delegations$: Observable<Delegation[]>;
     residences$: Observable<Residence[]>;
+    accueillants$: Observable<Accueillant[]>;
     chambres$: Observable<Chambre[]>;
     chambresIndisponibles: number[] = [];
     idIndispo: number[] = [];
+    inviteDelegations: Invite[] = [];
 
     constructor(
         private _eventService: EvenementService,
         private _residenceService: ResidenceService,
         private _chambreService: ChambreService,
+        private _accueillantService: AccueillantService,
         private _reservationService: ReservationService,
         private _delagationService: DelegationService,
         private _router: Router,
@@ -64,10 +78,12 @@ export class ReservationFormComponent implements OnInit {
     ngOnInit(): void {
         this.delegations$ = this._delagationService
             .getAllDelagations({ page: 0, size: 1000 })
-            .pipe(map((data) => data.content));
+            .pipe(map((data: any) => data.content));
+        this.accueillants$ = this._accueillantService
+            .getAll({ page: 0, size: 1000 })
+            .pipe(map((data: any) => data.content));
         this.events$ = this._eventService.getAllEvent();
         this.residences$ = this._residenceService.getAllResidences();
-        this.addGuest();
     }
 
     onSubmit(): void {
@@ -144,7 +160,6 @@ export class ReservationFormComponent implements OnInit {
             this.reservationForm.get('period').get('entree').value,
             this.reservationForm.get('period').get('sortie').value
         );
-        this.chambres$.subscribe((res) => console.log(res));
         this.resetChambre();
     }
 
@@ -159,27 +174,116 @@ export class ReservationFormComponent implements OnInit {
         this.invites.removeAt(index);
     }
 
-    addGuest(): void {
+    addGuest(guest?: Invite): void {
         this.invites.push(
             new FormGroup({
-                prenom: new FormControl(null, [
+                id: new FormControl(guest?.id),
+                checked: new FormControl(),
+                prenom: new FormControl(guest?.prenom, [
                     Validators.required,
                     Validators.minLength(3),
                 ]),
-                nom: new FormControl(null, [
+                nom: new FormControl(guest?.nom, [
                     Validators.required,
                     Validators.minLength(2),
                 ]),
-                telephone: new FormControl(null, [
+                telephone: new FormControl(guest?.telephone, [
                     Validators.required,
                     Validators.minLength(9),
                 ]),
                 chambre: new FormControl(null, [Validators.required]),
-                adresse: new FormControl(null),
-                email: new FormControl(null, [Validators.email]),
+                accueillant: new FormControl(null, [Validators.required]),
+                adresse: new FormControl(guest?.adresse),
+                email: new FormControl(guest?.email, [Validators.email]),
+                presence: new FormControl(),
             })
         );
     }
 
     addNewDelegation(): void {}
+
+    onChoiceDelegation(): void {
+        const delegation = this.reservationForm.get('delegation')
+            .value as Delegation;
+        this.inviteDelegations = [];
+        if (delegation) {
+            this.reservationForm.get('checkAll').setValue(true);
+            if (delegation.chef) {
+                this.inviteDelegations.push(delegation.chef);
+            }
+            this.inviteDelegations.push(...delegation.invites);
+            this.inviteDelegations.forEach((inv: Invite, index: number) => {
+                this.addGuest(inv);
+                const inviteForm = this.invites.controls[index];
+                inviteForm.get('checked').setValue(true);
+            });
+        }
+    }
+
+    onCheckAll(): void {
+        const checked = this.reservationForm.get('checkAll').value;
+        if (!checked) {
+            this.invites.controls.forEach((ctl: AbstractControl) => {
+                ctl.get('checked').setValue(false);
+                ctl.get('chambre').reset();
+                ctl.get('chambre').disable();
+                ctl.get('accueillant').reset();
+                ctl.get('accueillant').disable();
+                ctl.get('presence').reset();
+                ctl.get('presence').disable();
+            });
+        } else {
+            this.invites.controls.forEach((ctl: AbstractControl) => {
+                ctl.get('checked').setValue(true);
+                ctl.get('chambre').enable();
+                ctl.get('accueillant').enable();
+                ctl.get('presence').enable();
+            });
+        }
+    }
+
+    onCheckInvite(index: number): void {
+        const inviteForm = this.invites.controls[index];
+        const checked = inviteForm.get('checked').value;
+        if (!checked) {
+            inviteForm.get('chambre').reset();
+            inviteForm.get('chambre').disable();
+            inviteForm.get('accueillant').reset();
+            inviteForm.get('accueillant').disable();
+            inviteForm.get('presence').reset();
+            inviteForm.get('presence').disable();
+            this.reservationForm.get('checkAll').setValue(false);
+        } else {
+            inviteForm.get('chambre').enable();
+            inviteForm.get('accueillant').enable();
+            inviteForm.get('presence').enable();
+            this.reservationForm
+                .get('checkAll')
+                .setValue(
+                    this.invites.controls.every(
+                        (control: AbstractControl) =>
+                            control.get('checked').value === true
+                    )
+                );
+        }
+    }
+
+    onPresence(): void {
+        this.reservationForm
+            .get('ceremonie')
+            .setValue(
+                this.invites.controls.every(
+                    (ctl: AbstractControl) => ctl.get('presence').value
+                )
+            );
+    }
+
+    onChoiceAllPresence(): void {
+        const value = this.reservationForm.get('ceremonie').value;
+        this.invites.controls.forEach((ctl: AbstractControl) => {
+            if (ctl.get('checked').value) {
+                ctl.get('presence').setValue(value);
+            }
+        });
+    }
 }

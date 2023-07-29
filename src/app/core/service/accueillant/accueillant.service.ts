@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Accueillant } from '@core/model/accueillant.model';
+import { Pagination } from '@core/model/pagination.model';
 import { RequestParams } from '@core/model/params.model';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
@@ -25,13 +26,15 @@ export class AccueillantService {
         return this._httpClient.get<Accueillant>(`${API_URL}/${id}`);
     }
 
-    getAll(params: RequestParams): Observable<any> {
+    getAll(params: RequestParams): Observable<Pagination<Accueillant>> {
         Object.entries(params).forEach(([key, value]) => {
             if (!value) {
                 delete params[key];
             }
         });
-        return this._httpClient.get(API_URL, { params });
+        return this._httpClient.get<Pagination<Accueillant>>(API_URL, {
+            params,
+        });
     }
 
     delete(id: number): Observable<any> {

@@ -106,7 +106,7 @@
                 <!-- Info réservation -->
                 <div class="col-span-2 w-full flex space-x-2 items-center">
                     <h2 class="text-xl font-semibold">
-                        Informations des invités
+                        Information des invités
                     </h2>
                     <div class="flex-1">
                         <mat-divider></mat-divider>
@@ -115,7 +115,10 @@
                 <div class="col-span-1 w-full">
                     <mat-form-field class="w-full" appearance="fill">
                         <mat-label>Délégation</mat-label>
-                        <mat-select formControlName="delegation">
+                        <mat-select
+                            formControlName="delegation"
+                            (ngModelChange)="onChoiceDelegation()"
+                        >
                             <mat-option
                                 *ngFor="let d of delegations$ | async"
                                 [value]="d"
@@ -133,6 +136,111 @@
                     >
                         Nouvelle délégation
                     </button>
+                </div>
+                <div
+                    class="col-span-full w-full flex items-center responsive-table"
+                    *ngIf="inviteDelegations.length > 0"
+                >
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <mat-checkbox
+                                        (change)="onCheckAll($event)"
+                                        formControlName="checkAll"
+                                    ></mat-checkbox>
+                                </th>
+                                <th>Invité</th>
+                                <th class="whitespace-nowrap">Chambre</th>
+                                <th class="whitespace-nowrap">Accueillant</th>
+                                <th class="text-center">
+                                    <span class="mr-2">Présence cérémonie</span>
+                                    <mat-checkbox
+                                        formControlName="ceremonie"
+                                        (change)="onChoiceAllPresence()"
+                                    ></mat-checkbox>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody formArrayName="invites">
+                            <tr
+                                *ngFor="
+                                    let inv of inviteDelegations;
+                                    let i = index
+                                "
+                                [formGroupName]="i"
+                            >
+                                <td>
+                                    <mat-checkbox
+                                        (change)="onCheckInvite(i)"
+                                        formControlName="checked"
+                                    ></mat-checkbox>
+                                </td>
+                                <td class="whitespace-nowrap">
+                                    {{ inv.prenom | titlecase }}
+                                    {{ inv.nom | uppercase }}
+                                </td>
+                                <td class="whitespace-nowrap">
+                                    <mat-form-field
+                                        class="w-full fuse-mat-rounded fuse-mat-dense fuse-mat-no-subscript"
+                                        appearance="fill"
+                                    >
+                                        <mat-select
+                                            [placeholder]="'Chambre invité'"
+                                            formControlName="chambre"
+                                            (ngModelChange)="
+                                                onChoiceChambre($event)
+                                            "
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let c of chambres$ | async
+                                                "
+                                                [disabled]="isUnvalaible(c.id)"
+                                                [value]="c"
+                                            >
+                                                {{ c.pavillon.libelle }} -
+                                                {{ c.numero }} -
+                                                {{
+                                                    c.nombrePlace -
+                                                        c.placeReservee
+                                                }}
+                                                place(s) disponible(s)
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </td>
+                                <td class="whitespace-nowrap">
+                                    <mat-form-field
+                                        class="w-full fuse-mat-rounded fuse-mat-dense fuse-mat-no-subscript"
+                                        appearance="fill"
+                                    >
+                                        <mat-select
+                                            [placeholder]="'Accueillant'"
+                                            formControlName="accueillant"
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let acc of accueillants$
+                                                        | async
+                                                "
+                                                [value]="acc"
+                                            >
+                                                {{ acc.prenom | titlecase }} -
+                                                {{ acc.nom | uppercase }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </td>
+                                <td class="whitespace-nowrap text-center">
+                                    <mat-checkbox
+                                        (change)="onPresence()"
+                                        formControlName="presence"
+                                    ></mat-checkbox>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
 
                 <!-- <ng-container formArrayName="invites">

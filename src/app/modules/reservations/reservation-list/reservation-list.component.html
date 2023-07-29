@@ -16,26 +16,36 @@
         </button>
     </div>
 
-    <div class="responsive-table">
+    <div class="responsive-table" *ngIf="data$ | async as data">
         <table class="table">
             <thead>
                 <tr>
                     <th>Invité</th>
+                    <th>Délégation</th>
                     <th>Chambre</th>
+                    <th>Accueillant</th>
                     <th>Date d'entrée</th>
                     <th>Date de sortie</th>
-                    <!-- <th>Actions</th> -->
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let res of (data$ | async)?.content">
+                <tr *ngIf="data.empty">
+                    <td class="text-center" colspan="7">pas de réservation</td>
+                </tr>
+                <tr *ngFor="let res of data.content">
                     <td>
                         {{ res.invite.prenom | titlecase }}
                         {{ res.invite.nom | uppercase }}
                     </td>
+                    <td>{{ res.invite.delegation?.nom }}</td>
                     <td>
                         {{ res.chambre.pavillon.libelle }} —
                         {{ res.chambre.numero }}
+                    </td>
+                    <td>
+                        {{ res.accueillant.prenom | titlecase }}
+                        {{ res.accueillant.nom | uppercase }}
                     </td>
                     <td>
                         {{ res.dateEntree | date : "dd/MM/yyyy" }}
@@ -43,14 +53,14 @@
                     <td>
                         {{ res.dateSortie | date : "dd/MM/yyyy" }}
                     </td>
-                    <!-- <td>
+                    <td>
                         <button mat-icon-button>
                             <mat-icon
                                 svgIcon="heroicons_solid:pencil-alt"
                                 class="icon-size-4"
                             ></mat-icon>
                         </button>
-                    </td> -->
+                    </td>
                 </tr>
             </tbody>
         </table>
