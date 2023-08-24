@@ -19,7 +19,7 @@
 
     <form [formGroup]="residenceForm" (ngSubmit)="saveResidence()">
         <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-6 min-w-0">
-            <fuse-card class="col-span-1 p-4 w-full flex flex-col space-y-4">
+            <div class="col-span-1 w-full flex flex-col space-y-4">
                 <mat-form-field class="w-full" appearance="fill">
                     <mat-label for="libelle">Nom résidence</mat-label>
                     <input matInput name="libelle" formControlName="libelle" />
@@ -108,7 +108,7 @@
                         Le responsable est obligatoire.
                     </mat-error>
                 </mat-form-field>
-                <mat-form-field
+                <!-- <mat-form-field
                     class="w-full fuse-mat-textarea"
                     appearance="fill"
                 >
@@ -125,57 +125,60 @@
                         matSuffix
                         [svgIcon]="'heroicons_solid:location-marker'"
                     ></mat-icon>
-                </mat-form-field>
-            </fuse-card>
-            <div class="col-span-1 flex flex-col space-y-6">
-                <fuse-card class="w-full flex flex-col overflow-hidden">
-                    <div class="w-full p-3">
-                        <button
-                            *ngIf="!isImage"
-                            mat-flat-button
-                            type="button"
-                            class="bg-secondary text-white"
-                            (click)="fileInput.click()"
-                        >
-                            Choisir image
-                        </button>
-                        <button
-                            *ngIf="isImage"
-                            mat-flat-button
-                            type="button"
-                            class="bg-red-600 text-white"
-                            (click)="removeImage()"
-                        >
-                            Effacer image
-                        </button>
-                    </div>
-                    <input
-                        type="file"
-                        class="hidden"
-                        #fileInput
-                        (change)="fileChangeEvent($event)"
+                </mat-form-field> -->
+            </div>
+            <div class="col-span-1 overflow-hidden flex flex-col space-y-4">
+                <input
+                    type="file"
+                    class="hidden"
+                    #fileInput
+                    (change)="fileChangeEvent($event)"
+                />
+                <div class="w-full min-h-80 max-h-100">
+                    <img
+                        class="object-cover w-full h-full"
+                        [src]="imageResidence"
+                        alt=""
                     />
-                    <div class="w-full min-h-80 max-h-100">
-                        <img
-                            class="object-cover w-full h-full"
-                            [src]="imageResidence"
-                            alt=""
-                        />
-                    </div>
-                </fuse-card>
-                <fuse-card class="w-full p-4 flex items-center space-x-4">
-                    <button type="submit" mat-flat-button color="primary">
-                        Enregistrer
+                </div>
+                <div class="w-full p-3">
+                    <button
+                        *ngIf="!isImage"
+                        mat-flat-button
+                        type="button"
+                        class="bg-secondary text-white"
+                        (click)="fileInput.click()"
+                    >
+                        Choisir image
                     </button>
                     <button
+                        *ngIf="isImage"
                         mat-flat-button
-                        mat-dialog-close
                         type="button"
                         class="bg-red-600 text-white"
+                        (click)="removeImage()"
                     >
-                        Annuler
+                        Effacer image
                     </button>
-                </fuse-card>
+                </div>
+            </div>
+            <div class="w-full flex items-center space-x-4">
+                <button
+                    [disabled]="residenceForm.invalid"
+                    type="submit"
+                    mat-flat-button
+                    color="primary"
+                >
+                    Enregistrer
+                </button>
+                <button
+                    mat-flat-button
+                    mat-dialog-close
+                    type="button"
+                    class="bg-red-600 text-white"
+                >
+                    Annuler
+                </button>
             </div>
         </div>
     </form>

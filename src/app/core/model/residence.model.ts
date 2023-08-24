@@ -5,7 +5,6 @@ import { Image } from '@core/model/image.model';
 export type Residence = {
     id: number;
     libelle: string;
-    description: string;
     image: Image;
     telephoneResidence: string;
     adresse: string;

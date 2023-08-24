@@ -1,10 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Evenement } from '@core/model/evenement.model';
-import { Pagination } from '@core/model/pagination.model';
-import { RequestParams } from '@core/model/params.model';
 import { environment } from 'environments/environment';
-import { Observable, ReplaySubject, catchError, of, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 
 const API_URL = environment.apiUrl + '/evenements';
 
@@ -12,8 +10,6 @@ const API_URL = environment.apiUrl + '/evenements';
     providedIn: 'root',
 })
 export class EvenementService {
-    private _event: ReplaySubject<Evenement> = new ReplaySubject<Evenement>(1);
-
     constructor(private _http: HttpClient) {}
 
     // ajout Evenement

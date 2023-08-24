@@ -28,6 +28,7 @@ import {
     MAT_DATE_FORMATS,
     MAT_DATE_LOCALE,
 } from '@angular/material/core';
+import { PaginatorComponent } from './components/paginator/paginator.component';
 
 const LIST_MODULES = [
     MatButtonModule,
@@ -55,9 +56,10 @@ const LIST_MODULES = [
         FormsModule,
         ReactiveFormsModule,
         SummarizePipe,
+        PaginatorComponent,
         ...LIST_MODULES,
     ],
-    declarations: [SummarizePipe],
+    declarations: [SummarizePipe, PaginatorComponent],
     providers: [
         { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
         {

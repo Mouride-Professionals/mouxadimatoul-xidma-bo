@@ -1,22 +1,7 @@
 <h2 mat-dialog-title>{{ title }}</h2>
 <mat-dialog-content>
     <form [formGroup]="accueillantForm" (ngSubmit)="onSubmit()">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <mat-form-field class="col-span-1 gt-xs:pr-3">
-                <mat-label for="prenom">Prénom</mat-label>
-                <input matInput name="prenom" formControlName="prenom" />
-                <mat-icon
-                    class="icon-size-5"
-                    matSuffix
-                    [svgIcon]="'heroicons_solid:user-circle'"
-                ></mat-icon>
-                <mat-error
-                    *ngIf="f.prenom.touched && f.prenom.errors?.required"
-                    class="error-message"
-                >
-                    Le prénom est obligatoire.
-                </mat-error>
-            </mat-form-field>
+        <div class="grid grid-cols-1 gap-4">
             <mat-form-field class="col-span-1 gt-xs:pl-3">
                 <mat-label for="nom">Nom</mat-label>
                 <input matInput name="nom" formControlName="nom" />
@@ -32,8 +17,6 @@
                     Le nom est obligatoire.
                 </mat-error>
             </mat-form-field>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <mat-form-field class="flex-auto">
                 <mat-label for="telephone">Téléphone</mat-label>
                 <input
@@ -60,7 +43,10 @@
             </mat-form-field>
             <mat-form-field class="col-span-1 gt-xs:pl-3">
                 <mat-label for="role">Résidence</mat-label>
-                <mat-select formControlName="residence">
+                <mat-select
+                    formControlName="residence"
+                    [compareWith]="compareResidence"
+                >
                     <mat-option
                         *ngFor="let res of residences$ | async"
                         [value]="res"

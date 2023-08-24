@@ -16,6 +16,82 @@
         </button>
     </div>
 
+    <!-- Filter & Extraction -->
+    <div class="w-full flex gap-2 items-start flex-wrap">
+        <mat-form-field
+            class="min-w-60 fuse-mat-no-subcript fuse-mat-rounded fuse-mat-dense"
+        >
+            <mat-select
+                placeholder="Choisir une résidence"
+                (selectionChange)="onFilterData()"
+                [(ngModel)]="residence"
+                name="residence"
+            >
+                <mat-option [value]="null">---</mat-option>
+                <mat-option
+                    *ngFor="let item of residences$ | async"
+                    [value]="item.id"
+                >
+                    {{ item.libelle }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field
+            class="min-w-60 fuse-mat-no-subcript fuse-mat-rounded fuse-mat-dense"
+        >
+            <mat-select
+                placeholder="Choisir un événement"
+                (selectionChange)="onFilterData()"
+                [(ngModel)]="event"
+                name="event"
+            >
+                <mat-option [value]="null">---</mat-option>
+                <mat-option
+                    *ngFor="let item of events$ | async"
+                    [value]="item.id"
+                >
+                    {{ item.libelle }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field
+            class="fuse-mat-no-subcript fuse-mat-rounded fuse-mat-dense"
+        >
+            <input
+                matInput
+                [matDatepicker]="yearPicker"
+                [formControl]="date"
+                (ngModelChange)="onFilterData()"
+                placeholder="Choisir une année"
+            />
+            <mat-datepicker-toggle
+                matSuffix
+                [for]="yearPicker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker
+                #yearPicker
+                startView="multi-year"
+                (yearSelected)="selectYearHandler($event, yearPicker)"
+            ></mat-datepicker>
+        </mat-form-field>
+        <button
+            mat-raised-button
+            (click)="onPresence()"
+            [ngClass]="{ 'bg-green-500 text-white': presence === 1 }"
+        >
+            <span>Cérémonie officielle</span>
+        </button>
+        <button
+            mat-raised-button
+            (click)="onExportation()"
+            color="accent"
+            [disabled]="date.invalid || !event || !residence"
+        >
+            <mat-icon svgIcon="mat_solid:upload_file" class="mr-1"></mat-icon>
+            <span>exporter</span>
+        </button>
+    </div>
+
     <div class="responsive-table" *ngIf="data$ | async as data">
         <table class="table">
             <thead>
@@ -23,9 +99,11 @@
                     <th>Invité</th>
                     <th>Délégation</th>
                     <th>Chambre</th>
+                    <th>Evénement</th>
                     <th>Accueillant</th>
                     <th>Date d'entrée</th>
                     <th>Date de sortie</th>
+                    <th>Cérémonie</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -40,8 +118,10 @@
                     </td>
                     <td>{{ res.invite.delegation?.nom }}</td>
                     <td>
-                        {{ res.chambre.pavillon.libelle }} —
-                        {{ res.chambre.numero }}
+                        {{ res.chambre.reference }}
+                    </td>
+                    <td>
+                        {{ res.evenement.libelle }}
                     </td>
                     <td>
                         {{ res.accueillant.prenom | titlecase }}
@@ -53,101 +133,41 @@
                     <td>
                         {{ res.dateSortie | date : "dd/MM/yyyy" }}
                     </td>
-                    <td>
-                        <button mat-icon-button>
+                    <td class="text-center">
+                        <span
+                            class="p-1 rounded-full text-white text-sm"
+                            [ngClass]="{
+                                'bg-green-600': res.presence,
+                                'bg-red-600': !res.presence
+                            }"
+                            >{{ res.presence ? "oui" : "non" }}</span
+                        >
+                    </td>
+                    <td class="whitespace-nowrap">
+                        <button
+                            mat-icon-button
+                            [routerLink]="[res.id, 'modifier']"
+                        >
                             <mat-icon
                                 svgIcon="heroicons_solid:pencil-alt"
-                                class="icon-size-4"
+                                class="icon-size-4 text-amber-500"
+                            ></mat-icon>
+                        </button>
+                        <button mat-icon-button (click)="onDelete(res)">
+                            <mat-icon
+                                svgIcon="heroicons_solid:trash"
+                                class="icon-size-4 text-red-500"
                             ></mat-icon>
                         </button>
                     </td>
                 </tr>
             </tbody>
         </table>
+        <ng-container *ngIf="data.totalElements > pageSize">
+            <paginator
+                [pageable]="data"
+                (pageEvent)="onPageChange($event)"
+            ></paginator>
+        </ng-container>
     </div>
-
-    <!-- <div class="w-full flex justify-between items-center space-x-4">
-        <div class="w-full max-w-72">
-            <mat-form-field
-                class="w-full fuse-mat-rounded fuse-mat-dense fuse-mat-no-subscript"
-                appearance="fill"
-            >
-                <mat-select
-                    placeholder="Selectionner une résidence"
-                    [(ngModel)]="residenceSelected"
-                >
-                    <mat-option
-                        *ngFor="let r of residences$ | async"
-                        [value]="r"
-                        >{{ r.libelle }}</mat-option
-                    >
-                </mat-select>
-            </mat-form-field>
-        </div>
-        <div class="flex items-center space-x-4">
-            <button mat-icon-button (click)="onPrev()">
-                <mat-icon svgIcon="mat_solid:arrow_back_ios"></mat-icon>
-            </button>
-            <span class="text-xl font-semibold"
-                >{{ startDate | date : "dd MMM" }} -
-                {{ endDate | date : "dd MMM" }}</span
-            >
-            <button mat-icon-button (click)="onNext()">
-                <mat-icon svgIcon="mat_solid:arrow_forward_ios"></mat-icon>
-            </button>
-        </div>
-        <mat-button-toggle-group [(ngModel)]="type" aria-label="Font Style">
-            <mat-button-toggle value="week">Semaine</mat-button-toggle>
-            <mat-button-toggle value="month">Mois</mat-button-toggle>
-        </mat-button-toggle-group>
-    </div>
-
-    <div class="w-full h-full flex-1 overflow-hidden flex flex-col">
-        <div class="w-full bg-white border-b-2 grid grid-cols-8 divide-x-2">
-            <div class="w-full p-3">
-                <mat-select
-                    placeholder="Selectionner un pavillon"
-                    [(ngModel)]="pavillonSelected"
-                >
-                    <mat-option
-                        *ngFor="let p of pavillons$ | async"
-                        [value]="p"
-                        >{{ p.libelle }}</mat-option
-                    >
-                </mat-select>
-            </div>
-            <div
-                class="w-full p-3 flex items-center justify-center font-semibold"
-                *ngFor="let d of arraDays"
-            >
-                <span>{{ d | titlecase }}</span>
-            </div>
-        </div>
-        <div
-            class="w-full h-full overflow-y-scroll flex-1 flex flex-col divide-y-2"
-        >
-            <div
-                class="w-full bg-white grid grid-cols-8 divide-x-2"
-                *ngFor="let c of calendarReservations"
-            >
-                <div class="col-span-1 w-full p-3 flex flex-col">
-                    <span class="font-semibold">{{ c.libelleChambre }}</span>
-                    <span class="font-light">{{ c.nombrePlace }}</span>
-                </div>
-                <div class="w-full col-span-7 p-2 grid grid-cols-7 gap-2">
-                    <ng-container *ngFor="let res of c.reservations">
-                        <div
-                            class="col-start-1 col-end-5 w-full rounded-full bg-red-400"
-                        ></div>
-                        <div
-                            class="col-start-6 col-end-8 w-full rounded-full bg-green-400"
-                        ></div>
-                        <div
-                            class="col-start-3 col-end-8 w-full rounded-full bg-amber-400"
-                        ></div>
-                    </ng-container>
-                </div>
-            </div>
-        </div>
-    </div> -->
 </div>

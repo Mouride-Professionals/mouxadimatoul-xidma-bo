@@ -56,16 +56,10 @@
                     </td>
                     <td>{{ del.chef.telephone }}</td>
                     <td class="whitespace-nowrap">
-                        <button mat-icon-button>
+                        <button mat-icon-button [routerLink]="[del.id]">
                             <mat-icon
                                 class="icon-size-4"
                                 svgIcon="heroicons_solid:eye"
-                            ></mat-icon>
-                        </button>
-                        <button mat-icon-button>
-                            <mat-icon
-                                class="icon-size-4"
-                                svgIcon="heroicons_solid:pencil-alt"
                             ></mat-icon>
                         </button>
                     </td>

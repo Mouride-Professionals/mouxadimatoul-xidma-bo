@@ -11,7 +11,8 @@ import { ResidencesEditImageComponent } from '../residences-edit-image/residence
 import { Chambre } from '@core/model/chambre.model';
 import { Pavillon } from '@core/model/pavillon.model';
 import { ChambreService } from '@core/service/chambre/chambre.service';
-import { Pagination } from '@core/model/pagination.model';
+import { Observable } from 'rxjs';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
     selector: 'app-residences-details',
@@ -19,14 +20,15 @@ import { Pagination } from '@core/model/pagination.model';
     styleUrls: ['./residences-details.component.scss'],
 })
 export class ResidencesDetailsComponent implements OnInit {
+    data$: Observable<any>;
     residence: Residence;
     chambres: Chambre[] = [];
     pavillons: Pavillon[] = [];
     pavillonSelected: Pavillon;
     imageResidence: string | SafeUrl = 'assets/images/default.png';
 
-    page: number = 1;
-    itemPerPage: number = 9;
+    page: number = 0;
+    size: number = 9;
 
     constructor(
         private _route: ActivatedRoute,
@@ -58,22 +60,27 @@ export class ResidencesDetailsComponent implements OnInit {
         });
     }
 
+    onPageChange(event: PageEvent): void {
+        this.page = event.pageIndex;
+        this.size = event.pageSize;
+        this.loadChambres();
+    }
+
     loadChambres(): void {
         if (this.pavillonSelected) {
-            this._chambreService
-                .getChambreByPavillon(this.pavillonSelected.id, {
-                    page: this.page - 1,
-                    size: this.itemPerPage,
-                })
-                .subscribe((data: Pagination<Chambre>) => {
-                    this.chambres = data.content;
-                });
+            this.data$ = this._chambreService.getChambreByPavillon(
+                this.pavillonSelected.id,
+                {
+                    page: this.page,
+                    size: this.size,
+                }
+            );
         }
     }
 
     onChangePavillon(p: Pavillon): void {
         this.pavillonSelected = p;
-        this.page = 1;
+        this.page = 0;
         this.loadChambres();
     }
 

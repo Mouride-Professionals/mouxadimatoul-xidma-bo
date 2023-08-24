@@ -10,6 +10,7 @@ export type Reservation = {
     dateSortie: Date;
     dateSortieProvisoire: Date;
     statut: boolean;
+    presence: boolean;
     evenement: Evenement;
     chambre: Chambre;
     invite: Invite;

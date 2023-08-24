@@ -15,7 +15,6 @@ import { Observable } from 'rxjs';
 })
 export class AccueillantFormComponent implements OnInit {
     accueillantForm: FormGroup = new FormGroup({
-        prenom: new FormControl('', Validators.required),
         nom: new FormControl('', Validators.required),
         telephone: new FormControl('', Validators.required),
         residence: new FormControl('', Validators.required),
@@ -42,8 +41,8 @@ export class AccueillantFormComponent implements OnInit {
         if (this.data) {
             this.isEdit = true;
             this.title = 'Modifier un accueillant';
+            this.accueillantForm.patchValue(this.data);
         }
-        console.log('data', this.data, this.isEdit);
     }
 
     onSubmit(): void {
@@ -75,4 +74,7 @@ export class AccueillantFormComponent implements OnInit {
             });
         }
     }
+
+    compareResidence = (r1: Residence, r2: Residence): boolean =>
+        r1 === r2 || r1.id === r2.id;
 }

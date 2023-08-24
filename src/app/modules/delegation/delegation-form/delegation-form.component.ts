@@ -102,6 +102,7 @@ export class DelegationFormComponent implements OnInit {
                 telephone: new FormControl(null, [
                     Validators.required,
                     Validators.minLength(9),
+                    Validators.maxLength(15),
                 ]),
                 adresse: new FormControl(null),
                 email: new FormControl(null, [Validators.email]),

@@ -6,10 +6,27 @@
                 <mat-label>Pavillon</mat-label>
                 <mat-select
                     formControlName="pavillon"
+                    (selectionChange)="onSelectPavillon()"
                     [compareWith]="onComparePavillon"
                 >
                     <mat-option *ngFor="let p of pavillons" [value]="p">{{
                         p.libelle
+                    }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="w-full" appearance="fill">
+                <mat-label>Palier</mat-label>
+                <mat-select
+                    formControlName="niveau"
+                    [compareWith]="onComparePavillon"
+                >
+                    <mat-option *ngFor="let p of paliers" [value]="p">{{
+                        p === 0
+                            ? "Rez de chaussée"
+                            : p === 1
+                            ? p + "er étage"
+                            : p + "e étage"
                     }}</mat-option>
                 </mat-select>
             </mat-form-field>
