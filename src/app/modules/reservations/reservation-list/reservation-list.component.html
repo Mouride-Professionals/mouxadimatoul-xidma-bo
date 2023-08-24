@@ -1,0 +1,87 @@
+<div class="p-6 w-full content-container flex flex-col space-y-4">
+    <div class="w-full flex justify-between items-center">
+        <h2 class="text-4xl font-semibold">Gestion des réservations</h2>
+        <!-- New user -->
+        <button
+            class="ml-4 px-1 sm:px-4 min-w-10 text-white"
+            mat-flat-button
+            [routerLink]="['reserver']"
+            [color]="'primary'"
+        >
+            <mat-icon
+                class="icon-size-5"
+                [svgIcon]="'heroicons_solid:plus-circle'"
+            ></mat-icon>
+            <span class="hidden sm:inline-block ml-2">Réserver</span>
+        </button>
+    </div>
+
+    <!-- Search -->
+    <fuse-card class="flex rounded-md items-center p-2 justify-end">
+        <mat-form-field
+            class="w-full max-w-80 fuse-mat-rounded fuse-mat-dense fuse-mat-no-subscript"
+            appearance="fill"
+        >
+            <mat-select
+                [placeholder]="'Chambre invité'"
+                [(ngModel)]="event"
+                (ngModelChange)="loadReservations()"
+            >
+                <mat-option>---</mat-option>
+                <mat-option *ngFor="let e of events$ | async" [value]="e.id">
+                    {{ e.libelle }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </fuse-card>
+
+    <div class="responsive-table" *ngIf="data$ | async as data">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Invité</th>
+                    <th>Délégation</th>
+                    <th>Chambre</th>
+                    <th>Accueillant</th>
+                    <th>Date d'entrée</th>
+                    <th>Date de sortie</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="data.empty">
+                    <td class="text-center" colspan="7">pas de réservation</td>
+                </tr>
+                <tr *ngFor="let res of data.content">
+                    <td>
+                        {{ res.invite.prenom | titlecase }}
+                        {{ res.invite.nom | uppercase }}
+                    </td>
+                    <td>{{ res.invite.delegation?.nom }}</td>
+                    <td>
+                        {{ res.chambre.pavillon.libelle }} —
+                        {{ res.chambre.numero }}
+                    </td>
+                    <td>
+                        {{ res.accueillant.prenom | titlecase }}
+                        {{ res.accueillant.nom | uppercase }}
+                    </td>
+                    <td>
+                        {{ res.dateEntree | date : "dd/MM/yyyy" }}
+                    </td>
+                    <td>
+                        {{ res.dateSortie | date : "dd/MM/yyyy" }}
+                    </td>
+                    <td>
+                        <button mat-icon-button>
+                            <mat-icon
+                                svgIcon="heroicons_solid:pencil-alt"
+                                class="icon-size-4"
+                            ></mat-icon>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

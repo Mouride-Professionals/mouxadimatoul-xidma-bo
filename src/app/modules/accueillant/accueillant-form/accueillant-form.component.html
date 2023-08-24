@@ -1,0 +1,96 @@
+<h2 mat-dialog-title>{{ title }}</h2>
+<mat-dialog-content>
+    <form [formGroup]="accueillantForm" (ngSubmit)="onSubmit()">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <mat-form-field class="col-span-1 gt-xs:pr-3">
+                <mat-label for="prenom">Prénom</mat-label>
+                <input matInput name="prenom" formControlName="prenom" />
+                <mat-icon
+                    class="icon-size-5"
+                    matSuffix
+                    [svgIcon]="'heroicons_solid:user-circle'"
+                ></mat-icon>
+                <mat-error
+                    *ngIf="f.prenom.touched && f.prenom.errors?.required"
+                    class="error-message"
+                >
+                    Le prénom est obligatoire.
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="col-span-1 gt-xs:pl-3">
+                <mat-label for="nom">Nom</mat-label>
+                <input matInput name="nom" formControlName="nom" />
+                <mat-icon
+                    class="icon-size-5"
+                    matSuffix
+                    [svgIcon]="'heroicons_solid:user-circle'"
+                ></mat-icon>
+                <mat-error
+                    *ngIf="f.nom.touched && f.nom.errors?.required"
+                    class="error-message"
+                >
+                    Le nom est obligatoire.
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <mat-form-field class="flex-auto">
+                <mat-label for="telephone">Téléphone</mat-label>
+                <input
+                    matInput
+                    maxlength="9"
+                    name="telephone"
+                    formControlName="telephone"
+                    #postalCode
+                />
+                <mat-hint align="end"
+                    >{{ postalCode.value.length }} / 9</mat-hint
+                >
+                <mat-icon
+                    class="icon-size-5"
+                    matSuffix
+                    [svgIcon]="'heroicons_solid:phone'"
+                ></mat-icon>
+                <mat-error
+                    *ngIf="f.telephone.touched && f.telephone.errors?.required"
+                    class="error-message"
+                >
+                    Le télephone est obligatoire.
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="col-span-1 gt-xs:pl-3">
+                <mat-label for="role">Résidence</mat-label>
+                <mat-select formControlName="residence">
+                    <mat-option
+                        *ngFor="let res of residences$ | async"
+                        [value]="res"
+                        >{{ res.libelle }}</mat-option
+                    >
+                </mat-select>
+                <mat-error
+                    *ngIf="f.residence.touched && f.residence.errors?.required"
+                    class="error-message"
+                >
+                    La résidence est obligatoire.
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <mat-dialog-actions align="end">
+            <button
+                mat-flat-button
+                mat-dialog-close
+                type="button"
+                class="bg-red-600 text-white"
+            >
+                Annuler
+            </button>
+            <button
+                mat-flat-button
+                [disabled]="accueillantForm.invalid"
+                color="primary"
+            >
+                Enregistrer
+            </button>
+        </mat-dialog-actions>
+    </form>
+</mat-dialog-content>

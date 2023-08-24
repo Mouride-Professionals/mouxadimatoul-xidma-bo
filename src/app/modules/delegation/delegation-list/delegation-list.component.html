@@ -1,0 +1,76 @@
+<div class="p-6 w-full h-full flex flex-col space-y-4">
+    <h2 class="text-4xl font-semibold">Gestion des délégations</h2>
+
+    <!-- Search -->
+    <div class="flex items-center justify-between">
+        <mat-form-field
+            class="w-full max-w-120 fuse-mat-rounded fuse-mat-dense fuse-mat-no-subscript ml-4 lg:ml-0"
+        >
+            <mat-icon
+                class="icon-size-5"
+                [svgIcon]="'heroicons_solid:search'"
+                matPrefix
+            ></mat-icon>
+            <input
+                matInput
+                [autocomplete]="'off'"
+                [placeholder]="'Recherche'"
+                #searchInput
+            />
+        </mat-form-field>
+        <!-- New user -->
+        <button
+            class="ml-4 px-1 sm:px-4 min-w-10 text-white"
+            mat-flat-button
+            [color]="'primary'"
+            [routerLink]="['ajouter']"
+        >
+            <mat-icon
+                class="icon-size-5"
+                [svgIcon]="'heroicons_solid:plus-circle'"
+            ></mat-icon>
+            <span class="hidden sm:inline-block ml-2">Nouveau</span>
+        </button>
+    </div>
+
+    <div class="responsive-table" *ngIf="data$ | async as data">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Délégation</th>
+                    <th class="whitespace-nowrap">Nombre de pers.</th>
+                    <th class="whitespace-nowrap">Chef de délégation</th>
+                    <th>Téléphone</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let del of data.content">
+                    <td>{{ del.id }}</td>
+                    <td class="whitespace-nowrap">{{ del.nom | titlecase }}</td>
+                    <td class="font-semibold">{{ del.nombre }}</td>
+                    <td class="whitespace-nowrap">
+                        {{ del.chef.prenom | titlecase }}
+                        {{ del.chef.nom | uppercase }}
+                    </td>
+                    <td>{{ del.chef.telephone }}</td>
+                    <td class="whitespace-nowrap">
+                        <button mat-icon-button>
+                            <mat-icon
+                                class="icon-size-4"
+                                svgIcon="heroicons_solid:eye"
+                            ></mat-icon>
+                        </button>
+                        <button mat-icon-button>
+                            <mat-icon
+                                class="icon-size-4"
+                                svgIcon="heroicons_solid:pencil-alt"
+                            ></mat-icon>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

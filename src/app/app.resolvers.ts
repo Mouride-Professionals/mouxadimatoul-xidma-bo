@@ -5,6 +5,7 @@ import {
     RouterStateSnapshot,
 } from '@angular/router';
 import { NavigationService } from '@core/navigation/navigation.service';
+import { UtilisateurService } from '@core/service/utilisateur/utilisateur.service';
 import { forkJoin, Observable } from 'rxjs';
 
 @Injectable({
@@ -14,7 +15,10 @@ export class InitialDataResolver implements Resolve<any> {
     /**
      * Constructor
      */
-    constructor(private _navigationService: NavigationService) {}
+    constructor(
+        private _navigationService: NavigationService,
+        private _utilisateurService: UtilisateurService
+    ) {}
 
     // -----------------------------------------------------------------------------------------------------
     // @ Public methods
@@ -31,6 +35,9 @@ export class InitialDataResolver implements Resolve<any> {
         state: RouterStateSnapshot
     ): Observable<any> {
         // Fork join multiple API endpoint calls to wait all of them to finish
-        return forkJoin([this._navigationService.get()]);
+        return forkJoin([
+            this._navigationService.get(),
+            this._utilisateurService.getInfo(),
+        ]);
     }
 }

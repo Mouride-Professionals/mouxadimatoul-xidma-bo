@@ -8,6 +8,8 @@ import {
     FuseVerticalNavigationComponent,
 } from '@fuse/components/navigation';
 import { NavigationService } from '@core/navigation/navigation.service';
+import { Utilisateur } from '@core/model/utilisateur.model';
+import { UtilisateurService } from '@core/service/utilisateur/utilisateur.service';
 
 @Component({
     selector: 'classic-layout',
@@ -17,6 +19,7 @@ import { NavigationService } from '@core/navigation/navigation.service';
 export class ClassicLayoutComponent implements OnInit, OnDestroy {
     isScreenSmall: boolean;
     navigation: FuseNavigationItem[];
+    utilisateur: Utilisateur;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
     /**
@@ -25,6 +28,7 @@ export class ClassicLayoutComponent implements OnInit, OnDestroy {
     constructor(
         private _activatedRoute: ActivatedRoute,
         private _router: Router,
+        private _utilisateurService: UtilisateurService,
         private _navigationService: NavigationService,
         private _fuseMediaWatcherService: FuseMediaWatcherService,
         private _fuseNavigationService: FuseNavigationService
@@ -49,6 +53,13 @@ export class ClassicLayoutComponent implements OnInit, OnDestroy {
      * On init
      */
     ngOnInit(): void {
+        // Subscribe to navigation data
+        this._utilisateurService.user$
+            .pipe(takeUntil(this._unsubscribeAll))
+            .subscribe((user: Utilisateur) => {
+                this.utilisateur = user;
+            });
+
         // Subscribe to navigation data
         this._navigationService.navigation$
             .pipe(takeUntil(this._unsubscribeAll))

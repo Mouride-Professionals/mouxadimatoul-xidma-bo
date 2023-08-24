@@ -1,0 +1,120 @@
+<div class="p-6 w-full h-full flex flex-col space-y-6">
+    <div class="w-full flex justify-between items-center">
+        <h2 class="text-4xl font-semibold">Résidences</h2>
+        <button
+            class="ml-4 px-1 sm:px-4 min-w-10 text-white"
+            mat-flat-button
+            [color]="'primary'"
+            [routerLink]="['nouveau']"
+        >
+            <mat-icon
+                class="icon-size-5"
+                [svgIcon]="'heroicons_solid:plus-circle'"
+            ></mat-icon>
+            <span class="hidden sm:inline-block ml-2">Ajouter</span>
+        </button>
+    </div>
+
+    <!-- <div
+        class="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 min-w-0"
+    >
+        <div
+            class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden"
+        >
+            <div class="flex flex-col items-center mt-2">
+                <div
+                    class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-green-500"
+                >
+                    2
+                </div>
+                <div class="text-lg font-medium text-green-600">Résidences</div>
+            </div>
+        </div>
+        <div
+            class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden"
+        >
+            <div class="flex flex-col items-center mt-2">
+                <div
+                    class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-red-500"
+                >
+                    6
+                </div>
+                <div class="text-lg font-medium text-red-600">Pavillons</div>
+            </div>
+        </div>
+        <div
+            class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden"
+        >
+            <div class="flex flex-col items-center mt-2">
+                <div
+                    class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-amber-500"
+                >
+                    35
+                </div>
+                <div class="text-lg font-medium text-amber-600">Chambres</div>
+            </div>
+        </div>
+        <div
+            class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden"
+        >
+            <div class="flex flex-col items-center mt-2">
+                <div
+                    class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-blue-500"
+                >
+                    350
+                </div>
+                <div class="text-lg font-medium text-blue-600">Invités</div>
+            </div>
+        </div>
+    </div> -->
+
+    <div
+        class="w-full grid grid-cols-1 md:grid-cols-2 gap-6"
+        *ngIf="residences$ | async as residences"
+    >
+        <fuse-card
+            *ngFor="let residence of residences"
+            class="col-span-1 flex h-60 overflow-hidden flex-row w-full"
+        >
+            <div class="flex-0 w-64">
+                <img
+                    class="w-full h-full object-cover"
+                    [src]="getImage(residence)"
+                    alt="Card cover image"
+                />
+            </div>
+            <div class="flex flex-col flex-auto m-8 mb-4">
+                <div class="text-2xl font-semibold leading-tight">
+                    {{ residence.libelle }}
+                </div>
+                <div class="flex items-center leading-none mt-2 -ml-1">
+                    <!-- <div class="text-secondary ml-2">4.5</div>
+                    <div class="text-secondary mx-2">&bull;</div> -->
+                    <div class="text-secondary">
+                        {{ residence.pavillons.length }}
+                        pavillon{{ residence.pavillons.length > 1 ? "s" : "" }}
+                    </div>
+                </div>
+                <div class="flex-1 mt-6">
+                    {{ residence.description | summarize : 100 }}
+                </div>
+                <div class="flex items-center mt-3 -mx-3">
+                    <a
+                        class="px-3 mr-1"
+                        mat-flat-button
+                        [color]="'primary'"
+                        [routerLink]="[residence.id]"
+                    >
+                        Détail
+                    </a>
+                </div>
+            </div>
+        </fuse-card>
+        <fuse-card
+            class="w-full col-span-full p-4 justify-center items-center flex"
+            *ngIf="residences.length <= 0"
+        >
+            <span>Pas de résidence</span>
+        </fuse-card>
+    </div>
+</div>
