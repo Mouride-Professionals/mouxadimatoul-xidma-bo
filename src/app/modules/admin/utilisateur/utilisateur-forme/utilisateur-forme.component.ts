@@ -19,14 +19,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class UtilisateurFormeComponent implements OnInit {
     form: FormGroup;
     user: Utilisateur;
-    roles$: Observable<Role[]>;
+    // roles$: Observable<Role[]>;
     isEdit = false;
     tite: string = 'Ajouter un nouveau utilisateur';
 
     constructor(
         private _utilisateurService: UtilisateurService,
         private _matDialogRef: MatDialogRef<UtilisateurFormeComponent>,
-        private _roleService: RoleService,
+        // private _roleService: RoleService,
         @Inject(MAT_DIALOG_DATA) private data: Utilisateur,
         private _snackBar: MatSnackBar
     ) {}
@@ -38,7 +38,7 @@ export class UtilisateurFormeComponent implements OnInit {
 
     ngOnInit(): void {
         this.userForm();
-        this.getRoles();
+        // this.getRoles();
         if (this.data) {
             this.isEdit = true;
             this.tite = 'Modifier un utilisateur';
@@ -54,7 +54,7 @@ export class UtilisateurFormeComponent implements OnInit {
                 this.data?.telephone,
                 Validators.required
             ),
-            role: new FormControl(this.data?.role, Validators.required),
+            // role: new FormControl(this.data?.role, Validators.required),
         });
     }
 
@@ -87,13 +87,13 @@ export class UtilisateurFormeComponent implements OnInit {
         }
     }
     // Get all Roles
-    getRoles(): void {
-        this.roles$ = this._roleService
-            .getAllRoles()
-            .pipe(
-                map((roles: Role[]) =>
-                    roles.filter((role: Role) => role.libelle !== 'accueillant')
-                )
-            );
-    }
+    // getRoles(): void {
+    //     this.roles$ = this._roleService
+    //         .getAllRoles()
+    //         .pipe(
+    //             map((roles: Role[]) =>
+    //                 roles.filter((role: Role) => role.libelle !== 'accueillant')
+    //             )
+    //         );
+    // }
 }

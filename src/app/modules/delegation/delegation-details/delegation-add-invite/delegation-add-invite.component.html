@@ -1,0 +1,44 @@
+<h2 mat-dialog-title>Ajouter un membre</h2>
+<mat-dialog-content class="mat-typography">
+    <form [formGroup]="inviteForm" (ngSubmit)="onSubmit()">
+        <div class="w-full flex flex-col space-y-2">
+            <mat-form-field class="w-full" appearance="fill">
+                <mat-label>Téléphone</mat-label>
+                <input matInput formControlName="telephone" type="text" />
+            </mat-form-field>
+            <mat-form-field class="w-full" appearance="fill">
+                <mat-label>Prénom</mat-label>
+                <input matInput formControlName="prenom" type="text" />
+            </mat-form-field>
+            <mat-form-field class="w-full" appearance="fill">
+                <mat-label>Nom</mat-label>
+                <input matInput formControlName="nom" type="text" />
+            </mat-form-field>
+            <mat-form-field class="w-full" appearance="fill">
+                <mat-label>Adresse</mat-label>
+                <input matInput formControlName="adresse" type="text" />
+            </mat-form-field>
+            <mat-form-field class="w-full" appearance="fill">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" type="email" />
+            </mat-form-field>
+            <div class="flex justify-end items-center space-x-3">
+                <button
+                    mat-flat-button
+                    mat-dialog-close
+                    class="bg-red-600 text-white"
+                    type="button"
+                >
+                    Annuler
+                </button>
+                <button
+                    mat-flat-button
+                    [disabled]="inviteForm.invalid"
+                    color="primary"
+                >
+                    Enregistrer
+                </button>
+            </div>
+        </div>
+    </form>
+</mat-dialog-content>

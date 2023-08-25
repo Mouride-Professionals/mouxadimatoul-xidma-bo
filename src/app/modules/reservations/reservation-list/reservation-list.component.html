@@ -19,6 +19,7 @@
     <!-- Filter & Extraction -->
     <div class="w-full flex gap-2 items-start flex-wrap">
         <mat-form-field
+            *ngIf="role === 'ROLE_ADMIN'"
             class="min-w-60 fuse-mat-no-subcript fuse-mat-rounded fuse-mat-dense"
         >
             <mat-select

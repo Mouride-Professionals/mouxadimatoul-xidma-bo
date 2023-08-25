@@ -84,6 +84,14 @@ export class ReservationFormComponent implements OnInit {
         this.delegations$ = this._delagationService
             .getAllDelagations({ page: 0, size: 1000 })
             .pipe(map((data: any) => data.content));
+
+        if (this._residenceService.residence) {
+            this.reservationForm
+                .get('residence')
+                .setValue(this._residenceService.residence.id);
+            this.reservationForm.get('residence').disable();
+            this.onLoadHotes();
+        }
         this.events$ = this._eventService.getAllEvent();
         this.residences$ = this._residenceService.getAllResidences();
     }
@@ -92,6 +100,7 @@ export class ReservationFormComponent implements OnInit {
         if (this.reservationForm.invalid) {
             return;
         }
+        this.reservationForm.get('residence').enable();
         this.reservationForm.value.invites =
             this.reservationForm.value.invites.filter(
                 (inv: any) => inv.checked
@@ -159,18 +168,8 @@ export class ReservationFormComponent implements OnInit {
             this.reservationForm.get('residence').invalid
         ) {
             this.chambres = [];
-            this.responsables = [];
             return;
         }
-        this._responsableService
-            .getAll({
-                page: 0,
-                size: 200,
-                residence: this.reservationForm.get('residence').value,
-            })
-            .subscribe((res: Pageable<Responsable>) => {
-                this.responsables = res.content;
-            });
         this._chambreService
             .getAllDisponibleByResidence(
                 this.reservationForm.get('residence').value,
@@ -184,8 +183,18 @@ export class ReservationFormComponent implements OnInit {
     onLoadHotes(): void {
         if (this.reservationForm.get('residence').invalid) {
             this.accueillants = [];
+            this.responsables = [];
             return;
         }
+        this._responsableService
+            .getAll({
+                page: 0,
+                size: 200,
+                residence: this.reservationForm.get('residence').value,
+            })
+            .subscribe((res: Pageable<Responsable>) => {
+                this.responsables = res.content;
+            });
         this._accueillantService
             .getAll({
                 page: 0,

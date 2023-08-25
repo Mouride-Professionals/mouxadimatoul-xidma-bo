@@ -71,6 +71,16 @@ export class AuthService {
             );
     }
 
+    getRoles(): string[] {
+        const user: AuthModel = this._decodeTokenWithJWT(this.accessToken);
+        return user.roles;
+    }
+
+    getUsername(): string {
+        const user: AuthModel = this._decodeTokenWithJWT(this.accessToken);
+        return user.sub;
+    }
+
     /**
      * Sign out
      */

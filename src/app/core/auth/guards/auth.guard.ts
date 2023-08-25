@@ -12,6 +12,7 @@ import {
 } from '@angular/router';
 import { map, Observable, of, switchMap } from 'rxjs';
 import { AuthService } from 'app/core/auth/auth.service';
+import { AuthModel } from '../auth.model';
 
 @Injectable({
     providedIn: 'root',
@@ -99,9 +100,10 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
                 // Allow the access
                 return this._authService.auth$.pipe(
                     map(
-                        (res) =>
+                        (res: AuthModel) =>
                             res.roles.includes('ROLE_ADMIN') ||
-                            res.roles.includes('ROLE_RESPONSABLE')
+                            res.roles.includes('ROLE_RESPONSABLE') ||
+                            res.roles.includes('ROLE_ACCUEILLANT')
                     )
                 );
             })

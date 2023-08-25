@@ -41,6 +41,12 @@ export class AccueillantFormComponent implements OnInit {
 
     ngOnInit(): void {
         this.residences$ = this._residenceService.getAllResidences();
+        if (this._residenceService.residence) {
+            this.accueillantForm
+                .get('residence')
+                .setValue(this._residenceService.residence);
+            this.accueillantForm.get('residence').disable();
+        }
         if (this.data) {
             this.isEdit = true;
             this.title = 'Modifier un accueillant';
@@ -52,7 +58,7 @@ export class AccueillantFormComponent implements OnInit {
         if (this.accueillantForm.invalid) {
             return;
         }
-        console.log(!this.isEdit);
+        this.accueillantForm.get('residence').enable();
         if (!this.isEdit) {
             this._accueillantService
                 .save(this.accueillantForm.value)

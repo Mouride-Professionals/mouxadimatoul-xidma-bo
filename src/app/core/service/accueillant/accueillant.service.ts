@@ -26,6 +26,10 @@ export class AccueillantService {
         return this._httpClient.get<Accueillant>(`${API_URL}/${id}`);
     }
 
+    getByUsername(username: string): Observable<Accueillant> {
+        return this._httpClient.get<Accueillant>(`${API_URL}/user/${username}`);
+    }
+
     getAll(params: RequestParams): Observable<Pageable<Accueillant>> {
         Object.entries(params).forEach(([key, value]) => {
             if (!value) {

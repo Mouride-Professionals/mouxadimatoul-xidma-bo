@@ -8,6 +8,9 @@ export const defaultNavigation: FuseNavigationItem[] = [
         type: 'basic',
         icon: 'mat_solid:dashboard',
         link: '/dashboard',
+        meta: {
+            roles: ['ROLE_ADMIN', 'ROLE_RESPONSABLE', 'ROLE_ACCUEILLANT'],
+        },
     },
     {
         id: 'utilisateurs',
@@ -15,6 +18,9 @@ export const defaultNavigation: FuseNavigationItem[] = [
         type: 'basic',
         icon: 'heroicons_solid:users',
         link: 'utilisateurs',
+        meta: {
+            roles: ['ROLE_ADMIN'],
+        },
     },
     {
         id: 'residences',
@@ -22,6 +28,9 @@ export const defaultNavigation: FuseNavigationItem[] = [
         type: 'basic',
         icon: 'mat_solid:home',
         link: 'residences',
+        meta: {
+            roles: ['ROLE_ADMIN', 'ROLE_RESPONSABLE'],
+        },
     },
     {
         id: 'reservations',
@@ -29,6 +38,9 @@ export const defaultNavigation: FuseNavigationItem[] = [
         type: 'basic',
         icon: 'heroicons_solid:bookmark',
         link: 'reservations',
+        meta: {
+            roles: ['ROLE_ADMIN', 'ROLE_RESPONSABLE', 'ROLE_ACCUEILLANT'],
+        },
     },
     // {
     //     id: 'residences',
@@ -74,6 +86,9 @@ export const defaultNavigation: FuseNavigationItem[] = [
         type: 'basic',
         icon: 'event',
         link: '/evenements',
+        meta: {
+            roles: ['ROLE_ADMIN'],
+        },
     },
     {
         id: 'delegations',
@@ -81,6 +96,9 @@ export const defaultNavigation: FuseNavigationItem[] = [
         type: 'basic',
         icon: 'heroicons_outline:user-group',
         link: '/delegations',
+        meta: {
+            roles: ['ROLE_ADMIN', 'ROLE_RESPONSABLE', 'ROLE_ACCUEILLANT'],
+        },
     },
     {
         id: 'accueillants',
@@ -88,6 +106,9 @@ export const defaultNavigation: FuseNavigationItem[] = [
         type: 'basic',
         icon: 'heroicons_outline:user-group',
         link: '/accueillants',
+        meta: {
+            roles: ['ROLE_ADMIN', 'ROLE_RESPONSABLE'],
+        },
     },
     {
         id: 'responsables',
@@ -95,6 +116,9 @@ export const defaultNavigation: FuseNavigationItem[] = [
         type: 'basic',
         icon: 'heroicons_outline:user-group',
         link: '/responsables',
+        meta: {
+            roles: ['ROLE_ADMIN', 'ROLE_RESPONSABLE'],
+        },
     },
     /*{
         id: 'dons',

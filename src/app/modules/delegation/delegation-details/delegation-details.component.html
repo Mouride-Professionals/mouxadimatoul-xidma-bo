@@ -16,6 +16,13 @@
         </button>
     </div>
 
+    <div class="w-full flex justify-end items-center">
+        <button mat-raised-button class="" (click)="openModal()">
+            <mat-icon svgIcon="heroicons_solid:plus" class="mr-2"></mat-icon>
+            <span>Ajouter</span>
+        </button>
+    </div>
+
     <div class="responsive-table">
         <table class="table">
             <thead>
@@ -38,9 +45,12 @@
                     <td>{{ delegation?.chef.telephone }}</td>
                     <td>{{ delegation?.chef.adresse }}</td>
                     <td class="whitespace-nowrap">
-                        <button mat-icon-button>
+                        <button
+                            mat-icon-button
+                            (click)="openModal(delegation?.chef)"
+                        >
                             <mat-icon
-                                class="icon-size-4"
+                                class="icon-size-4 text-amber-500"
                                 svgIcon="heroicons_solid:pencil-alt"
                             ></mat-icon>
                         </button>
@@ -56,9 +66,9 @@
                     <td>{{ inv.telephone }}</td>
                     <td>{{ inv.adresse }}</td>
                     <td class="whitespace-nowrap">
-                        <button mat-icon-button>
+                        <button mat-icon-button (click)="openModal(inv)">
                             <mat-icon
-                                class="icon-size-4"
+                                class="icon-size-4 text-amber-500"
                                 svgIcon="heroicons_solid:pencil-alt"
                             ></mat-icon>
                         </button>

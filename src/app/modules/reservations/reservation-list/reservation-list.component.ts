@@ -3,6 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from '@core/auth/auth.service';
 import { Evenement } from '@core/model/evenement.model';
 import { Pageable } from '@core/model/pageable.model';
 import { Reservation } from '@core/model/reservation.model';
@@ -44,12 +45,14 @@ export class ReservationListComponent implements OnInit {
     date: FormControl = new FormControl(moment(), Validators.required);
     residence: number;
     event: number;
+    role: string;
 
     page = 0;
     pageSize = 10;
     presence: -1 | 1 = -1;
 
     constructor(
+        private _authService: AuthService,
         private _evenementService: EvenementService,
         private _residenceService: ResidenceService,
         private _reservationService: ReservationService,
@@ -58,6 +61,10 @@ export class ReservationListComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
+        this.role = this._authService.getRoles()[0];
+        if (this._residenceService.residence) {
+            this.residence = this._residenceService.residence.id;
+        }
         this.events$ = this._evenementService.getAllEvent();
         this.residences$ = this._residenceService.getAllResidences();
         this.loadReservations();

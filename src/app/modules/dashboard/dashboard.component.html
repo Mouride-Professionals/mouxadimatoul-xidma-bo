@@ -2,6 +2,7 @@
     <div class="w-full flex justify-between items-center space-x-2">
         <h2 class="text-2xl font-semibold">Tableau de bord</h2>
         <mat-form-field
+            *ngIf="role === 'ROLE_ADMIN'"
             class="min-w-60 fuse-mat-no-subcript fuse-mat-rounded fuse-mat-dense"
         >
             <mat-select

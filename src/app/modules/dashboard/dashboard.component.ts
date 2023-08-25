@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '@core/auth/auth.service';
 import { Residence } from '@core/model/residence.model';
 import { ResidenceService } from '@core/service/residence/residence.service';
 import { ChambreDispo } from '@core/service/stats/chambre-dispo.stats';
@@ -13,13 +14,6 @@ import {
 } from 'ng-apexcharts';
 import { Observable } from 'rxjs';
 
-export type ChartOptions = {
-    series: ApexAxisChartSeries;
-    chart: ApexChart;
-    xaxis: ApexXAxis;
-    title: ApexTitleSubtitle;
-};
-
 @Component({
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
@@ -33,14 +27,20 @@ export class DashboardComponent implements OnInit {
     chambreDispos: ChambreDispo[] = [];
 
     residence = 1;
+    role: string;
 
     constructor(
+        private _autthService: AuthService,
         private _residenceService: ResidenceService,
         private _statService: StatsService
     ) {}
 
     ngOnInit(): void {
+        this.role = this._autthService.getRoles()[0];
         this.residences$ = this._residenceService.getAllResidences();
+        if (this._residenceService.residence) {
+            this.residence = this._residenceService.residence.id;
+        }
         this.onFilterData();
     }
 

@@ -19,7 +19,7 @@
 
     <form [formGroup]="residenceForm" (ngSubmit)="saveResidence()">
         <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-6 min-w-0">
-            <div class="col-span-1 w-full flex flex-col space-y-4">
+            <div class="col-span-1 w-full flex flex-col">
                 <mat-form-field class="w-full" appearance="fill">
                     <mat-label for="libelle">Nom résidence</mat-label>
                     <input matInput name="libelle" formControlName="libelle" />
@@ -79,53 +79,62 @@
                         Le télephone est obligatoire.
                     </mat-error>
                 </mat-form-field>
-                <mat-form-field class="w-full" appearance="fill">
-                    <mat-label for="role">Responsable résidence</mat-label>
-                    <mat-select
-                        [placeholder]="'Responsable'"
-                        formControlName="responsable"
-                    >
-                        <mat-option
-                            *ngFor="let res of users"
-                            [value]="res.telephone"
-                        >
-                            {{ res.prenom | titlecase }}
-                            {{ res.nom | uppercase }}</mat-option
-                        >
-                    </mat-select>
-                    <mat-icon
-                        class="icon-size-5"
-                        matPrefix
-                        [svgIcon]="'heroicons_solid:user'"
-                    ></mat-icon>
-                    <mat-error
-                        *ngIf="
-                            f.responsable.touched &&
-                            f.responsable.errors?.required
-                        "
-                        class="error-message"
-                    >
-                        Le responsable est obligatoire.
-                    </mat-error>
-                </mat-form-field>
-                <!-- <mat-form-field
-                    class="w-full fuse-mat-textarea"
-                    appearance="fill"
-                >
-                    <mat-label for="description">Description</mat-label>
-                    <textarea
-                        matInput
-                        name="description"
-                        formControlName="description"
-                        [rows]="3"
-                        matTextareaAutosize
-                    ></textarea>
+                <div class="w-full flex items-center pb-4 space-x-2">
+                    <h4 class="text-lg font-medium">Responsable</h4>
+                    <div class="w-full flex-1 h-0.5 bg-slate-400"></div>
+                </div>
+                <mat-form-field class="col-span-1 w-full">
+                    <mat-label for="prenom">Prénom</mat-label>
+                    <input matInput name="prenom" formControlName="prenom" />
                     <mat-icon
                         class="icon-size-5"
                         matSuffix
-                        [svgIcon]="'heroicons_solid:location-marker'"
+                        [svgIcon]="'heroicons_solid:user-circle'"
                     ></mat-icon>
-                </mat-form-field> -->
+                    <mat-error
+                        *ngIf="f.prenom.touched && f.prenom.errors?.required"
+                        class="error-message"
+                    >
+                        Le prénom est obligatoire.
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="col-span-1 w-full">
+                    <mat-label for="nom">Nom</mat-label>
+                    <input matInput name="nom" formControlName="nom" />
+                    <mat-icon
+                        class="icon-size-5"
+                        matSuffix
+                        [svgIcon]="'heroicons_solid:user-circle'"
+                    ></mat-icon>
+                    <mat-error
+                        *ngIf="f.nom.touched && f.nom.errors?.required"
+                        class="error-message"
+                    >
+                        Le nom est obligatoire.
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="col-span-1 w-full">
+                    <mat-label for="telephone">Téléphone</mat-label>
+                    <input
+                        matInput
+                        maxlength="9"
+                        name="telephone"
+                        formControlName="telephone"
+                    />
+                    <mat-icon
+                        class="icon-size-5"
+                        matSuffix
+                        [svgIcon]="'heroicons_solid:phone'"
+                    ></mat-icon>
+                    <mat-error
+                        *ngIf="
+                            f.telephone.touched && f.telephone.errors?.required
+                        "
+                        class="error-message"
+                    >
+                        Le télephone est obligatoire.
+                    </mat-error>
+                </mat-form-field>
             </div>
             <div class="col-span-1 overflow-hidden flex flex-col space-y-4">
                 <input

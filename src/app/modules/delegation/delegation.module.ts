@@ -6,6 +6,7 @@ import { DelegationDetailsComponent } from './delegation-details/delegation-deta
 import { SharedModule } from '@shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { delegationRoutes } from './delegation.routing';
+import { DelegationAddInviteComponent } from './delegation-details/delegation-add-invite/delegation-add-invite.component';
 
 @NgModule({
     declarations: [
@@ -13,6 +14,7 @@ import { delegationRoutes } from './delegation.routing';
         DelegationListComponent,
         DelegationFormComponent,
         DelegationDetailsComponent,
+        DelegationAddInviteComponent,
     ],
     imports: [SharedModule, RouterModule.forChild(delegationRoutes)],
 })

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, map, takeUntil } from 'rxjs';
 import { FuseMediaWatcherService } from '@fuse/services/media-watcher';
 import {
     FuseNavigationItem,
@@ -10,6 +10,7 @@ import {
 import { NavigationService } from '@core/navigation/navigation.service';
 import { Utilisateur } from '@core/model/utilisateur.model';
 import { UtilisateurService } from '@core/service/utilisateur/utilisateur.service';
+import { AuthService } from '@core/auth/auth.service';
 
 @Component({
     selector: 'classic-layout',
@@ -28,6 +29,7 @@ export class ClassicLayoutComponent implements OnInit, OnDestroy {
     constructor(
         private _activatedRoute: ActivatedRoute,
         private _router: Router,
+        private _authService: AuthService,
         private _utilisateurService: UtilisateurService,
         private _navigationService: NavigationService,
         private _fuseMediaWatcherService: FuseMediaWatcherService,
@@ -62,7 +64,16 @@ export class ClassicLayoutComponent implements OnInit, OnDestroy {
 
         // Subscribe to navigation data
         this._navigationService.navigation$
-            .pipe(takeUntil(this._unsubscribeAll))
+            .pipe(
+                takeUntil(this._unsubscribeAll),
+                map((navs: FuseNavigationItem[]) =>
+                    navs.filter((nav: FuseNavigationItem) =>
+                        nav.meta?.roles?.includes(
+                            this._authService.getRoles()[0]
+                        )
+                    )
+                )
+            )
             .subscribe((navigation: FuseNavigationItem[]) => {
                 this.navigation = navigation;
             });

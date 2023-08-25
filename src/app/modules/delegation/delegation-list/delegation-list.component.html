@@ -52,7 +52,7 @@
                 <tr *ngFor="let del of data.content">
                     <td>{{ del.id }}</td>
                     <td class="whitespace-nowrap">{{ del.nom | titlecase }}</td>
-                    <td class="font-semibold">{{ del.nombre }}</td>
+                    <td class="font-semibold">{{ del.invites.length + 1 }}</td>
                     <td class="whitespace-nowrap">
                         {{ del.chef.prenom | titlecase }}
                         {{ del.chef.nom | uppercase }}

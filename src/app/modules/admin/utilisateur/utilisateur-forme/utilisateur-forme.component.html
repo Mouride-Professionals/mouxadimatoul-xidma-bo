@@ -60,42 +60,23 @@
                     Le télephone est obligatoire.
                 </mat-error>
             </mat-form-field>
-            <mat-form-field class="col-span-1 w-full">
-                <mat-label for="role">Rôle</mat-label>
-                <mat-select [placeholder]="'Rôle'" formControlName="role">
-                    <mat-option
-                        *ngFor="let role of roles$ | async"
-                        [value]="role"
-                        >{{ role.libelle }}</mat-option
-                    >
-                </mat-select>
-                <mat-icon
-                    class="icon-size-5"
-                    matPrefix
-                    [svgIcon]="'heroicons_solid:user'"
-                ></mat-icon>
-                <mat-error
-                    *ngIf="
-                        formUser.role.touched && formUser.role.errors?.required
-                    "
-                    class="error-message"
+            <div class="col-span-full flex justify-end items-center space-x-4">
+                <button
+                    mat-flat-button
+                    mat-dialog-close
+                    type="button"
+                    class="bg-red-600 text-white"
                 >
-                    Le role est obligatoire.
-                </mat-error>
-            </mat-form-field>
+                    Annuler
+                </button>
+                <button
+                    mat-flat-button
+                    [disabled]="form.invalid"
+                    color="primary"
+                >
+                    Enregistrer
+                </button>
+            </div>
         </div>
-        <mat-dialog-actions align="end">
-            <button
-                mat-flat-button
-                mat-dialog-close
-                type="button"
-                class="bg-red-600 text-white"
-            >
-                Annuler
-            </button>
-            <button mat-flat-button [disabled]="form.invalid" color="primary">
-                Enregistrer
-            </button>
-        </mat-dialog-actions>
     </form>
 </mat-dialog-content>
