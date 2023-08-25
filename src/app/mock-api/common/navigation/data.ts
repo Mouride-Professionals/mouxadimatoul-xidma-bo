@@ -89,6 +89,13 @@ export const defaultNavigation: FuseNavigationItem[] = [
         icon: 'heroicons_outline:user-group',
         link: '/accueillants',
     },
+    {
+        id: 'responsables',
+        title: 'Responsables des chambres',
+        type: 'basic',
+        icon: 'heroicons_outline:user-group',
+        link: '/responsables',
+    },
     /*{
         id: 'dons',
         title: 'Gestion des dons',

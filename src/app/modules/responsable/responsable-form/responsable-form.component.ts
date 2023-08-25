@@ -1,0 +1,68 @@
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Residence } from '@core/model/residence.model';
+import { Responsable } from '@core/model/responsable.model';
+import { ResidenceService } from '@core/service/residence/residence.service';
+import { ResponsableService } from '@core/service/responsable/responsable.service';
+import { Observable } from 'rxjs';
+
+@Component({
+    selector: 'app-responsable-form',
+    templateUrl: './responsable-form.component.html',
+    styleUrls: ['./responsable-form.component.scss'],
+})
+export class ResponsableFormComponent implements OnInit {
+    responsableForm: FormGroup = new FormGroup({
+        prenom: new FormControl('', Validators.required),
+        nom: new FormControl('', Validators.required),
+        telephone: new FormControl('', Validators.required),
+        residence: new FormControl('', Validators.required),
+    });
+    responsable: Responsable;
+    residences$: Observable<Residence[]>;
+    isEdit = false;
+    title: string = 'Ajouter un nouveau responsable';
+
+    constructor(
+        private _responsableService: ResponsableService,
+        private _matDialogRef: MatDialogRef<ResponsableFormComponent>,
+        private _residenceService: ResidenceService,
+        @Inject(MAT_DIALOG_DATA) private data: Responsable,
+        private _snackBar: MatSnackBar
+    ) {}
+
+    get f(): any {
+        return this.responsableForm.controls;
+    }
+
+    ngOnInit(): void {
+        this.residences$ = this._residenceService.getAllResidences();
+        if (this.data) {
+            this.isEdit = true;
+            this.title = 'Modifier un responsable';
+            this.responsableForm.patchValue(this.data);
+        }
+    }
+
+    onSubmit(): void {
+        if (this.responsableForm.invalid) {
+            return;
+        }
+        const _data: Responsable = {
+            ...this.data,
+            ...this.responsableForm.value,
+        };
+        this._responsableService.save(_data).subscribe(() => {
+            this._snackBar.open('Responsable modifié avec succés!', '', {
+                panelClass: ['bg-orange-500', 'text-white'],
+                duration: 3000,
+            });
+            this._matDialogRef.close(true);
+        });
+    }
+
+    compareResidence = (r1: Residence, r2: Residence): boolean =>
+        r1 === r2 || r1.id === r2.id;
+}

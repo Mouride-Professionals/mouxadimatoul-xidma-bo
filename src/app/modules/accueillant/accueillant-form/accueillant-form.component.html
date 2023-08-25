@@ -2,46 +2,68 @@
 <mat-dialog-content>
     <form [formGroup]="accueillantForm" (ngSubmit)="onSubmit()">
         <div class="grid grid-cols-1 gap-4">
-            <mat-form-field class="col-span-1 gt-xs:pl-3">
-                <mat-label for="nom">Nom</mat-label>
-                <input matInput name="nom" formControlName="nom" />
-                <mat-icon
-                    class="icon-size-5"
-                    matSuffix
-                    [svgIcon]="'heroicons_solid:user-circle'"
-                ></mat-icon>
-                <mat-error
-                    *ngIf="f.nom.touched && f.nom.errors?.required"
-                    class="error-message"
-                >
-                    Le nom est obligatoire.
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field class="flex-auto">
-                <mat-label for="telephone">Téléphone</mat-label>
-                <input
-                    matInput
-                    maxlength="9"
-                    name="telephone"
-                    formControlName="telephone"
-                    #postalCode
-                />
-                <mat-hint align="end"
-                    >{{ postalCode.value.length }} / 9</mat-hint
-                >
-                <mat-icon
-                    class="icon-size-5"
-                    matSuffix
-                    [svgIcon]="'heroicons_solid:phone'"
-                ></mat-icon>
-                <mat-error
-                    *ngIf="f.telephone.touched && f.telephone.errors?.required"
-                    class="error-message"
-                >
-                    Le télephone est obligatoire.
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field class="col-span-1 gt-xs:pl-3">
+            <ng-container formGroupName="utilisateur">
+                <mat-form-field class="col-span-1 w-full">
+                    <mat-label for="prenom">Prénom</mat-label>
+                    <input matInput name="prenom" formControlName="prenom" />
+                    <mat-icon
+                        class="icon-size-5"
+                        matSuffix
+                        [svgIcon]="'heroicons_solid:user-circle'"
+                    ></mat-icon>
+                    <mat-error
+                        *ngIf="
+                            f.utilisateur.get('prenom').touched &&
+                            f.utilisateur.get('prenom').errors?.required
+                        "
+                        class="error-message"
+                    >
+                        Le prénom est obligatoire.
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="col-span-1 w-full">
+                    <mat-label for="nom">Nom</mat-label>
+                    <input matInput name="nom" formControlName="nom" />
+                    <mat-icon
+                        class="icon-size-5"
+                        matSuffix
+                        [svgIcon]="'heroicons_solid:user-circle'"
+                    ></mat-icon>
+                    <mat-error
+                        *ngIf="
+                            f.utilisateur.get('nom').touched &&
+                            f.utilisateur.get('nom').errors?.required
+                        "
+                        class="error-message"
+                    >
+                        Le nom est obligatoire.
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="col-span-1 w-full">
+                    <mat-label for="telephone">Téléphone</mat-label>
+                    <input
+                        matInput
+                        maxlength="9"
+                        name="telephone"
+                        formControlName="telephone"
+                    />
+                    <mat-icon
+                        class="icon-size-5"
+                        matSuffix
+                        [svgIcon]="'heroicons_solid:phone'"
+                    ></mat-icon>
+                    <mat-error
+                        *ngIf="
+                            f.utilisateur.get('telephone').touched &&
+                            f.utilisateur.get('telephone').errors?.required
+                        "
+                        class="error-message"
+                    >
+                        Le télephone est obligatoire.
+                    </mat-error>
+                </mat-form-field>
+            </ng-container>
+            <mat-form-field class="col-span-1 w-full">
                 <mat-label for="role">Résidence</mat-label>
                 <mat-select
                     formControlName="residence"

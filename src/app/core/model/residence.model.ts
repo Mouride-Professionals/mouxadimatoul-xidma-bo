@@ -1,6 +1,7 @@
 import { Utilisateur } from '@core/model/utilisateur.model';
 import { Pavillon } from '@core/model/pavillon.model';
 import { Image } from '@core/model/image.model';
+import { Responsable } from './responsable.model';
 
 export type Residence = {
     id: number;
@@ -11,4 +12,5 @@ export type Residence = {
     statut: boolean;
     responsable: Utilisateur;
     pavillons: Pavillon[];
+    responsables: Responsable[];
 };

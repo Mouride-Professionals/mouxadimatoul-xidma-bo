@@ -46,6 +46,9 @@
                 </tr>
             </thead>
             <tbody>
+                <tr *ngIf="data.empty">
+                    <td class="text-center" colspan="6">Pas de délégation</td>
+                </tr>
                 <tr *ngFor="let del of data.content">
                     <td>{{ del.id }}</td>
                     <td class="whitespace-nowrap">{{ del.nom | titlecase }}</td>

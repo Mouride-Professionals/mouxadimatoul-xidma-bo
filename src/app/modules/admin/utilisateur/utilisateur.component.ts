@@ -75,6 +75,7 @@ export class UtilisateurComponent implements OnInit {
         this._fuseConfirmation
             .open({
                 title: 'confirmation',
+                // eslint-disable-next-line quotes, @typescript-eslint/quotes
                 message: "Voulez-vous changer le statut de l'utilisateur",
                 icon: {
                     show: true,

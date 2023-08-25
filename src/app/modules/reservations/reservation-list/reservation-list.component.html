@@ -101,15 +101,15 @@
                     <th>Chambre</th>
                     <th>Evénement</th>
                     <th>Accueillant</th>
-                    <th>Date d'entrée</th>
-                    <th>Date de sortie</th>
+                    <th>Responsable</th>
+                    <th>Période séjour</th>
                     <th>Cérémonie</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngIf="data.empty">
-                    <td class="text-center" colspan="7">pas de réservation</td>
+                    <td class="text-center" colspan="9">pas de réservation</td>
                 </tr>
                 <tr *ngFor="let res of data.content">
                     <td>
@@ -124,13 +124,15 @@
                         {{ res.evenement.libelle }}
                     </td>
                     <td>
-                        {{ res.accueillant.prenom | titlecase }}
-                        {{ res.accueillant.nom | uppercase }}
+                        {{ res.accueillant.utilisateur.prenom | titlecase }}
+                        {{ res.accueillant.utilisateur.nom | uppercase }}
                     </td>
                     <td>
-                        {{ res.dateEntree | date : "dd/MM/yyyy" }}
+                        {{ res.responsable?.prenom | titlecase }}
+                        {{ res.responsable?.nom | uppercase }}
                     </td>
                     <td>
+                        {{ res.dateEntree | date : "dd/MM/yyyy" }} -
                         {{ res.dateSortie | date : "dd/MM/yyyy" }}
                     </td>
                     <td class="text-center">

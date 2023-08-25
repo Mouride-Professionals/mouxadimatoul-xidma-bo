@@ -6,9 +6,11 @@ import { Accueillant } from '@core/model/accueillant.model';
 import { Chambre } from '@core/model/chambre.model';
 import { Pageable } from '@core/model/pageable.model';
 import { Reservation } from '@core/model/reservation.model';
+import { Responsable } from '@core/model/responsable.model';
 import { AccueillantService } from '@core/service/accueillant/accueillant.service';
 import { ChambreService } from '@core/service/chambre/chambre.service';
 import { ReservationService } from '@core/service/reservation/reservation.service';
+import { ResponsableService } from '@core/service/responsable/responsable.service';
 
 @Component({
     selector: 'app-reservation-edit',
@@ -21,16 +23,19 @@ export class ReservationEditComponent implements OnInit {
         dateSortie: new FormControl(null, [Validators.required]),
         presence: new FormControl(null, [Validators.required]),
         chambre: new FormControl(null, [Validators.required]),
+        responsable: new FormControl(null, [Validators.required]),
         accueillant: new FormControl(null, [Validators.required]),
     });
     reservation: Reservation;
     accueillants: Accueillant[] = [];
     chambres: Chambre[] = [];
+    responsables: Responsable[] = [];
 
     constructor(
         private _chambreService: ChambreService,
         private _accueillantService: AccueillantService,
         private _reservationService: ReservationService,
+        private _responsableService: ResponsableService,
         private _route: ActivatedRoute,
         private _router: Router,
         private _snackBar: MatSnackBar
@@ -47,6 +52,16 @@ export class ReservationEditComponent implements OnInit {
                         this.reservationForm.patchValue(res);
                         this.onLoadHotes();
                         this.onLoadChambre();
+
+                        this._responsableService
+                            .getAll({
+                                page: 0,
+                                size: 200,
+                                residence: res.chambre.pavillon.residence.id,
+                            })
+                            .subscribe((result: Pageable<Responsable>) => {
+                                this.responsables = result.content;
+                            });
                     });
             }
         });
@@ -113,6 +128,9 @@ export class ReservationEditComponent implements OnInit {
 
     compareAccueillant = (a1: Accueillant, a2: Accueillant): boolean =>
         a1 === a2 || a1.id === a2.id;
+
+    compareResponsable = (r1: Responsable, r2: Responsable): boolean =>
+        r1 === r2 || r1.id === r2.id;
 
     compareChambre = (c1: Chambre, c2: Chambre): boolean =>
         c1 === c2 || c1.id === c2.id;

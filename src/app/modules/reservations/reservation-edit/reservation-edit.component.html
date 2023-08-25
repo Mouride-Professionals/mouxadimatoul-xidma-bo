@@ -80,14 +80,31 @@
                             *ngFor="let acc of accueillants"
                             [value]="acc"
                         >
-                            {{ acc.prenom | titlecase }} -
-                            {{ acc.nom | uppercase }}
+                            {{ acc.utilisateur.prenom | titlecase }} -
+                            {{ acc.utilisateur.nom | uppercase }}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
-                <mat-checkbox class="col-span-1" formControlName="presence"
-                    >Présence cérémoonie</mat-checkbox
-                >
+                <mat-form-field class="col-span-1 w-full">
+                    <mat-label>Responsable</mat-label>
+                    <mat-select
+                        formControlName="responsable"
+                        [compareWith]="compareResponsable"
+                    >
+                        <mat-option
+                            *ngFor="let resp of responsables"
+                            [value]="resp"
+                        >
+                            {{ resp.prenom | titlecase }} -
+                            {{ resp.nom | uppercase }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div class="col-span-1 w-full flex items-center">
+                    <mat-checkbox formControlName="presence"
+                        >Présence cérémoonie</mat-checkbox
+                    >
+                </div>
                 <div class="col-span-full mb-4 flex w-full items-center">
                     <button
                         mat-raised-button

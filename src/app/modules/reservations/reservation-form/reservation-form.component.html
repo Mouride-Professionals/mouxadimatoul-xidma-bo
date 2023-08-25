@@ -143,6 +143,7 @@
                                 <th>Invité</th>
                                 <th class="whitespace-nowrap">Chambre</th>
                                 <th class="whitespace-nowrap">Accueillant</th>
+                                <th class="whitespace-nowrap">Responsable</th>
                                 <th class="text-center">
                                     <span class="mr-2">Présence cérémonie</span>
                                     <mat-checkbox
@@ -210,8 +211,38 @@
                                                 *ngFor="let acc of accueillants"
                                                 [value]="acc"
                                             >
-                                                {{ acc.prenom | titlecase }} -
-                                                {{ acc.nom | uppercase }}
+                                                {{
+                                                    acc.utilisateur.prenom
+                                                        | titlecase
+                                                }}
+                                                -
+                                                {{
+                                                    acc.utilisateur.nom
+                                                        | uppercase
+                                                }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </td>
+                                <td class="whitespace-nowrap">
+                                    <mat-form-field
+                                        class="w-full fuse-mat-rounded fuse-mat-dense fuse-mat-no-subscript"
+                                        appearance="fill"
+                                    >
+                                        <mat-select
+                                            [placeholder]="
+                                                'Responsable chambre'
+                                            "
+                                            formControlName="responsable"
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let resp of responsables
+                                                "
+                                                [value]="resp"
+                                            >
+                                                {{ resp.prenom | titlecase }} -
+                                                {{ resp.nom | uppercase }}
                                             </mat-option>
                                         </mat-select>
                                     </mat-form-field>

@@ -1,6 +1,8 @@
 import { Evenement } from '@core/model/evenement.model';
 import { Chambre } from '@core/model/chambre.model';
 import { Invite } from '@core/model/invite.model';
+import { Accueillant } from './accueillant.model';
+import { Responsable } from './responsable.model';
 
 export type Reservation = {
     id: number;
@@ -12,6 +14,8 @@ export type Reservation = {
     statut: boolean;
     presence: boolean;
     evenement: Evenement;
+    accueillant: Accueillant;
+    responsable: Responsable;
     chambre: Chambre;
     invite: Invite;
 };

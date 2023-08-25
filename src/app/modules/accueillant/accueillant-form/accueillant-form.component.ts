@@ -15,8 +15,11 @@ import { Observable } from 'rxjs';
 })
 export class AccueillantFormComponent implements OnInit {
     accueillantForm: FormGroup = new FormGroup({
-        nom: new FormControl('', Validators.required),
-        telephone: new FormControl('', Validators.required),
+        utilisateur: new FormGroup({
+            prenom: new FormControl('', Validators.required),
+            nom: new FormControl('', Validators.required),
+            telephone: new FormControl('', Validators.required),
+        }),
         residence: new FormControl('', Validators.required),
     });
     accueillant: Accueillant;

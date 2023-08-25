@@ -1,4 +1,5 @@
 import { Pavillon } from './pavillon.model';
+import { Responsable } from './responsable.model';
 
 export type Chambre = {
     id: number;
@@ -8,4 +9,5 @@ export type Chambre = {
     placeChoisie?: number;
     reference: string;
     pavillon: Pavillon;
+    responsables: Responsable[];
 };

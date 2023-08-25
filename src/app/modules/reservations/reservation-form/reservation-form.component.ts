@@ -15,12 +15,14 @@ import { Evenement } from '@core/model/evenement.model';
 import { Invite } from '@core/model/invite.model';
 import { Pageable } from '@core/model/pageable.model';
 import { Residence } from '@core/model/residence.model';
+import { Responsable } from '@core/model/responsable.model';
 import { AccueillantService } from '@core/service/accueillant/accueillant.service';
 import { ChambreService } from '@core/service/chambre/chambre.service';
 import { DelegationService } from '@core/service/delegation/delegation.service';
 import { EvenementService } from '@core/service/evenement/evenement.service';
 import { ReservationService } from '@core/service/reservation/reservation.service';
 import { ResidenceService } from '@core/service/residence/residence.service';
+import { ResponsableService } from '@core/service/responsable/responsable.service';
 import { Observable, map } from 'rxjs';
 
 @Component({
@@ -53,6 +55,7 @@ export class ReservationFormComponent implements OnInit {
     residences$: Observable<Residence[]>;
     accueillants: Accueillant[] = [];
     chambres: Chambre[] = [];
+    responsables: Responsable[] = [];
     chambresIndisponibles: number[] = [];
     idIndispo: number[] = [];
     inviteDelegations: Invite[] = [];
@@ -62,6 +65,7 @@ export class ReservationFormComponent implements OnInit {
         private _residenceService: ResidenceService,
         private _chambreService: ChambreService,
         private _accueillantService: AccueillantService,
+        private _responsableService: ResponsableService,
         private _reservationService: ReservationService,
         private _delagationService: DelegationService,
         private _router: Router,
@@ -155,8 +159,18 @@ export class ReservationFormComponent implements OnInit {
             this.reservationForm.get('residence').invalid
         ) {
             this.chambres = [];
+            this.responsables = [];
             return;
         }
+        this._responsableService
+            .getAll({
+                page: 0,
+                size: 200,
+                residence: this.reservationForm.get('residence').value,
+            })
+            .subscribe((res: Pageable<Responsable>) => {
+                this.responsables = res.content;
+            });
         this._chambreService
             .getAllDisponibleByResidence(
                 this.reservationForm.get('residence').value,
@@ -214,6 +228,7 @@ export class ReservationFormComponent implements OnInit {
                 ]),
                 chambre: new FormControl(null, [Validators.required]),
                 accueillant: new FormControl(null, [Validators.required]),
+                responsable: new FormControl(null, [Validators.required]),
                 adresse: new FormControl(guest?.adresse),
                 email: new FormControl(guest?.email, [Validators.email]),
                 presence: new FormControl(),

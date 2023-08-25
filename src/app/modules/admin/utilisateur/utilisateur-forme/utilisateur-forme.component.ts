@@ -4,7 +4,7 @@ import { UtilisateurService } from '@core/service/utilisateur/utilisateur.servic
 import { Utilisateur } from '@core/model/utilisateur.model';
 import { RoleService } from '@core/service/role/role.service';
 import { Role } from '@core/model/role.model';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import {
     MAT_DIALOG_DATA,
     MatDialogRef,
@@ -88,6 +88,12 @@ export class UtilisateurFormeComponent implements OnInit {
     }
     // Get all Roles
     getRoles(): void {
-        this.roles$ = this._roleService.getAllRoles();
+        this.roles$ = this._roleService
+            .getAllRoles()
+            .pipe(
+                map((roles: Role[]) =>
+                    roles.filter((role: Role) => role.libelle !== 'accueillant')
+                )
+            );
     }
 }
