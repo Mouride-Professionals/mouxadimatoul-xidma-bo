@@ -1,3 +1,108 @@
 <div class="p-6 w-full h-full flex flex-col space-y-6">
-    <h2 class="text-2xl font-semibold">Tableau de bord</h2>
+    <div class="w-full flex justify-between items-center space-x-2">
+        <h2 class="text-2xl font-semibold">Tableau de bord</h2>
+        <mat-form-field
+            class="min-w-60 fuse-mat-no-subcript fuse-mat-rounded fuse-mat-dense"
+        >
+            <mat-select
+                placeholder="Choisir une résidence"
+                (selectionChange)="onFilterData()"
+                [(ngModel)]="residence"
+                name="residence"
+            >
+                <mat-option [value]="null">---</mat-option>
+                <mat-option
+                    *ngFor="let item of residences$ | async"
+                    [value]="item.id"
+                >
+                    {{ item.libelle }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="w-full grid grid-cols-1 md:grid-cols-4 gap-4">
+        <ng-container *ngIf="total$ | async as total">
+            <div
+                class="col-span-1 w-full px-4 py-2 bg-white shadow flex justify-between items-center"
+            >
+                <div class="flex flex-col space-y-1">
+                    <h5 class="text-md font-medium text-gray-400">Pavillons</h5>
+                    <h3 class="text-lg font-semibold text-gray-600">
+                        {{ total.pavillons }}
+                    </h3>
+                </div>
+                <!-- <button
+                        class="p-3 rounded-full bg-amber-200 text-amber-500 flex items-center justify-center"
+                    >
+                        <svg-icon
+                            src="assets/icons/agent.svg"
+                            svgClass="w-5 h-5"
+                        ></svg-icon>
+                    </button> -->
+            </div>
+            <div
+                class="col-span-1 w-full px-4 py-2 bg-white shadow flex justify-between items-center"
+            >
+                <div class="flex flex-col space-y-1">
+                    <h5 class="text-md font-medium text-gray-400">Chambres</h5>
+                    <h3 class="text-lg font-semibold text-gray-600">
+                        {{ total.chambres }}
+                    </h3>
+                </div>
+            </div>
+            <div
+                class="col-span-1 w-full px-4 py-2 bg-white shadow flex justify-between items-center"
+            >
+                <div class="flex flex-col space-y-1">
+                    <h5 class="text-md font-medium text-gray-400">
+                        Délégations
+                    </h5>
+                    <h3 class="text-lg font-semibold text-gray-600">
+                        {{ total.delegations }}
+                    </h3>
+                </div>
+            </div>
+            <div
+                class="col-span-1 w-full px-4 py-2 bg-white shadow flex justify-between items-center"
+            >
+                <div class="flex flex-col space-y-1">
+                    <h5 class="text-md font-medium text-gray-400">
+                        Réservations
+                    </h5>
+                    <h3 class="text-lg font-semibold text-gray-600">
+                        {{ total.reservations }}
+                    </h3>
+                </div>
+            </div>
+        </ng-container>
+
+        <div class="col-span-full flex flex-col flex-auto space-y-4">
+            <h2 class="text-2xl font-semibold">
+                Les chambres disponibles par pavillon
+            </h2>
+
+            <fuse-card
+                class="flex p-4 flex-col flex-auto"
+                *ngIf="chambreDispoChart"
+            >
+                <apx-chart
+                    class="flex-auto w-full h-80"
+                    [chart]="chambreDispoChart.chart"
+                    [colors]="chambreDispoChart.colors"
+                    [dataLabels]="chambreDispoChart.dataLabels"
+                    [grid]="chambreDispoChart.grid"
+                    [labels]="chambreDispoChart.labels"
+                    [legend]="chambreDispoChart.legend"
+                    [plotOptions]="chambreDispoChart.plotOptions"
+                    [series]="chambreDispoChart.series"
+                    [states]="chambreDispoChart.states"
+                    [stroke]="chambreDispoChart.stroke"
+                    [tooltip]="chambreDispoChart.tooltip"
+                    [xaxis]="chambreDispoChart.xaxis"
+                    [yaxis]="chambreDispoChart.yaxis"
+                ></apx-chart>
+            </fuse-card>
+        </div>
+    </div>
 </div>
