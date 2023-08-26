@@ -46,9 +46,9 @@
                 <h2 class="text-4xl font-semibold">
                     {{ residence?.libelle | titlecase }}
                 </h2>
-                <p>
+                <!-- <p>
                     {{ residence?.description | summarize : 120 }}
-                </p>
+                </p> -->
             </div>
             <div class="flex flex-col space-y-4">
                 <div class="flex items-center space-x-4">
@@ -83,7 +83,7 @@
         </div>
     </div>
     <div class="w-full p-6 grid grid-cols-4 gap-6">
-        <div class="col-span-1 flex flex-col space-y-4">
+        <div class="col-span-full md:col-span-1 flex flex-col space-y-4">
             <fuse-card
                 class="p-3 w-full flex items-center justify-center space-x-4"
                 *ngIf="pavillons.length <= 0"
@@ -112,7 +112,9 @@
                 <span>Ajouter pavillon</span>
             </button>
         </div>
-        <fuse-card class="col-span-3 w-full p-4 flex flex-col space-y-4">
+        <fuse-card
+            class="col-span-full md:col-span-3 w-full p-4 flex flex-col space-y-4"
+        >
             <div class="w-full flex items-center justify-between">
                 <h2 class="text-2xl font-serif">Chambres</h2>
                 <button
@@ -125,19 +127,22 @@
                     <span>Nouveau</span>
                 </button>
             </div>
-            <div class="w-full grid grid-cols-3 gap-4">
+            <div
+                class="w-full grid grid-cols-2 md:grid-cols-3 gap-4"
+                *ngIf="data$ | async as data"
+            >
                 <fuse-card
-                    *ngIf="chambres.length <= 0"
+                    *ngIf="data.empty"
                     class="col-span-full w-full p-3 flex justify-center items-center"
                 >
                     <span>Pas de chambres</span>
                 </fuse-card>
                 <fuse-card
                     class="col-span-1 w-full p-3 flex flex-col space-y-2"
-                    *ngFor="let c of chambres"
+                    *ngFor="let c of data.content"
                 >
-                    <div class="flex justify-between items-center space-x-4">
-                        <span class="text-lg font-medium">{{ c.numero }}</span>
+                    <div class="flex justify-end items-center space-x-4">
+                        <!-- <span class="text-lg font-medium">{{ c.numero }}</span> -->
                         <button
                             mat-icon-button
                             [matMenuTriggerFor]="menuChambre"
@@ -154,7 +159,7 @@
                             class="icon-size-5"
                         ></mat-icon>
                         <span class="text-lg font-light">{{
-                            c.pavillon.libelle | titlecase
+                            c.reference
                         }}</span>
                     </div>
                     <div class="flex items-center space-x-2">
@@ -169,6 +174,12 @@
                         >
                     </div>
                 </fuse-card>
+                <ng-container *ngIf="data.totalElements > size">
+                    <paginator
+                        [pageable]="data"
+                        (pageEvent)="onPageChange($event)"
+                    ></paginator>
+                </ng-container>
             </div>
         </fuse-card>
     </div>

@@ -1,0 +1,121 @@
+<div class="p-6 w-full content-container flex flex-col space-y-4">
+    <div class="w-full flex justify-between items-center">
+        <h2 class="text-4xl font-semibold">Modifier la réservation</h2>
+        <!-- New user -->
+        <button
+            class="ml-4 px-1 sm:px-4 min-w-10 text-white"
+            mat-flat-button
+            [routerLink]="['/reservations']"
+            [color]="'warn'"
+        >
+            <mat-icon
+                class="icon-size-5"
+                svgIcon="mat_solid:arrow_back"
+            ></mat-icon>
+            <span class="hidden sm:inline-block ml-2">Annuler</span>
+        </button>
+    </div>
+
+    <div class="w-full flex-1 h-full overflow-y-scroll">
+        <form
+            class="w-full"
+            [formGroup]="reservationForm"
+            (ngSubmit)="onSubmit()"
+        >
+            <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-6">
+                <mat-form-field class="col-span-1 w-full">
+                    <mat-label>Date d'entrée</mat-label>
+                    <input
+                        matInput
+                        [matDatepicker]="pickerEntree"
+                        formControlName="dateEntree"
+                    />
+                    <mat-datepicker-toggle
+                        matSuffix
+                        [for]="pickerEntree"
+                    ></mat-datepicker-toggle>
+                    <mat-datepicker #pickerEntree></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field class="col-span-1 w-full">
+                    <mat-label>Date de sortie</mat-label>
+                    <input
+                        matInput
+                        [matDatepicker]="pickerSortie"
+                        formControlName="dateSortie"
+                    />
+                    <mat-datepicker-toggle
+                        matSuffix
+                        [for]="pickerSortie"
+                    ></mat-datepicker-toggle>
+                    <mat-datepicker #pickerSortie></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field class="col-span-1 w-full">
+                    <mat-label
+                        >Chambre ({{
+                            reservation?.chambre.reference
+                        }})</mat-label
+                    >
+                    <mat-select
+                        formControlName="chambre"
+                        [compareWith]="compareChambre"
+                    >
+                        <mat-option
+                            *ngFor="let c of chambres"
+                            [disabled]="isUnvalaible(c)"
+                            [value]="c"
+                        >
+                            {{ c.reference }} -
+                            {{ c.nombrePlace - c.placeReservee }}
+                            place(s) disponible(s)
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="col-span-1 w-full">
+                    <mat-label>Accueillant</mat-label>
+                    <mat-select
+                        formControlName="accueillant"
+                        [compareWith]="compareAccueillant"
+                    >
+                        <mat-option
+                            *ngFor="let acc of accueillants"
+                            [value]="acc"
+                        >
+                            {{ acc.utilisateur.prenom | titlecase }} -
+                            {{ acc.utilisateur.nom | uppercase }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="col-span-1 w-full">
+                    <mat-label>Responsable</mat-label>
+                    <mat-select
+                        formControlName="responsable"
+                        [compareWith]="compareResponsable"
+                    >
+                        <mat-option
+                            *ngFor="let resp of responsables"
+                            [value]="resp"
+                        >
+                            {{ resp.prenom | titlecase }} -
+                            {{ resp.nom | uppercase }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div class="col-span-1 w-full flex items-center">
+                    <mat-checkbox formControlName="presence"
+                        >Présence cérémoonie</mat-checkbox
+                    >
+                </div>
+                <div class="col-span-full mb-4 flex w-full items-center">
+                    <button
+                        mat-raised-button
+                        class="w-full max-w-60"
+                        color="primary"
+                        [disabled]="reservationForm.invalid"
+                    >
+                        Enregistrer
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

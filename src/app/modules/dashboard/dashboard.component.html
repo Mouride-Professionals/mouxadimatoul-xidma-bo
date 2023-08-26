@@ -1,173 +1,109 @@
 <div class="p-6 w-full h-full flex flex-col space-y-6">
-    <!-- <h2 class="text-2xl font-semibold">Dashboard du <strong>29-07-2023</strong></h2> -->
-
-    <div class="space-y-4">
-        <div
-            class="responsive-table grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 w-full min-w-0"
+    <div class="w-full flex justify-between items-center space-x-2">
+        <h2 class="text-2xl font-semibold">Tableau de bord</h2>
+        <mat-form-field
+            *ngIf="role === 'ROLE_ADMIN'"
+            class="min-w-60 fuse-mat-no-subcript fuse-mat-rounded fuse-mat-dense"
         >
-            <div
-                class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden"
+            <mat-select
+                placeholder="Choisir une résidence"
+                (selectionChange)="onFilterData()"
+                [(ngModel)]="residence"
+                name="residence"
             >
-                <div class="flex items-start justify-between">
-                    <div
-                        class="text-lg font-medium tracking-tight leading-6 truncate uppercase"
-                    >
-                        Résidences
-                    </div>
-                </div>
-                <div
-                    *ngIf="residences$ | async as residences"
-                    class="flex flex-col items-center mt-2"
+                <mat-option [value]="null">---</mat-option>
+                <mat-option
+                    *ngFor="let item of residences$ | async"
+                    [value]="item.id"
                 >
-                    <div
-                        class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-green-500"
-                    >
-                        {{ residences.length }}
-                    </div>
-                </div>
-            </div>
-
-            <div
-                class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden"
-            >
-                <div class="flex items-start justify-between">
-                    <div
-                        class="text-lg font-medium tracking-tight leading-6 truncate"
-                    >
-                        CHAMBRES
-                    </div>
-                </div>
-                <div class="flex flex-col items-center mt-2">
-                    <div
-                        class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-red-500"
-                    >
-                        370
-                    </div>
-                    <!-- <div
-                        class="flex flex-row items-baseline justify-between w-full text-black"
-                    >
-                        <div class="ml-1.5 text-lg font-semibold">
-                            R T M
-                            <p class="text-center">37</p>
-                        </div>
-                        <div class="ml-1.5 text-lg font-semibold">
-                            R K M
-                            <p class="text-center">25</p>
-                        </div>
-                    </div> -->
-                </div>
-            </div>
-
-            <div
-                class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden"
-            >
-                <div class="flex items-start justify-between">
-                    <div
-                        class="text-lg font-medium tracking-tight leading-6 truncate"
-                    >
-                        TOTAL INVITÉS REÇUS
-                    </div>
-                </div>
-                <div class="flex flex-col items-center mt-2">
-                    <div
-                        class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-amber-500"
-                    >
-                        7500
-                    </div>
-                    <!-- <div
-                        class="flex flex-row mt-3 items-baseline justify-between w-full text-black"
-                    >
-                        <div class="ml-1.5 text-lg font-semibold">
-                            R T M
-                            <p class="text-center">370</p>
-                        </div>
-                        <div class="ml-1.5 text-lg font-semibold">
-                            R K M
-                            <p class="text-center">255</p>
-                        </div>
-                    </div> -->
-                </div>
-            </div>
-
-            <div
-                class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden"
-            >
-                <div class="flex items-start justify-between">
-                    <div
-                        class="text-lg font-medium tracking-tight leading-6 truncate"
-                    >
-                        ÉVÉNEMENTS
-                    </div>
-                </div>
-                <div class="flex flex-col items-center mt-2">
-                    <div
-                        class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-blue-500"
-                    >
-                        5
-                    </div>
-                </div>
-            </div>
-        </div>
+                    {{ item.libelle }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
     </div>
 
-    <div class="responsive-table" *ngIf="data$ | async as data">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Invité</th>
-                    <th>Délégation</th>
-                    <th>Chambre</th>
-                    <th>Accueillant</th>
-                    <th>Date d'entrée</th>
-                    <th>Date de sortie</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngIf="data.empty">
-                    <td class="text-center" colspan="6">pas de réservation</td>
-                </tr>
-                <tr *ngFor="let res of data.content">
-                    <td>
-                        {{ res.invite.prenom | titlecase }}
-                        {{ res.invite.nom | uppercase }}
-                    </td>
-                    <td>{{ res.invite.delegation?.nom }}</td>
-                    <td>
-                        {{ res.chambre.pavillon.libelle }} —
-                        {{ res.chambre.numero }}
-                    </td>
-                    <td>
-                        {{ res.accueillant.prenom | titlecase }}
-                        {{ res.accueillant.nom | uppercase }}
-                    </td>
-                    <td>
-                        {{ res.dateEntree | date : "dd/MM/yyyy" }}
-                    </td>
-                    <td>
-                        {{ res.dateSortie | date : "dd/MM/yyyy" }}
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <button
-            mat-raised-button
-            color="primary"
-            [routerLink]="['/reservations']"
-        >
-            voir plus
-        </button>
-    </div>
-
-    <!-- <div class="flex flex-col flex-auto">
-        <div class="flex flex-col flex-auto">
-            <apx-chart
-                class="flex-auto w-full h-80"
-                [series]="chartOptions.series"
-                [chart]="chartOptions.chart"
-                [xaxis]="chartOptions.xaxis"
-                [title]="chartOptions.title"
+    <div class="w-full grid grid-cols-1 md:grid-cols-4 gap-4">
+        <ng-container *ngIf="total$ | async as total">
+            <div
+                class="col-span-1 w-full px-4 py-2 bg-white shadow flex justify-between items-center"
             >
-            </apx-chart>
+                <div class="flex flex-col space-y-1">
+                    <h5 class="text-md font-medium text-gray-400">Pavillons</h5>
+                    <h3 class="text-lg font-semibold text-gray-600">
+                        {{ total.pavillons }}
+                    </h3>
+                </div>
+                <!-- <button
+                        class="p-3 rounded-full bg-amber-200 text-amber-500 flex items-center justify-center"
+                    >
+                        <svg-icon
+                            src="assets/icons/agent.svg"
+                            svgClass="w-5 h-5"
+                        ></svg-icon>
+                    </button> -->
+            </div>
+            <div
+                class="col-span-1 w-full px-4 py-2 bg-white shadow flex justify-between items-center"
+            >
+                <div class="flex flex-col space-y-1">
+                    <h5 class="text-md font-medium text-gray-400">Chambres</h5>
+                    <h3 class="text-lg font-semibold text-gray-600">
+                        {{ total.chambres }}
+                    </h3>
+                </div>
+            </div>
+            <div
+                class="col-span-1 w-full px-4 py-2 bg-white shadow flex justify-between items-center"
+            >
+                <div class="flex flex-col space-y-1">
+                    <h5 class="text-md font-medium text-gray-400">
+                        Délégations
+                    </h5>
+                    <h3 class="text-lg font-semibold text-gray-600">
+                        {{ total.delegations }}
+                    </h3>
+                </div>
+            </div>
+            <div
+                class="col-span-1 w-full px-4 py-2 bg-white shadow flex justify-between items-center"
+            >
+                <div class="flex flex-col space-y-1">
+                    <h5 class="text-md font-medium text-gray-400">
+                        Réservations
+                    </h5>
+                    <h3 class="text-lg font-semibold text-gray-600">
+                        {{ total.reservations }}
+                    </h3>
+                </div>
+            </div>
+        </ng-container>
+
+        <div class="col-span-full flex flex-col flex-auto space-y-4">
+            <h2 class="text-2xl font-semibold">
+                Les chambres disponibles par pavillon
+            </h2>
+
+            <fuse-card
+                class="flex p-4 flex-col flex-auto"
+                *ngIf="chambreDispoChart"
+            >
+                <apx-chart
+                    class="flex-auto w-full h-80"
+                    [chart]="chambreDispoChart.chart"
+                    [colors]="chambreDispoChart.colors"
+                    [dataLabels]="chambreDispoChart.dataLabels"
+                    [grid]="chambreDispoChart.grid"
+                    [labels]="chambreDispoChart.labels"
+                    [legend]="chambreDispoChart.legend"
+                    [plotOptions]="chambreDispoChart.plotOptions"
+                    [series]="chambreDispoChart.series"
+                    [states]="chambreDispoChart.states"
+                    [stroke]="chambreDispoChart.stroke"
+                    [tooltip]="chambreDispoChart.tooltip"
+                    [xaxis]="chambreDispoChart.xaxis"
+                    [yaxis]="chambreDispoChart.yaxis"
+                ></apx-chart>
+            </fuse-card>
         </div>
-    </div> -->
+    </div>
 </div>

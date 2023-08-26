@@ -15,9 +15,11 @@ import { Observable } from 'rxjs';
 })
 export class AccueillantFormComponent implements OnInit {
     accueillantForm: FormGroup = new FormGroup({
-        prenom: new FormControl('', Validators.required),
-        nom: new FormControl('', Validators.required),
-        telephone: new FormControl('', Validators.required),
+        utilisateur: new FormGroup({
+            prenom: new FormControl('', Validators.required),
+            nom: new FormControl('', Validators.required),
+            telephone: new FormControl('', Validators.required),
+        }),
         residence: new FormControl('', Validators.required),
     });
     accueillant: Accueillant;
@@ -39,18 +41,24 @@ export class AccueillantFormComponent implements OnInit {
 
     ngOnInit(): void {
         this.residences$ = this._residenceService.getAllResidences();
+        if (this._residenceService.residence) {
+            this.accueillantForm
+                .get('residence')
+                .setValue(this._residenceService.residence);
+            this.accueillantForm.get('residence').disable();
+        }
         if (this.data) {
             this.isEdit = true;
             this.title = 'Modifier un accueillant';
+            this.accueillantForm.patchValue(this.data);
         }
-        console.log('data', this.data, this.isEdit);
     }
 
     onSubmit(): void {
         if (this.accueillantForm.invalid) {
             return;
         }
-        console.log(!this.isEdit);
+        this.accueillantForm.get('residence').enable();
         if (!this.isEdit) {
             this._accueillantService
                 .save(this.accueillantForm.value)
@@ -75,4 +83,7 @@ export class AccueillantFormComponent implements OnInit {
             });
         }
     }
+
+    compareResidence = (r1: Residence, r2: Residence): boolean =>
+        r1 === r2 || r1.id === r2.id;
 }

@@ -82,6 +82,13 @@ export const appRoutes: Route[] = [
                     ),
             },
             {
+                path: 'responsables',
+                loadChildren: () =>
+                    import('./modules/responsable/responsable.module').then(
+                        (m) => m.ResponsableModule
+                    ),
+            },
+            {
                 path: 'accueillants',
                 loadChildren: () =>
                     import('./modules/accueillant/accueillant.module').then(

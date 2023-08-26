@@ -13,13 +13,16 @@ import { Chambre } from '@core/model/chambre.model';
 import { Delegation } from '@core/model/delegation.model';
 import { Evenement } from '@core/model/evenement.model';
 import { Invite } from '@core/model/invite.model';
+import { Pageable } from '@core/model/pageable.model';
 import { Residence } from '@core/model/residence.model';
+import { Responsable } from '@core/model/responsable.model';
 import { AccueillantService } from '@core/service/accueillant/accueillant.service';
 import { ChambreService } from '@core/service/chambre/chambre.service';
 import { DelegationService } from '@core/service/delegation/delegation.service';
 import { EvenementService } from '@core/service/evenement/evenement.service';
 import { ReservationService } from '@core/service/reservation/reservation.service';
 import { ResidenceService } from '@core/service/residence/residence.service';
+import { ResponsableService } from '@core/service/responsable/responsable.service';
 import { Observable, map } from 'rxjs';
 
 @Component({
@@ -50,8 +53,9 @@ export class ReservationFormComponent implements OnInit {
     events$: Observable<Evenement[]>;
     delegations$: Observable<Delegation[]>;
     residences$: Observable<Residence[]>;
-    accueillants$: Observable<Accueillant[]>;
-    chambres$: Observable<Chambre[]>;
+    accueillants: Accueillant[] = [];
+    chambres: Chambre[] = [];
+    responsables: Responsable[] = [];
     chambresIndisponibles: number[] = [];
     idIndispo: number[] = [];
     inviteDelegations: Invite[] = [];
@@ -61,6 +65,7 @@ export class ReservationFormComponent implements OnInit {
         private _residenceService: ResidenceService,
         private _chambreService: ChambreService,
         private _accueillantService: AccueillantService,
+        private _responsableService: ResponsableService,
         private _reservationService: ReservationService,
         private _delagationService: DelegationService,
         private _router: Router,
@@ -79,9 +84,14 @@ export class ReservationFormComponent implements OnInit {
         this.delegations$ = this._delagationService
             .getAllDelagations({ page: 0, size: 1000 })
             .pipe(map((data: any) => data.content));
-        this.accueillants$ = this._accueillantService
-            .getAll({ page: 0, size: 1000 })
-            .pipe(map((data: any) => data.content));
+
+        if (this._residenceService.residence) {
+            this.reservationForm
+                .get('residence')
+                .setValue(this._residenceService.residence.id);
+            this.reservationForm.get('residence').disable();
+            this.onLoadHotes();
+        }
         this.events$ = this._eventService.getAllEvent();
         this.residences$ = this._residenceService.getAllResidences();
     }
@@ -90,43 +100,42 @@ export class ReservationFormComponent implements OnInit {
         if (this.reservationForm.invalid) {
             return;
         }
-        const reservation = {
-            ...this.reservationForm.value,
-            invites: this.reservationForm.value.invites.filter(
-                (i: any) => i.checked
-            ),
-        };
-        this._reservationService.addReservations(reservation).subscribe({
-            next: (res) => {
-                this._snackBar.open(
-                    `${res.length} réservation${
-                        res.length > 1 ? 's' : ''
-                    } effectuée${res.length > 1 ? 's' : ''}`,
-                    '',
-                    {
-                        panelClass: ['bg-green-600', 'text-white'],
-                        duration: 3000,
-                    }
-                );
-                this._router.navigate(['/reservations']);
-            },
-            error: (err) => {
-                console.log(err);
-                this._snackBar.open(err.error.message, '', {
-                    panelClass: ['bg-red-600', 'text-white'],
-                    duration: 3500,
-                });
-            },
-        });
+        this.reservationForm.get('residence').enable();
+        this.reservationForm.value.invites =
+            this.reservationForm.value.invites.filter(
+                (inv: any) => inv.checked
+            );
+        this._reservationService
+            .addReservations(this.reservationForm.value)
+            .subscribe({
+                next: (res) => {
+                    this._snackBar.open(
+                        `${res.length} réservation${
+                            res.length > 1 ? 's' : ''
+                        } effectuée${res.length > 1 ? 's' : ''}`,
+                        '',
+                        {
+                            panelClass: ['bg-green-600', 'text-white'],
+                            duration: 3000,
+                        }
+                    );
+                    this._router.navigate(['/reservations']);
+                },
+                error: (err) => {
+                    console.log(err);
+                    this._snackBar.open(err.error.message, '', {
+                        panelClass: ['bg-red-600', 'text-white'],
+                        duration: 3500,
+                    });
+                },
+            });
     }
 
     onChoiceChambre(chambre: Chambre): void {
         if (chambre) {
-            console.log(chambre);
-
-            const chambreSelected: number[] = this.invites.value.map(
-                (i: any) => i.chambre?.id
-            );
+            const chambreSelected: number[] = this.invites.value
+                .map((i: any) => i.chambre?.id)
+                .filter((x: number) => x > 0);
             const idSelected: { [key: number]: number } =
                 chambreSelected.reduce(
                     (count, currentValue) => (
@@ -137,20 +146,19 @@ export class ReservationFormComponent implements OnInit {
                     ),
                     {}
                 );
-            if (
-                chambre.nombrePlace - chambre.placeReservee <=
-                idSelected[chambre.id]
-            ) {
-                this.idIndispo.push(chambre.id);
-            } else {
-                const index = this.idIndispo.indexOf(chambre.id);
-                this.idIndispo = this.idIndispo.splice(index, 1);
-            }
+
+            this._updateChambres(this.chambres, idSelected);
         }
     }
 
-    isUnvalaible(id: number): boolean {
-        return this.idIndispo.includes(id);
+    isUnvalaible(chambre: Chambre): boolean {
+        chambre.placeChoisie = chambre.placeChoisie ? chambre.placeChoisie : 0;
+        return (
+            chambre.nombrePlace -
+                chambre.placeReservee -
+                chambre.placeChoisie <=
+            0
+        );
     }
 
     onLoadChambre(): void {
@@ -159,14 +167,44 @@ export class ReservationFormComponent implements OnInit {
             this.reservationForm.get('period').get('sortie').invalid ||
             this.reservationForm.get('residence').invalid
         ) {
+            this.chambres = [];
             return;
         }
-        this.chambres$ = this._chambreService.getAllDisponibleByResidence(
-            this.reservationForm.get('residence').value,
-            this.reservationForm.get('period').get('entree').value,
-            this.reservationForm.get('period').get('sortie').value
-        );
+        this._chambreService
+            .getAllDisponibleByResidence(
+                this.reservationForm.get('residence').value,
+                this.reservationForm.get('period').get('entree').value,
+                this.reservationForm.get('period').get('sortie').value
+            )
+            .subscribe((chambres: Chambre[]) => (this.chambres = chambres));
         this.resetChambre();
+    }
+
+    onLoadHotes(): void {
+        if (this.reservationForm.get('residence').invalid) {
+            this.accueillants = [];
+            this.responsables = [];
+            return;
+        }
+        this._responsableService
+            .getAll({
+                page: 0,
+                size: 200,
+                residence: this.reservationForm.get('residence').value,
+            })
+            .subscribe((res: Pageable<Responsable>) => {
+                this.responsables = res.content;
+            });
+        this._accueillantService
+            .getAll({
+                page: 0,
+                size: 100,
+                residence: this.reservationForm.get('residence').value,
+            })
+            .subscribe(
+                (res: Pageable<Accueillant>) =>
+                    (this.accueillants = res.content)
+            );
     }
 
     resetChambre(): void {
@@ -199,14 +237,13 @@ export class ReservationFormComponent implements OnInit {
                 ]),
                 chambre: new FormControl(null, [Validators.required]),
                 accueillant: new FormControl(null, [Validators.required]),
+                responsable: new FormControl(null, [Validators.required]),
                 adresse: new FormControl(guest?.adresse),
                 email: new FormControl(guest?.email, [Validators.email]),
                 presence: new FormControl(),
             })
         );
     }
-
-    addNewDelegation(): void {}
 
     onChoiceDelegation(): void {
         const delegation = this.reservationForm.get('delegation')
@@ -289,6 +326,20 @@ export class ReservationFormComponent implements OnInit {
         this.invites.controls.forEach((ctl: AbstractControl) => {
             if (ctl.get('checked').value) {
                 ctl.get('presence').setValue(value);
+            }
+        });
+    }
+
+    private _updateChambres(
+        chambres: Chambre[],
+        idSelected: { [key: number]: number }
+    ): void {
+        chambres.forEach((chambre) => {
+            const places = idSelected[chambre.id];
+            if (places) {
+                chambre.placeChoisie = places;
+            } else {
+                chambre.placeChoisie = 0;
             }
         });
     }

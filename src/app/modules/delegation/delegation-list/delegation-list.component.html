@@ -46,26 +46,23 @@
                 </tr>
             </thead>
             <tbody>
+                <tr *ngIf="data.empty">
+                    <td class="text-center" colspan="6">Pas de délégation</td>
+                </tr>
                 <tr *ngFor="let del of data.content">
                     <td>{{ del.id }}</td>
                     <td class="whitespace-nowrap">{{ del.nom | titlecase }}</td>
-                    <td class="font-semibold">{{ del.nombre }}</td>
+                    <td class="font-semibold">{{ del.invites.length + 1 }}</td>
                     <td class="whitespace-nowrap">
                         {{ del.chef.prenom | titlecase }}
                         {{ del.chef.nom | uppercase }}
                     </td>
                     <td>{{ del.chef.telephone }}</td>
                     <td class="whitespace-nowrap">
-                        <button mat-icon-button>
+                        <button mat-icon-button [routerLink]="[del.id]">
                             <mat-icon
                                 class="icon-size-4"
                                 svgIcon="heroicons_solid:eye"
-                            ></mat-icon>
-                        </button>
-                        <button mat-icon-button>
-                            <mat-icon
-                                class="icon-size-4"
-                                svgIcon="heroicons_solid:pencil-alt"
                             ></mat-icon>
                         </button>
                     </td>

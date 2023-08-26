@@ -16,7 +16,7 @@
         </button>
     </div>
 
-    <fuse-card class="w-full flex-1 h-full overflow-y-scroll p-4">
+    <div class="w-full flex-1 h-full overflow-y-scroll">
         <form
             class="w-full"
             [formGroup]="reservationForm"
@@ -90,8 +90,7 @@
                     <mat-form-field class="w-full" appearance="fill">
                         <mat-label>Résidence</mat-label>
                         <mat-select
-                            (ngModelChange)="onLoadChambre()"
-                            #residenceSelect
+                            (ngModelChange)="onLoadChambre(); onLoadHotes()"
                             formControlName="residence"
                         >
                             <mat-option
@@ -127,16 +126,6 @@
                         </mat-select>
                     </mat-form-field>
                 </div>
-                <div class="col-span-1 w-full flex items-center">
-                    <button
-                        mat-raised-button
-                        color="primary"
-                        class=""
-                        (click)="addNewDelegation()"
-                    >
-                        Nouvelle délégation
-                    </button>
-                </div>
                 <div
                     class="col-span-full w-full flex items-center responsive-table"
                     *ngIf="inviteDelegations.length > 0"
@@ -153,6 +142,7 @@
                                 <th>Invité</th>
                                 <th class="whitespace-nowrap">Chambre</th>
                                 <th class="whitespace-nowrap">Accueillant</th>
+                                <th class="whitespace-nowrap">Responsable</th>
                                 <th class="text-center">
                                     <span class="mr-2">Présence cérémonie</span>
                                     <mat-checkbox
@@ -193,14 +183,11 @@
                                             "
                                         >
                                             <mat-option
-                                                *ngFor="
-                                                    let c of chambres$ | async
-                                                "
-                                                [disabled]="isUnvalaible(c.id)"
+                                                *ngFor="let c of chambres"
+                                                [disabled]="isUnvalaible(c)"
                                                 [value]="c"
                                             >
-                                                {{ c.pavillon.libelle }} -
-                                                {{ c.numero }} -
+                                                {{ c.reference }} -
                                                 {{
                                                     c.nombrePlace -
                                                         c.placeReservee
@@ -220,14 +207,41 @@
                                             formControlName="accueillant"
                                         >
                                             <mat-option
-                                                *ngFor="
-                                                    let acc of accueillants$
-                                                        | async
-                                                "
+                                                *ngFor="let acc of accueillants"
                                                 [value]="acc"
                                             >
-                                                {{ acc.prenom | titlecase }} -
-                                                {{ acc.nom | uppercase }}
+                                                {{
+                                                    acc.utilisateur.prenom
+                                                        | titlecase
+                                                }}
+                                                -
+                                                {{
+                                                    acc.utilisateur.nom
+                                                        | uppercase
+                                                }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </td>
+                                <td class="whitespace-nowrap">
+                                    <mat-form-field
+                                        class="w-full fuse-mat-rounded fuse-mat-dense fuse-mat-no-subscript"
+                                        appearance="fill"
+                                    >
+                                        <mat-select
+                                            [placeholder]="
+                                                'Responsable chambre'
+                                            "
+                                            formControlName="responsable"
+                                        >
+                                            <mat-option
+                                                *ngFor="
+                                                    let resp of responsables
+                                                "
+                                                [value]="resp"
+                                            >
+                                                {{ resp.prenom | titlecase }} -
+                                                {{ resp.nom | uppercase }}
                                             </mat-option>
                                         </mat-select>
                                     </mat-form-field>
@@ -243,132 +257,6 @@
                     </table>
                 </div>
 
-                <!-- <ng-container formArrayName="invites">
-                    <ng-container
-                        *ngFor="
-                            let guestForm of invites.controls;
-                            let i = index;
-                            let first = first
-                        "
-                        [formGroup]="guestForm"
-                    >
-                        <div
-                            class="col-span-2 w-full flex space-x-2 items-center"
-                        >
-                            <h2 class="text-xl font-semibold">
-                                Invité {{ i + 1 }}
-                            </h2>
-                            <div class="flex-1">
-                                <mat-divider></mat-divider>
-                            </div>
-                            <button
-                                type="button"
-                                mat-icon-button
-                                color="warn"
-                                (click)="removeGuest(i)"
-                                *ngIf="!first"
-                            >
-                                <mat-icon
-                                    svgIcon="heroicons_solid:trash"
-                                ></mat-icon>
-                            </button>
-                        </div>
-                        <div class="col-span-1 w-full">
-                            <mat-form-field class="w-full" appearance="fill">
-                                <mat-label>Prénom</mat-label>
-                                <input
-                                    matInput
-                                    formControlName="prenom"
-                                    type="text"
-                                    [placeholder]="'prénom invité ' + (i + 1)"
-                                />
-                            </mat-form-field>
-                        </div>
-                        <div class="col-span-1 w-full">
-                            <mat-form-field class="w-full" appearance="fill">
-                                <mat-label>Nom</mat-label>
-                                <input
-                                    matInput
-                                    formControlName="nom"
-                                    type="text"
-                                    [placeholder]="'nom invité ' + (i + 1)"
-                                />
-                            </mat-form-field>
-                        </div>
-                        <div class="col-span-1 w-full">
-                            <mat-form-field class="w-full" appearance="fill">
-                                <mat-label>Téléphone</mat-label>
-                                <input
-                                    matInput
-                                    formControlName="telephone"
-                                    type="text"
-                                    [placeholder]="
-                                        'téléphone invité ' + (i + 1)
-                                    "
-                                />
-                            </mat-form-field>
-                        </div>
-                        <div class="col-span-1 w-full">
-                            <mat-form-field class="w-full" appearance="fill">
-                                <mat-label>Adresse</mat-label>
-                                <input
-                                    matInput
-                                    formControlName="adresse"
-                                    type="text"
-                                    [placeholder]="'adresse invité ' + (i + 1)"
-                                />
-                            </mat-form-field>
-                        </div>
-                        <div class="col-span-1 w-full">
-                            <mat-form-field class="w-full" appearance="fill">
-                                <mat-label>Email</mat-label>
-                                <input
-                                    matInput
-                                    formControlName="email"
-                                    type="email"
-                                    [placeholder]="'email invité ' + (i + 1)"
-                                />
-                            </mat-form-field>
-                        </div>
-                        <div class="w-full col-span-1">
-                            <mat-form-field class="w-full" appearance="fill">
-                                <mat-label>Chambre</mat-label>
-                                <mat-select
-                                    [placeholder]="'Chambre invité ' + (i + 1)"
-                                    formControlName="chambre"
-                                    (ngModelChange)="onChoiceChambre($event)"
-                                >
-                                    <mat-option
-                                        *ngFor="let c of chambres$ | async"
-                                        [disabled]="isUnvalaible(c.id)"
-                                        [value]="c"
-                                    >
-                                        {{ c.pavillon.libelle }} -
-                                        {{ c.numero }} -
-                                        {{ c.nombrePlace - c.placeReservee }}
-                                        place(s) disponible(s)
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
-                    </ng-container>
-                </ng-container>
-
-                <div class="col-span-full flex items-center">
-                    <button
-                        mat-flat-button
-                        type="button"
-                        class="bg-secondary text-white flex items-center"
-                        (click)="addGuest()"
-                    >
-                        <mat-icon
-                            svgIcon="mat_solid:person_add_alt"
-                            class="text-white icon-size-4 mr-2"
-                        ></mat-icon>
-                        <span>Ajouter invité</span>
-                    </button>
-                </div> -->
-
                 <div class="col-span-full mb-4 flex w-full items-center">
                     <button
                         mat-raised-button
@@ -381,5 +269,5 @@
                 </div>
             </div>
         </form>
-    </fuse-card>
+    </div>
 </div>

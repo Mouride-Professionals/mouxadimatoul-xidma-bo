@@ -1,23 +1,33 @@
 <h2 mat-dialog-title>Ajouter un événement</h2>
 <form [formGroup]="form" (ngSubmit)="saveEvent()">
     <div class="w-full flex flex-col space-y-4">
-        <mat-form-field
-            class="w-full gt-xs:pr-3">
+        <mat-form-field class="w-full gt-xs:pr-3">
             <mat-label>Nom de l'événement</mat-label>
-            <input matInput name="libelle" formControlName="libelle">
-            <mat-icon
-                class="icon-size-5"
-                matSuffix
-                [svgIcon]="'event'">
+            <input matInput name="libelle" formControlName="libelle" />
+            <mat-icon class="icon-size-5" matSuffix [svgIcon]="'event'">
             </mat-icon>
-            <mat-error *ngIf="formEvent.libelle.touched && formEvent.libelle.errors?.required" class="error-message">
+            <mat-error
+                *ngIf="
+                    formEvent.libelle.touched &&
+                    formEvent.libelle.errors?.required
+                "
+                class="error-message"
+            >
                 le nom est obligatoire!
             </mat-error>
         </mat-form-field>
         <div class="flex justify-end items-center space-x-3">
-
-        <button mat-flat-button mat-dialog-close class="bg-red-600 text-white" type="button">Annuler</button>
-        <button mat-flat-button [disabled]="form.invalid" color="primary" >Enregistrer</button>
+            <button
+                mat-flat-button
+                mat-dialog-close
+                class="bg-red-600 text-white"
+                type="button"
+            >
+                Annuler
+            </button>
+            <button mat-flat-button [disabled]="form.invalid" color="primary">
+                Enregistrer
+            </button>
         </div>
     </div>
 </form>

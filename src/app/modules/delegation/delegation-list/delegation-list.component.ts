@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Delegation } from '@core/model/delegation.model';
-import { Pagination } from '@core/model/pagination.model';
+import { Pageable } from '@core/model/pageable.model';
 import { DelegationService } from '@core/service/delegation/delegation.service';
 import { Observable } from 'rxjs';
 
@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
     styleUrls: ['./delegation-list.component.scss'],
 })
 export class DelegationListComponent implements OnInit {
-    data$: Observable<Pagination<Delegation>>;
+    data$: Observable<Pageable<Delegation>>;
 
     page: number = 0;
     size: number = 20;

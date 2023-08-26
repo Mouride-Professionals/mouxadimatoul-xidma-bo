@@ -63,8 +63,11 @@
                     <th>Actions</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr *ngFor="let user of (data$ | async)?.content">
+            <tbody *ngIf="data$ | async as data">
+                <tr *ngIf="data.empty">
+                    <td class="text-center" colspan="7">Pas d'utilisateur</td>
+                </tr>
+                <tr *ngFor="let user of data.content">
                     <td>{{ user.id }}</td>
                     <td>{{ user.prenom }}</td>
                     <td>{{ user.nom }}</td>

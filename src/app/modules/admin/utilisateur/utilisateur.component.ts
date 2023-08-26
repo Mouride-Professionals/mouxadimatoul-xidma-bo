@@ -4,12 +4,12 @@ import { UtilisateurFormeComponent } from '@modules/admin/utilisateur/utilisateu
 import { UtilisateurService } from '@core/service/utilisateur/utilisateur.service';
 import { Observable } from 'rxjs';
 import { Utilisateur } from '@core/model/utilisateur.model';
-import { Pagination } from '@core/model/pagination.model';
 import { RequestParams } from '@core/model/params.model';
 import {
     FuseConfirmationConfig,
     FuseConfirmationService,
 } from '@fuse/services/confirmation';
+import { Pageable } from '@core/model/pageable.model';
 
 @Component({
     selector: 'app-utilisateur',
@@ -18,7 +18,7 @@ import {
 })
 export class UtilisateurComponent implements OnInit {
     search: string = '';
-    data$: Observable<Pagination<Utilisateur>>;
+    data$: Observable<Pageable<Utilisateur>>;
 
     roleItems: { name: string; value: string }[] = [
         { name: 'Tous', value: '' },
@@ -75,6 +75,7 @@ export class UtilisateurComponent implements OnInit {
         this._fuseConfirmation
             .open({
                 title: 'confirmation',
+                // eslint-disable-next-line quotes, @typescript-eslint/quotes
                 message: "Voulez-vous changer le statut de l'utilisateur",
                 icon: {
                     show: true,

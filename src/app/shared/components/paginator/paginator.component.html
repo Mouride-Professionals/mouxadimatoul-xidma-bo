@@ -1,0 +1,41 @@
+<div class="w-full p-4 bg-white shadow-lg flex items-center">
+    <div class="flex space-x-1 items-center">
+        <button mat-icon-button (click)="onFirst()" [disabled]="pageable.first">
+            <mat-icon
+                svgIcon="heroicons_solid:chevron-double-left"
+                class="icon-size-5"
+            ></mat-icon>
+        </button>
+        <button mat-icon-button (click)="onPrev()" [disabled]="pageable.first">
+            <mat-icon
+                svgIcon="heroicons_solid:chevron-left"
+                class="icon-size-5"
+            ></mat-icon>
+        </button>
+        <button
+            mat-icon-button
+            [ngClass]="{
+                'bg-primary-600 text-white': pageable?.number === p - 1
+            }"
+            (click)="onChoicePage(p)"
+            *ngFor="
+                let p of pages
+                    | slice : (sliceIndex - 1) * 10 : sliceIndex * 10 + 1
+            "
+        >
+            <span>{{ p }}</span>
+        </button>
+        <button mat-icon-button (click)="onNext()" [disabled]="pageable.last">
+            <mat-icon
+                svgIcon="heroicons_solid:chevron-right"
+                class="icon-size-5"
+            ></mat-icon>
+        </button>
+        <button mat-icon-button (click)="onLast()" [disabled]="pageable.last">
+            <mat-icon
+                svgIcon="heroicons_solid:chevron-double-right"
+                class="icon-size-5"
+            ></mat-icon>
+        </button>
+    </div>
+</div>

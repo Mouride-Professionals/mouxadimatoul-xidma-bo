@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { Utilisateur } from '@core/model/utilisateur.model';
 import { ResidenceService } from '@core/service/residence/residence.service';
 import { UtilisateurService } from '@core/service/utilisateur/utilisateur.service';
@@ -13,36 +14,28 @@ import { UtilisateurService } from '@core/service/utilisateur/utilisateur.servic
 export class ResidencesFormComponent implements OnInit {
     residenceForm: FormGroup = new FormGroup({
         libelle: new FormControl('', Validators.required),
-        description: new FormControl('', Validators.required),
         adresse: new FormControl('', Validators.required),
         telephoneResidence: new FormControl('', Validators.required),
-        responsable: new FormControl('', Validators.required),
+        prenom: new FormControl('', Validators.required),
+        nom: new FormControl('', Validators.required),
+        telephone: new FormControl('', Validators.required),
     });
 
-    users: Utilisateur[] = [];
     isImage: boolean = false;
     image: any;
     imageResidence: string = 'assets/images/default.png';
 
     constructor(
         private _snackBar: MatSnackBar,
-        private _userService: UtilisateurService,
-        private _residenceService: ResidenceService
+        private _residenceService: ResidenceService,
+        private _router: Router
     ) {}
 
     get f(): any {
         return this.residenceForm.controls;
     }
 
-    ngOnInit(): void {
-        this._userService
-            .getAllUsers({ page: 0, size: 100 }, 'responsable')
-            .subscribe((data) => {
-                if (!data.empty) {
-                    this.users = data.content;
-                }
-            });
-    }
+    ngOnInit(): void {}
 
     saveResidence(): void {
         if (this.residenceForm.invalid) {
@@ -55,6 +48,7 @@ export class ResidencesFormComponent implements OnInit {
                     panelClass: ['bg-green-500', 'text-white'],
                     duration: 3000,
                 });
+                this._router.navigate(['/residences']);
             });
     }
     fileChangeEvent(fileInput: any): void {

@@ -17,11 +17,13 @@ export class ResidencesChambreFormComponent implements OnInit {
             Validators.required,
             Validators.min(1),
         ]),
+        niveau: new FormControl(null, Validators.required),
         numero: new FormControl('', [Validators.required]),
         pavillon: new FormControl(null, [Validators.required]),
     });
     chambre: Chambre;
     pavillons: Pavillon[] = [];
+    paliers: number[] = [];
 
     title: string = 'Ajouter une nouvelle chambre';
     isEdit = false;
@@ -47,6 +49,15 @@ export class ResidencesChambreFormComponent implements OnInit {
             this.chambreForm.patchValue(this.chambre);
             this.f.pavillon.disable();
         }
+    }
+
+    onSelectPavillon(): void {
+        const pav = this.chambreForm.get('pavillon').value as Pavillon;
+        this.paliers = [];
+        if (!pav) {
+            return;
+        }
+        this.paliers = Array.from({ length: pav.niveau }, (x, i) => i);
     }
 
     onSubmit(): void {

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Chambre } from '@core/model/chambre.model';
-import { Pagination } from '@core/model/pagination.model';
+import { Pageable } from '@core/model/pageable.model';
 import { RequestParams } from '@core/model/params.model';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
@@ -39,8 +39,8 @@ export class ChambreService {
     getChambreByPavillon(
         idPavillon: number,
         params: RequestParams
-    ): Observable<Pagination<Chambre>> {
-        return this._httpClient.get<Pagination<Chambre>>(
+    ): Observable<Pageable<Chambre>> {
+        return this._httpClient.get<Pageable<Chambre>>(
             `${API_URL}/pavillon/${idPavillon}`,
             { params: { ...params } }
         );

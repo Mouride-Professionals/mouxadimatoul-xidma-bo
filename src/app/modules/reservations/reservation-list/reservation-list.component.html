@@ -16,24 +16,82 @@
         </button>
     </div>
 
-    <!-- Search -->
-    <fuse-card class="flex rounded-md items-center p-2 justify-end">
+    <!-- Filter & Extraction -->
+    <div class="w-full flex gap-2 items-start flex-wrap">
         <mat-form-field
-            class="w-full max-w-80 fuse-mat-rounded fuse-mat-dense fuse-mat-no-subscript"
-            appearance="fill"
+            *ngIf="role === 'ROLE_ADMIN'"
+            class="min-w-60 fuse-mat-no-subcript fuse-mat-rounded fuse-mat-dense"
         >
             <mat-select
-                [placeholder]="'Chambre invité'"
-                [(ngModel)]="event"
-                (ngModelChange)="loadReservations()"
+                placeholder="Choisir une résidence"
+                (selectionChange)="onFilterData()"
+                [(ngModel)]="residence"
+                name="residence"
             >
-                <mat-option>---</mat-option>
-                <mat-option *ngFor="let e of events$ | async" [value]="e.id">
-                    {{ e.libelle }}
+                <mat-option [value]="null">---</mat-option>
+                <mat-option
+                    *ngFor="let item of residences$ | async"
+                    [value]="item.id"
+                >
+                    {{ item.libelle }}
                 </mat-option>
             </mat-select>
         </mat-form-field>
-    </fuse-card>
+        <mat-form-field
+            class="min-w-60 fuse-mat-no-subcript fuse-mat-rounded fuse-mat-dense"
+        >
+            <mat-select
+                placeholder="Choisir un événement"
+                (selectionChange)="onFilterData()"
+                [(ngModel)]="event"
+                name="event"
+            >
+                <mat-option [value]="null">---</mat-option>
+                <mat-option
+                    *ngFor="let item of events$ | async"
+                    [value]="item.id"
+                >
+                    {{ item.libelle }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field
+            class="fuse-mat-no-subcript fuse-mat-rounded fuse-mat-dense"
+        >
+            <input
+                matInput
+                [matDatepicker]="yearPicker"
+                [formControl]="date"
+                (ngModelChange)="onFilterData()"
+                placeholder="Choisir une année"
+            />
+            <mat-datepicker-toggle
+                matSuffix
+                [for]="yearPicker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker
+                #yearPicker
+                startView="multi-year"
+                (yearSelected)="selectYearHandler($event, yearPicker)"
+            ></mat-datepicker>
+        </mat-form-field>
+        <button
+            mat-raised-button
+            (click)="onPresence()"
+            [ngClass]="{ 'bg-green-500 text-white': presence === 1 }"
+        >
+            <span>Cérémonie officielle</span>
+        </button>
+        <button
+            mat-raised-button
+            (click)="onExportation()"
+            color="accent"
+            [disabled]="date.invalid || !event || !residence"
+        >
+            <mat-icon svgIcon="mat_solid:upload_file" class="mr-1"></mat-icon>
+            <span>exporter</span>
+        </button>
+    </div>
 
     <div class="responsive-table" *ngIf="data$ | async as data">
         <table class="table">
@@ -42,15 +100,17 @@
                     <th>Invité</th>
                     <th>Délégation</th>
                     <th>Chambre</th>
+                    <th>Evénement</th>
                     <th>Accueillant</th>
-                    <th>Date d'entrée</th>
-                    <th>Date de sortie</th>
+                    <th>Responsable</th>
+                    <th>Période séjour</th>
+                    <th>Cérémonie</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngIf="data.empty">
-                    <td class="text-center" colspan="7">pas de réservation</td>
+                    <td class="text-center" colspan="9">pas de réservation</td>
                 </tr>
                 <tr *ngFor="let res of data.content">
                     <td>
@@ -59,29 +119,58 @@
                     </td>
                     <td>{{ res.invite.delegation?.nom }}</td>
                     <td>
-                        {{ res.chambre.pavillon.libelle }} —
-                        {{ res.chambre.numero }}
+                        {{ res.chambre.reference }}
                     </td>
                     <td>
-                        {{ res.accueillant.prenom | titlecase }}
-                        {{ res.accueillant.nom | uppercase }}
+                        {{ res.evenement.libelle }}
                     </td>
                     <td>
-                        {{ res.dateEntree | date : "dd/MM/yyyy" }}
+                        {{ res.accueillant.utilisateur.prenom | titlecase }}
+                        {{ res.accueillant.utilisateur.nom | uppercase }}
                     </td>
                     <td>
+                        {{ res.responsable?.prenom | titlecase }}
+                        {{ res.responsable?.nom | uppercase }}
+                    </td>
+                    <td>
+                        {{ res.dateEntree | date : "dd/MM/yyyy" }} -
                         {{ res.dateSortie | date : "dd/MM/yyyy" }}
                     </td>
-                    <td>
-                        <button mat-icon-button>
+                    <td class="text-center">
+                        <span
+                            class="p-1 rounded-full text-white text-sm"
+                            [ngClass]="{
+                                'bg-green-600': res.presence,
+                                'bg-red-600': !res.presence
+                            }"
+                            >{{ res.presence ? "oui" : "non" }}</span
+                        >
+                    </td>
+                    <td class="whitespace-nowrap">
+                        <button
+                            mat-icon-button
+                            [routerLink]="[res.id, 'modifier']"
+                        >
                             <mat-icon
                                 svgIcon="heroicons_solid:pencil-alt"
-                                class="icon-size-4"
+                                class="icon-size-4 text-amber-500"
+                            ></mat-icon>
+                        </button>
+                        <button mat-icon-button (click)="onDelete(res)">
+                            <mat-icon
+                                svgIcon="heroicons_solid:trash"
+                                class="icon-size-4 text-red-500"
                             ></mat-icon>
                         </button>
                     </td>
                 </tr>
             </tbody>
         </table>
+        <ng-container *ngIf="data.totalElements > pageSize">
+            <paginator
+                [pageable]="data"
+                (pageEvent)="onPageChange($event)"
+            ></paginator>
+        </ng-container>
     </div>
 </div>
