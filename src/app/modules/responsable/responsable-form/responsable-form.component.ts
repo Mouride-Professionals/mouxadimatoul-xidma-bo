@@ -44,11 +44,11 @@ export class ResponsableFormComponent implements OnInit {
                 .get('residence')
                 .setValue(this._residenceService.residence);
             this.responsableForm.get('residence').disable();
-            if (this.data) {
-                this.isEdit = true;
-                this.title = 'Modifier un responsable';
-                this.responsableForm.patchValue(this.data);
-            }
+        }
+        if (this.data) {
+            this.isEdit = true;
+            this.title = 'Modifier un responsable';
+            this.responsableForm.patchValue(this.data);
         }
     }
 

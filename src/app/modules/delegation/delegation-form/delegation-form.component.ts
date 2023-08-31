@@ -16,7 +16,7 @@ export class DelegationFormComponent implements OnInit {
         nombre: new FormControl(1, [
             Validators.required,
             Validators.min(1),
-            Validators.max(10),
+            Validators.max(50),
         ]),
         invites: new FormArray([], Validators.required),
     });
@@ -70,16 +70,16 @@ export class DelegationFormComponent implements OnInit {
         });
     }
 
-    onAddGuest(): void {
-        if (this.delegationForm.get('nombre').invalid) {
-            return;
-        }
-        this.invites.clear();
-        const nombre = this.delegationForm.get('nombre').value;
-        for (let i = 0; i < nombre; i++) {
-            this._addGuest();
-        }
-    }
+    // onAddGuest(): void {
+    //     if (this.delegationForm.get('nombre').invalid) {
+    //         return;
+    //     }
+    //     this.invites.clear();
+    //     const nombre = this.delegationForm.get('nombre').value;
+    //     for (let i = 0; i < nombre; i++) {
+    //         this._addGuest();
+    //     }
+    // }
 
     removeGuest(i: number): void {
         const nombre = this.delegationForm.get('nombre').value;

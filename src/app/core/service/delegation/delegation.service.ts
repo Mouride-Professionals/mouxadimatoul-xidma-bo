@@ -29,6 +29,10 @@ export class DelegationService {
         return this._httpClient.post<Delegation>(API_URL, delegation);
     }
 
+    updateDelegation(delegation: Delegation): Observable<Delegation> {
+        return this._httpClient.put<Delegation>(API_URL, delegation);
+    }
+
     getById(id: number): Observable<Delegation> {
         return this._httpClient.get<Delegation>(`${API_URL}/${id}`);
     }

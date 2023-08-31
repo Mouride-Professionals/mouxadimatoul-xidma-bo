@@ -99,6 +99,7 @@
                 <tr>
                     <th>Invité</th>
                     <th>Délégation</th>
+                    <th>Nbr personnes</th>
                     <th>Chambre</th>
                     <th>Evénement</th>
                     <th>Accueillant</th>
@@ -110,14 +111,15 @@
             </thead>
             <tbody>
                 <tr *ngIf="data.empty">
-                    <td class="text-center" colspan="9">pas de réservation</td>
+                    <td class="text-center" colspan="10">pas de réservation</td>
                 </tr>
                 <tr *ngFor="let res of data.content">
-                    <td>
+                    <td class="whitespace-nowrap">
                         {{ res.invite.prenom | titlecase }}
                         {{ res.invite.nom | uppercase }}
                     </td>
                     <td>{{ res.invite.delegation?.nom }}</td>
+                    <td>{{ res.invite.delegation?.nombre }}</td>
                     <td>
                         {{ res.chambre.reference }}
                     </td>

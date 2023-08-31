@@ -52,17 +52,17 @@
                 <tr *ngFor="let del of data.content">
                     <td>{{ del.id }}</td>
                     <td class="whitespace-nowrap">{{ del.nom | titlecase }}</td>
-                    <td class="font-semibold">{{ del.invites.length + 1 }}</td>
+                    <td class="font-semibold">{{ del.nombre }}</td>
                     <td class="whitespace-nowrap">
                         {{ del.chef.prenom | titlecase }}
                         {{ del.chef.nom | uppercase }}
                     </td>
                     <td>{{ del.chef.telephone }}</td>
                     <td class="whitespace-nowrap">
-                        <button mat-icon-button [routerLink]="[del.id]">
+                        <button mat-icon-button (click)="onEditDelegation(del)">
                             <mat-icon
-                                class="icon-size-4"
-                                svgIcon="heroicons_solid:eye"
+                                class="icon-size-4 text-amber-500"
+                                svgIcon="heroicons_solid:pencil"
                             ></mat-icon>
                         </button>
                     </td>

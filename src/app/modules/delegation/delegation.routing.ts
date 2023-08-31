@@ -17,14 +17,14 @@ export const delegationRoutes: Routes = [
                 path: 'ajouter',
                 component: DelegationFormComponent,
             },
-            {
-                path: 'modifier/:id',
-                component: DelegationFormComponent,
-            },
-            {
-                path: ':id',
-                component: DelegationDetailsComponent,
-            },
+            // {
+            //     path: 'modifier/:id',
+            //     component: DelegationFormComponent,
+            // },
+            // {
+            //     path: ':id',
+            //     component: DelegationDetailsComponent,
+            // },
         ],
     },
 ];
