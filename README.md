@@ -1,27 +1,70 @@
-# Fuse - Admin template and Starter project for Angular
+# Mouxadimatoul Xidma BO
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli)
+Angular back-office application for managing Moukhadimatoul Xidma operations: reservations, delegations, residences, rooms, events, users, roles, responsables, accueillants, and dashboard statistics.
 
-## Development server
+## Tech Stack
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- Angular 15
+- Angular Material
+- Tailwind CSS
+- Transloco for translations
+- Karma/Jasmine for unit tests
 
-## Code scaffolding
+## Requirements
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Node.js 18 recommended
+- npm
+- Running API at `http://localhost:8081/api/v1`
 
-## Build
+## Getting Started
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```bash
+npm install
+npm start
+```
 
-## Running unit tests
+Open `http://localhost:4200`.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+The local API URL is configured in `src/environments/environment.ts`:
 
-## Running end-to-end tests
+```ts
+apiUrl: 'http://localhost:8081/api/v1'
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice.  To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Available Scripts
 
-## Further help
+```bash
+npm start       # Start the development server
+npm run build   # Build production assets into dist/mkhidma
+npm test        # Run unit tests with Karma/Jasmine
+npm run lint    # Run Angular ESLint
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Project Structure
+
+```text
+src/app/modules      Feature pages and routed modules
+src/app/core         Models, API services, icons, and shared core setup
+src/app/layout       Application layouts and shell components
+src/assets           Images, fonts, styles, and translations
+src/environments     Local and production API configuration
+```
+
+## Docker
+
+```bash
+docker build -t mouxadimatoul-xidma-bo .
+docker run --rm -p 8080:80 mouxadimatoul-xidma-bo
+```
+
+## Development Notes
+
+- Keep feature files grouped as `*.component.ts`, `*.component.html`, `*.component.scss`, and `*.component.spec.ts`.
+- Update tests when changing services, forms, route behavior, or user-facing component logic.
+
+## Contributing
+
+- Start new work from the latest `main`.
+- Use focused branch names such as `feature/reservation-list`, `fix/login-error`, or `chore/update-readme`.
+- Keep commits small and use clear messages, for example `feat: add reservation filters`, `fix: handle API errors`, or `docs: update setup steps`.
+- Open pull requests with a short summary, test notes, and screenshots for visible UI changes.
