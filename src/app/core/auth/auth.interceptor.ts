@@ -30,6 +30,7 @@ export class AuthInterceptor implements HttpInterceptor {
         // Clone the request object
         let newReq = req.clone();
         if (
+            !req.url.includes('/auth/login') &&
             this._authService.accessToken &&
             !AuthUtils.isTokenExpired(this._authService.accessToken)
         ) {
