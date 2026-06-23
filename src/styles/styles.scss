@@ -38,6 +38,105 @@
 }
 
 [dir='rtl'] {
+    text-align: right;
+
+    [class*='space-x-'] > :not([hidden]) ~ :not([hidden]) {
+        --tw-space-x-reverse: 1 !important;
+    }
+
+    .ml-1,
+    .ml-1\.5,
+    .ml-2,
+    .ml-4 {
+        margin-left: 0 !important;
+    }
+
+    .ml-1 {
+        margin-right: theme('spacing.1') !important;
+    }
+
+    .ml-1\.5 {
+        margin-right: theme('spacing.1.5') !important;
+    }
+
+    .ml-2 {
+        margin-right: theme('spacing.2') !important;
+    }
+
+    .ml-4 {
+        margin-right: theme('spacing.4') !important;
+    }
+
+    .mr-1,
+    .mr-2,
+    .mr-4 {
+        margin-right: 0 !important;
+    }
+
+    .mr-1 {
+        margin-left: theme('spacing.1') !important;
+    }
+
+    .mr-2 {
+        margin-left: theme('spacing.2') !important;
+    }
+
+    .mr-4 {
+        margin-left: theme('spacing.4') !important;
+    }
+
+    .table {
+        @apply text-right;
+
+        tr td:last-child,
+        tr th:last-child {
+            border-top-right-radius: 0 !important;
+            border-bottom-right-radius: 0 !important;
+            border-top-left-radius: theme('borderRadius.md') !important;
+            border-bottom-left-radius: theme('borderRadius.md') !important;
+        }
+
+        tr td:first-child,
+        tr th:first-child {
+            border-top-left-radius: 0 !important;
+            border-bottom-left-radius: 0 !important;
+            border-top-right-radius: theme('borderRadius.md') !important;
+            border-bottom-right-radius: theme('borderRadius.md') !important;
+        }
+    }
+
+    .mat-menu-panel,
+    .mat-mdc-menu-panel,
+    .mat-select-panel,
+    .mat-datepicker-content,
+    .mat-snack-bar-container {
+        direction: rtl;
+        text-align: right;
+    }
+
+    .mat-form-field,
+    .mat-mdc-form-field {
+        text-align: right;
+    }
+
+    fuse-vertical-navigation.fuse-vertical-navigation-position-left {
+        .fuse-vertical-navigation-wrapper {
+            left: auto !important;
+            right: 0 !important;
+            box-shadow: inset 1px 0 0 var(--fuse-border) !important;
+        }
+
+        &.fuse-vertical-navigation-mode-over {
+            left: auto !important;
+            right: 0 !important;
+            transform: translate3d(100%, 0, 0) !important;
+
+            &.fuse-vertical-navigation-opened {
+                transform: translate3d(0, 0, 0) !important;
+            }
+        }
+    }
+
     .header-actions {
         padding-left: 0 !important;
         padding-right: theme('spacing.2') !important;

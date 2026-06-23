@@ -26,7 +26,7 @@ export const appRoutes: Route[] = [
                 path: 'connexion',
                 loadChildren: () =>
                     import('@modules/auth/login/login.module').then(
-                        (m) => m.LoginModule
+                        m => m.LoginModule
                     ),
             },
         ],
@@ -43,63 +43,63 @@ export const appRoutes: Route[] = [
                 path: 'dashboard',
                 loadChildren: () =>
                     import('./modules/dashboard/dashboard.module').then(
-                        (m) => m.DashboardModule
+                        m => m.DashboardModule
                     ),
             },
             {
                 path: 'utilisateurs',
                 loadChildren: () =>
                     import('./modules/admin/admin.module').then(
-                        (m) => m.AdminModule
+                        m => m.AdminModule
                     ),
             },
             {
                 path: 'residences',
                 loadChildren: () =>
                     import('./modules/residences/residences.module').then(
-                        (m) => m.ResidencesModule
+                        m => m.ResidencesModule
                     ),
             },
             {
                 path: 'evenements',
                 loadChildren: () =>
                     import('./modules/evenement/evenement.module').then(
-                        (m) => m.EvenementModule
+                        m => m.EvenementModule
                     ),
             },
             {
                 path: 'reservations',
                 loadChildren: () =>
                     import('./modules/reservations/reservations.module').then(
-                        (m) => m.ReservationsModule
+                        m => m.ReservationsModule
                     ),
             },
             {
                 path: 'delegations',
                 loadChildren: () =>
                     import('./modules/delegation/delegation.module').then(
-                        (m) => m.DelegationModule
+                        m => m.DelegationModule
                     ),
             },
             {
                 path: 'responsables',
                 loadChildren: () =>
                     import('./modules/responsable/responsable.module').then(
-                        (m) => m.ResponsableModule
+                        m => m.ResponsableModule
                     ),
             },
             {
                 path: 'accueillants',
                 loadChildren: () =>
                     import('./modules/accueillant/accueillant.module').then(
-                        (m) => m.AccueillantModule
+                        m => m.AccueillantModule
                     ),
             },
             {
                 path: 'profiles',
                 loadChildren: () =>
                     import('./modules/profile/profile.module').then(
-                        (m) => m.ProfileModule
+                        m => m.ProfileModule
                     ),
             },
         ],

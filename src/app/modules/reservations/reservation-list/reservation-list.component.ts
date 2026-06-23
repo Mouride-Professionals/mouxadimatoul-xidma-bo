@@ -5,6 +5,7 @@ import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '@core/auth/auth.service';
+import { LanguageService } from '@core/i18n/language.service';
 import { Evenement } from '@core/model/evenement.model';
 import { Pageable } from '@core/model/pageable.model';
 import { Reservation } from '@core/model/reservation.model';
@@ -58,6 +59,7 @@ export class ReservationListComponent implements OnInit {
         private _evenementService: EvenementService,
         private _residenceService: ResidenceService,
         private _reservationService: ReservationService,
+        private _languageService: LanguageService,
         private _fuseConfirmationService: FuseConfirmationService,
         private _snackBar: MatSnackBar,
         private _translocoService: TranslocoService
@@ -96,6 +98,7 @@ export class ReservationListComponent implements OnInit {
                 year: moment(this.date.value).toDate().getFullYear(),
                 event: this.event,
                 presence: this.presence,
+                locale: this._languageService.activeLanguage,
             })
             .subscribe((responseMessage: any) => {
                 const element = document.createElement('a');

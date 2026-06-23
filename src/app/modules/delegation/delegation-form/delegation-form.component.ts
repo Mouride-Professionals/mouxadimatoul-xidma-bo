@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { translateApiError } from '@core/i18n/api-error-message';
 import { Delegation } from '@core/model/delegation.model';
 import { DelegationService } from '@core/service/delegation/delegation.service';
 import { TranslocoService } from '@ngneat/transloco';
@@ -68,7 +69,7 @@ export class DelegationFormComponent implements OnInit {
             },
             error: (err) => {
                 this._snackBar.open(
-                    err.error.message,
+                    translateApiError(this._translocoService, err),
                     this._translocoService.translate('common.close'),
                     {
                         panelClass: ['bg-red-500', 'text-white'],

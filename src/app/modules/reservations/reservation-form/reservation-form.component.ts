@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { translateApiError } from '@core/i18n/api-error-message';
 import { Accueillant } from '@core/model/accueillant.model';
 import { Chambre } from '@core/model/chambre.model';
 import { Delegation } from '@core/model/delegation.model';
@@ -126,10 +127,14 @@ export class ReservationFormComponent implements OnInit {
                 },
                 error: (err) => {
                     console.log(err);
-                    this._snackBar.open(err.error.message, '', {
-                        panelClass: ['bg-red-600', 'text-white'],
-                        duration: 3500,
-                    });
+                    this._snackBar.open(
+                        translateApiError(this._translocoService, err),
+                        '',
+                        {
+                            panelClass: ['bg-red-600', 'text-white'],
+                            duration: 3500,
+                        }
+                    );
                 },
             });
     }

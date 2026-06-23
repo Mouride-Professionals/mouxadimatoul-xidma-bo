@@ -5,6 +5,5 @@ export const evenementRoutes: Routes = [
     {
         path: '',
         component: EvenementComponent,
-        
     },
 ];

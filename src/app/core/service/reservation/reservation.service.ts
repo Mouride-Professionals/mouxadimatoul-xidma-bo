@@ -49,6 +49,7 @@ export class ReservationService {
             year: number;
             event: number;
             presence: -1 | 1;
+            locale?: 'fr' | 'ar';
         }
     ): Observable<any> {
         return this._httpClient.get(

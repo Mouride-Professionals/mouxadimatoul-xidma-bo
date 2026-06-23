@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, ReplaySubject, tap } from 'rxjs';
+import { map, Observable, ReplaySubject, switchMap, tap } from 'rxjs';
 import { FuseNavigationItem } from '@fuse/components/navigation';
 import { TranslocoService } from '@ngneat/transloco';
 
@@ -19,11 +19,13 @@ export class NavigationService {
         private _httpClient: HttpClient,
         private _translocoService: TranslocoService
     ) {
-        this._translocoService.langChanges$.subscribe(() => {
-            if (this._rawNavigation.length) {
-                this._navigation.next(this._translateNavigation());
-            }
-        });
+        this._translocoService.langChanges$
+            .pipe(switchMap(lang => this._translocoService.load(lang)))
+            .subscribe(() => {
+                if (this._rawNavigation.length) {
+                    this._navigation.next(this._translateNavigation());
+                }
+            });
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -50,7 +52,15 @@ export class NavigationService {
             .pipe(
                 tap((navigation) => {
                     this._rawNavigation = navigation;
-                    this._navigation.next(this._translateNavigation());
+                }),
+                switchMap(() =>
+                    this._translocoService.load(
+                        this._translocoService.getActiveLang()
+                    )
+                ),
+                map(() => this._translateNavigation()),
+                tap((navigation) => {
+                    this._navigation.next(navigation);
                 })
             );
     }

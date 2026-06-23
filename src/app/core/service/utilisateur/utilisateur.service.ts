@@ -57,7 +57,7 @@ export class UtilisateurService {
     getInfo(): Observable<Utilisateur> {
         return this._http
             .get<Utilisateur>(`${API_URL}/info`)
-            .pipe(tap((user) => (this.user = user)));
+            .pipe(tap(user => (this.user = user)));
     }
 
     // liste de tous les utilisateurs
