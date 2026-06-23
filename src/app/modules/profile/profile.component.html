@@ -6,14 +6,16 @@
             [formGroup]="profileForm">
             <!-- Section -->
             <div class="w-full">
-                <div class="text-xl">Information Personnelle</div>
-                <div class="text-secondary">Profile de l'utilisateur.</div>
+                <div class="text-xl">{{ 'profile.personalInfo' | transloco }}</div>
+                <div class="text-secondary">
+                    {{ 'profile.description' | transloco }}
+                </div>
             </div>
             <div class="grid sm:grid-cols-4 gap-6 w-full mt-8">
                 <!-- Prénom -->
                 <div class="sm:col-span-2">
                     <mat-form-field class="fuse-mat-no-subscript w-full">
-                        <mat-label>Prénom</mat-label>
+                        <mat-label>{{ 'fields.firstName' | transloco }}</mat-label>
                         <mat-icon
                             class="icon-size-5"
                             [svgIcon]="'heroicons_solid:user'"
@@ -26,7 +28,7 @@
                 <!-- Nom -->
                 <div class="sm:col-span-2">
                     <mat-form-field class="fuse-mat-no-subscript w-full">
-                        <mat-label>Nom</mat-label>
+                        <mat-label>{{ 'fields.lastName' | transloco }}</mat-label>
                         <mat-icon
                             class="icon-size-5"
                             [svgIcon]="'heroicons_solid:user'"
@@ -39,7 +41,7 @@
                 <!-- Phone -->
                 <div class="sm:col-span-2">
                     <mat-form-field class="fuse-mat-no-subscript w-full">
-                        <mat-label>Téléphone</mat-label>
+                        <mat-label>{{ 'fields.phone' | transloco }}</mat-label>
                         <mat-icon
                             class="icon-size-5"
                             [svgIcon]="'heroicons_solid:phone'"
@@ -52,7 +54,7 @@
                 <!-- Country -->
                 <div class="sm:col-span-2">
                     <mat-form-field class="fuse-mat-no-subscript w-full">
-                        <mat-label>Rôle</mat-label>
+                        <mat-label>{{ 'fields.role' | transloco }}</mat-label>
                         <mat-icon
                             class="icon-size-5"
                             [svgIcon]="'heroicons_solid:location-marker'"
@@ -68,13 +70,13 @@
                 <button
                     mat-stroked-button
                     type="button">
-                    Annuler
+                    {{ 'common.cancel' | transloco }}
                 </button>
                 <button
                     class="ml-4"
                     mat-flat-button
                     type="button"
-                    [color]="'primary'">Enregistrer
+                    [color]="'primary'">{{ 'common.save' | transloco }}
                 </button>
             </div>
 
@@ -91,7 +93,7 @@
             [showIcon]="false"
             [type]="alert.type"
             [@shake]="alert.type === 'error'">
-            {{alert.message}}
+            {{alert.messageKey | transloco}}
         </fuse-alert>
         <!-- Form Changer mot de passe -->
         <form
@@ -99,14 +101,18 @@
             #resetPasswordNgForm="ngForm">
             <!-- Section -->
             <div class="w-full">
-                <div class="text-secondary">Changer mot de passe.</div>
+                <div class="text-secondary">
+                    {{ 'profile.changePassword' | transloco }}
+                </div>
             </div>
             <!-- Actions -->
             <div class="flex items-end space-x-4 justify-between">
                 <!-- Prénom -->
                 <div class="w-full">
                     <mat-form-field class="fuse-mat-no-subscript w-full">
-                        <mat-label>nouveau mot de passe</mat-label>
+                        <mat-label>{{
+                            'profile.newPassword' | transloco
+                        }}</mat-label>
                         <mat-icon
                             class="icon-size-5"
                             [svgIcon]="'heroicons_solid:eye'"
@@ -119,14 +125,16 @@
                             #passwordField
                             matInput>
                         <mat-error>
-                            le mot de passe est obligatoire
+                            {{ 'profile.validation.passwordRequired' | transloco }}
                         </mat-error>
                     </mat-form-field>
                 </div>
                 <!-- Nom -->
                 <div class="w-full">
                     <mat-form-field class="fuse-mat-no-subscript w-full">
-                        <mat-label>Confirme mot de passe</mat-label>
+                        <mat-label>{{
+                            'profile.confirmPassword' | transloco
+                        }}</mat-label>
                         <mat-icon
                             class="icon-size-5"
                             [svgIcon]="'heroicons_solid:eye'"
@@ -139,10 +147,10 @@
                             #passwordConfirmField
                             matInput>
                         <mat-error *ngIf="resetPasswordForm.get('passwordConfirm').hasError('required')">
-                            La confirmation du mot de passe est requise
+                            {{ 'profile.validation.passwordConfirmationRequired' | transloco }}
                         </mat-error>
                         <mat-error *ngIf="resetPasswordForm.get('passwordConfirm').hasError('mustMatch')">
-                            Les mots de passe doivent correspondre
+                            {{ 'profile.validation.passwordsMustMatch' | transloco }}
                         </mat-error>
                     </mat-form-field>
                 </div>
@@ -152,7 +160,7 @@
                     type="button"
                     [disabled]="resetPasswordForm.disabled"
                     (click)="resetPassword()"
-                    [color]="'primary'">Modifier
+                    [color]="'primary'">{{ 'common.edit' | transloco }}
                 </button>
             </div>
 

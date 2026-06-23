@@ -1,13 +1,16 @@
 <div class="w-full relative flex items-center bg-primary">
+    <div class="login-language-selector absolute top-4 right-4 z-10">
+        <language-selector></language-selector>
+    </div>
     <div
-        class="w-full md:w-4/6 md:h-full bg-card p-4 md:rounded-r-2xl flex md:items-center justify-center"
+        class="login-panel w-full md:w-4/6 md:h-full bg-card p-4 md:rounded-r-2xl flex md:items-center justify-center"
     >
         <div class="w-full max-w-80 sm:w-80 mx-auto sm:mx-0">
             <!-- Title -->
             <div
                 class="mt-8 text-4xl font-extrabold tracking-tight leading-tight"
             >
-                Espace d'administration
+                {{ 'auth.login.title' | transloco }}
             </div>
 
             <!-- Alert -->
@@ -19,14 +22,14 @@
                 [type]="alert.type"
                 [@shake]="alert.type === 'error'"
             >
-                {{ alert.message }}
+                {{ alert.messageKey | transloco }}
             </fuse-alert>
 
             <!-- Sign in form -->
             <form class="mt-8" [formGroup]="loginForm" #loginNgForm="ngForm">
                 <!-- Email field -->
                 <mat-form-field class="w-full" appearance="fill">
-                    <mat-label>Téléphone</mat-label>
+                    <mat-label>{{ 'auth.login.phone' | transloco }}</mat-label>
                     <input
                         id="username"
                         matInput
@@ -36,18 +39,20 @@
                     <mat-error
                         *ngIf="loginForm.get('username').hasError('required')"
                     >
-                        Numéro téléphone obligatoire
+                        {{ 'auth.login.validation.phoneRequired' | transloco }}
                     </mat-error>
                     <mat-error
                         *ngIf="loginForm.get('username').hasError('pattern')"
                     >
-                        Numéro de téléphone incorrect
+                        {{ 'auth.login.validation.phoneInvalid' | transloco }}
                     </mat-error>
                 </mat-form-field>
 
                 <!-- Password field -->
                 <mat-form-field class="w-full" appearance="fill">
-                    <mat-label>Mot de passe</mat-label>
+                    <mat-label>{{
+                        'auth.login.password' | transloco
+                    }}</mat-label>
                     <input
                         id="password"
                         matInput
@@ -76,7 +81,9 @@
                             [svgIcon]="'heroicons_solid:eye-off'"
                         ></mat-icon>
                     </button>
-                    <mat-error> Mot de passe obligatoire </mat-error>
+                    <mat-error>
+                        {{ 'auth.login.validation.passwordRequired' | transloco }}
+                    </mat-error>
                 </mat-form-field>
 
                 <!-- Actions -->
@@ -90,7 +97,7 @@
                     <a
                         class="text-md font-medium text-primary-500 hover:underline"
                         [routerLink]="['/mot-de-passe-oublie']"
-                        >Mot de passe oublié?
+                        >{{ 'auth.login.forgotPassword' | transloco }}
                     </a>
                 </div>
 
@@ -103,7 +110,9 @@
                     type="button"
                     (click)="login()"
                 >
-                    <span *ngIf="!loginForm.disabled"> Se connecter </span>
+                    <span *ngIf="!loginForm.disabled">
+                        {{ 'auth.login.submit' | transloco }}
+                    </span>
                     <mat-progress-spinner
                         *ngIf="loginForm.disabled"
                         [diameter]="24"

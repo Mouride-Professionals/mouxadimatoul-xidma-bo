@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Delegation } from '@core/model/delegation.model';
 import { DelegationService } from '@core/service/delegation/delegation.service';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
     selector: 'app-delegation-form',
@@ -25,7 +26,8 @@ export class DelegationFormComponent implements OnInit {
     constructor(
         private _delegationService: DelegationService,
         private _router: Router,
-        private _snackBar: MatSnackBar
+        private _snackBar: MatSnackBar,
+        private _translocoService: TranslocoService
     ) {}
 
     get invites(): FormArray {
@@ -52,7 +54,10 @@ export class DelegationFormComponent implements OnInit {
         this._delegationService.saveDelegation(this.delegation).subscribe({
             next: (res: Delegation) => {
                 this._snackBar.open(
-                    `La délégation ${res.nom} est bien ajoutée`,
+                    this._translocoService.translate(
+                        'delegations.messages.created',
+                        { name: res.nom }
+                    ),
                     '',
                     {
                         panelClass: ['bg-green-500', 'text-white'],
@@ -62,10 +67,14 @@ export class DelegationFormComponent implements OnInit {
                 this._router.navigate(['/delegations']);
             },
             error: (err) => {
-                this._snackBar.open(err.error.message, 'fermer', {
-                    panelClass: ['bg-red-500', 'text-white'],
-                    duration: 4000,
-                });
+                this._snackBar.open(
+                    err.error.message,
+                    this._translocoService.translate('common.close'),
+                    {
+                        panelClass: ['bg-red-500', 'text-white'],
+                        duration: 4000,
+                    }
+                );
             },
         });
     }

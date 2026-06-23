@@ -11,6 +11,7 @@ import { AccueillantService } from '@core/service/accueillant/accueillant.servic
 import { ChambreService } from '@core/service/chambre/chambre.service';
 import { ReservationService } from '@core/service/reservation/reservation.service';
 import { ResponsableService } from '@core/service/responsable/responsable.service';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
     selector: 'app-reservation-edit',
@@ -38,7 +39,8 @@ export class ReservationEditComponent implements OnInit {
         private _responsableService: ResponsableService,
         private _route: ActivatedRoute,
         private _router: Router,
-        private _snackBar: MatSnackBar
+        private _snackBar: MatSnackBar,
+        private _translocoService: TranslocoService
     ) {}
 
     ngOnInit(): void {
@@ -78,10 +80,16 @@ export class ReservationEditComponent implements OnInit {
         this._reservationService
             .updateReservation(this.reservation)
             .subscribe(() => {
-                this._snackBar.open('Réservation modifiée', 'fermer', {
-                    panelClass: ['bg-amber-500', 'text-white'],
-                    duration: 3000,
-                });
+                this._snackBar.open(
+                    this._translocoService.translate(
+                        'reservations.messages.updated'
+                    ),
+                    this._translocoService.translate('common.close'),
+                    {
+                        panelClass: ['bg-amber-500', 'text-white'],
+                        duration: 3000,
+                    }
+                );
                 this._router.navigate(['/reservations']);
             });
     }

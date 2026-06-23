@@ -1,9 +1,11 @@
-<h2 mat-dialog-title>{{ tite }}</h2>
+<h2 mat-dialog-title>{{ titleKey | transloco }}</h2>
 <mat-dialog-content>
     <form [formGroup]="form" (ngSubmit)="saveUser()">
         <div class="grid grid-cols-1 gap-4">
             <mat-form-field class="col-span-1 w-full">
-                <mat-label for="prenom">Prénom</mat-label>
+                <mat-label for="prenom">{{
+                    'fields.firstName' | transloco
+                }}</mat-label>
                 <input matInput name="prenom" formControlName="prenom" />
                 <mat-icon
                     class="icon-size-5"
@@ -17,11 +19,11 @@
                     "
                     class="error-message"
                 >
-                    Le prénom est obligatoire.
+                    {{ 'validation.required.firstName' | transloco }}
                 </mat-error>
             </mat-form-field>
             <mat-form-field class="col-span-1 w-full">
-                <mat-label for="nom">Nom</mat-label>
+                <mat-label for="nom">{{ 'fields.lastName' | transloco }}</mat-label>
                 <input matInput name="nom" formControlName="nom" />
                 <mat-icon
                     class="icon-size-5"
@@ -34,11 +36,13 @@
                     "
                     class="error-message"
                 >
-                    Le nom est obligatoire.
+                    {{ 'validation.required.lastName' | transloco }}
                 </mat-error>
             </mat-form-field>
             <mat-form-field class="col-span-1 w-full">
-                <mat-label for="telephone">Téléphone</mat-label>
+                <mat-label for="telephone">{{
+                    'fields.phone' | transloco
+                }}</mat-label>
                 <input
                     matInput
                     maxlength="9"
@@ -57,7 +61,7 @@
                     "
                     class="error-message"
                 >
-                    Le télephone est obligatoire.
+                    {{ 'validation.required.phone' | transloco }}
                 </mat-error>
             </mat-form-field>
             <div class="col-span-full flex justify-end items-center space-x-4">
@@ -67,14 +71,14 @@
                     type="button"
                     class="bg-red-600 text-white"
                 >
-                    Annuler
+                    {{ 'common.cancel' | transloco }}
                 </button>
                 <button
                     mat-flat-button
                     [disabled]="form.invalid"
                     color="primary"
                 >
-                    Enregistrer
+                    {{ 'common.save' | transloco }}
                 </button>
             </div>
         </div>

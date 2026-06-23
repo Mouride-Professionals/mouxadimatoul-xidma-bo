@@ -8,9 +8,9 @@ import { Observable, map } from 'rxjs';
 import {
     MAT_DIALOG_DATA,
     MatDialogRef,
-    matDialogAnimations,
 } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslocoService } from '@ngneat/transloco';
 @Component({
     selector: 'app-utilisateur-forme',
     templateUrl: './utilisateur-forme.component.html',
@@ -21,14 +21,15 @@ export class UtilisateurFormeComponent implements OnInit {
     user: Utilisateur;
     // roles$: Observable<Role[]>;
     isEdit = false;
-    tite: string = 'Ajouter un nouveau utilisateur';
+    titleKey: string = 'users.form.addTitle';
 
     constructor(
         private _utilisateurService: UtilisateurService,
         private _matDialogRef: MatDialogRef<UtilisateurFormeComponent>,
         // private _roleService: RoleService,
         @Inject(MAT_DIALOG_DATA) private data: Utilisateur,
-        private _snackBar: MatSnackBar
+        private _snackBar: MatSnackBar,
+        private _translocoService: TranslocoService
     ) {}
 
     // Convenience getter for easy access to form fields
@@ -41,7 +42,7 @@ export class UtilisateurFormeComponent implements OnInit {
         // this.getRoles();
         if (this.data) {
             this.isEdit = true;
-            this.tite = 'Modifier un utilisateur';
+            this.titleKey = 'users.form.editTitle';
         }
         console.log('data', this.data, this.isEdit);
     }
@@ -67,10 +68,16 @@ export class UtilisateurFormeComponent implements OnInit {
             this._utilisateurService
                 .createUser(this.form.value)
                 .subscribe((res: Utilisateur) => {
-                    this._snackBar.open('Utilisateur ajouté avec succés!', '', {
-                        panelClass: ['bg-green-500', 'text-white'],
-                        duration: 3000,
-                    });
+                    this._snackBar.open(
+                        this._translocoService.translate(
+                            'users.messages.created'
+                        ),
+                        '',
+                        {
+                            panelClass: ['bg-green-500', 'text-white'],
+                            duration: 3000,
+                        }
+                    );
                     this.form.reset();
                     this._matDialogRef.close(true);
                 });

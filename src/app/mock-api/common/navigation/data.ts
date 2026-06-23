@@ -4,42 +4,46 @@ import { FuseNavigationItem } from '@fuse/components/navigation';
 export const defaultNavigation: FuseNavigationItem[] = [
     {
         id: 'dashboard',
-        title: 'Dashboard',
+        title: 'navigation.dashboard',
         type: 'basic',
         icon: 'mat_solid:dashboard',
         link: '/dashboard',
         meta: {
             roles: ['ROLE_ADMIN', 'ROLE_RESPONSABLE', 'ROLE_ACCUEILLANT'],
+            translationKey: 'navigation.dashboard',
         },
     },
     {
         id: 'utilisateurs',
-        title: 'Gestion des utilisateurs',
+        title: 'navigation.users',
         type: 'basic',
         icon: 'heroicons_solid:users',
         link: 'utilisateurs',
         meta: {
             roles: ['ROLE_ADMIN'],
+            translationKey: 'navigation.users',
         },
     },
     {
         id: 'residences',
-        title: 'Résidences',
+        title: 'navigation.residences',
         type: 'basic',
         icon: 'mat_solid:home',
         link: 'residences',
         meta: {
             roles: ['ROLE_ADMIN', 'ROLE_RESPONSABLE'],
+            translationKey: 'navigation.residences',
         },
     },
     {
         id: 'reservations',
-        title: 'Réservations',
+        title: 'navigation.reservations',
         type: 'basic',
         icon: 'heroicons_solid:bookmark',
         link: 'reservations',
         meta: {
             roles: ['ROLE_ADMIN', 'ROLE_RESPONSABLE', 'ROLE_ACCUEILLANT'],
+            translationKey: 'navigation.reservations',
         },
     },
     // {
@@ -82,42 +86,46 @@ export const defaultNavigation: FuseNavigationItem[] = [
     // },
     {
         id: 'evenements',
-        title: 'Événements',
+        title: 'navigation.events',
         type: 'basic',
         icon: 'event',
         link: '/evenements',
         meta: {
             roles: ['ROLE_ADMIN'],
+            translationKey: 'navigation.events',
         },
     },
     {
         id: 'delegations',
-        title: 'Délégations',
+        title: 'navigation.delegations',
         type: 'basic',
         icon: 'heroicons_outline:user-group',
         link: '/delegations',
         meta: {
             roles: ['ROLE_ADMIN', 'ROLE_RESPONSABLE', 'ROLE_ACCUEILLANT'],
+            translationKey: 'navigation.delegations',
         },
     },
     {
         id: 'accueillants',
-        title: 'Accueillants',
+        title: 'navigation.hosts',
         type: 'basic',
         icon: 'heroicons_outline:user-group',
         link: '/accueillants',
         meta: {
             roles: ['ROLE_ADMIN', 'ROLE_RESPONSABLE'],
+            translationKey: 'navigation.hosts',
         },
     },
     {
         id: 'responsables',
-        title: 'Responsables des chambres',
+        title: 'navigation.roomManagers',
         type: 'basic',
         icon: 'heroicons_outline:user-group',
         link: '/responsables',
         meta: {
             roles: ['ROLE_ADMIN', 'ROLE_RESPONSABLE'],
+            translationKey: 'navigation.roomManagers',
         },
     },
     /*{

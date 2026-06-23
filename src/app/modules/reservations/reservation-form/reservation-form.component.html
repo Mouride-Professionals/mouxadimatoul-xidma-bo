@@ -1,6 +1,8 @@
 <div class="p-6 w-full content-container flex flex-col space-y-4">
     <div class="w-full flex justify-between items-center">
-        <h2 class="text-4xl font-semibold">Nouvelle réservation</h2>
+        <h2 class="text-4xl font-semibold">
+            {{ 'reservations.form.addTitle' | transloco }}
+        </h2>
         <!-- New user -->
         <button
             class="ml-4 px-1 sm:px-4 min-w-10 text-white"
@@ -12,7 +14,9 @@
                 class="icon-size-5"
                 svgIcon="mat_solid:arrow_back"
             ></mat-icon>
-            <span class="hidden sm:inline-block ml-2">Annuler</span>
+            <span class="hidden sm:inline-block ml-2">
+                {{ 'common.cancel' | transloco }}
+            </span>
         </button>
     </div>
 
@@ -26,7 +30,7 @@
                 <!-- Info réservation -->
                 <div class="col-span-2 w-full flex space-x-2 items-center">
                     <h2 class="text-xl font-semibold">
-                        Information de la reservation
+                        {{ 'reservations.form.information' | transloco }}
                     </h2>
                     <div class="flex-1">
                         <mat-divider></mat-divider>
@@ -34,7 +38,7 @@
                 </div>
                 <div class="col-span-1 w-full">
                     <mat-form-field class="w-full" appearance="fill">
-                        <mat-label>Période de séjour</mat-label>
+                        <mat-label>{{ 'fields.stayPeriod' | transloco }}</mat-label>
                         <mat-date-range-input
                             formGroupName="period"
                             [rangePicker]="picker"
@@ -46,22 +50,22 @@
                                     onLoadChambre()
                                 "
                                 formControlName="entree"
-                                placeholder="Date d'entrée"
+                                [placeholder]="'fields.arrivalDate' | transloco"
                             />
                             <input
                                 matEndDate
                                 (dateChange)="onLoadChambre()"
                                 formControlName="sortie"
-                                placeholder="Date de sortie"
+                                [placeholder]="'fields.departureDate' | transloco"
                             />
                         </mat-date-range-input>
                         <mat-hint>
-                            Du
+                            {{ 'reservations.form.from' | transloco }}
                             {{
                                 f.period.controls.entree.value
                                     | date : "dd MMM yyyy"
                             }}
-                            Au
+                            {{ 'reservations.form.to' | transloco }}
                             {{
                                 f.period.controls.sortie.value
                                     | date : "dd MMM yyyy"
@@ -76,7 +80,7 @@
                 </div>
                 <div class="col-span-1 w-full">
                     <mat-form-field class="w-full" appearance="fill">
-                        <mat-label>Evénement</mat-label>
+                        <mat-label>{{ 'fields.event' | transloco }}</mat-label>
                         <mat-select formControlName="evenement">
                             <mat-option
                                 *ngFor="let e of events$ | async"
@@ -88,7 +92,7 @@
                 </div>
                 <div class="col-span-1 w-full">
                     <mat-form-field class="w-full" appearance="fill">
-                        <mat-label>Résidence</mat-label>
+                        <mat-label>{{ 'fields.residence' | transloco }}</mat-label>
                         <mat-select
                             (ngModelChange)="onLoadChambre(); onLoadHotes()"
                             formControlName="residence"
@@ -105,7 +109,7 @@
                 <!-- Info réservation -->
                 <div class="col-span-2 w-full flex space-x-2 items-center">
                     <h2 class="text-xl font-semibold">
-                        Information des invités
+                        {{ 'reservations.form.guestsInformation' | transloco }}
                     </h2>
                     <div class="flex-1">
                         <mat-divider></mat-divider>
@@ -113,7 +117,7 @@
                 </div>
                 <div class="col-span-1 w-full">
                     <mat-form-field class="w-full" appearance="fill">
-                        <mat-label>Délégation</mat-label>
+                        <mat-label>{{ 'fields.delegation' | transloco }}</mat-label>
                         <mat-select
                             formControlName="delegation"
                             (ngModelChange)="onChoiceDelegation()"
@@ -139,12 +143,23 @@
                                         formControlName="checkAll"
                                     ></mat-checkbox>
                                 </th>
-                                <th>Invité</th>
-                                <th class="whitespace-nowrap">Chambre</th>
-                                <th class="whitespace-nowrap">Accueillant</th>
-                                <th class="whitespace-nowrap">Responsable</th>
+                                <th>{{ 'fields.guest' | transloco }}</th>
+                                <th class="whitespace-nowrap">
+                                    {{ 'fields.room' | transloco }}
+                                </th>
+                                <th class="whitespace-nowrap">
+                                    {{ 'fields.host' | transloco }}
+                                </th>
+                                <th class="whitespace-nowrap">
+                                    {{ 'fields.manager' | transloco }}
+                                </th>
                                 <th class="text-center">
-                                    <span class="mr-2">Présence cérémonie</span>
+                                    <span class="mr-2">
+                                        {{
+                                            'fields.ceremonyPresence'
+                                                | transloco
+                                        }}
+                                    </span>
                                     <mat-checkbox
                                         formControlName="ceremonie"
                                         (change)="onChoiceAllPresence()"
@@ -176,7 +191,10 @@
                                         appearance="fill"
                                     >
                                         <mat-select
-                                            [placeholder]="'Chambre invité'"
+                                            [placeholder]="
+                                                'reservations.form.guestRoom'
+                                                    | transloco
+                                            "
                                             formControlName="chambre"
                                             (ngModelChange)="
                                                 onChoiceChambre($event)
@@ -192,7 +210,10 @@
                                                     c.nombrePlace -
                                                         c.placeReservee
                                                 }}
-                                                place(s) disponible(s)
+                                                {{
+                                                    'reservations.form.availablePlaces'
+                                                        | transloco
+                                                }}
                                             </mat-option>
                                         </mat-select>
                                     </mat-form-field>
@@ -203,7 +224,9 @@
                                         appearance="fill"
                                     >
                                         <mat-select
-                                            [placeholder]="'Accueillant'"
+                                            [placeholder]="
+                                                'fields.host' | transloco
+                                            "
                                             formControlName="accueillant"
                                         >
                                             <mat-option
@@ -230,7 +253,8 @@
                                     >
                                         <mat-select
                                             [placeholder]="
-                                                'Responsable chambre'
+                                                'fields.roomManager'
+                                                    | transloco
                                             "
                                             formControlName="responsable"
                                         >
@@ -264,7 +288,7 @@
                         color="primary"
                         [disabled]="reservationForm.invalid"
                     >
-                        Enregistrer
+                        {{ 'common.save' | transloco }}
                     </button>
                 </div>
             </div>

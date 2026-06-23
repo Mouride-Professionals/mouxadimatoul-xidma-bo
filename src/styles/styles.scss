@@ -37,3 +37,34 @@
     height: calc(100vh - theme('spacing.16'));
 }
 
+[dir='rtl'] {
+    .header-actions {
+        padding-left: 0 !important;
+        padding-right: theme('spacing.2') !important;
+        margin-left: 0 !important;
+        margin-right: auto !important;
+
+        > :not([hidden]) ~ :not([hidden]) {
+            --tw-space-x-reverse: 1 !important;
+        }
+    }
+
+    .user-summary {
+        margin-left: 0 !important;
+        margin-right: theme('spacing.4') !important;
+    }
+
+    .login-language-selector {
+        right: auto !important;
+        left: theme('spacing.4') !important;
+    }
+
+    @media (min-width: theme('screens.md')) {
+        .login-panel {
+            border-top-right-radius: 0 !important;
+            border-bottom-right-radius: 0 !important;
+            border-top-left-radius: theme('borderRadius.2xl') !important;
+            border-bottom-left-radius: theme('borderRadius.2xl') !important;
+        }
+    }
+}

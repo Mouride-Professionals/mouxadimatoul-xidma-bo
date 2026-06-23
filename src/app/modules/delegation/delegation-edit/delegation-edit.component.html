@@ -1,13 +1,15 @@
-<h2 mat-dialog-title class="text-2xl font-semibold">Modifier la délégation</h2>
+<h2 mat-dialog-title class="text-2xl font-semibold">
+    {{ 'delegations.form.editTitle' | transloco }}
+</h2>
 <div mat-dialog-content>
     <form [formGroup]="delegationForm" (ngSubmit)="onSubmit()">
         <div class="w-full flex flex-col space-y-4 py-2">
             <mat-form-field class="w-full" appearance="fill">
-                <mat-label>Nom de la délégation</mat-label>
+                <mat-label>{{ 'fields.delegationName' | transloco }}</mat-label>
                 <input matInput type="text" formControlName="nom" />
             </mat-form-field>
             <mat-form-field class="w-full" appearance="fill">
-                <mat-label>Nombre de personnes</mat-label>
+                <mat-label>{{ 'fields.peopleCount' | transloco }}</mat-label>
                 <input type="number" matInput formControlName="nombre" />
             </mat-form-field>
 
@@ -17,7 +19,7 @@
                     mat-raised-button
                     color="primary"
                 >
-                    Enregistrer
+                    {{ 'common.save' | transloco }}
                 </button>
                 <button
                     type="button"
@@ -25,7 +27,7 @@
                     color="warn"
                     (click)="onClose()"
                 >
-                    Annuler
+                    {{ 'common.cancel' | transloco }}
                 </button>
             </div>
         </div>

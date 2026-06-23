@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { Utilisateur } from '@core/model/utilisateur.model';
 import { ResidenceService } from '@core/service/residence/residence.service';
-import { UtilisateurService } from '@core/service/utilisateur/utilisateur.service';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
     selector: 'app-residences-form',
@@ -28,7 +27,8 @@ export class ResidencesFormComponent implements OnInit {
     constructor(
         private _snackBar: MatSnackBar,
         private _residenceService: ResidenceService,
-        private _router: Router
+        private _router: Router,
+        private _translocoService: TranslocoService
     ) {}
 
     get f(): any {
@@ -44,10 +44,16 @@ export class ResidencesFormComponent implements OnInit {
         this._residenceService
             .createResidence(this.residenceForm.value, this.image)
             .subscribe((res: any) => {
-                this._snackBar.open('Résidence créée avec success', '', {
-                    panelClass: ['bg-green-500', 'text-white'],
-                    duration: 3000,
-                });
+                this._snackBar.open(
+                    this._translocoService.translate(
+                        'residences.messages.created'
+                    ),
+                    '',
+                    {
+                        panelClass: ['bg-green-500', 'text-white'],
+                        duration: 3000,
+                    }
+                );
                 this._router.navigate(['/residences']);
             });
     }

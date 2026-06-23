@@ -1,9 +1,13 @@
-<h2 mat-dialog-title class="text-2xl font-semibold">Modifier la résidence</h2>
+<h2 mat-dialog-title class="text-2xl font-semibold">
+    {{ 'residences.form.editTitle' | transloco }}
+</h2>
 <div mat-dialog-content>
     <form [formGroup]="residenceForm" (ngSubmit)="onSubmit()">
         <div class="w-full flex flex-col space-y-4">
             <mat-form-field class="w-full" appearance="fill">
-                <mat-label for="libelle">Nom résidence</mat-label>
+                <mat-label for="libelle">
+                    {{ 'residences.fields.name' | transloco }}
+                </mat-label>
                 <input matInput name="libelle" formControlName="libelle" />
                 <mat-icon
                     class="icon-size-5"
@@ -14,11 +18,13 @@
                     *ngIf="f.libelle.touched && f.libelle.errors?.required"
                     class="error-message"
                 >
-                    Le nom est obligatoire.
+                    {{ 'validation.required.name' | transloco }}
                 </mat-error>
             </mat-form-field>
             <mat-form-field class="w-full" appearance="fill">
-                <mat-label for="adresse">Adresse</mat-label>
+                <mat-label for="adresse">
+                    {{ 'fields.address' | transloco }}
+                </mat-label>
                 <input matInput name="adresse" formControlName="adresse" />
                 <mat-icon
                     class="icon-size-5"
@@ -29,12 +35,12 @@
                     *ngIf="f.adresse.touched && f.adresse.errors?.required"
                     class="error-message"
                 >
-                    L'adresse est obligatoire.
+                    {{ 'validation.required.address' | transloco }}
                 </mat-error>
             </mat-form-field>
             <mat-form-field class="w-full" appearance="fill">
                 <mat-label for="telephoneResidence"
-                    >Téléphone résidence</mat-label
+                    >{{ 'residences.fields.phone' | transloco }}</mat-label
                 >
                 <input
                     matInput
@@ -58,13 +64,15 @@
                     "
                     class="error-message"
                 >
-                    Le télephone est obligatoire.
+                    {{ 'validation.required.phone' | transloco }}
                 </mat-error>
             </mat-form-field>
             <mat-form-field class="w-full" appearance="fill">
-                <mat-label for="role">Responsable résidence</mat-label>
+                <mat-label for="role">
+                    {{ 'residences.fields.manager' | transloco }}
+                </mat-label>
                 <mat-select
-                    [placeholder]="'Responsable'"
+                    [placeholder]="'fields.manager' | transloco"
                     formControlName="responsable"
                     [compareWith]="onCompareUser"
                 >
@@ -84,11 +92,13 @@
                     "
                     class="error-message"
                 >
-                    Le responsable est obligatoire.
+                    {{ 'validation.required.manager' | transloco }}
                 </mat-error>
             </mat-form-field>
             <mat-form-field class="w-full fuse-mat-textarea" appearance="fill">
-                <mat-label for="description">Description</mat-label>
+                <mat-label for="description">
+                    {{ 'fields.description' | transloco }}
+                </mat-label>
                 <textarea
                     matInput
                     name="description"
@@ -103,14 +113,16 @@
                 ></mat-icon>
             </mat-form-field>
             <div class="w-full flex items-center space-x-4">
-                <button mat-raised-button color="primary">Enregistrer</button>
+                <button mat-raised-button color="primary">
+                    {{ 'common.save' | transloco }}
+                </button>
                 <button
                     mat-raised-button
                     color="warn"
                     type="button"
                     (click)="onReset()"
                 >
-                    Annuler
+                    {{ 'common.cancel' | transloco }}
                 </button>
             </div>
         </div>

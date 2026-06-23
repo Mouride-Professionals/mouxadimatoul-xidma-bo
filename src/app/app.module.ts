@@ -1,4 +1,4 @@
-import { LOCALE_ID, NgModule } from '@angular/core';
+import { APP_INITIALIZER, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ExtraOptions, PreloadAllModules, RouterModule } from '@angular/router';
@@ -14,11 +14,25 @@ import { AppComponent } from 'app/app.component';
 import { appRoutes } from 'app/app.routing';
 import { HttpClientModule } from '@angular/common/http';
 
-import localeFr from '@angular/common/locales/fr'; 
+import localeAr from '@angular/common/locales/ar';
+import localeFr from '@angular/common/locales/fr';
 import { registerLocaleData } from '@angular/common';
+import {
+    TRANSLOCO_CONFIG,
+    TRANSLOCO_LOADER,
+    translocoConfig,
+    TranslocoModule,
+} from '@ngneat/transloco';
+import { AppTranslocoLoader } from '@core/i18n/transloco-loader';
+import { LanguageService } from '@core/i18n/language.service';
 
-// the second parameter 'fr' is optional
 registerLocaleData(localeFr, 'fr');
+registerLocaleData(localeAr, 'ar');
+
+export const initializeLanguage =
+    (languageService: LanguageService): (() => void) =>
+    () =>
+        languageService.initialize();
 
 const routerConfig: ExtraOptions = {
     preloadingStrategy: PreloadAllModules,
@@ -32,6 +46,7 @@ const routerConfig: ExtraOptions = {
         BrowserAnimationsModule,
         RouterModule.forRoot(appRoutes, routerConfig),
         HttpClientModule,
+        TranslocoModule,
 
         // Fuse, FuseConfig & FuseMockAPI
         FuseModule,
@@ -47,7 +62,29 @@ const routerConfig: ExtraOptions = {
         // 3rd party modules that require global configuration via forRoot
         MarkdownModule.forRoot({}),
     ],
-    providers: [{ provide: LOCALE_ID, useValue: 'fr' }],
+    providers: [
+        { provide: LOCALE_ID, useValue: 'fr' },
+        {
+            provide: TRANSLOCO_CONFIG,
+            useValue: translocoConfig({
+                availableLangs: ['fr', 'ar'],
+                defaultLang: 'fr',
+                fallbackLang: 'fr',
+                reRenderOnLangChange: true,
+                prodMode: false,
+            }),
+        },
+        {
+            provide: TRANSLOCO_LOADER,
+            useClass: AppTranslocoLoader,
+        },
+        {
+            provide: APP_INITIALIZER,
+            useFactory: initializeLanguage,
+            deps: [LanguageService],
+            multi: true,
+        },
+    ],
     bootstrap: [AppComponent],
 })
 export class AppModule {}

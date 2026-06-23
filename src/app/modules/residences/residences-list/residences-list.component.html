@@ -1,6 +1,8 @@
 <div class="p-6 w-full h-full flex flex-col space-y-6">
     <div class="w-full flex justify-between items-center">
-        <h2 class="text-4xl font-semibold">Résidences</h2>
+        <h2 class="text-4xl font-semibold">
+            {{ 'residences.title' | transloco }}
+        </h2>
         <button
             class="ml-4 px-1 sm:px-4 min-w-10 text-white"
             mat-flat-button
@@ -11,7 +13,9 @@
                 class="icon-size-5"
                 [svgIcon]="'heroicons_solid:plus-circle'"
             ></mat-icon>
-            <span class="hidden sm:inline-block ml-2">Ajouter</span>
+            <span class="hidden sm:inline-block ml-2">
+                {{ 'common.add' | transloco }}
+            </span>
         </button>
     </div>
 
@@ -27,7 +31,7 @@
                 <img
                     class="w-full h-full object-cover"
                     [src]="getImage(residence)"
-                    alt="Card cover image"
+                    [alt]="'residences.imageAlt' | transloco"
                 />
             </div>
             <div class="flex flex-col flex-auto m-8 mb-4">
@@ -38,8 +42,11 @@
                     <!-- <div class="text-secondary ml-2">4.5</div>
                     <div class="text-secondary mx-2">&bull;</div> -->
                     <div class="text-secondary">
-                        {{ residence.pavillons.length }}
-                        pavillon{{ residence.pavillons.length > 1 ? "s" : "" }}
+                        {{
+                            'residences.pavilionCount'
+                                | transloco
+                                    : { count: residence.pavillons.length }
+                        }}
                     </div>
                 </div>
                 <div class="flex-1 mt-6">
@@ -52,7 +59,7 @@
                         [color]="'primary'"
                         [routerLink]="[residence.id]"
                     >
-                        Détail
+                        {{ 'common.details' | transloco }}
                     </a>
                 </div>
             </div>
@@ -61,7 +68,7 @@
             class="w-full col-span-full p-4 justify-center items-center flex"
             *ngIf="residences.length <= 0"
         >
-            <span>Pas de résidence</span>
+            <span>{{ 'residences.empty' | transloco }}</span>
         </fuse-card>
     </div>
 </div>

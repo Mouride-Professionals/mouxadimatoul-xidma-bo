@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, ReplaySubject, tap } from 'rxjs';
 import { FuseNavigationItem } from '@fuse/components/navigation';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Injectable({
     providedIn: 'root',
@@ -9,11 +10,21 @@ import { FuseNavigationItem } from '@fuse/components/navigation';
 export class NavigationService {
     private _navigation: ReplaySubject<FuseNavigationItem[]> =
         new ReplaySubject<FuseNavigationItem[]>(1);
+    private _rawNavigation: FuseNavigationItem[] = [];
 
     /**
      * Constructor
      */
-    constructor(private _httpClient: HttpClient) {}
+    constructor(
+        private _httpClient: HttpClient,
+        private _translocoService: TranslocoService
+    ) {
+        this._translocoService.langChanges$.subscribe(() => {
+            if (this._rawNavigation.length) {
+                this._navigation.next(this._translateNavigation());
+            }
+        });
+    }
 
     // -----------------------------------------------------------------------------------------------------
     // @ Accessors
@@ -38,8 +49,31 @@ export class NavigationService {
             .get<FuseNavigationItem[]>('api/common/navigation')
             .pipe(
                 tap((navigation) => {
-                    this._navigation.next(navigation);
+                    this._rawNavigation = navigation;
+                    this._navigation.next(this._translateNavigation());
                 })
             );
+    }
+
+    private _translateNavigation(
+        items: FuseNavigationItem[] = this._rawNavigation
+    ): FuseNavigationItem[] {
+        return items.map((item) => {
+            const translationKey = item.meta?.translationKey;
+            const translatedItem: FuseNavigationItem = {
+                ...item,
+                title: translationKey
+                    ? this._translocoService.translate(translationKey)
+                    : item.title,
+            };
+
+            if (item.children?.length) {
+                translatedItem.children = this._translateNavigation(
+                    item.children
+                );
+            }
+
+            return translatedItem;
+        });
     }
 }

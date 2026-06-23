@@ -1,6 +1,8 @@
 <div class="p-6 w-full content-container flex flex-col space-y-4">
     <div class="w-full flex justify-between items-center">
-        <h2 class="text-4xl font-semibold">Gestion des réservations</h2>
+        <h2 class="text-4xl font-semibold">
+            {{ 'reservations.title' | transloco }}
+        </h2>
         <!-- New user -->
         <button
             class="ml-4 px-1 sm:px-4 min-w-10 text-white"
@@ -12,7 +14,9 @@
                 class="icon-size-5"
                 [svgIcon]="'heroicons_solid:plus-circle'"
             ></mat-icon>
-            <span class="hidden sm:inline-block ml-2">Réserver</span>
+            <span class="hidden sm:inline-block ml-2">
+                {{ 'reservations.actions.book' | transloco }}
+            </span>
         </button>
     </div>
 
@@ -23,7 +27,7 @@
             class="min-w-60 fuse-mat-no-subcript fuse-mat-rounded fuse-mat-dense"
         >
             <mat-select
-                placeholder="Choisir une résidence"
+                [placeholder]="'dashboard.filters.residence' | transloco"
                 (selectionChange)="onFilterData()"
                 [(ngModel)]="residence"
                 name="residence"
@@ -41,7 +45,7 @@
             class="min-w-60 fuse-mat-no-subcript fuse-mat-rounded fuse-mat-dense"
         >
             <mat-select
-                placeholder="Choisir un événement"
+                [placeholder]="'reservations.filters.event' | transloco"
                 (selectionChange)="onFilterData()"
                 [(ngModel)]="event"
                 name="event"
@@ -63,7 +67,7 @@
                 [matDatepicker]="yearPicker"
                 [formControl]="date"
                 (ngModelChange)="onFilterData()"
-                placeholder="Choisir une année"
+                [placeholder]="'reservations.filters.year' | transloco"
             />
             <mat-datepicker-toggle
                 matSuffix
@@ -80,7 +84,7 @@
             (click)="onPresence()"
             [ngClass]="{ 'bg-green-500 text-white': presence === 1 }"
         >
-            <span>Cérémonie officielle</span>
+            <span>{{ 'reservations.filters.officialCeremony' | transloco }}</span>
         </button>
         <button
             mat-raised-button
@@ -89,7 +93,7 @@
             [disabled]="date.invalid || !event || !residence"
         >
             <mat-icon svgIcon="mat_solid:upload_file" class="mr-1"></mat-icon>
-            <span>exporter</span>
+            <span>{{ 'reservations.actions.export' | transloco }}</span>
         </button>
     </div>
 
@@ -97,21 +101,23 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Invité</th>
-                    <th>Délégation</th>
-                    <th>Nbr personnes</th>
-                    <th>Chambre</th>
-                    <th>Evénement</th>
-                    <th>Accueillant</th>
-                    <th>Responsable</th>
-                    <th>Période séjour</th>
-                    <th>Cérémonie</th>
-                    <th>Actions</th>
+                    <th>{{ 'fields.guest' | transloco }}</th>
+                    <th>{{ 'fields.delegation' | transloco }}</th>
+                    <th>{{ 'fields.peopleCountShort' | transloco }}</th>
+                    <th>{{ 'fields.room' | transloco }}</th>
+                    <th>{{ 'fields.event' | transloco }}</th>
+                    <th>{{ 'fields.host' | transloco }}</th>
+                    <th>{{ 'fields.manager' | transloco }}</th>
+                    <th>{{ 'fields.stayPeriod' | transloco }}</th>
+                    <th>{{ 'fields.ceremony' | transloco }}</th>
+                    <th>{{ 'common.actions' | transloco }}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngIf="data.empty">
-                    <td class="text-center" colspan="10">pas de réservation</td>
+                        <td class="text-center" colspan="10">
+                            {{ 'reservations.empty' | transloco }}
+                        </td>
                 </tr>
                 <tr *ngFor="let res of data.content">
                     <td class="whitespace-nowrap">
@@ -145,7 +151,10 @@
                                 'bg-green-600': res.presence,
                                 'bg-red-600': !res.presence
                             }"
-                            >{{ res.presence ? "oui" : "non" }}</span
+                            >{{
+                                (res.presence ? 'common.yes' : 'common.no')
+                                    | transloco
+                            }}</span
                         >
                     </td>
                     <td class="whitespace-nowrap">

@@ -11,6 +11,7 @@ import { FuseNavigationModule } from '@fuse/components/navigation';
 import { SharedModule } from 'app/shared/shared.module';
 import { ClassicLayoutComponent } from './classic.component';
 import { UserModule } from 'app/layout/common/user/user.module';
+import { LanguageSelectorModule } from 'app/layout/common/language-selector/language-selector.module';
 
 @NgModule({
     declarations: [ClassicLayoutComponent],
@@ -25,6 +26,7 @@ import { UserModule } from 'app/layout/common/user/user.module';
         FuseLoadingBarModule,
         FuseNavigationModule,
         UserModule,
+        LanguageSelectorModule,
         SharedModule,
     ],
     exports: [ClassicLayoutComponent],

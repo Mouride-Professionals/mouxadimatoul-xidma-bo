@@ -23,6 +23,7 @@ import { EvenementService } from '@core/service/evenement/evenement.service';
 import { ReservationService } from '@core/service/reservation/reservation.service';
 import { ResidenceService } from '@core/service/residence/residence.service';
 import { ResponsableService } from '@core/service/responsable/responsable.service';
+import { TranslocoService } from '@ngneat/transloco';
 import { Observable, map } from 'rxjs';
 
 @Component({
@@ -69,7 +70,8 @@ export class ReservationFormComponent implements OnInit {
         private _reservationService: ReservationService,
         private _delagationService: DelegationService,
         private _router: Router,
-        private _snackBar: MatSnackBar
+        private _snackBar: MatSnackBar,
+        private _translocoService: TranslocoService
     ) {}
 
     get f(): any {
@@ -110,9 +112,10 @@ export class ReservationFormComponent implements OnInit {
             .subscribe({
                 next: (res) => {
                     this._snackBar.open(
-                        `${res.length} réservation${
-                            res.length > 1 ? 's' : ''
-                        } effectuée${res.length > 1 ? 's' : ''}`,
+                        this._translocoService.translate(
+                            'reservations.messages.created',
+                            { count: res.length }
+                        ),
                         '',
                         {
                             panelClass: ['bg-green-600', 'text-white'],

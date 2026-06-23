@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Delegation } from '@core/model/delegation.model';
 import { DelegationService } from '@core/service/delegation/delegation.service';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
     selector: 'app-delegation-edit',
@@ -24,6 +25,7 @@ export class DelegationEditComponent {
         private _matDialogRef: MatDialogRef<DelegationEditComponent>,
         private _delegationService: DelegationService,
         private _snackBar: MatSnackBar,
+        private _translocoService: TranslocoService,
         @Inject(MAT_DIALOG_DATA) private delegation: Delegation
     ) {}
 
@@ -46,10 +48,16 @@ export class DelegationEditComponent {
         };
         this._delegationService.updateDelegation(this.delegation).subscribe({
             next: () => {
-                this._snackBar.open('Délégation modifiée avec success', '', {
-                    panelClass: ['bg-green-500', 'text-white'],
-                    duration: 3000,
-                });
+                this._snackBar.open(
+                    this._translocoService.translate(
+                        'delegations.messages.updated'
+                    ),
+                    '',
+                    {
+                        panelClass: ['bg-green-500', 'text-white'],
+                        duration: 3000,
+                    }
+                );
                 this._matDialogRef.close(true);
             },
             error: (err: any) => {

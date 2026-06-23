@@ -1,16 +1,20 @@
 <h2 mat-dialog-title class="text-2xl font-semibold">
-    Ajouter un nouveau pavillon
+    {{ 'residences.pavilions.form.addTitle' | transloco }}
 </h2>
 <div mat-dialog-content>
     <form [formGroup]="pavillonForm" (ngSubmit)="onSubmit()">
         <div class="w-full flex flex-col space-y-4 py-2">
             <div class="w-full flex space-x-4 items-center">
                 <mat-form-field class="w-full" appearance="fill">
-                    <mat-label>Nom du pavillon</mat-label>
+                    <mat-label>
+                        {{ 'residences.pavilions.fields.name' | transloco }}
+                    </mat-label>
                     <input matInput type="text" formControlName="libelle" />
                 </mat-form-field>
                 <mat-form-field class="w-full" appearance="fill">
-                    <mat-label>Niveau</mat-label>
+                    <mat-label>
+                        {{ 'residences.pavilions.fields.level' | transloco }}
+                    </mat-label>
                     <input type="number" matInput formControlName="niveau" />
                 </mat-form-field>
             </div>
@@ -25,7 +29,10 @@
                             matInput
                             type="text"
                             formControlName="numero"
-                            [placeholder]="'Numéro Chambre ' + (i + 1)"
+                            [placeholder]="
+                                'residences.rooms.numberPlaceholder'
+                                    | transloco : { index: i + 1 }
+                            "
                         />
                     </mat-form-field>
                     <mat-form-field class="w-full" appearance="fill">
@@ -34,7 +41,8 @@
                             matInput
                             formControlName="nombrePlace"
                             [placeholder]="
-                                'Nombre de places Chambre ' + (i + 1)
+                                'residences.rooms.placesPlaceholder'
+                                    | transloco : { index: i + 1 }
                             "
                         />
                     </mat-form-field>
@@ -54,7 +62,7 @@
                     mat-icon-button
                     type="button"
                     color="primary"
-                    matTooltip="Ajouter une chambre"
+                    [matTooltip]="'residences.rooms.add' | transloco"
                     matTooltipPosition="above"
                     (click)="onAddChambre()"
                 >
@@ -63,14 +71,16 @@
             </div>
 
             <div class="w-full flex items-center space-x-4">
-                <button mat-raised-button color="primary">Enregistrer</button>
+                <button mat-raised-button color="primary">
+                    {{ 'common.save' | transloco }}
+                </button>
                 <button
                     mat-raised-button
                     color="warn"
                     type="button"
                     (click)="onReset()"
                 >
-                    Annuler
+                    {{ 'common.cancel' | transloco }}
                 </button>
             </div>
         </div>

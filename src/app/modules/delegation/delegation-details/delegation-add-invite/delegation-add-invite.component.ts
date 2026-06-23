@@ -29,7 +29,7 @@ export class DelegationAddInviteComponent implements OnInit {
         email: new FormControl(null, [Validators.email]),
     });
     isEdit = false;
-    title = 'Ajouter un nouveau membre';
+    titleKey = 'delegations.members.addTitle';
 
     constructor(
         private _matDialogRef: MatDialogRef<DelegationAddInviteComponent>,
@@ -41,7 +41,7 @@ export class DelegationAddInviteComponent implements OnInit {
     ngOnInit(): void {
         if (this._data.invite) {
             this.isEdit = true;
-            this.title = 'Modifier un membre';
+            this.titleKey = 'delegations.members.editTitle';
             this.inviteForm.patchValue(this._data.invite);
         }
     }

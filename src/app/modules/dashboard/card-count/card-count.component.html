@@ -10,8 +10,8 @@
                     [svgIcon]="'heroicons_solid:dots-vertical'"></mat-icon>
             </button>
             <mat-menu #summaryMenu="matMenu">
-                <button mat-menu-item>faire une réservation</button>
-                <button mat-menu-item>etat d'une chambres</button>
+                <button mat-menu-item>{{ 'dashboard.actions.createReservation' | transloco }}</button>
+                <button mat-menu-item>{{ 'dashboard.actions.roomStatus' | transloco }}</button>
             </mat-menu>
         </div>
     </div>

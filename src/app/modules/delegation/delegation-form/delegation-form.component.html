@@ -1,6 +1,8 @@
 <div class="p-6 w-full content-container flex flex-col space-y-4">
     <div class="w-full flex justify-between items-center">
-        <h2 class="text-4xl font-semibold">Nouvelle délégation</h2>
+        <h2 class="text-4xl font-semibold">
+            {{ 'delegations.form.newTitle' | transloco }}
+        </h2>
         <!-- New user -->
         <button
             class="ml-4 px-1 sm:px-4 min-w-10 text-white"
@@ -12,7 +14,9 @@
                 class="icon-size-5"
                 svgIcon="mat_solid:arrow_back"
             ></mat-icon>
-            <span class="hidden sm:inline-block ml-2">Retour à la liste</span>
+            <span class="hidden sm:inline-block ml-2">
+                {{ 'common.backToList' | transloco }}
+            </span>
         </button>
     </div>
 
@@ -26,7 +30,7 @@
                 <!-- Info réservation -->
                 <div class="col-span-2 w-full flex space-x-2 items-center">
                     <h2 class="text-xl font-semibold">
-                        Information de la délégation
+                        {{ 'delegations.form.information' | transloco }}
                     </h2>
                     <div class="flex-1">
                         <mat-divider></mat-divider>
@@ -34,13 +38,17 @@
                 </div>
                 <div class="col-span-1 w-full">
                     <mat-form-field class="w-full" appearance="fill">
-                        <mat-label>Nom de la délégation</mat-label>
+                        <mat-label>{{
+                            'fields.delegationName' | transloco
+                        }}</mat-label>
                         <input matInput type="text" formControlName="nom" />
                     </mat-form-field>
                 </div>
                 <div class="col-span-1 w-full">
                     <mat-form-field class="w-full" appearance="fill">
-                        <mat-label>Nombre de personnes</mat-label>
+                        <mat-label>{{
+                            'fields.peopleCount' | transloco
+                        }}</mat-label>
                         <input
                             matInput
                             type="number"
@@ -63,10 +71,10 @@
                             class="col-span-2 w-full flex space-x-2 items-center"
                         >
                             <h2 class="text-xl font-semibold" *ngIf="first">
-                                Responsable de la délégation
+                                {{ 'fields.delegationLeader' | transloco }}
                             </h2>
                             <!-- <h2 class="text-xl font-semibold" *ngIf="!first">
-                                Invité {{ i + 1 }}
+                                {{ 'fields.guest' | transloco }} {{ i + 1 }}
                             </h2> -->
                             <div class="flex-1">
                                 <mat-divider></mat-divider>
@@ -85,29 +93,41 @@
                         </div>
                         <div class="col-span-1 w-full">
                             <mat-form-field class="w-full" appearance="fill">
-                                <mat-label>Prénom</mat-label>
+                                <mat-label>{{
+                                    'fields.firstName' | transloco
+                                }}</mat-label>
                                 <input
                                     matInput
                                     formControlName="prenom"
                                     type="text"
-                                    [placeholder]="'prénom invité ' + (i + 1)"
+                                    [placeholder]="
+                                        ('delegations.form.guestFirstNamePlaceholder'
+                                            | transloco : { index: i + 1 })
+                                    "
                                 />
                             </mat-form-field>
                         </div>
                         <div class="col-span-1 w-full">
                             <mat-form-field class="w-full" appearance="fill">
-                                <mat-label>Nom</mat-label>
+                                <mat-label>{{
+                                    'fields.lastName' | transloco
+                                }}</mat-label>
                                 <input
                                     matInput
                                     formControlName="nom"
                                     type="text"
-                                    [placeholder]="'nom invité ' + (i + 1)"
+                                    [placeholder]="
+                                        ('delegations.form.guestLastNamePlaceholder'
+                                            | transloco : { index: i + 1 })
+                                    "
                                 />
                             </mat-form-field>
                         </div>
                         <div class="col-span-1 w-full">
                             <mat-form-field class="w-full" appearance="fill">
-                                <mat-label>Téléphone</mat-label>
+                                <mat-label>{{
+                                    'fields.phone' | transloco
+                                }}</mat-label>
                                 <input
                                     matInput
                                     formControlName="telephone"
@@ -117,7 +137,9 @@
                         </div>
                         <div class="col-span-1 w-full">
                             <mat-form-field class="w-full" appearance="fill">
-                                <mat-label>Adresse</mat-label>
+                                <mat-label>{{
+                                    'fields.address' | transloco
+                                }}</mat-label>
                                 <input
                                     matInput
                                     formControlName="adresse"
@@ -127,12 +149,15 @@
                         </div>
                         <!-- <div class="col-span-1 w-full">
                             <mat-form-field class="w-full" appearance="fill">
-                                <mat-label>Email</mat-label>
+                                <mat-label>{{ 'fields.email' | transloco }}</mat-label>
                                 <input
                                     matInput
                                     formControlName="email"
                                     type="email"
-                                    [placeholder]="'email invité ' + (i + 1)"
+                                    [placeholder]="
+                                        ('delegations.form.guestEmailPlaceholder'
+                                            | transloco : { index: i + 1 })
+                                    "
                                 />
                             </mat-form-field>
                         </div> -->
@@ -148,14 +173,14 @@
                         color="primary"
                         [disabled]="delegationForm.invalid"
                     >
-                        Enregistrer
+                        {{ 'common.save' | transloco }}
                     </button>
                     <button
                         mat-raised-button
                         class="w-full max-w-60"
                         color="warn"
                     >
-                        Annuler
+                        {{ 'common.cancel' | transloco }}
                     </button>
                 </div>
             </div>

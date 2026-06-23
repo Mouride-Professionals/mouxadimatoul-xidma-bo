@@ -1,25 +1,25 @@
-<h2 mat-dialog-title>Ajouter un membre</h2>
+<h2 mat-dialog-title>{{ titleKey | transloco }}</h2>
 <mat-dialog-content class="mat-typography">
     <form [formGroup]="inviteForm" (ngSubmit)="onSubmit()">
         <div class="w-full flex flex-col space-y-2">
             <mat-form-field class="w-full" appearance="fill">
-                <mat-label>Téléphone</mat-label>
+                <mat-label>{{ 'fields.phone' | transloco }}</mat-label>
                 <input matInput formControlName="telephone" type="text" />
             </mat-form-field>
             <mat-form-field class="w-full" appearance="fill">
-                <mat-label>Prénom</mat-label>
+                <mat-label>{{ 'fields.firstName' | transloco }}</mat-label>
                 <input matInput formControlName="prenom" type="text" />
             </mat-form-field>
             <mat-form-field class="w-full" appearance="fill">
-                <mat-label>Nom</mat-label>
+                <mat-label>{{ 'fields.lastName' | transloco }}</mat-label>
                 <input matInput formControlName="nom" type="text" />
             </mat-form-field>
             <mat-form-field class="w-full" appearance="fill">
-                <mat-label>Adresse</mat-label>
+                <mat-label>{{ 'fields.address' | transloco }}</mat-label>
                 <input matInput formControlName="adresse" type="text" />
             </mat-form-field>
             <mat-form-field class="w-full" appearance="fill">
-                <mat-label>Email</mat-label>
+                <mat-label>{{ 'fields.email' | transloco }}</mat-label>
                 <input matInput formControlName="email" type="email" />
             </mat-form-field>
             <div class="flex justify-end items-center space-x-3">
@@ -29,14 +29,14 @@
                     class="bg-red-600 text-white"
                     type="button"
                 >
-                    Annuler
+                    {{ 'common.cancel' | transloco }}
                 </button>
                 <button
                     mat-flat-button
                     [disabled]="inviteForm.invalid"
                     color="primary"
                 >
-                    Enregistrer
+                    {{ 'common.save' | transloco }}
                 </button>
             </div>
         </div>

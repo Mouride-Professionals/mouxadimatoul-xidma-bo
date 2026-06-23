@@ -6,6 +6,7 @@ import { Residence } from '@core/model/residence.model';
 import { Responsable } from '@core/model/responsable.model';
 import { ResidenceService } from '@core/service/residence/residence.service';
 import { ResponsableService } from '@core/service/responsable/responsable.service';
+import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -23,14 +24,15 @@ export class ResponsableFormComponent implements OnInit {
     responsable: Responsable;
     residences$: Observable<Residence[]>;
     isEdit = false;
-    title: string = 'Ajouter un nouveau responsable';
+    titleKey: string = 'roomManagers.form.addTitle';
 
     constructor(
         private _responsableService: ResponsableService,
         private _matDialogRef: MatDialogRef<ResponsableFormComponent>,
         private _residenceService: ResidenceService,
         @Inject(MAT_DIALOG_DATA) private data: Responsable,
-        private _snackBar: MatSnackBar
+        private _snackBar: MatSnackBar,
+        private _translocoService: TranslocoService
     ) {}
 
     get f(): any {
@@ -47,7 +49,7 @@ export class ResponsableFormComponent implements OnInit {
         }
         if (this.data) {
             this.isEdit = true;
-            this.title = 'Modifier un responsable';
+            this.titleKey = 'roomManagers.form.editTitle';
             this.responsableForm.patchValue(this.data);
         }
     }
@@ -62,10 +64,16 @@ export class ResponsableFormComponent implements OnInit {
             ...this.responsableForm.value,
         };
         this._responsableService.save(_data).subscribe(() => {
-            this._snackBar.open('Responsable modifié avec succés!', '', {
-                panelClass: ['bg-orange-500', 'text-white'],
-                duration: 3000,
-            });
+            this._snackBar.open(
+                this._translocoService.translate(
+                    'roomManagers.messages.updated'
+                ),
+                '',
+                {
+                    panelClass: ['bg-orange-500', 'text-white'],
+                    duration: 3000,
+                }
+            );
             this._matDialogRef.close(true);
         });
     }

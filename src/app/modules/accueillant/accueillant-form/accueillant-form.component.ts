@@ -6,6 +6,7 @@ import { Accueillant } from '@core/model/accueillant.model';
 import { Residence } from '@core/model/residence.model';
 import { AccueillantService } from '@core/service/accueillant/accueillant.service';
 import { ResidenceService } from '@core/service/residence/residence.service';
+import { TranslocoService } from '@ngneat/transloco';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -25,14 +26,15 @@ export class AccueillantFormComponent implements OnInit {
     accueillant: Accueillant;
     residences$: Observable<Residence[]>;
     isEdit = false;
-    title: string = 'Ajouter un nouveau accueillant';
+    titleKey: string = 'hosts.form.addTitle';
 
     constructor(
         private _accueillantService: AccueillantService,
         private _matDialogRef: MatDialogRef<AccueillantFormComponent>,
         private _residenceService: ResidenceService,
         @Inject(MAT_DIALOG_DATA) private data: Accueillant,
-        private _snackBar: MatSnackBar
+        private _snackBar: MatSnackBar,
+        private _translocoService: TranslocoService
     ) {}
 
     get f(): any {
@@ -49,7 +51,7 @@ export class AccueillantFormComponent implements OnInit {
         }
         if (this.data) {
             this.isEdit = true;
-            this.title = 'Modifier un accueillant';
+            this.titleKey = 'hosts.form.editTitle';
             this.accueillantForm.patchValue(this.data);
         }
     }
@@ -63,10 +65,16 @@ export class AccueillantFormComponent implements OnInit {
             this._accueillantService
                 .save(this.accueillantForm.value)
                 .subscribe(() => {
-                    this._snackBar.open('Accueillant ajouté avec succés!', '', {
-                        panelClass: ['bg-green-500', 'text-white'],
-                        duration: 3000,
-                    });
+                    this._snackBar.open(
+                        this._translocoService.translate(
+                            'hosts.messages.created'
+                        ),
+                        '',
+                        {
+                            panelClass: ['bg-green-500', 'text-white'],
+                            duration: 3000,
+                        }
+                    );
                     this._matDialogRef.close(true);
                 });
         } else {
@@ -75,10 +83,16 @@ export class AccueillantFormComponent implements OnInit {
                 ...this.accueillantForm.value,
             };
             this._accueillantService.update(_data).subscribe(() => {
-                this._snackBar.open('Accueillant modifié avec succés!', '', {
-                    panelClass: ['bg-orange-500', 'text-white'],
-                    duration: 3000,
-                });
+                this._snackBar.open(
+                    this._translocoService.translate(
+                        'hosts.messages.updated'
+                    ),
+                    '',
+                    {
+                        panelClass: ['bg-orange-500', 'text-white'],
+                        duration: 3000,
+                    }
+                );
                 this._matDialogRef.close(true);
             });
         }

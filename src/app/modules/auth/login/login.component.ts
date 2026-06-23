@@ -15,9 +15,9 @@ export class LoginComponent implements OnInit {
     @ViewChild('loginNgForm') loginNgForm: NgForm;
     loginForm: FormGroup;
 
-    alert: { type: FuseAlertType; message: string } = {
+    alert: { type: FuseAlertType; messageKey: string } = {
         type: 'success',
-        message: '',
+        messageKey: '',
     };
     showAlert: boolean = false;
 
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
                 Validators.pattern(/^(77|78|75|70|76)\d{7}$/gm),
             ]),
             password: new FormControl('', Validators.required),
-        })
+        });
     }
 
     ngOnInit(): void {}
@@ -70,7 +70,7 @@ export class LoginComponent implements OnInit {
                 // Set the alert
                 this.alert = {
                     type: 'error',
-                    message: 'Numéro ou mot de passe incorrect',
+                    messageKey: 'auth.login.error.invalidCredentials',
                 };
 
                 // Show the alert

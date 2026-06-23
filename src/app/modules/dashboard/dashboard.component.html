@@ -1,12 +1,14 @@
 <div class="p-6 w-full h-full flex flex-col space-y-6">
     <div class="w-full flex justify-between items-center space-x-2">
-        <h2 class="text-2xl font-semibold">Tableau de bord</h2>
+        <h2 class="text-2xl font-semibold">
+            {{ 'dashboard.title' | transloco }}
+        </h2>
         <mat-form-field
             *ngIf="role === 'ROLE_ADMIN'"
             class="min-w-60 fuse-mat-no-subcript fuse-mat-rounded fuse-mat-dense"
         >
             <mat-select
-                placeholder="Choisir une résidence"
+                [placeholder]="'dashboard.filters.residence' | transloco"
                 (selectionChange)="onFilterData()"
                 [(ngModel)]="residence"
                 name="residence"
@@ -28,7 +30,9 @@
                 class="col-span-1 w-full px-4 py-2 bg-white shadow flex justify-between items-center"
             >
                 <div class="flex flex-col space-y-1">
-                    <h5 class="text-md font-medium text-gray-400">Pavillons</h5>
+                    <h5 class="text-md font-medium text-gray-400">
+                        {{ 'dashboard.stats.pavilions' | transloco }}
+                    </h5>
                     <h3 class="text-lg font-semibold text-gray-600">
                         {{ total.pavillons }}
                     </h3>
@@ -46,7 +50,9 @@
                 class="col-span-1 w-full px-4 py-2 bg-white shadow flex justify-between items-center"
             >
                 <div class="flex flex-col space-y-1">
-                    <h5 class="text-md font-medium text-gray-400">Chambres</h5>
+                    <h5 class="text-md font-medium text-gray-400">
+                        {{ 'dashboard.stats.rooms' | transloco }}
+                    </h5>
                     <h3 class="text-lg font-semibold text-gray-600">
                         {{ total.chambres }}
                     </h3>
@@ -57,7 +63,7 @@
             >
                 <div class="flex flex-col space-y-1">
                     <h5 class="text-md font-medium text-gray-400">
-                        Délégations
+                        {{ 'dashboard.stats.delegations' | transloco }}
                     </h5>
                     <h3 class="text-lg font-semibold text-gray-600">
                         {{ total.delegations }}
@@ -69,7 +75,7 @@
             >
                 <div class="flex flex-col space-y-1">
                     <h5 class="text-md font-medium text-gray-400">
-                        Réservations
+                        {{ 'dashboard.stats.reservations' | transloco }}
                     </h5>
                     <h3 class="text-lg font-semibold text-gray-600">
                         {{ total.reservations }}
@@ -80,7 +86,7 @@
 
         <div class="col-span-full flex flex-col flex-auto space-y-4">
             <h2 class="text-2xl font-semibold">
-                Les chambres disponibles par pavillon
+                {{ 'dashboard.charts.availableRoomsByPavilion' | transloco }}
             </h2>
 
             <fuse-card

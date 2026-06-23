@@ -13,6 +13,7 @@ import { EvenementService } from '@core/service/evenement/evenement.service';
 import { ReservationService } from '@core/service/reservation/reservation.service';
 import { ResidenceService } from '@core/service/residence/residence.service';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
+import { TranslocoService } from '@ngneat/transloco';
 import moment, { Moment } from 'moment';
 import { Observable } from 'rxjs';
 
@@ -58,7 +59,8 @@ export class ReservationListComponent implements OnInit {
         private _residenceService: ResidenceService,
         private _reservationService: ReservationService,
         private _fuseConfirmationService: FuseConfirmationService,
-        private _snackBar: MatSnackBar
+        private _snackBar: MatSnackBar,
+        private _translocoService: TranslocoService
     ) {}
 
     ngOnInit(): void {
@@ -103,10 +105,16 @@ export class ReservationListComponent implements OnInit {
                 element.href = URL.createObjectURL(file);
                 document.body.appendChild(element);
                 element.click();
-                this._snackBar.open('Exportation réussie', '', {
-                    panelClass: ['bg-green-500', 'text-white'],
-                    duration: 2000,
-                });
+                this._snackBar.open(
+                    this._translocoService.translate(
+                        'reservations.messages.exported'
+                    ),
+                    '',
+                    {
+                        panelClass: ['bg-green-500', 'text-white'],
+                        duration: 2000,
+                    }
+                );
             });
     }
 
@@ -137,14 +145,24 @@ export class ReservationListComponent implements OnInit {
     onDelete(reservation: Reservation): void {
         this._fuseConfirmationService
             .open({
-                message: `Voulez vous supprimer la reservation de ${reservation.invite.prenom} ${reservation.invite.nom}`,
-                title: 'Confirmation',
+                message: this._translocoService.translate(
+                    'reservations.confirmDelete',
+                    {
+                        firstName: reservation.invite.prenom,
+                        lastName: reservation.invite.nom,
+                    }
+                ),
+                title: this._translocoService.translate(
+                    'common.confirmation'
+                ),
                 actions: {
                     confirm: {
-                        label: 'Oui',
+                        label: this._translocoService.translate('common.yes'),
                         color: 'warn',
                     },
-                    cancel: { label: 'Non' },
+                    cancel: {
+                        label: this._translocoService.translate('common.no'),
+                    },
                 },
             })
             .afterClosed()
@@ -154,8 +172,12 @@ export class ReservationListComponent implements OnInit {
                         .delete(reservation.id)
                         .subscribe(() => {
                             this._snackBar.open(
-                                'Réservation supprimée',
-                                'fermer',
+                                this._translocoService.translate(
+                                    'reservations.messages.deleted'
+                                ),
+                                this._translocoService.translate(
+                                    'common.close'
+                                ),
                                 {
                                     panelClass: ['bg-red-500', 'text-white'],
                                     duration: 3000,

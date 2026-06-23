@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Chambre } from '@core/model/chambre.model';
 import { Pavillon } from '@core/model/pavillon.model';
 import { ChambreService } from '@core/service/chambre/chambre.service';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
     selector: 'app-residences-chambre-form',
@@ -25,13 +26,14 @@ export class ResidencesChambreFormComponent implements OnInit {
     pavillons: Pavillon[] = [];
     paliers: number[] = [];
 
-    title: string = 'Ajouter une nouvelle chambre';
+    titleKey: string = 'residences.rooms.form.addTitle';
     isEdit = false;
 
     constructor(
         private _matDialogRef: MatDialogRef<ResidencesChambreFormComponent>,
         private _chambreService: ChambreService,
         private _snackBar: MatSnackBar,
+        private _translocoService: TranslocoService,
         @Inject(MAT_DIALOG_DATA)
         private _data: { chambre?: Chambre; pavillons: Pavillon[] }
     ) {}
@@ -45,10 +47,21 @@ export class ResidencesChambreFormComponent implements OnInit {
         if (this._data.chambre) {
             this.chambre = this._data.chambre;
             this.isEdit = true;
-            this.title = 'Modifier la chambre';
+            this.titleKey = 'residences.rooms.form.editTitle';
             this.chambreForm.patchValue(this.chambre);
             this.f.pavillon.disable();
         }
+    }
+
+    getFloorLabel(floor: number): string {
+        if (floor === 0) {
+            return this._translocoService.translate(
+                'residences.rooms.groundFloor'
+            );
+        }
+        return this._translocoService.translate('residences.rooms.floorNumber', {
+            floor,
+        });
     }
 
     onSelectPavillon(): void {
@@ -72,10 +85,16 @@ export class ResidencesChambreFormComponent implements OnInit {
         if (this.isEdit) {
             this._chambreService.updateChambre(this.chambre).subscribe({
                 next: (c: Chambre) => {
-                    this._snackBar.open('La chambre a été bien modifié', '', {
-                        panelClass: ['bg-green-500', 'text-white'],
-                        duration: 3000,
-                    });
+                    this._snackBar.open(
+                        this._translocoService.translate(
+                            'residences.rooms.messages.updated'
+                        ),
+                        '',
+                        {
+                            panelClass: ['bg-green-500', 'text-white'],
+                            duration: 3000,
+                        }
+                    );
                     this._matDialogRef.close(true);
                 },
                 error: (err: any) => {
@@ -86,10 +105,16 @@ export class ResidencesChambreFormComponent implements OnInit {
         } else {
             this._chambreService.createChambre(this.chambre).subscribe({
                 next: (c: Chambre) => {
-                    this._snackBar.open('La chambre a été bien créée', '', {
-                        panelClass: ['bg-green-500', 'text-white'],
-                        duration: 3000,
-                    });
+                    this._snackBar.open(
+                        this._translocoService.translate(
+                            'residences.rooms.messages.created'
+                        ),
+                        '',
+                        {
+                            panelClass: ['bg-green-500', 'text-white'],
+                            duration: 3000,
+                        }
+                    );
                     this._matDialogRef.close(true);
                 },
                 error: (err: any) => {

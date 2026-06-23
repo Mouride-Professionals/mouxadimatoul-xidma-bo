@@ -1,8 +1,8 @@
-<h2 mat-dialog-title>Ajouter un événement</h2>
+<h2 mat-dialog-title>{{ titleKey | transloco }}</h2>
 <form [formGroup]="form" (ngSubmit)="saveEvent()">
     <div class="w-full flex flex-col space-y-4">
         <mat-form-field class="w-full gt-xs:pr-3">
-            <mat-label>Nom de l'événement</mat-label>
+            <mat-label>{{ 'fields.eventName' | transloco }}</mat-label>
             <input matInput name="libelle" formControlName="libelle" />
             <mat-icon class="icon-size-5" matSuffix [svgIcon]="'event'">
             </mat-icon>
@@ -13,7 +13,7 @@
                 "
                 class="error-message"
             >
-                le nom est obligatoire!
+                {{ 'validation.required.name' | transloco }}
             </mat-error>
         </mat-form-field>
         <div class="flex justify-end items-center space-x-3">
@@ -23,10 +23,10 @@
                 class="bg-red-600 text-white"
                 type="button"
             >
-                Annuler
+                {{ 'common.cancel' | transloco }}
             </button>
             <button mat-flat-button [disabled]="form.invalid" color="primary">
-                Enregistrer
+                {{ 'common.save' | transloco }}
             </button>
         </div>
     </div>

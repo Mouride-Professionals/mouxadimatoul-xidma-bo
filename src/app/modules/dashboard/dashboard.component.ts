@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '@core/auth/auth.service';
 import { Residence } from '@core/model/residence.model';
 import { ResidenceService } from '@core/service/residence/residence.service';
@@ -6,20 +6,17 @@ import { ChambreDispo } from '@core/service/stats/chambre-dispo.stats';
 import { StatsService } from '@core/service/stats/stats.service';
 import { TotalStats } from '@core/service/stats/total.stats';
 import {
-    ApexAxisChartSeries,
-    ApexChart,
     ApexOptions,
-    ApexTitleSubtitle,
-    ApexXAxis,
 } from 'ng-apexcharts';
-import { Observable } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
     styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
     residences$: Observable<Residence[]>;
     total$: Observable<TotalStats>;
 
@@ -28,11 +25,13 @@ export class DashboardComponent implements OnInit {
 
     residence = 1;
     role: string;
+    private _unsubscribeAll: Subject<any> = new Subject<any>();
 
     constructor(
         private _autthService: AuthService,
         private _residenceService: ResidenceService,
-        private _statService: StatsService
+        private _statService: StatsService,
+        private _translocoService: TranslocoService
     ) {}
 
     ngOnInit(): void {
@@ -42,6 +41,19 @@ export class DashboardComponent implements OnInit {
             this.residence = this._residenceService.residence.id;
         }
         this.onFilterData();
+
+        this._translocoService.langChanges$
+            .pipe(takeUntil(this._unsubscribeAll))
+            .subscribe(() => {
+                if (this.chambreDispos.length) {
+                    this._prepareChartChambreDispo();
+                }
+            });
+    }
+
+    ngOnDestroy(): void {
+        this._unsubscribeAll.next(null);
+        this._unsubscribeAll.complete();
     }
 
     onFilterData(): void {
@@ -97,7 +109,9 @@ export class DashboardComponent implements OnInit {
             },
             series: [
                 {
-                    name: 'Chambre disponible',
+                    name: this._translocoService.translate(
+                        'dashboard.charts.availableRooms'
+                    ),
                     data: this.chambreDispos.map(
                         (c: ChambreDispo) => c.chambres
                     ),

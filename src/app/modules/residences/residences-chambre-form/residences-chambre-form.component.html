@@ -1,9 +1,11 @@
-<h2 mat-dialog-title class="text-2xl font-semibold">{{ title }}</h2>
+<h2 mat-dialog-title class="text-2xl font-semibold">
+    {{ titleKey | transloco }}
+</h2>
 <div mat-dialog-content>
     <form [formGroup]="chambreForm" (ngSubmit)="onSubmit()">
         <div class="w-full flex flex-col space-y-4 py-2">
             <mat-form-field class="w-full" appearance="fill">
-                <mat-label>Pavillon</mat-label>
+                <mat-label>{{ 'fields.pavilion' | transloco }}</mat-label>
                 <mat-select
                     formControlName="pavillon"
                     (selectionChange)="onSelectPavillon()"
@@ -16,40 +18,38 @@
             </mat-form-field>
 
             <mat-form-field class="w-full" appearance="fill">
-                <mat-label>Palier</mat-label>
+                <mat-label>{{ 'residences.rooms.floor' | transloco }}</mat-label>
                 <mat-select
                     formControlName="niveau"
                     [compareWith]="onComparePavillon"
                 >
                     <mat-option *ngFor="let p of paliers" [value]="p">{{
-                        p === 0
-                            ? "Rez de chaussée"
-                            : p === 1
-                            ? p + "er étage"
-                            : p + "e étage"
+                        getFloorLabel(p)
                     }}</mat-option>
                 </mat-select>
             </mat-form-field>
 
             <mat-form-field class="w-full" appearance="fill">
-                <mat-label>Numéro de chambre</mat-label>
+                <mat-label>{{ 'residences.rooms.number' | transloco }}</mat-label>
                 <input matInput type="text" formControlName="numero" />
             </mat-form-field>
 
             <mat-form-field class="w-full" appearance="fill">
-                <mat-label>Nombre de places</mat-label>
+                <mat-label>{{ 'residences.rooms.places' | transloco }}</mat-label>
                 <input matInput type="text" formControlName="nombrePlace" />
             </mat-form-field>
 
             <div class="w-full flex items-center space-x-4">
-                <button mat-raised-button color="primary">Enregistrer</button>
+                <button mat-raised-button color="primary">
+                    {{ 'common.save' | transloco }}
+                </button>
                 <button
                     mat-raised-button
                     color="warn"
                     type="button"
                     (click)="onReset()"
                 >
-                    Annuler
+                    {{ 'common.cancel' | transloco }}
                 </button>
             </div>
         </div>

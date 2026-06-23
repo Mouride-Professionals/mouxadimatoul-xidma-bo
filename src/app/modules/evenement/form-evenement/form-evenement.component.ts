@@ -14,7 +14,7 @@ export class FormEvenementComponent implements OnInit {
     form: FormGroup;
     evenement: Evenement;
     isEdit = false;
-    titre: string = 'Ajouter un nouveau événement';
+    titleKey: string = 'events.form.addTitle';
 
     constructor(
         private _matDialogRef: MatDialogRef<FormEvenementComponent>,
@@ -30,7 +30,7 @@ export class FormEvenementComponent implements OnInit {
         this.eventForm();
         if (this.data) {
             this.isEdit = true;
-            this.titre = 'Modifier un événement';
+            this.titleKey = 'events.form.editTitle';
         }
     }
 

@@ -12,14 +12,16 @@
                 class="icon-size-5"
                 svgIcon="mat_solid:arrow_back"
             ></mat-icon>
-            <span class="hidden sm:inline-block ml-2">Retour à la liste</span>
+            <span class="hidden sm:inline-block ml-2">
+                {{ 'common.backToList' | transloco }}
+            </span>
         </button>
     </div>
 
     <div class="w-full flex justify-end items-center">
         <button mat-raised-button class="" (click)="openModal()">
             <mat-icon svgIcon="heroicons_solid:plus" class="mr-2"></mat-icon>
-            <span>Ajouter</span>
+            <span>{{ 'common.add' | transloco }}</span>
         </button>
     </div>
 
@@ -27,11 +29,15 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th class="whitespace-nowrap">Prénom</th>
-                    <th class="whitespace-nowrap">Nom</th>
-                    <th>Téléphone</th>
-                    <th>Adresse</th>
-                    <th>Actions</th>
+                    <th class="whitespace-nowrap">
+                        {{ 'fields.firstName' | transloco }}
+                    </th>
+                    <th class="whitespace-nowrap">
+                        {{ 'fields.lastName' | transloco }}
+                    </th>
+                    <th>{{ 'fields.phone' | transloco }}</th>
+                    <th>{{ 'fields.address' | transloco }}</th>
+                    <th>{{ 'common.actions' | transloco }}</th>
                 </tr>
             </thead>
             <tbody>

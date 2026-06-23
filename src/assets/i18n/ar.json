@@ -1,0 +1,306 @@
+{
+    "auth": {
+        "login": {
+            "title": "مساحة الإدارة",
+            "phone": "الهاتف",
+            "password": "كلمة المرور",
+            "forgotPassword": "هل نسيت كلمة المرور؟",
+            "submit": "تسجيل الدخول",
+            "error": {
+                "invalidCredentials": "رقم الهاتف أو كلمة المرور غير صحيحة"
+            },
+            "validation": {
+                "phoneRequired": "رقم الهاتف مطلوب",
+                "phoneInvalid": "رقم الهاتف غير صحيح",
+                "passwordRequired": "كلمة المرور مطلوبة"
+            }
+        }
+    },
+    "common": {
+        "actions": "الإجراءات",
+        "add": "إضافة",
+        "all": "الكل",
+        "back": "رجوع",
+        "backToList": "العودة إلى القائمة",
+        "cancel": "إلغاء",
+        "close": "إغلاق",
+        "confirmation": "تأكيد",
+        "delete": "حذف",
+        "details": "التفاصيل",
+        "edit": "تعديل",
+        "id": "المعرف",
+        "new": "جديد",
+        "no": "لا",
+        "save": "حفظ",
+        "search": "بحث",
+        "yes": "نعم"
+    },
+    "dashboard": {
+        "title": "لوحة التحكم",
+        "filters": {
+            "residence": "اختر إقامة"
+        },
+        "stats": {
+            "pavilions": "الأجنحة",
+            "rooms": "الغرف",
+            "delegations": "الوفود",
+            "reservations": "الحجوزات"
+        },
+        "charts": {
+            "availableRooms": "الغرف المتاحة",
+            "availableRoomsByPavilion": "الغرف المتاحة حسب الجناح"
+        },
+        "actions": {
+            "createReservation": "إنشاء حجز",
+            "roomStatus": "حالة الغرف"
+        }
+    },
+    "delegations": {
+        "title": "إدارة الوفود",
+        "empty": "لا توجد وفود",
+        "form": {
+            "newTitle": "وفد جديد",
+            "editTitle": "تعديل الوفد",
+            "information": "معلومات الوفد",
+            "guestFirstNamePlaceholder": "الاسم الشخصي للضيف {{index}}",
+            "guestLastNamePlaceholder": "الاسم العائلي للضيف {{index}}",
+            "guestEmailPlaceholder": "بريد الضيف {{index}}"
+        },
+        "members": {
+            "addTitle": "إضافة عضو",
+            "editTitle": "تعديل عضو"
+        },
+        "messages": {
+            "created": "تمت إضافة الوفد {{name}} بنجاح",
+            "updated": "تم تعديل الوفد بنجاح"
+        }
+    },
+    "language": {
+        "select": "تغيير اللغة",
+        "fr": "Français",
+        "ar": "العربية"
+    },
+    "events": {
+        "title": "إدارة الأحداث",
+        "form": {
+            "addTitle": "إضافة حدث",
+            "editTitle": "تعديل حدث"
+        }
+    },
+    "fields": {
+        "accommodation": "السكن",
+        "address": "العنوان",
+        "arrivalDate": "تاريخ الوصول",
+        "ceremony": "الحفل",
+        "ceremonyPresence": "حضور الحفل",
+        "delegation": "الوفد",
+        "delegationLeader": "رئيس الوفد",
+        "delegationName": "اسم الوفد",
+        "departureDate": "تاريخ المغادرة",
+        "description": "الوصف",
+        "email": "البريد الإلكتروني",
+        "event": "الحدث",
+        "eventName": "اسم الحدث",
+        "firstName": "الاسم الشخصي",
+        "guest": "ضيف",
+        "host": "المستقبل",
+        "lastName": "الاسم العائلي",
+        "manager": "المسؤول",
+        "name": "الاسم",
+        "pavilion": "الجناح",
+        "peopleCount": "عدد الأشخاص",
+        "peopleCountShort": "عدد الأشخاص",
+        "phone": "الهاتف",
+        "residence": "الإقامة",
+        "role": "الدور",
+        "room": "الغرفة",
+        "roomManager": "مسؤول الغرفة",
+        "stayPeriod": "مدة الإقامة",
+        "status": "الحالة"
+    },
+    "hosts": {
+        "title": "إدارة المستقبلين",
+        "empty": "لا يوجد مستقبلون",
+        "form": {
+            "addTitle": "إضافة مستقبل",
+            "editTitle": "تعديل مستقبل"
+        },
+        "messages": {
+            "created": "تمت إضافة المستقبل بنجاح!",
+            "updated": "تم تعديل المستقبل بنجاح!"
+        }
+    },
+    "guests": {
+        "title": "إدارة الضيوف",
+        "form": {
+            "addTitle": "إضافة ضيف"
+        }
+    },
+    "layout": {
+        "logoAlt": "شعار Moukhadimatoul Khidma"
+    },
+    "navigation": {
+        "dashboard": "لوحة التحكم",
+        "users": "إدارة المستخدمين",
+        "residences": "الإقامات",
+        "reservations": "الحجوزات",
+        "events": "الأحداث",
+        "delegations": "الوفود",
+        "hosts": "المستقبلون",
+        "roomManagers": "مسؤولو الغرف"
+    },
+    "profile": {
+        "personalInfo": "المعلومات الشخصية",
+        "description": "ملف المستخدم.",
+        "changePassword": "تغيير كلمة المرور.",
+        "newPassword": "كلمة المرور الجديدة",
+        "confirmPassword": "تأكيد كلمة المرور",
+        "validation": {
+            "passwordRequired": "كلمة المرور مطلوبة",
+            "passwordConfirmationRequired": "تأكيد كلمة المرور مطلوب",
+            "passwordsMustMatch": "يجب أن تتطابق كلمتا المرور"
+        }
+    },
+    "roles": {
+        "admin": "مدير",
+        "responsable": "مسؤول",
+        "accueillant": "مستقبل"
+    },
+    "reservations": {
+        "title": "إدارة الحجوزات",
+        "empty": "لا توجد حجوزات",
+        "confirmDelete": "هل تريد حذف حجز {{firstName}} {{lastName}}؟",
+        "actions": {
+            "book": "حجز",
+            "export": "تصدير"
+        },
+        "filters": {
+            "event": "اختر حدثا",
+            "officialCeremony": "الحفل الرسمي",
+            "year": "اختر سنة"
+        },
+        "form": {
+            "addTitle": "حجز جديد",
+            "editTitle": "تعديل الحجز",
+            "information": "معلومات الحجز",
+            "guestsInformation": "معلومات الضيوف",
+            "from": "من",
+            "to": "إلى",
+            "guestRoom": "غرفة الضيف",
+            "availablePlaces": "مكان/أماكن متاحة"
+        },
+        "messages": {
+            "created": "تم إنشاء {{count}} حجز",
+            "deleted": "تم حذف الحجز",
+            "exported": "تم التصدير بنجاح",
+            "updated": "تم تعديل الحجز"
+        }
+    },
+    "residences": {
+        "title": "الإقامات",
+        "empty": "لا توجد إقامات",
+        "imageAlt": "صورة الإقامة",
+        "coverAlt": "غلاف الإقامة",
+        "pavilionCount": "{{count}} جناح",
+        "actions": {
+            "chooseImage": "اختيار صورة",
+            "list": "قائمة الإقامات",
+            "removeImage": "حذف الصورة"
+        },
+        "fields": {
+            "manager": "مسؤول الإقامة",
+            "name": "اسم الإقامة",
+            "phone": "هاتف الإقامة"
+        },
+        "form": {
+            "addTitle": "إضافة إقامة",
+            "editTitle": "تعديل الإقامة"
+        },
+        "images": {
+            "editPlaceholder": "تعديل صورة الإقامة"
+        },
+        "messages": {
+            "created": "تم إنشاء الإقامة بنجاح",
+            "updated": "تم تعديل الإقامة بنجاح"
+        },
+        "pavilions": {
+            "add": "إضافة جناح",
+            "empty": "لا توجد أجنحة",
+            "fields": {
+                "level": "المستوى",
+                "name": "اسم الجناح"
+            },
+            "form": {
+                "addTitle": "إضافة جناح جديد"
+            },
+            "messages": {
+                "created": "تم إنشاء الجناح بنجاح"
+            }
+        },
+        "rooms": {
+            "add": "إضافة غرفة",
+            "block": "حظر",
+            "empty": "لا توجد غرف",
+            "floor": "الطابق",
+            "floorNumber": "الطابق {{floor}}",
+            "form": {
+                "addTitle": "إضافة غرفة جديدة",
+                "editTitle": "تعديل الغرفة"
+            },
+            "groundFloor": "الطابق الأرضي",
+            "messages": {
+                "created": "تم إنشاء الغرفة بنجاح",
+                "updated": "تم تعديل الغرفة بنجاح"
+            },
+            "number": "رقم الغرفة",
+            "numberPlaceholder": "رقم الغرفة {{index}}",
+            "placeCount": "{{count}} شخص",
+            "places": "عدد الأماكن",
+            "placesPlaceholder": "عدد أماكن الغرفة {{index}}",
+            "title": "الغرف"
+        },
+        "tooltips": {
+            "editImage": "تعديل صورة الإقامة",
+            "editInfo": "تعديل معلومات الإقامة"
+        }
+    },
+    "roomManagers": {
+        "title": "إدارة مسؤولي الغرف",
+        "empty": "لا يوجد مسؤول",
+        "form": {
+            "addTitle": "إضافة مسؤول",
+            "editTitle": "تعديل مسؤول"
+        },
+        "messages": {
+            "updated": "تم تعديل المسؤول بنجاح!"
+        }
+    },
+    "userMenu": {
+        "signedInAs": "متصل بصفته",
+        "profile": "ملفي الشخصي",
+        "signOut": "تسجيل الخروج"
+    },
+    "users": {
+        "title": "إدارة المستخدمين",
+        "empty": "لا يوجد مستخدمون",
+        "confirmStatus": "هل تريد تغيير حالة المستخدم؟",
+        "form": {
+            "addTitle": "إضافة مستخدم",
+            "editTitle": "تعديل مستخدم"
+        },
+        "messages": {
+            "created": "تمت إضافة المستخدم بنجاح!"
+        }
+    },
+    "validation": {
+        "required": {
+            "address": "العنوان مطلوب.",
+            "firstName": "الاسم الشخصي مطلوب.",
+            "lastName": "الاسم العائلي مطلوب.",
+            "manager": "المسؤول مطلوب.",
+            "name": "الاسم مطلوب.",
+            "phone": "رقم الهاتف مطلوب.",
+            "residence": "الإقامة مطلوبة."
+        }
+    }
+}

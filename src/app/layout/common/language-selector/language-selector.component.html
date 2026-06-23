@@ -1,0 +1,24 @@
+<ng-container *ngIf="activeLanguage$ | async as activeLanguage">
+    <button
+        mat-icon-button
+        [matMenuTriggerFor]="languageMenu"
+        [matTooltip]="'language.select' | transloco"
+        type="button"
+    >
+        <mat-icon [svgIcon]="'mat_solid:language'"></mat-icon>
+    </button>
+
+    <mat-menu #languageMenu="matMenu">
+        <button
+            mat-menu-item
+            *ngFor="let language of languages"
+            (click)="setLanguage(language.code)"
+        >
+            <mat-icon
+                *ngIf="language.code === activeLanguage"
+                [svgIcon]="'heroicons_outline:check'"
+            ></mat-icon>
+            <span>{{ 'language.' + language.code | transloco }}</span>
+        </button>
+    </mat-menu>
+</ng-container>

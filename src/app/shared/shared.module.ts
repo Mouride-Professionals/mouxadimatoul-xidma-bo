@@ -29,6 +29,7 @@ import {
     MAT_DATE_LOCALE,
 } from '@angular/material/core';
 import { PaginatorComponent } from './components/paginator/paginator.component';
+import { TranslocoModule } from '@ngneat/transloco';
 
 const LIST_MODULES = [
     MatButtonModule,
@@ -47,6 +48,7 @@ const LIST_MODULES = [
     MatDividerModule,
     MatDatepickerModule,
     NgApexchartsModule,
+    TranslocoModule,
 ];
 
 @NgModule({

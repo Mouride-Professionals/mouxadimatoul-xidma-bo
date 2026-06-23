@@ -1,6 +1,6 @@
 <div class="p-6 w-full h-full flex flex-col space-y-4">
     <h2 class="text-4xl font-semibold">
-        Gestion des responsables des chambres
+        {{ 'roomManagers.title' | transloco }}
     </h2>
 
     <!-- Search -->
@@ -16,7 +16,7 @@
             <input
                 matInput
                 [autocomplete]="'off'"
-                [placeholder]="'Recherche'"
+                [placeholder]="'common.search' | transloco"
                 #searchInput
             />
         </mat-form-field>
@@ -31,7 +31,9 @@
                 class="icon-size-5"
                 [svgIcon]="'heroicons_solid:plus-circle'"
             ></mat-icon>
-            <span class="hidden sm:inline-block ml-2">Nouveau</span>
+            <span class="hidden sm:inline-block ml-2">
+                {{ 'common.new' | transloco }}
+            </span>
         </button>
     </div>
 
@@ -40,15 +42,19 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th class="whitespace-nowrap">Nom</th>
-                    <th>Téléphone</th>
-                    <th>Résidence</th>
-                    <th>Actions</th>
+                    <th class="whitespace-nowrap">
+                        {{ 'fields.name' | transloco }}
+                    </th>
+                    <th>{{ 'fields.phone' | transloco }}</th>
+                    <th>{{ 'fields.residence' | transloco }}</th>
+                    <th>{{ 'common.actions' | transloco }}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngIf="data.empty">
-                    <td class="text-center" colspan="5">Pas de responsable</td>
+                    <td class="text-center" colspan="5">
+                        {{ 'roomManagers.empty' | transloco }}
+                    </td>
                 </tr>
                 <tr *ngFor="let resp of data.content">
                     <td>{{ resp.id }}</td>

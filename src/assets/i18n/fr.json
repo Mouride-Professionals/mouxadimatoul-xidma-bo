@@ -1,0 +1,306 @@
+{
+    "auth": {
+        "login": {
+            "title": "Espace d'administration",
+            "phone": "Téléphone",
+            "password": "Mot de passe",
+            "forgotPassword": "Mot de passe oublié ?",
+            "submit": "Se connecter",
+            "error": {
+                "invalidCredentials": "Numéro ou mot de passe incorrect"
+            },
+            "validation": {
+                "phoneRequired": "Numéro de téléphone obligatoire",
+                "phoneInvalid": "Numéro de téléphone incorrect",
+                "passwordRequired": "Mot de passe obligatoire"
+            }
+        }
+    },
+    "common": {
+        "actions": "Actions",
+        "add": "Ajouter",
+        "all": "Tous",
+        "back": "Retour",
+        "backToList": "Retour à la liste",
+        "cancel": "Annuler",
+        "close": "Fermer",
+        "confirmation": "Confirmation",
+        "delete": "Supprimer",
+        "details": "Détail",
+        "edit": "Éditer",
+        "id": "ID",
+        "new": "Nouveau",
+        "no": "NON",
+        "save": "Enregistrer",
+        "search": "Recherche",
+        "yes": "OUI"
+    },
+    "dashboard": {
+        "title": "Tableau de bord",
+        "filters": {
+            "residence": "Choisir une résidence"
+        },
+        "stats": {
+            "pavilions": "Pavillons",
+            "rooms": "Chambres",
+            "delegations": "Délégations",
+            "reservations": "Réservations"
+        },
+        "charts": {
+            "availableRooms": "Chambre disponible",
+            "availableRoomsByPavilion": "Les chambres disponibles par pavillon"
+        },
+        "actions": {
+            "createReservation": "Faire une réservation",
+            "roomStatus": "État des chambres"
+        }
+    },
+    "delegations": {
+        "title": "Gestion des délégations",
+        "empty": "Pas de délégation",
+        "form": {
+            "newTitle": "Nouvelle délégation",
+            "editTitle": "Modifier la délégation",
+            "information": "Information de la délégation",
+            "guestFirstNamePlaceholder": "Prénom invité {{index}}",
+            "guestLastNamePlaceholder": "Nom invité {{index}}",
+            "guestEmailPlaceholder": "Email invité {{index}}"
+        },
+        "members": {
+            "addTitle": "Ajouter un membre",
+            "editTitle": "Modifier un membre"
+        },
+        "messages": {
+            "created": "La délégation {{name}} est bien ajoutée",
+            "updated": "Délégation modifiée avec succès"
+        }
+    },
+    "language": {
+        "select": "Changer de langue",
+        "fr": "Français",
+        "ar": "العربية"
+    },
+    "events": {
+        "title": "Gestion des événements",
+        "form": {
+            "addTitle": "Ajouter un événement",
+            "editTitle": "Modifier un événement"
+        }
+    },
+    "fields": {
+        "accommodation": "Logement",
+        "address": "Adresse",
+        "arrivalDate": "Date d'arrivée",
+        "ceremony": "Cérémonie",
+        "ceremonyPresence": "Présence cérémonie",
+        "delegation": "Délégation",
+        "delegationLeader": "Chef de délégation",
+        "delegationName": "Nom de la délégation",
+        "departureDate": "Date de sortie",
+        "description": "Description",
+        "email": "Email",
+        "event": "Événement",
+        "eventName": "Nom de l'événement",
+        "firstName": "Prénom",
+        "guest": "Invité",
+        "host": "Accueillant",
+        "lastName": "Nom",
+        "manager": "Responsable",
+        "name": "Nom",
+        "pavilion": "Pavillon",
+        "peopleCount": "Nombre de pers.",
+        "peopleCountShort": "Nbr personnes",
+        "phone": "Téléphone",
+        "residence": "Résidence",
+        "role": "Rôle",
+        "room": "Chambre",
+        "roomManager": "Responsable chambre",
+        "stayPeriod": "Période séjour",
+        "status": "Statut"
+    },
+    "hosts": {
+        "title": "Gestion des accueillants",
+        "empty": "Pas d'accueillant",
+        "form": {
+            "addTitle": "Ajouter un accueillant",
+            "editTitle": "Modifier un accueillant"
+        },
+        "messages": {
+            "created": "Accueillant ajouté avec succès !",
+            "updated": "Accueillant modifié avec succès !"
+        }
+    },
+    "guests": {
+        "title": "Gestion des invités",
+        "form": {
+            "addTitle": "Ajouter un invité"
+        }
+    },
+    "layout": {
+        "logoAlt": "Logo Moukhadimatoul Khidma"
+    },
+    "navigation": {
+        "dashboard": "Dashboard",
+        "users": "Gestion des utilisateurs",
+        "residences": "Résidences",
+        "reservations": "Réservations",
+        "events": "Événements",
+        "delegations": "Délégations",
+        "hosts": "Accueillants",
+        "roomManagers": "Responsables des chambres"
+    },
+    "profile": {
+        "personalInfo": "Information personnelle",
+        "description": "Profil de l'utilisateur.",
+        "changePassword": "Changer le mot de passe.",
+        "newPassword": "Nouveau mot de passe",
+        "confirmPassword": "Confirmer le mot de passe",
+        "validation": {
+            "passwordRequired": "Le mot de passe est obligatoire",
+            "passwordConfirmationRequired": "La confirmation du mot de passe est requise",
+            "passwordsMustMatch": "Les mots de passe doivent correspondre"
+        }
+    },
+    "roles": {
+        "admin": "Administrateur",
+        "responsable": "Responsable",
+        "accueillant": "Accueillant"
+    },
+    "reservations": {
+        "title": "Gestion des réservations",
+        "empty": "Pas de réservation",
+        "confirmDelete": "Voulez-vous supprimer la réservation de {{firstName}} {{lastName}} ?",
+        "actions": {
+            "book": "Réserver",
+            "export": "Exporter"
+        },
+        "filters": {
+            "event": "Choisir un événement",
+            "officialCeremony": "Cérémonie officielle",
+            "year": "Choisir une année"
+        },
+        "form": {
+            "addTitle": "Nouvelle réservation",
+            "editTitle": "Modifier la réservation",
+            "information": "Information de la réservation",
+            "guestsInformation": "Information des invités",
+            "from": "Du",
+            "to": "Au",
+            "guestRoom": "Chambre invité",
+            "availablePlaces": "place(s) disponible(s)"
+        },
+        "messages": {
+            "created": "{{count}} réservation(s) effectuée(s)",
+            "deleted": "Réservation supprimée",
+            "exported": "Exportation réussie",
+            "updated": "Réservation modifiée"
+        }
+    },
+    "residences": {
+        "title": "Résidences",
+        "empty": "Pas de résidence",
+        "imageAlt": "Image de la résidence",
+        "coverAlt": "Couverture de la résidence",
+        "pavilionCount": "{{count}} pavillon(s)",
+        "actions": {
+            "chooseImage": "Choisir image",
+            "list": "Liste des résidences",
+            "removeImage": "Effacer image"
+        },
+        "fields": {
+            "manager": "Responsable résidence",
+            "name": "Nom résidence",
+            "phone": "Téléphone résidence"
+        },
+        "form": {
+            "addTitle": "Ajouter une résidence",
+            "editTitle": "Modifier la résidence"
+        },
+        "images": {
+            "editPlaceholder": "Modification de l'image de la résidence"
+        },
+        "messages": {
+            "created": "Résidence créée avec succès",
+            "updated": "La résidence est modifiée avec succès"
+        },
+        "pavilions": {
+            "add": "Ajouter pavillon",
+            "empty": "Pas de pavillon",
+            "fields": {
+                "level": "Niveau",
+                "name": "Nom du pavillon"
+            },
+            "form": {
+                "addTitle": "Ajouter un nouveau pavillon"
+            },
+            "messages": {
+                "created": "Pavillon créé avec succès"
+            }
+        },
+        "rooms": {
+            "add": "Ajouter une chambre",
+            "block": "Bloquer",
+            "empty": "Pas de chambres",
+            "floor": "Palier",
+            "floorNumber": "{{floor}}e étage",
+            "form": {
+                "addTitle": "Ajouter une nouvelle chambre",
+                "editTitle": "Modifier la chambre"
+            },
+            "groundFloor": "Rez-de-chaussée",
+            "messages": {
+                "created": "La chambre a été bien créée",
+                "updated": "La chambre a été bien modifiée"
+            },
+            "number": "Numéro de chambre",
+            "numberPlaceholder": "Numéro chambre {{index}}",
+            "placeCount": "{{count}} personne(s)",
+            "places": "Nombre de places",
+            "placesPlaceholder": "Nombre de places chambre {{index}}",
+            "title": "Chambres"
+        },
+        "tooltips": {
+            "editImage": "Modifier l'image de la résidence",
+            "editInfo": "Modifier les infos de la résidence"
+        }
+    },
+    "roomManagers": {
+        "title": "Gestion des responsables des chambres",
+        "empty": "Pas de responsable",
+        "form": {
+            "addTitle": "Ajouter un responsable",
+            "editTitle": "Modifier un responsable"
+        },
+        "messages": {
+            "updated": "Responsable modifié avec succès !"
+        }
+    },
+    "userMenu": {
+        "signedInAs": "Connecté en tant que",
+        "profile": "Mon profil",
+        "signOut": "Déconnexion"
+    },
+    "users": {
+        "title": "Gestion des utilisateurs",
+        "empty": "Pas d'utilisateur",
+        "confirmStatus": "Voulez-vous changer le statut de l'utilisateur ?",
+        "form": {
+            "addTitle": "Ajouter un utilisateur",
+            "editTitle": "Modifier un utilisateur"
+        },
+        "messages": {
+            "created": "Utilisateur ajouté avec succès !"
+        }
+    },
+    "validation": {
+        "required": {
+            "address": "L'adresse est obligatoire.",
+            "firstName": "Le prénom est obligatoire.",
+            "lastName": "Le nom est obligatoire.",
+            "manager": "Le responsable est obligatoire.",
+            "name": "Le nom est obligatoire.",
+            "phone": "Le téléphone est obligatoire.",
+            "residence": "La résidence est obligatoire."
+        }
+    }
+}

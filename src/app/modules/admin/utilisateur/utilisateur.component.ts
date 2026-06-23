@@ -10,6 +10,7 @@ import {
     FuseConfirmationService,
 } from '@fuse/services/confirmation';
 import { Pageable } from '@core/model/pageable.model';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
     selector: 'app-utilisateur',
@@ -20,10 +21,10 @@ export class UtilisateurComponent implements OnInit {
     search: string = '';
     data$: Observable<Pageable<Utilisateur>>;
 
-    roleItems: { name: string; value: string }[] = [
-        { name: 'Tous', value: '' },
-        { name: 'Admin', value: 'admin' },
-        { name: 'Responsable', value: 'responsable' },
+    roleItems: { labelKey: string; value: string }[] = [
+        { labelKey: 'common.all', value: '' },
+        { labelKey: 'roles.admin', value: 'admin' },
+        { labelKey: 'roles.responsable', value: 'responsable' },
     ];
 
     role: string = '';
@@ -33,7 +34,8 @@ export class UtilisateurComponent implements OnInit {
     constructor(
         private _matDialog: MatDialog,
         private _utilisateurService: UtilisateurService,
-        private _fuseConfirmation: FuseConfirmationService
+        private _fuseConfirmation: FuseConfirmationService,
+        private _translocoService: TranslocoService
     ) {}
 
     ngOnInit(): void {
@@ -74,9 +76,10 @@ export class UtilisateurComponent implements OnInit {
     confirmStatut(id: number): void {
         this._fuseConfirmation
             .open({
-                title: 'confirmation',
-                // eslint-disable-next-line quotes, @typescript-eslint/quotes
-                message: "Voulez-vous changer le statut de l'utilisateur",
+                title: this._translocoService.translate('common.confirmation'),
+                message: this._translocoService.translate(
+                    'users.confirmStatus'
+                ),
                 icon: {
                     show: true,
                     name: 'heroicons_solid:question-mark-circle',
@@ -84,11 +87,11 @@ export class UtilisateurComponent implements OnInit {
                 },
                 actions: {
                     confirm: {
-                        label: 'OUI',
+                        label: this._translocoService.translate('common.yes'),
                         color: 'primary',
                     },
                     cancel: {
-                        label: 'NON',
+                        label: this._translocoService.translate('common.no'),
                     },
                 },
             })

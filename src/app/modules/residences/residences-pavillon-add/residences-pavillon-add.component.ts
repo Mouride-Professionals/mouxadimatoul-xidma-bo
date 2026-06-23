@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Pavillon } from '@core/model/pavillon.model';
 import { Residence } from '@core/model/residence.model';
 import { PavillonService } from '@core/service/pavillon/pavillon.service';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
     selector: 'app-residences-pavillon-add',
@@ -25,6 +26,7 @@ export class ResidencesPavillonAddComponent implements OnInit {
         private _matDialogRef: MatDialogRef<ResidencesPavillonAddComponent>,
         private _pavillonService: PavillonService,
         private _snackBar: MatSnackBar,
+        private _translocoService: TranslocoService,
         @Inject(MAT_DIALOG_DATA) private residence: Residence
     ) {}
 
@@ -49,10 +51,16 @@ export class ResidencesPavillonAddComponent implements OnInit {
         };
         this._pavillonService.createPavillon(pavillon).subscribe({
             next: (pav: Pavillon) => {
-                this._snackBar.open('Pavillon créé avec success', '', {
-                    panelClass: ['bg-green-500', 'text-white'],
-                    duration: 3000,
-                });
+                this._snackBar.open(
+                    this._translocoService.translate(
+                        'residences.pavilions.messages.created'
+                    ),
+                    '',
+                    {
+                        panelClass: ['bg-green-500', 'text-white'],
+                        duration: 3000,
+                    }
+                );
                 this._matDialogRef.close(pav);
             },
             error: (err: any) => {

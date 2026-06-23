@@ -1,6 +1,8 @@
 <div class="p-6 w-full h-full flex flex-col space-y-6">
     <div class="w-full flex justify-between items-center">
-        <h2 class="text-4xl font-semibold">Ajouter une résidence</h2>
+        <h2 class="text-4xl font-semibold">
+            {{ 'residences.form.addTitle' | transloco }}
+        </h2>
         <button
             class="ml-4 px-1 sm:px-4 min-w-10 text-white"
             mat-flat-button
@@ -11,9 +13,9 @@
                 class="icon-size-5"
                 [svgIcon]="'heroicons_solid:arrow-left'"
             ></mat-icon>
-            <span class="hidden sm:inline-block ml-2"
-                >Listes des résidences</span
-            >
+            <span class="hidden sm:inline-block ml-2">
+                {{ 'residences.actions.list' | transloco }}
+            </span>
         </button>
     </div>
 
@@ -21,7 +23,9 @@
         <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-6 min-w-0">
             <div class="col-span-1 w-full flex flex-col">
                 <mat-form-field class="w-full" appearance="fill">
-                    <mat-label for="libelle">Nom résidence</mat-label>
+                    <mat-label for="libelle">
+                        {{ 'residences.fields.name' | transloco }}
+                    </mat-label>
                     <input matInput name="libelle" formControlName="libelle" />
                     <mat-icon
                         class="icon-size-5"
@@ -32,11 +36,13 @@
                         *ngIf="f.libelle.touched && f.libelle.errors?.required"
                         class="error-message"
                     >
-                        Le nom est obligatoire.
+                        {{ 'validation.required.name' | transloco }}
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field class="w-full" appearance="fill">
-                    <mat-label for="adresse">Adresse</mat-label>
+                    <mat-label for="adresse">
+                        {{ 'fields.address' | transloco }}
+                    </mat-label>
                     <input matInput name="adresse" formControlName="adresse" />
                     <mat-icon
                         class="icon-size-5"
@@ -47,12 +53,12 @@
                         *ngIf="f.adresse.touched && f.adresse.errors?.required"
                         class="error-message"
                     >
-                        L'adresse est obligatoire.
+                        {{ 'validation.required.address' | transloco }}
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field class="w-full" appearance="fill">
                     <mat-label for="telephoneResidence"
-                        >Téléphone résidence</mat-label
+                        >{{ 'residences.fields.phone' | transloco }}</mat-label
                     >
                     <input
                         matInput
@@ -76,15 +82,19 @@
                         "
                         class="error-message"
                     >
-                        Le télephone est obligatoire.
+                        {{ 'validation.required.phone' | transloco }}
                     </mat-error>
                 </mat-form-field>
                 <div class="w-full flex items-center pb-4 space-x-2">
-                    <h4 class="text-lg font-medium">Responsable</h4>
+                    <h4 class="text-lg font-medium">
+                        {{ 'fields.manager' | transloco }}
+                    </h4>
                     <div class="w-full flex-1 h-0.5 bg-slate-400"></div>
                 </div>
                 <mat-form-field class="col-span-1 w-full">
-                    <mat-label for="prenom">Prénom</mat-label>
+                    <mat-label for="prenom">
+                        {{ 'fields.firstName' | transloco }}
+                    </mat-label>
                     <input matInput name="prenom" formControlName="prenom" />
                     <mat-icon
                         class="icon-size-5"
@@ -95,11 +105,13 @@
                         *ngIf="f.prenom.touched && f.prenom.errors?.required"
                         class="error-message"
                     >
-                        Le prénom est obligatoire.
+                        {{ 'validation.required.firstName' | transloco }}
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field class="col-span-1 w-full">
-                    <mat-label for="nom">Nom</mat-label>
+                    <mat-label for="nom">
+                        {{ 'fields.lastName' | transloco }}
+                    </mat-label>
                     <input matInput name="nom" formControlName="nom" />
                     <mat-icon
                         class="icon-size-5"
@@ -110,11 +122,13 @@
                         *ngIf="f.nom.touched && f.nom.errors?.required"
                         class="error-message"
                     >
-                        Le nom est obligatoire.
+                        {{ 'validation.required.lastName' | transloco }}
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field class="col-span-1 w-full">
-                    <mat-label for="telephone">Téléphone</mat-label>
+                    <mat-label for="telephone">
+                        {{ 'fields.phone' | transloco }}
+                    </mat-label>
                     <input
                         matInput
                         maxlength="9"
@@ -132,7 +146,7 @@
                         "
                         class="error-message"
                     >
-                        Le télephone est obligatoire.
+                        {{ 'validation.required.phone' | transloco }}
                     </mat-error>
                 </mat-form-field>
             </div>
@@ -158,7 +172,7 @@
                         class="bg-secondary text-white"
                         (click)="fileInput.click()"
                     >
-                        Choisir image
+                        {{ 'residences.actions.chooseImage' | transloco }}
                     </button>
                     <button
                         *ngIf="isImage"
@@ -167,7 +181,7 @@
                         class="bg-red-600 text-white"
                         (click)="removeImage()"
                     >
-                        Effacer image
+                        {{ 'residences.actions.removeImage' | transloco }}
                     </button>
                 </div>
             </div>
@@ -178,7 +192,7 @@
                     mat-flat-button
                     color="primary"
                 >
-                    Enregistrer
+                    {{ 'common.save' | transloco }}
                 </button>
                 <button
                     mat-flat-button
@@ -186,7 +200,7 @@
                     type="button"
                     class="bg-red-600 text-white"
                 >
-                    Annuler
+                    {{ 'common.cancel' | transloco }}
                 </button>
             </div>
         </div>

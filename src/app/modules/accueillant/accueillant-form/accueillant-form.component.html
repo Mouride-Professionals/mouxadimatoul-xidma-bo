@@ -1,10 +1,12 @@
-<h2 mat-dialog-title>{{ title }}</h2>
+<h2 mat-dialog-title>{{ titleKey | transloco }}</h2>
 <mat-dialog-content>
     <form [formGroup]="accueillantForm" (ngSubmit)="onSubmit()">
         <div class="grid grid-cols-1 gap-4">
             <ng-container formGroupName="utilisateur">
                 <mat-form-field class="col-span-1 w-full">
-                    <mat-label for="prenom">Prénom</mat-label>
+                    <mat-label for="prenom">{{
+                        'fields.firstName' | transloco
+                    }}</mat-label>
                     <input matInput name="prenom" formControlName="prenom" />
                     <mat-icon
                         class="icon-size-5"
@@ -18,11 +20,13 @@
                         "
                         class="error-message"
                     >
-                        Le prénom est obligatoire.
+                        {{ 'validation.required.firstName' | transloco }}
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field class="col-span-1 w-full">
-                    <mat-label for="nom">Nom</mat-label>
+                    <mat-label for="nom">{{
+                        'fields.lastName' | transloco
+                    }}</mat-label>
                     <input matInput name="nom" formControlName="nom" />
                     <mat-icon
                         class="icon-size-5"
@@ -36,11 +40,13 @@
                         "
                         class="error-message"
                     >
-                        Le nom est obligatoire.
+                        {{ 'validation.required.lastName' | transloco }}
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field class="col-span-1 w-full">
-                    <mat-label for="telephone">Téléphone</mat-label>
+                    <mat-label for="telephone">{{
+                        'fields.phone' | transloco
+                    }}</mat-label>
                     <input
                         matInput
                         maxlength="9"
@@ -59,12 +65,14 @@
                         "
                         class="error-message"
                     >
-                        Le télephone est obligatoire.
+                        {{ 'validation.required.phone' | transloco }}
                     </mat-error>
                 </mat-form-field>
             </ng-container>
             <mat-form-field class="col-span-1 w-full">
-                <mat-label for="role">Résidence</mat-label>
+                <mat-label for="role">{{
+                    'fields.residence' | transloco
+                }}</mat-label>
                 <mat-select
                     formControlName="residence"
                     [compareWith]="compareResidence"
@@ -79,7 +87,7 @@
                     *ngIf="f.residence.touched && f.residence.errors?.required"
                     class="error-message"
                 >
-                    La résidence est obligatoire.
+                    {{ 'validation.required.residence' | transloco }}
                 </mat-error>
             </mat-form-field>
         </div>
@@ -90,14 +98,14 @@
                 type="button"
                 class="bg-red-600 text-white"
             >
-                Annuler
+                {{ 'common.cancel' | transloco }}
             </button>
             <button
                 mat-flat-button
                 [disabled]="accueillantForm.invalid"
                 color="primary"
             >
-                Enregistrer
+                {{ 'common.save' | transloco }}
             </button>
         </mat-dialog-actions>
     </form>

@@ -6,6 +6,7 @@ import { Residence } from '@core/model/residence.model';
 import { Utilisateur } from '@core/model/utilisateur.model';
 import { ResidenceService } from '@core/service/residence/residence.service';
 import { UtilisateurService } from '@core/service/utilisateur/utilisateur.service';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
     selector: 'app-residences-edit',
@@ -27,6 +28,7 @@ export class ResidencesEditComponent implements OnInit {
         private _residenceService: ResidenceService,
         private _userService: UtilisateurService,
         private _snackBar: MatSnackBar,
+        private _translocoService: TranslocoService,
         @Inject(MAT_DIALOG_DATA) private residence: Residence
     ) {}
 
@@ -59,7 +61,9 @@ export class ResidencesEditComponent implements OnInit {
         this._residenceService.updateResidence(this.residence).subscribe({
             next: (res: Residence) => {
                 this._snackBar.open(
-                    'La résidence est modifiée avec succes',
+                    this._translocoService.translate(
+                        'residences.messages.updated'
+                    ),
                     '',
                     {
                         panelClass: ['bg-green-500', 'text-white'],

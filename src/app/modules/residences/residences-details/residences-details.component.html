@@ -2,7 +2,7 @@
     <div class="w-full h-90 overflow-hidden relative group/header">
         <img
             [src]="imageResidence"
-            alt="Cover"
+            [alt]="'residences.coverAlt' | transloco"
             class="absolute inset-0 z-0 w-full h-full object-cover"
         />
         <div class="bg-gray-900/50 absolute inset-0 w-full h-full"></div>
@@ -15,12 +15,12 @@
                         class="icon-size-4"
                         svgIcon="heroicons_solid:arrow-left"
                     ></mat-icon>
-                    <span>Retour</span>
+                    <span>{{ 'common.back' | transloco }}</span>
                 </button>
             </div>
             <button
                 mat-icon-button
-                matTooltip="Modifier l'image de la résidence"
+                [matTooltip]="'residences.tooltips.editImage' | transloco"
                 (click)="onOpenResidenceImage()"
             >
                 <mat-icon
@@ -30,7 +30,7 @@
             </button>
             <button
                 mat-icon-button
-                matTooltip="Modifier les infos de la résidence"
+                [matTooltip]="'residences.tooltips.editInfo' | transloco"
                 (click)="onOpenEditResidence()"
             >
                 <mat-icon
@@ -88,7 +88,7 @@
                 class="p-3 w-full flex items-center justify-center space-x-4"
                 *ngIf="pavillons.length <= 0"
             >
-                <span>Pas de pavillon</span>
+                <span>{{ 'residences.pavilions.empty' | transloco }}</span>
             </fuse-card>
             <fuse-card
                 class="p-3 w-full flex items-center justify-between space-x-4 cursor-pointer"
@@ -109,14 +109,16 @@
                     svgIcon="heroicons_solid:plus"
                     class="text-white"
                 ></mat-icon>
-                <span>Ajouter pavillon</span>
+                <span>{{ 'residences.pavilions.add' | transloco }}</span>
             </button>
         </div>
         <fuse-card
             class="col-span-full md:col-span-3 w-full p-4 flex flex-col space-y-4"
         >
             <div class="w-full flex items-center justify-between">
-                <h2 class="text-2xl font-serif">Chambres</h2>
+                <h2 class="text-2xl font-serif">
+                    {{ 'residences.rooms.title' | transloco }}
+                </h2>
                 <button
                     mat-raised-button
                     color="primary"
@@ -124,7 +126,7 @@
                     (click)="onOpenChambreModal()"
                 >
                     <mat-icon svgIcon="heroicons_solid:plus"></mat-icon>
-                    <span>Nouveau</span>
+                    <span>{{ 'common.new' | transloco }}</span>
                 </button>
             </div>
             <div
@@ -135,7 +137,7 @@
                     *ngIf="data.empty"
                     class="col-span-full w-full p-3 flex justify-center items-center"
                 >
-                    <span>Pas de chambres</span>
+                    <span>{{ 'residences.rooms.empty' | transloco }}</span>
                 </fuse-card>
                 <fuse-card
                     class="col-span-1 w-full p-3 flex flex-col space-y-2"
@@ -168,8 +170,9 @@
                             class="icon-size-5"
                         ></mat-icon>
                         <span class="text-lg font-light"
-                            >{{ c.nombrePlace }} personne{{
-                                c.nombrePlace ? "s" : ""
+                            >{{
+                                'residences.rooms.placeCount'
+                                    | transloco : { count: c.nombrePlace }
                             }}</span
                         >
                     </div>
@@ -187,7 +190,9 @@
 
 <mat-menu #menuChambre="matMenu">
     <ng-template matMenuContent let-c="chambre">
-        <button mat-menu-item (click)="onOpenChambreModal(c)">Modifier</button>
-        <button mat-menu-item>Bloquer</button>
+        <button mat-menu-item (click)="onOpenChambreModal(c)">
+            {{ 'common.edit' | transloco }}
+        </button>
+        <button mat-menu-item>{{ 'residences.rooms.block' | transloco }}</button>
     </ng-template>
 </mat-menu>

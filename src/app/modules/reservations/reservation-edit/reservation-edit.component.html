@@ -1,6 +1,8 @@
 <div class="p-6 w-full content-container flex flex-col space-y-4">
     <div class="w-full flex justify-between items-center">
-        <h2 class="text-4xl font-semibold">Modifier la réservation</h2>
+        <h2 class="text-4xl font-semibold">
+            {{ 'reservations.form.editTitle' | transloco }}
+        </h2>
         <!-- New user -->
         <button
             class="ml-4 px-1 sm:px-4 min-w-10 text-white"
@@ -12,7 +14,9 @@
                 class="icon-size-5"
                 svgIcon="mat_solid:arrow_back"
             ></mat-icon>
-            <span class="hidden sm:inline-block ml-2">Annuler</span>
+            <span class="hidden sm:inline-block ml-2">
+                {{ 'common.cancel' | transloco }}
+            </span>
         </button>
     </div>
 
@@ -24,7 +28,7 @@
         >
             <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-6">
                 <mat-form-field class="col-span-1 w-full">
-                    <mat-label>Date d'entrée</mat-label>
+                    <mat-label>{{ 'fields.arrivalDate' | transloco }}</mat-label>
                     <input
                         matInput
                         [matDatepicker]="pickerEntree"
@@ -37,7 +41,7 @@
                     <mat-datepicker #pickerEntree></mat-datepicker>
                 </mat-form-field>
                 <mat-form-field class="col-span-1 w-full">
-                    <mat-label>Date de sortie</mat-label>
+                    <mat-label>{{ 'fields.departureDate' | transloco }}</mat-label>
                     <input
                         matInput
                         [matDatepicker]="pickerSortie"
@@ -51,7 +55,7 @@
                 </mat-form-field>
                 <mat-form-field class="col-span-1 w-full">
                     <mat-label
-                        >Chambre ({{
+                        >{{ 'fields.room' | transloco }} ({{
                             reservation?.chambre.reference
                         }})</mat-label
                     >
@@ -66,12 +70,12 @@
                         >
                             {{ c.reference }} -
                             {{ c.nombrePlace - c.placeReservee }}
-                            place(s) disponible(s)
+                            {{ 'reservations.form.availablePlaces' | transloco }}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field class="col-span-1 w-full">
-                    <mat-label>Accueillant</mat-label>
+                    <mat-label>{{ 'fields.host' | transloco }}</mat-label>
                     <mat-select
                         formControlName="accueillant"
                         [compareWith]="compareAccueillant"
@@ -86,7 +90,7 @@
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field class="col-span-1 w-full">
-                    <mat-label>Responsable</mat-label>
+                    <mat-label>{{ 'fields.manager' | transloco }}</mat-label>
                     <mat-select
                         formControlName="responsable"
                         [compareWith]="compareResponsable"
@@ -102,7 +106,7 @@
                 </mat-form-field>
                 <div class="col-span-1 w-full flex items-center">
                     <mat-checkbox formControlName="presence"
-                        >Présence cérémoonie</mat-checkbox
+                        >{{ 'fields.ceremonyPresence' | transloco }}</mat-checkbox
                     >
                 </div>
                 <div class="col-span-full mb-4 flex w-full items-center">
@@ -112,7 +116,7 @@
                         color="primary"
                         [disabled]="reservationForm.invalid"
                     >
-                        Enregistrer
+                        {{ 'common.save' | transloco }}
                     </button>
                 </div>
             </div>

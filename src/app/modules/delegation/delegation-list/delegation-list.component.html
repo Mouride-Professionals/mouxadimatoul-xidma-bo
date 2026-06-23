@@ -1,5 +1,7 @@
 <div class="p-6 w-full h-full flex flex-col space-y-4">
-    <h2 class="text-4xl font-semibold">Gestion des délégations</h2>
+    <h2 class="text-4xl font-semibold">
+        {{ 'delegations.title' | transloco }}
+    </h2>
 
     <!-- Search -->
     <div class="flex items-center justify-between">
@@ -14,7 +16,7 @@
             <input
                 matInput
                 [autocomplete]="'off'"
-                [placeholder]="'Recherche'"
+                [placeholder]="'common.search' | transloco"
                 #searchInput
             />
         </mat-form-field>
@@ -29,7 +31,9 @@
                 class="icon-size-5"
                 [svgIcon]="'heroicons_solid:plus-circle'"
             ></mat-icon>
-            <span class="hidden sm:inline-block ml-2">Nouveau</span>
+            <span class="hidden sm:inline-block ml-2">
+                {{ 'common.new' | transloco }}
+            </span>
         </button>
     </div>
 
@@ -38,16 +42,22 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Délégation</th>
-                    <th class="whitespace-nowrap">Nombre de pers.</th>
-                    <th class="whitespace-nowrap">Chef de délégation</th>
-                    <th>Téléphone</th>
-                    <th>Actions</th>
+                    <th>{{ 'fields.delegation' | transloco }}</th>
+                    <th class="whitespace-nowrap">
+                        {{ 'fields.peopleCount' | transloco }}
+                    </th>
+                    <th class="whitespace-nowrap">
+                        {{ 'fields.delegationLeader' | transloco }}
+                    </th>
+                    <th>{{ 'fields.phone' | transloco }}</th>
+                    <th>{{ 'common.actions' | transloco }}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngIf="data.empty">
-                    <td class="text-center" colspan="6">Pas de délégation</td>
+                    <td class="text-center" colspan="6">
+                        {{ 'delegations.empty' | transloco }}
+                    </td>
                 </tr>
                 <tr *ngFor="let del of data.content">
                     <td>{{ del.id }}</td>

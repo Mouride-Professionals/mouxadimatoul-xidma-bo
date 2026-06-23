@@ -11,20 +11,22 @@
 <mat-menu [xPosition]="'before'" #userActions="matMenu">
     <button mat-menu-item>
         <span class="flex flex-col leading-none">
-            <span>Connecté en tant que</span>
+            <span>{{ 'userMenu.signedInAs' | transloco }}</span>
             <span class="mt-1.5 text-md font-medium">{{
-                user?.role.libelle | uppercase
+                user?.role?.libelle
+                    ? (('roles.' + user.role.libelle) | transloco | uppercase)
+                    : ''
             }}</span>
         </span>
     </button>
     <mat-divider class="my-2"></mat-divider>
     <button mat-menu-item (click)="showProfile()">
         <mat-icon [svgIcon]="'heroicons_outline:user-circle'"></mat-icon>
-        <span>Mon profil</span>
+        <span>{{ 'userMenu.profile' | transloco }}</span>
     </button>
     <mat-divider class="my-2"></mat-divider>
     <button mat-menu-item (click)="signOut()">
         <mat-icon [svgIcon]="'heroicons_outline:logout'"></mat-icon>
-        <span>Déconnexion</span>
+        <span>{{ 'userMenu.signOut' | transloco }}</span>
     </button>
 </mat-menu>

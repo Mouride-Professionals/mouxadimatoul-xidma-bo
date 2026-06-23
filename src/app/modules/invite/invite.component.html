@@ -1,5 +1,5 @@
 <div class="p-6 w-full h-full flex flex-col space-y-4">
-    <h2 class="text-2xl font-semibold">Gestion des invités</h2>
+    <h2 class="text-2xl font-semibold">{{ 'guests.title' | transloco }}</h2>
 
     <!-- Search -->
     <div class="flex items-center justify-between">
@@ -14,7 +14,7 @@
             <input
                 matInput
                 [autocomplete]="'off'"
-                [placeholder]="'Recherche'"
+                [placeholder]="'common.search' | transloco"
                 #searchInput
             />
         </mat-form-field>
@@ -29,7 +29,9 @@
                 class="icon-size-5"
                 [svgIcon]="'heroicons_solid:plus-circle'"
             ></mat-icon>
-            <span class="hidden sm:inline-block ml-2">Nouveau</span>
+            <span class="hidden sm:inline-block ml-2">
+                {{ 'common.new' | transloco }}
+            </span>
         </button>
     </div>
 
@@ -37,14 +39,14 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Nom</th>
-                    <th>Prenom</th>
-                    <th>Tel</th>
-                    <th>Adresse</th>
-                    <th>Date d'arrivé</th>
-                    <th>Date de sortie</th>
-                    <th>Logement</th>
-                    <th>Actions</th>
+                    <th>{{ 'fields.lastName' | transloco }}</th>
+                    <th>{{ 'fields.firstName' | transloco }}</th>
+                    <th>{{ 'fields.phone' | transloco }}</th>
+                    <th>{{ 'fields.address' | transloco }}</th>
+                    <th>{{ 'fields.arrivalDate' | transloco }}</th>
+                    <th>{{ 'fields.departureDate' | transloco }}</th>
+                    <th>{{ 'fields.accommodation' | transloco }}</th>
+                    <th>{{ 'common.actions' | transloco }}</th>
                 </tr>
             </thead>
             <tbody>
