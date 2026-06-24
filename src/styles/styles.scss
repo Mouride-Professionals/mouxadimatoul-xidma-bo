@@ -6,9 +6,66 @@
 
 .responsive-table {
     @apply relative overflow-x-auto rounded-lg;
+    -webkit-overflow-scrolling: touch;
 }
 
 .mat-form-field-required-marker { color: red !important }
+
+.kh-page {
+    min-height: calc(100dvh - theme('spacing.16'));
+    @apply w-full min-w-0 p-4 sm:p-6 flex flex-col gap-4;
+}
+
+.kh-page-header {
+    @apply w-full flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between;
+}
+
+.kh-page-title {
+    @apply text-2xl sm:text-4xl font-semibold leading-tight;
+}
+
+.kh-page-actions,
+.kh-toolbar {
+    @apply w-full sm:w-auto flex flex-col sm:flex-row flex-wrap gap-2 sm:items-center;
+}
+
+.kh-toolbar {
+    @apply items-stretch;
+}
+
+.kh-form-section {
+    @apply col-span-full w-full flex items-center gap-2;
+}
+
+.kh-form-actions {
+    @apply col-span-full mb-4 flex w-full flex-col sm:flex-row gap-3 sm:items-center;
+}
+
+button:focus-visible,
+a:focus-visible,
+[role='button']:focus-visible,
+.mat-button-focus-overlay:focus-visible {
+    outline: 2px solid var(--fuse-primary);
+    outline-offset: 2px;
+}
+
+.user-status-dot {
+    position: absolute;
+    inset-inline-end: 0;
+    bottom: 0;
+}
+
+.dir-aware-icon {
+    transform-origin: center;
+}
+
+.kh-button-label {
+    margin-inline-start: theme('spacing.2');
+}
+
+.kh-inline-icon {
+    margin-inline-end: theme('spacing.2');
+}
 
 .table {
     border-spacing: 0 8px;
@@ -33,12 +90,32 @@
     }
 }
 
+.table-dense {
+    min-width: 72rem;
+}
+
+@media (max-width: theme('screens.sm')) {
+    .table {
+        th, td {
+            @apply px-4 py-2;
+        }
+    }
+}
+
 .content-container {
-    height: calc(100vh - theme('spacing.16'));
+    min-height: calc(100dvh - theme('spacing.16'));
+}
+
+.lang-ar {
+    font-family: Inter, Tahoma, Arial, sans-serif;
 }
 
 [dir='rtl'] {
     text-align: right;
+
+    .dir-aware-icon {
+        transform: scaleX(-1);
+    }
 
     [class*='space-x-'] > :not([hidden]) ~ :not([hidden]) {
         --tw-space-x-reverse: 1 !important;
@@ -117,24 +194,6 @@
     .mat-form-field,
     .mat-mdc-form-field {
         text-align: right;
-    }
-
-    fuse-vertical-navigation.fuse-vertical-navigation-position-left {
-        .fuse-vertical-navigation-wrapper {
-            left: auto !important;
-            right: 0 !important;
-            box-shadow: inset 1px 0 0 var(--fuse-border) !important;
-        }
-
-        &.fuse-vertical-navigation-mode-over {
-            left: auto !important;
-            right: 0 !important;
-            transform: translate3d(100%, 0, 0) !important;
-
-            &.fuse-vertical-navigation-opened {
-                transform: translate3d(0, 0, 0) !important;
-            }
-        }
     }
 
     .header-actions {

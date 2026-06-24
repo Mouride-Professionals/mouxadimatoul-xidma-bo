@@ -2,6 +2,7 @@
 <button
     mat-icon-button
     [matTooltip]="tooltip || 'Toggle Fullscreen'"
+    [attr.aria-label]="tooltip || 'Toggle Fullscreen'"
     (click)="toggleFullscreen()">
     <ng-container [ngTemplateOutlet]="iconTpl || defaultIconTpl"></ng-container>
 </button>

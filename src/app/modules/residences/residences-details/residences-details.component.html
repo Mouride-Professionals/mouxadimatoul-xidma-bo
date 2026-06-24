@@ -1,5 +1,5 @@
-<div class="w-full h-full flex flex-col flex-auto">
-    <div class="w-full h-90 overflow-hidden relative group/header">
+<div class="w-full min-h-full flex flex-col flex-auto">
+    <div class="w-full min-h-80 sm:h-90 overflow-hidden relative group/header">
         <img
             [src]="imageResidence"
             [alt]="'residences.coverAlt' | transloco"
@@ -7,12 +7,12 @@
         />
         <div class="bg-gray-900/50 absolute inset-0 w-full h-full"></div>
         <div
-            class="absolute top-0 inset-x-0 p-6 flex items-center justify-between space-x-4"
+            class="absolute top-0 inset-x-0 p-4 sm:p-6 flex items-center justify-between gap-3"
         >
             <div class="flex-1">
-                <button mat-flat-button class="" [routerLink]="['/residences']">
+                <button mat-flat-button [routerLink]="['/residences']">
                     <mat-icon
-                        class="icon-size-4"
+                        class="icon-size-4 dir-aware-icon"
                         svgIcon="heroicons_solid:arrow-left"
                     ></mat-icon>
                     <span>{{ 'common.back' | transloco }}</span>
@@ -21,6 +21,7 @@
             <button
                 mat-icon-button
                 [matTooltip]="'residences.tooltips.editImage' | transloco"
+                [attr.aria-label]="'residences.tooltips.editImage' | transloco"
                 (click)="onOpenResidenceImage()"
             >
                 <mat-icon
@@ -31,6 +32,7 @@
             <button
                 mat-icon-button
                 [matTooltip]="'residences.tooltips.editInfo' | transloco"
+                [attr.aria-label]="'residences.tooltips.editInfo' | transloco"
                 (click)="onOpenEditResidence()"
             >
                 <mat-icon
@@ -40,41 +42,41 @@
             </button>
         </div>
         <div
-            class="absolute inset-0 w-full h-full p-8 flex justify-between items-center gap-6 text-white"
+            class="absolute inset-0 w-full h-full p-4 pt-24 sm:p-8 sm:pt-24 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 sm:gap-6 text-white"
         >
             <div class="max-w-128 w-full flex flex-col">
-                <h2 class="text-4xl font-semibold">
+                <h2 class="text-3xl sm:text-4xl font-semibold leading-tight">
                     {{ residence?.libelle | titlecase }}
                 </h2>
                 <!-- <p>
                     {{ residence?.description | summarize : 120 }}
                 </p> -->
             </div>
-            <div class="flex flex-col space-y-4">
-                <div class="flex items-center space-x-4">
+            <div class="w-full sm:w-auto flex flex-col gap-3">
+                <div class="flex items-center gap-3 min-w-0">
                     <mat-icon
-                        class="icon-size-6 text-white"
+                        class="icon-size-5 sm:icon-size-6 text-white shrink-0"
                         [svgIcon]="'heroicons_solid:map'"
                     ></mat-icon>
-                    <span class="text-lg font-semibold">{{
+                    <span class="text-base sm:text-lg font-semibold truncate">{{
                         residence?.adresse
                     }}</span>
                 </div>
-                <div class="flex items-center space-x-4">
+                <div class="flex items-center gap-3 min-w-0">
                     <mat-icon
-                        class="icon-size-6 text-white"
+                        class="icon-size-5 sm:icon-size-6 text-white shrink-0"
                         [svgIcon]="'heroicons_solid:phone'"
                     ></mat-icon>
-                    <span class="text-lg font-semibold">{{
+                    <span class="text-base sm:text-lg font-semibold truncate">{{
                         residence?.telephoneResidence
                     }}</span>
                 </div>
-                <div class="flex items-center space-x-4">
+                <div class="flex items-center gap-3 min-w-0">
                     <mat-icon
-                        class="icon-size-6 text-white"
+                        class="icon-size-5 sm:icon-size-6 text-white shrink-0"
                         [svgIcon]="'heroicons_solid:user'"
                     ></mat-icon>
-                    <span class="text-lg font-semibold"
+                    <span class="text-base sm:text-lg font-semibold truncate"
                         >{{ residence?.responsable.prenom | titlecase }}
                         {{ residence?.responsable.nom | uppercase }}</span
                     >
@@ -82,16 +84,16 @@
             </div>
         </div>
     </div>
-    <div class="w-full p-6 grid grid-cols-4 gap-6">
-        <div class="col-span-full md:col-span-1 flex flex-col space-y-4">
+    <div class="w-full p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div class="flex lg:col-span-1 lg:flex-col gap-3 overflow-x-auto lg:overflow-visible pb-1 lg:pb-0">
             <fuse-card
-                class="p-3 w-full flex items-center justify-center space-x-4"
+                class="p-3 min-w-56 lg:min-w-0 w-full flex items-center justify-center"
                 *ngIf="pavillons.length <= 0"
             >
                 <span>{{ 'residences.pavilions.empty' | transloco }}</span>
             </fuse-card>
             <fuse-card
-                class="p-3 w-full flex items-center justify-between space-x-4 cursor-pointer"
+                class="p-3 min-w-44 lg:min-w-0 w-full flex items-center justify-between gap-3 cursor-pointer"
                 [ngClass]="{
                     'bg-secondary text-white': p.id === pavillonSelected?.id
                 }"
@@ -101,6 +103,7 @@
                 <span>{{ p.libelle | titlecase }}</span>
             </fuse-card>
             <button
+                class="min-w-44 lg:min-w-0"
                 mat-stroked-button
                 color="primary"
                 (click)="onOpenPavillonModal()"
@@ -113,13 +116,14 @@
             </button>
         </div>
         <fuse-card
-            class="col-span-full md:col-span-3 w-full p-4 flex flex-col space-y-4"
+            class="lg:col-span-3 w-full p-4 flex flex-col gap-4"
         >
-            <div class="w-full flex items-center justify-between">
+            <div class="w-full flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                 <h2 class="text-2xl font-serif">
                     {{ 'residences.rooms.title' | transloco }}
                 </h2>
                 <button
+                    class="w-full sm:w-auto"
                     mat-raised-button
                     color="primary"
                     *ngIf="pavillons.length > 0"
@@ -130,7 +134,7 @@
                 </button>
             </div>
             <div
-                class="w-full grid grid-cols-2 md:grid-cols-3 gap-4"
+                class="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
                 *ngIf="data$ | async as data"
             >
                 <fuse-card
@@ -140,22 +144,23 @@
                     <span>{{ 'residences.rooms.empty' | transloco }}</span>
                 </fuse-card>
                 <fuse-card
-                    class="col-span-1 w-full p-3 flex flex-col space-y-2"
+                    class="w-full p-3 flex flex-col gap-2"
                     *ngFor="let c of data.content"
                 >
-                    <div class="flex justify-end items-center space-x-4">
+                    <div class="flex justify-end items-center">
                         <!-- <span class="text-lg font-medium">{{ c.numero }}</span> -->
                         <button
                             mat-icon-button
                             [matMenuTriggerFor]="menuChambre"
                             [matMenuTriggerData]="{ chambre: c }"
+                            [attr.aria-label]="'common.actions' | transloco"
                         >
                             <mat-icon
                                 svgIcon="heroicons_solid:dots-vertical"
                             ></mat-icon>
                         </button>
                     </div>
-                    <div class="flex items-center space-x-2">
+                    <div class="flex items-center gap-2">
                         <mat-icon
                             svgIcon="heroicons_solid:home"
                             class="icon-size-5"
@@ -164,7 +169,7 @@
                             c.reference
                         }}</span>
                     </div>
-                    <div class="flex items-center space-x-2">
+                    <div class="flex items-center gap-2">
                         <mat-icon
                             svgIcon="heroicons_solid:users"
                             class="icon-size-5"

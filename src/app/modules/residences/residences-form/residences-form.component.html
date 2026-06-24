@@ -1,27 +1,29 @@
-<div class="p-6 w-full h-full flex flex-col space-y-6">
-    <div class="w-full flex justify-between items-center">
-        <h2 class="text-4xl font-semibold">
+<div class="kh-page">
+    <div class="kh-page-header">
+        <h2 class="kh-page-title">
             {{ 'residences.form.addTitle' | transloco }}
         </h2>
-        <button
-            class="ml-4 px-1 sm:px-4 min-w-10 text-white"
-            mat-flat-button
-            [color]="'primary'"
-            [routerLink]="['/residences']"
-        >
-            <mat-icon
-                class="icon-size-5"
-                [svgIcon]="'heroicons_solid:arrow-left'"
-            ></mat-icon>
-            <span class="hidden sm:inline-block ml-2">
-                {{ 'residences.actions.list' | transloco }}
-            </span>
-        </button>
+        <div class="kh-page-actions">
+            <button
+                class="w-full sm:w-auto text-white"
+                mat-flat-button
+                [color]="'primary'"
+                [routerLink]="['/residences']"
+            >
+                <mat-icon
+                    class="icon-size-5 dir-aware-icon"
+                    [svgIcon]="'heroicons_solid:arrow-left'"
+                ></mat-icon>
+                <span class="kh-button-label">
+                    {{ 'residences.actions.list' | transloco }}
+                </span>
+            </button>
+        </div>
     </div>
 
     <form [formGroup]="residenceForm" (ngSubmit)="saveResidence()">
-        <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-6 min-w-0">
-            <div class="col-span-1 w-full flex flex-col">
+        <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 min-w-0">
+            <div class="w-full flex flex-col">
                 <mat-form-field class="w-full" appearance="fill">
                     <mat-label for="libelle">
                         {{ 'residences.fields.name' | transloco }}
@@ -85,7 +87,7 @@
                         {{ 'validation.required.phone' | transloco }}
                     </mat-error>
                 </mat-form-field>
-                <div class="w-full flex items-center pb-4 space-x-2">
+                <div class="w-full flex items-center pb-4 gap-2">
                     <h4 class="text-lg font-medium">
                         {{ 'fields.manager' | transloco }}
                     </h4>
@@ -150,7 +152,7 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-            <div class="col-span-1 overflow-hidden flex flex-col space-y-4">
+            <div class="overflow-hidden flex flex-col gap-4">
                 <input
                     type="file"
                     class="hidden"
@@ -164,12 +166,12 @@
                         alt=""
                     />
                 </div>
-                <div class="w-full p-3">
+                <div class="w-full p-3 flex flex-col sm:flex-row gap-3">
                     <button
                         *ngIf="!isImage"
                         mat-flat-button
                         type="button"
-                        class="bg-secondary text-white"
+                        class="w-full sm:w-auto bg-secondary text-white"
                         (click)="fileInput.click()"
                     >
                         {{ 'residences.actions.chooseImage' | transloco }}
@@ -178,18 +180,19 @@
                         *ngIf="isImage"
                         mat-flat-button
                         type="button"
-                        class="bg-red-600 text-white"
+                        class="w-full sm:w-auto bg-red-600 text-white"
                         (click)="removeImage()"
                     >
                         {{ 'residences.actions.removeImage' | transloco }}
                     </button>
                 </div>
             </div>
-            <div class="w-full flex items-center space-x-4">
+            <div class="kh-form-actions">
                 <button
                     [disabled]="residenceForm.invalid"
                     type="submit"
                     mat-flat-button
+                    class="w-full sm:max-w-60"
                     color="primary"
                 >
                     {{ 'common.save' | transloco }}
@@ -198,7 +201,7 @@
                     mat-flat-button
                     mat-dialog-close
                     type="button"
-                    class="bg-red-600 text-white"
+                    class="w-full sm:max-w-60 bg-red-600 text-white"
                 >
                     {{ 'common.cancel' | transloco }}
                 </button>

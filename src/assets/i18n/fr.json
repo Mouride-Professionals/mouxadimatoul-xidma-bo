@@ -5,6 +5,7 @@
             "phone": "Téléphone",
             "password": "Mot de passe",
             "forgotPassword": "Mot de passe oublié ?",
+            "togglePasswordVisibility": "Afficher ou masquer le mot de passe",
             "submit": "Se connecter",
             "error": {
                 "invalidCredentials": "Numéro ou mot de passe incorrect"
@@ -31,6 +32,11 @@
         "id": "ID",
         "new": "Nouveau",
         "no": "NON",
+        "firstPage": "Première page",
+        "lastPage": "Dernière page",
+        "nextPage": "Page suivante",
+        "page": "Page {{page}}",
+        "previousPage": "Page précédente",
         "save": "Enregistrer",
         "search": "Recherche",
         "yes": "OUI"
@@ -210,7 +216,8 @@
         }
     },
     "layout": {
-        "logoAlt": "Logo Moukhadimatoul Khidma"
+        "logoAlt": "Logo Moukhadimatoul Khidma",
+        "openNavigation": "Ouvrir le menu"
     },
     "navigation": {
         "dashboard": "Dashboard",
@@ -260,7 +267,11 @@
             "from": "Du",
             "to": "Au",
             "guestRoom": "Chambre invité",
-            "availablePlaces": "place(s) disponible(s)"
+            "availablePlaces": "place(s) disponible(s)",
+            "selectAllGuests": "Sélectionner tous les invités",
+            "selectGuest": "Sélectionner {{name}}",
+            "markAllCeremonyPresence": "Marquer tous les invités présents à la cérémonie",
+            "markCeremonyPresence": "Présence à la cérémonie pour {{name}}"
         },
         "messages": {
             "created": "{{count}} réservation(s) effectuée(s)",
@@ -349,6 +360,7 @@
         }
     },
     "userMenu": {
+        "open": "Ouvrir le menu utilisateur",
         "signedInAs": "Connecté en tant que",
         "profile": "Mon profil",
         "signOut": "Déconnexion"

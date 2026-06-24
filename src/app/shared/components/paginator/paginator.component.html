@@ -1,15 +1,25 @@
-<div class="w-full p-4 bg-white shadow-lg flex items-center">
-    <div class="flex space-x-1 items-center">
-        <button mat-icon-button (click)="onFirst()" [disabled]="pageable.first">
+<div class="w-full p-3 sm:p-4 bg-white shadow-lg flex items-center overflow-x-auto">
+    <div class="flex gap-1 items-center">
+        <button
+            mat-icon-button
+            (click)="onFirst()"
+            [disabled]="pageable.first"
+            [attr.aria-label]="'common.firstPage' | transloco"
+        >
             <mat-icon
                 svgIcon="heroicons_solid:chevron-double-left"
-                class="icon-size-5"
+                class="icon-size-5 dir-aware-icon"
             ></mat-icon>
         </button>
-        <button mat-icon-button (click)="onPrev()" [disabled]="pageable.first">
+        <button
+            mat-icon-button
+            (click)="onPrev()"
+            [disabled]="pageable.first"
+            [attr.aria-label]="'common.previousPage' | transloco"
+        >
             <mat-icon
                 svgIcon="heroicons_solid:chevron-left"
-                class="icon-size-5"
+                class="icon-size-5 dir-aware-icon"
             ></mat-icon>
         </button>
         <button
@@ -18,6 +28,7 @@
                 'bg-primary-600 text-white': pageable?.number === p - 1
             }"
             (click)="onChoicePage(p)"
+            [attr.aria-label]="'common.page' | transloco : { page: p }"
             *ngFor="
                 let p of pages
                     | slice : (sliceIndex - 1) * 10 : sliceIndex * 10 + 1
@@ -25,16 +36,26 @@
         >
             <span>{{ p }}</span>
         </button>
-        <button mat-icon-button (click)="onNext()" [disabled]="pageable.last">
+        <button
+            mat-icon-button
+            (click)="onNext()"
+            [disabled]="pageable.last"
+            [attr.aria-label]="'common.nextPage' | transloco"
+        >
             <mat-icon
                 svgIcon="heroicons_solid:chevron-right"
-                class="icon-size-5"
+                class="icon-size-5 dir-aware-icon"
             ></mat-icon>
         </button>
-        <button mat-icon-button (click)="onLast()" [disabled]="pageable.last">
+        <button
+            mat-icon-button
+            (click)="onLast()"
+            [disabled]="pageable.last"
+            [attr.aria-label]="'common.lastPage' | transloco"
+        >
             <mat-icon
                 svgIcon="heroicons_solid:chevron-double-right"
-                class="icon-size-5"
+                class="icon-size-5 dir-aware-icon"
             ></mat-icon>
         </button>
     </div>

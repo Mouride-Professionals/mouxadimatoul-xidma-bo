@@ -1,26 +1,27 @@
-<div class="p-6 w-full content-container flex flex-col space-y-4">
-    <div class="w-full flex justify-between items-center">
-        <h2 class="text-4xl font-semibold">{{ delegation?.nom }}</h2>
-        <!-- New user -->
-        <button
-            class="ml-4 px-1 sm:px-4 min-w-10 text-white"
-            mat-flat-button
-            [routerLink]="['/delegations']"
-            [color]="'primary'"
-        >
-            <mat-icon
-                class="icon-size-5"
-                svgIcon="mat_solid:arrow_back"
-            ></mat-icon>
-            <span class="hidden sm:inline-block ml-2">
-                {{ 'common.backToList' | transloco }}
-            </span>
-        </button>
+<div class="kh-page">
+    <div class="kh-page-header">
+        <h2 class="kh-page-title">{{ delegation?.nom }}</h2>
+        <div class="kh-page-actions">
+            <button
+                class="w-full sm:w-auto text-white"
+                mat-flat-button
+                [routerLink]="['/delegations']"
+                [color]="'primary'"
+            >
+                <mat-icon
+                    class="icon-size-5 dir-aware-icon"
+                    svgIcon="mat_solid:arrow_back"
+                ></mat-icon>
+                <span class="kh-button-label">
+                    {{ 'common.backToList' | transloco }}
+                </span>
+            </button>
+        </div>
     </div>
 
-    <div class="w-full flex justify-end items-center">
-        <button mat-raised-button class="" (click)="openModal()">
-            <mat-icon svgIcon="heroicons_solid:plus" class="mr-2"></mat-icon>
+    <div class="kh-page-actions sm:justify-end">
+        <button class="w-full sm:w-auto" mat-raised-button (click)="openModal()">
+            <mat-icon svgIcon="heroicons_solid:plus" class="kh-inline-icon"></mat-icon>
             <span>{{ 'common.add' | transloco }}</span>
         </button>
     </div>
@@ -54,6 +55,7 @@
                         <button
                             mat-icon-button
                             (click)="openModal(delegation?.chef)"
+                            [attr.aria-label]="'common.edit' | transloco"
                         >
                             <mat-icon
                                 class="icon-size-4 text-amber-500"
@@ -72,7 +74,11 @@
                     <td>{{ inv.telephone }}</td>
                     <td>{{ inv.adresse }}</td>
                     <td class="whitespace-nowrap">
-                        <button mat-icon-button (click)="openModal(inv)">
+                        <button
+                            mat-icon-button
+                            (click)="openModal(inv)"
+                            [attr.aria-label]="'common.edit' | transloco"
+                        >
                             <mat-icon
                                 class="icon-size-4 text-amber-500"
                                 svgIcon="heroicons_solid:pencil-alt"

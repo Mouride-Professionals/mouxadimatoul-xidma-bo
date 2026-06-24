@@ -4,7 +4,7 @@
 <div mat-dialog-content>
     <form [formGroup]="pavillonForm" (ngSubmit)="onSubmit()">
         <div class="w-full flex flex-col space-y-4 py-2">
-            <div class="w-full flex space-x-4 items-center">
+            <div class="w-full flex flex-col sm:flex-row gap-4 sm:items-center">
                 <mat-form-field class="w-full" appearance="fill">
                     <mat-label>
                         {{ 'residences.pavilions.fields.name' | transloco }}
@@ -22,7 +22,7 @@
                 <div
                     *ngFor="let cForm of chambres.controls; let i = index"
                     [formGroup]="cForm"
-                    class="w-full flex space-x-4 items-center"
+                    class="w-full flex flex-col sm:flex-row gap-4 sm:items-center"
                 >
                     <mat-form-field class="w-full" appearance="fill">
                         <input
@@ -50,6 +50,7 @@
                         mat-icon-button
                         color="warn"
                         type="button"
+                        [attr.aria-label]="'common.delete' | transloco"
                         (click)="onDeleteChambreItem(i)"
                     >
                         <mat-icon svgIcon="heroicons_solid:trash"></mat-icon>
@@ -63,6 +64,7 @@
                     type="button"
                     color="primary"
                     [matTooltip]="'residences.rooms.add' | transloco"
+                    [attr.aria-label]="'residences.rooms.add' | transloco"
                     matTooltipPosition="above"
                     (click)="onAddChambre()"
                 >
@@ -70,7 +72,7 @@
                 </button>
             </div>
 
-            <div class="w-full flex items-center space-x-4">
+            <div class="w-full flex flex-col sm:flex-row gap-4 sm:items-center">
                 <button mat-raised-button color="primary">
                     {{ 'common.save' | transloco }}
                 </button>

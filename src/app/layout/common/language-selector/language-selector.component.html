@@ -3,6 +3,7 @@
         mat-icon-button
         [matMenuTriggerFor]="languageMenu"
         [matTooltip]="'language.select' | transloco"
+        [attr.aria-label]="'language.select' | transloco"
         type="button"
     >
         <mat-icon [svgIcon]="'mat_solid:language'"></mat-icon>

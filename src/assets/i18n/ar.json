@@ -5,6 +5,7 @@
             "phone": "الهاتف",
             "password": "كلمة المرور",
             "forgotPassword": "هل نسيت كلمة المرور؟",
+            "togglePasswordVisibility": "إظهار أو إخفاء كلمة المرور",
             "submit": "تسجيل الدخول",
             "error": {
                 "invalidCredentials": "رقم الهاتف أو كلمة المرور غير صحيحة"
@@ -31,6 +32,11 @@
         "id": "المعرف",
         "new": "جديد",
         "no": "لا",
+        "firstPage": "الصفحة الأولى",
+        "lastPage": "الصفحة الأخيرة",
+        "nextPage": "الصفحة التالية",
+        "page": "الصفحة {{page}}",
+        "previousPage": "الصفحة السابقة",
         "save": "حفظ",
         "search": "بحث",
         "yes": "نعم"
@@ -210,7 +216,8 @@
         }
     },
     "layout": {
-        "logoAlt": "شعار Moukhadimatoul Khidma"
+        "logoAlt": "شعار Moukhadimatoul Khidma",
+        "openNavigation": "فتح القائمة"
     },
     "navigation": {
         "dashboard": "لوحة التحكم",
@@ -260,7 +267,11 @@
             "from": "من",
             "to": "إلى",
             "guestRoom": "غرفة الضيف",
-            "availablePlaces": "مكان/أماكن متاحة"
+            "availablePlaces": "مكان/أماكن متاحة",
+            "selectAllGuests": "اختيار جميع الضيوف",
+            "selectGuest": "اختيار {{name}}",
+            "markAllCeremonyPresence": "تحديد حضور جميع الضيوف في الحفل",
+            "markCeremonyPresence": "حضور الحفل لـ {{name}}"
         },
         "messages": {
             "created": "تم إنشاء {{count}} حجز",
@@ -349,6 +360,7 @@
         }
     },
     "userMenu": {
+        "open": "فتح قائمة المستخدم",
         "signedInAs": "متصل بصفته",
         "profile": "ملفي الشخصي",
         "signOut": "تسجيل الخروج"

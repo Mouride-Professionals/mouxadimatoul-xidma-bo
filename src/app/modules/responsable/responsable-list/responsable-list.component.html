@@ -1,12 +1,14 @@
-<div class="p-6 w-full h-full flex flex-col space-y-4">
-    <h2 class="text-4xl font-semibold">
-        {{ 'roomManagers.title' | transloco }}
-    </h2>
+<div class="kh-page">
+    <div class="kh-page-header">
+        <h2 class="kh-page-title">
+            {{ 'roomManagers.title' | transloco }}
+        </h2>
+    </div>
 
     <!-- Search -->
-    <div class="flex items-center justify-between">
+    <div class="kh-toolbar sm:flex-row sm:justify-between">
         <mat-form-field
-            class="w-full max-w-120 fuse-mat-rounded fuse-mat-dense fuse-mat-no-subscript ml-4 lg:ml-0"
+            class="w-full sm:max-w-120 fuse-mat-rounded fuse-mat-dense fuse-mat-no-subscript"
         >
             <mat-icon
                 class="icon-size-5"
@@ -20,9 +22,8 @@
                 #searchInput
             />
         </mat-form-field>
-        <!-- New user -->
         <button
-            class="ml-4 px-1 sm:px-4 min-w-10 text-white"
+            class="w-full sm:w-auto text-white"
             mat-flat-button
             [color]="'primary'"
             (click)="onOpenModal()"
@@ -31,7 +32,7 @@
                 class="icon-size-5"
                 [svgIcon]="'heroicons_solid:plus-circle'"
             ></mat-icon>
-            <span class="hidden sm:inline-block ml-2">
+            <span class="kh-button-label">
                 {{ 'common.new' | transloco }}
             </span>
         </button>
@@ -65,7 +66,11 @@
                     <td>{{ resp.telephone }}</td>
                     <td>{{ resp.residence.libelle }}</td>
                     <td class="whitespace-nowrap">
-                        <button mat-icon-button (click)="onOpenModal(resp)">
+                        <button
+                            mat-icon-button
+                            (click)="onOpenModal(resp)"
+                            [attr.aria-label]="'common.edit' | transloco"
+                        >
                             <mat-icon
                                 class="icon-size-4 text-amber-500"
                                 svgIcon="heroicons_solid:pencil-alt"

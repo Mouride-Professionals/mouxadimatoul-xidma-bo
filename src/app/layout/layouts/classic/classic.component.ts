@@ -11,6 +11,7 @@ import { NavigationService } from '@core/navigation/navigation.service';
 import { Utilisateur } from '@core/model/utilisateur.model';
 import { UtilisateurService } from '@core/service/utilisateur/utilisateur.service';
 import { AuthService } from '@core/auth/auth.service';
+import { LanguageService } from '@core/i18n/language.service';
 
 @Component({
     selector: 'classic-layout',
@@ -18,7 +19,8 @@ import { AuthService } from '@core/auth/auth.service';
     encapsulation: ViewEncapsulation.None,
 })
 export class ClassicLayoutComponent implements OnInit, OnDestroy {
-    isScreenSmall: boolean;
+    isNavigationOverlay: boolean;
+    navigationPosition: 'left' | 'right' = 'left';
     navigation: FuseNavigationItem[];
     utilisateur: Utilisateur;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
@@ -30,6 +32,7 @@ export class ClassicLayoutComponent implements OnInit, OnDestroy {
         private _activatedRoute: ActivatedRoute,
         private _router: Router,
         private _authService: AuthService,
+        private _languageService: LanguageService,
         private _utilisateurService: UtilisateurService,
         private _navigationService: NavigationService,
         private _fuseMediaWatcherService: FuseMediaWatcherService,
@@ -78,12 +81,17 @@ export class ClassicLayoutComponent implements OnInit, OnDestroy {
                 this.navigation = navigation;
             });
 
+        this._languageService.activeLanguage$
+            .pipe(takeUntil(this._unsubscribeAll))
+            .subscribe((language) => {
+                this.navigationPosition = language === 'ar' ? 'right' : 'left';
+            });
+
         // Subscribe to media changes
         this._fuseMediaWatcherService.onMediaChange$
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe(({ matchingAliases }) => {
-                // Check if the screen is small
-                this.isScreenSmall = !matchingAliases.includes('md');
+                this.isNavigationOverlay = !matchingAliases.includes('lg');
             });
     }
 

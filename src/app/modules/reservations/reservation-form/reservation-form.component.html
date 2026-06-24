@@ -1,34 +1,35 @@
-<div class="p-6 w-full content-container flex flex-col space-y-4">
-    <div class="w-full flex justify-between items-center">
-        <h2 class="text-4xl font-semibold">
+<div class="kh-page">
+    <div class="kh-page-header">
+        <h2 class="kh-page-title">
             {{ 'reservations.form.addTitle' | transloco }}
         </h2>
-        <!-- New user -->
-        <button
-            class="ml-4 px-1 sm:px-4 min-w-10 text-white"
-            mat-flat-button
-            [routerLink]="['/reservations']"
-            [color]="'warn'"
-        >
-            <mat-icon
-                class="icon-size-5"
-                svgIcon="mat_solid:arrow_back"
-            ></mat-icon>
-            <span class="hidden sm:inline-block ml-2">
-                {{ 'common.cancel' | transloco }}
-            </span>
-        </button>
+        <div class="kh-page-actions">
+            <button
+                class="w-full sm:w-auto text-white"
+                mat-flat-button
+                [routerLink]="['/reservations']"
+                [color]="'warn'"
+            >
+                <mat-icon
+                    class="icon-size-5 dir-aware-icon"
+                    svgIcon="mat_solid:arrow_back"
+                ></mat-icon>
+                <span class="kh-button-label">
+                    {{ 'common.cancel' | transloco }}
+                </span>
+            </button>
+        </div>
     </div>
 
-    <div class="w-full flex-1 h-full overflow-y-scroll">
+    <div class="w-full flex-1 min-h-0">
         <form
             class="w-full"
             [formGroup]="reservationForm"
             (ngSubmit)="onSubmit()"
         >
-            <div class="w-full grid grid-cols-2 gap-6">
+            <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                 <!-- Info réservation -->
-                <div class="col-span-2 w-full flex space-x-2 items-center">
+                <div class="kh-form-section">
                     <h2 class="text-xl font-semibold">
                         {{ 'reservations.form.information' | transloco }}
                     </h2>
@@ -36,7 +37,7 @@
                         <mat-divider></mat-divider>
                     </div>
                 </div>
-                <div class="col-span-1 w-full">
+                <div class="w-full">
                     <mat-form-field class="w-full" appearance="fill">
                         <mat-label>{{ 'fields.stayPeriod' | transloco }}</mat-label>
                         <mat-date-range-input
@@ -78,7 +79,7 @@
                         <mat-date-range-picker #picker></mat-date-range-picker>
                     </mat-form-field>
                 </div>
-                <div class="col-span-1 w-full">
+                <div class="w-full">
                     <mat-form-field class="w-full" appearance="fill">
                         <mat-label>{{ 'fields.event' | transloco }}</mat-label>
                         <mat-select formControlName="evenement">
@@ -90,7 +91,7 @@
                         </mat-select>
                     </mat-form-field>
                 </div>
-                <div class="col-span-1 w-full">
+                <div class="w-full">
                     <mat-form-field class="w-full" appearance="fill">
                         <mat-label>{{ 'fields.residence' | transloco }}</mat-label>
                         <mat-select
@@ -107,7 +108,7 @@
                 </div>
 
                 <!-- Info réservation -->
-                <div class="col-span-2 w-full flex space-x-2 items-center">
+                <div class="kh-form-section">
                     <h2 class="text-xl font-semibold">
                         {{ 'reservations.form.guestsInformation' | transloco }}
                     </h2>
@@ -115,7 +116,7 @@
                         <mat-divider></mat-divider>
                     </div>
                 </div>
-                <div class="col-span-1 w-full">
+                <div class="w-full">
                     <mat-form-field class="w-full" appearance="fill">
                         <mat-label>{{ 'fields.delegation' | transloco }}</mat-label>
                         <mat-select
@@ -134,13 +135,17 @@
                     class="col-span-full w-full flex items-center responsive-table"
                     *ngIf="inviteDelegations.length > 0"
                 >
-                    <table class="table">
+                    <table class="table table-dense">
                         <thead>
                             <tr>
                                 <th>
                                     <mat-checkbox
                                         (change)="onCheckAll($event)"
                                         formControlName="checkAll"
+                                        [attr.aria-label]="
+                                            'reservations.form.selectAllGuests'
+                                                | transloco
+                                        "
                                     ></mat-checkbox>
                                 </th>
                                 <th>{{ 'fields.guest' | transloco }}</th>
@@ -154,7 +159,7 @@
                                     {{ 'fields.manager' | transloco }}
                                 </th>
                                 <th class="text-center">
-                                    <span class="mr-2">
+                                    <span class="kh-inline-icon">
                                         {{
                                             'fields.ceremonyPresence'
                                                 | transloco
@@ -163,6 +168,10 @@
                                     <mat-checkbox
                                         formControlName="ceremonie"
                                         (change)="onChoiceAllPresence()"
+                                        [attr.aria-label]="
+                                            'reservations.form.markAllCeremonyPresence'
+                                                | transloco
+                                        "
                                     ></mat-checkbox>
                                 </th>
                             </tr>
@@ -179,6 +188,16 @@
                                     <mat-checkbox
                                         (change)="onCheckInvite(i)"
                                         formControlName="checked"
+                                        [attr.aria-label]="
+                                            'reservations.form.selectGuest'
+                                                | transloco
+                                                    : {
+                                                          name:
+                                                              inv.prenom +
+                                                              ' ' +
+                                                              inv.nom
+                                                      }
+                                        "
                                     ></mat-checkbox>
                                 </td>
                                 <td class="whitespace-nowrap">
@@ -274,6 +293,16 @@
                                     <mat-checkbox
                                         (change)="onPresence()"
                                         formControlName="presence"
+                                        [attr.aria-label]="
+                                            'reservations.form.markCeremonyPresence'
+                                                | transloco
+                                                    : {
+                                                          name:
+                                                              inv.prenom +
+                                                              ' ' +
+                                                              inv.nom
+                                                      }
+                                        "
                                     ></mat-checkbox>
                                 </td>
                             </tr>
@@ -281,10 +310,10 @@
                     </table>
                 </div>
 
-                <div class="col-span-full mb-4 flex w-full items-center">
+                <div class="kh-form-actions">
                     <button
                         mat-raised-button
-                        class="w-full max-w-60"
+                        class="w-full sm:max-w-60"
                         color="primary"
                         [disabled]="reservationForm.invalid"
                     >

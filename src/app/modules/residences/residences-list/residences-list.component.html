@@ -1,22 +1,24 @@
-<div class="p-6 w-full h-full flex flex-col space-y-6">
-    <div class="w-full flex justify-between items-center">
-        <h2 class="text-4xl font-semibold">
+<div class="kh-page">
+    <div class="kh-page-header">
+        <h2 class="kh-page-title">
             {{ 'residences.title' | transloco }}
         </h2>
-        <button
-            class="ml-4 px-1 sm:px-4 min-w-10 text-white"
-            mat-flat-button
-            [color]="'primary'"
-            [routerLink]="['nouveau']"
-        >
-            <mat-icon
-                class="icon-size-5"
-                [svgIcon]="'heroicons_solid:plus-circle'"
-            ></mat-icon>
-            <span class="hidden sm:inline-block ml-2">
-                {{ 'common.add' | transloco }}
-            </span>
-        </button>
+        <div class="kh-page-actions">
+            <button
+                class="w-full sm:w-auto text-white"
+                mat-flat-button
+                [color]="'primary'"
+                [routerLink]="['nouveau']"
+            >
+                <mat-icon
+                    class="icon-size-5"
+                    [svgIcon]="'heroicons_solid:plus-circle'"
+                ></mat-icon>
+                <span class="kh-button-label">
+                    {{ 'common.add' | transloco }}
+                </span>
+            </button>
+        </div>
     </div>
 
     <div
@@ -34,11 +36,11 @@
                     [alt]="'residences.imageAlt' | transloco"
                 />
             </div>
-            <div class="flex flex-col flex-auto m-8 mb-4">
+            <div class="flex flex-col flex-auto m-4 sm:m-8 sm:mb-4">
                 <div class="text-2xl font-semibold leading-tight">
                     {{ residence.libelle }}
                 </div>
-                <div class="flex items-center leading-none mt-2 -ml-1">
+                <div class="flex items-center leading-none mt-2">
                     <!-- <div class="text-secondary ml-2">4.5</div>
                     <div class="text-secondary mx-2">&bull;</div> -->
                     <div class="text-secondary">
@@ -52,9 +54,9 @@
                 <div class="flex-1 mt-6">
                     {{ residence.description | summarize : 100 }}
                 </div>
-                <div class="flex items-center mt-3 -mx-3">
+                <div class="flex items-center mt-3">
                     <a
-                        class="px-3 mr-1"
+                        class="w-full sm:w-auto"
                         mat-flat-button
                         [color]="'primary'"
                         [routerLink]="[residence.id]"

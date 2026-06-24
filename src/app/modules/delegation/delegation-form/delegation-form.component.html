@@ -1,34 +1,35 @@
-<div class="p-6 w-full content-container flex flex-col space-y-4">
-    <div class="w-full flex justify-between items-center">
-        <h2 class="text-4xl font-semibold">
+<div class="kh-page">
+    <div class="kh-page-header">
+        <h2 class="kh-page-title">
             {{ 'delegations.form.newTitle' | transloco }}
         </h2>
-        <!-- New user -->
-        <button
-            class="ml-4 px-1 sm:px-4 min-w-10 text-white"
-            mat-flat-button
-            [routerLink]="['/delegations']"
-            [color]="'primary'"
-        >
-            <mat-icon
-                class="icon-size-5"
-                svgIcon="mat_solid:arrow_back"
-            ></mat-icon>
-            <span class="hidden sm:inline-block ml-2">
-                {{ 'common.backToList' | transloco }}
-            </span>
-        </button>
+        <div class="kh-page-actions">
+            <button
+                class="w-full sm:w-auto text-white"
+                mat-flat-button
+                [routerLink]="['/delegations']"
+                [color]="'primary'"
+            >
+                <mat-icon
+                    class="icon-size-5 dir-aware-icon"
+                    svgIcon="mat_solid:arrow_back"
+                ></mat-icon>
+                <span class="kh-button-label">
+                    {{ 'common.backToList' | transloco }}
+                </span>
+            </button>
+        </div>
     </div>
 
-    <fuse-card class="w-full flex-1 h-full overflow-y-scroll p-4">
+    <fuse-card class="w-full flex-1 min-h-0 p-4">
         <form
             class="w-full"
             [formGroup]="delegationForm"
             (ngSubmit)="onSubmit()"
         >
-            <div class="w-full grid grid-cols-2 gap-6">
+            <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                 <!-- Info réservation -->
-                <div class="col-span-2 w-full flex space-x-2 items-center">
+                <div class="kh-form-section">
                     <h2 class="text-xl font-semibold">
                         {{ 'delegations.form.information' | transloco }}
                     </h2>
@@ -36,7 +37,7 @@
                         <mat-divider></mat-divider>
                     </div>
                 </div>
-                <div class="col-span-1 w-full">
+                <div class="w-full">
                     <mat-form-field class="w-full" appearance="fill">
                         <mat-label>{{
                             'fields.delegationName' | transloco
@@ -44,7 +45,7 @@
                         <input matInput type="text" formControlName="nom" />
                     </mat-form-field>
                 </div>
-                <div class="col-span-1 w-full">
+                <div class="w-full">
                     <mat-form-field class="w-full" appearance="fill">
                         <mat-label>{{
                             'fields.peopleCount' | transloco
@@ -67,9 +68,7 @@
                         "
                         [formGroup]="guestForm"
                     >
-                        <div
-                            class="col-span-2 w-full flex space-x-2 items-center"
-                        >
+                        <div class="kh-form-section">
                             <h2 class="text-xl font-semibold" *ngIf="first">
                                 {{ 'fields.delegationLeader' | transloco }}
                             </h2>
@@ -91,7 +90,7 @@
                                 ></mat-icon>
                             </button>
                         </div>
-                        <div class="col-span-1 w-full">
+                        <div class="w-full">
                             <mat-form-field class="w-full" appearance="fill">
                                 <mat-label>{{
                                     'fields.firstName' | transloco
@@ -107,7 +106,7 @@
                                 />
                             </mat-form-field>
                         </div>
-                        <div class="col-span-1 w-full">
+                        <div class="w-full">
                             <mat-form-field class="w-full" appearance="fill">
                                 <mat-label>{{
                                     'fields.lastName' | transloco
@@ -123,7 +122,7 @@
                                 />
                             </mat-form-field>
                         </div>
-                        <div class="col-span-1 w-full">
+                        <div class="w-full">
                             <mat-form-field class="w-full" appearance="fill">
                                 <mat-label>{{
                                     'fields.phone' | transloco
@@ -135,7 +134,7 @@
                                 />
                             </mat-form-field>
                         </div>
-                        <div class="col-span-1 w-full">
+                        <div class="w-full">
                             <mat-form-field class="w-full" appearance="fill">
                                 <mat-label>{{
                                     'fields.address' | transloco
@@ -164,12 +163,10 @@
                     </ng-container>
                 </ng-container>
 
-                <div
-                    class="col-span-full mb-4 space-x-4 flex w-full items-center"
-                >
+                <div class="kh-form-actions">
                     <button
                         mat-raised-button
-                        class="w-full max-w-60"
+                        class="w-full sm:max-w-60"
                         color="primary"
                         [disabled]="delegationForm.invalid"
                     >
@@ -177,7 +174,7 @@
                     </button>
                     <button
                         mat-raised-button
-                        class="w-full max-w-60"
+                        class="w-full sm:max-w-60"
                         color="warn"
                     >
                         {{ 'common.cancel' | transloco }}
