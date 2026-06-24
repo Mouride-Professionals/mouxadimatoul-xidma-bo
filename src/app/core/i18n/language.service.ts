@@ -3,7 +3,7 @@ import { Inject, Injectable, Optional } from '@angular/core';
 import { Directionality } from '@angular/cdk/bidi';
 import { DateAdapter } from '@angular/material/core';
 import { TranslocoService } from '@ngneat/transloco';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, firstValueFrom, Observable } from 'rxjs';
 
 export type AppLanguage = 'fr' | 'ar';
 
@@ -53,8 +53,13 @@ export class LanguageService {
         return this._activeLanguage.value;
     }
 
-    initialize(): void {
-        this.setLanguage(this._resolveInitialLanguage(), false);
+    initialize(): Promise<void> {
+        const language = this._resolveInitialLanguage();
+
+        this.setLanguage(language, false);
+        return firstValueFrom(this._translocoService.load(language)).then(
+            () => undefined
+        );
     }
 
     setLanguage(language: AppLanguage, persist: boolean = true): void {

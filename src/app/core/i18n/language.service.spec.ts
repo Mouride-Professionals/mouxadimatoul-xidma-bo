@@ -4,6 +4,7 @@ import { DateAdapter } from '@angular/material/core';
 import { EventEmitter } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { TranslocoService } from '@ngneat/transloco';
+import { of } from 'rxjs';
 
 import { LanguageService } from './language.service';
 
@@ -31,8 +32,9 @@ describe('LanguageService', () => {
 
         translocoService = jasmine.createSpyObj<TranslocoService>(
             'TranslocoService',
-            ['setActiveLang']
+            ['load', 'setActiveLang']
         );
+        translocoService.load.and.returnValue(of({}));
         dateAdapter = jasmine.createSpyObj<DateAdapter<unknown>>(
             'DateAdapter',
             ['setLocale']
@@ -59,13 +61,14 @@ describe('LanguageService', () => {
         localStorage.clear();
     });
 
-    it('uses Arabic from the browser on first visit', () => {
+    it('uses Arabic from the browser on first visit', async () => {
         setBrowserLanguages(['ar-SN', 'fr-FR'], 'fr-FR');
 
-        service.initialize();
+        await service.initialize();
 
         expect(service.activeLanguage).toBe('ar');
         expect(translocoService.setActiveLang).toHaveBeenCalledWith('ar');
+        expect(translocoService.load).toHaveBeenCalledWith('ar');
         expect(document.documentElement.lang).toBe('ar');
         expect(document.documentElement.dir).toBe('rtl');
         expect(document.body.classList).toContain('lang-ar');
@@ -74,22 +77,23 @@ describe('LanguageService', () => {
         expect(directionality.value).toBe('rtl');
     });
 
-    it('falls back to French for unsupported browser languages', () => {
+    it('falls back to French for unsupported browser languages', async () => {
         setBrowserLanguages(['en-US'], 'en-US');
 
-        service.initialize();
+        await service.initialize();
 
         expect(service.activeLanguage).toBe('fr');
         expect(translocoService.setActiveLang).toHaveBeenCalledWith('fr');
+        expect(translocoService.load).toHaveBeenCalledWith('fr');
         expect(document.documentElement.lang).toBe('fr');
         expect(document.documentElement.dir).toBe('ltr');
     });
 
-    it('lets a stored manual choice override the browser language', () => {
+    it('lets a stored manual choice override the browser language', async () => {
         localStorage.setItem('khidma.language', 'fr');
         setBrowserLanguages(['ar'], 'ar');
 
-        service.initialize();
+        await service.initialize();
 
         expect(service.activeLanguage).toBe('fr');
         expect(document.documentElement.dir).toBe('ltr');

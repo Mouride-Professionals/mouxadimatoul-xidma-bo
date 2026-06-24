@@ -30,7 +30,7 @@ registerLocaleData(localeFr, 'fr');
 registerLocaleData(localeAr, 'ar');
 
 export const initializeLanguage =
-    (languageService: LanguageService): (() => void) =>
+    (languageService: LanguageService): (() => Promise<void>) =>
     () =>
         languageService.initialize();
 
