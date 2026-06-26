@@ -1,0 +1,160 @@
+<form [formGroup]="delegationForm" (ngSubmit)="onSubmit()">
+    <h2 mat-dialog-title>
+        {{ 'delegations.form.createFromReservationTitle' | transloco }}
+    </h2>
+
+    <mat-dialog-content class="reservation-delegation-dialog">
+        <mat-form-field class="w-full" appearance="fill">
+            <mat-label>{{ 'fields.delegationName' | transloco }}</mat-label>
+            <input matInput formControlName="nom" />
+            <mat-error *ngIf="delegationForm.get('nom').hasError('required')">
+                {{ 'validation.required.name' | transloco }}
+            </mat-error>
+            <mat-error *ngIf="delegationForm.get('nom').hasError('minlength')">
+                {{
+                    'validation.minLength'
+                        | transloco
+                            : {
+                                  requiredLength:
+                                      delegationForm.get('nom').errors
+                                          ?.minlength.requiredLength
+                              }
+                }}
+            </mat-error>
+        </mat-form-field>
+
+        <div formArrayName="invites" class="space-y-4">
+            <div
+                class="reservation-delegation-dialog__guest"
+                *ngFor="let guest of invites.controls; let i = index"
+                [formGroupName]="i"
+            >
+                <div class="reservation-delegation-dialog__guest-header">
+                    <h3>
+                        {{
+                            (i === 0
+                                ? 'fields.delegationLeader'
+                                : 'fields.guest'
+                            ) | transloco
+                        }}
+                    </h3>
+                    <button
+                        *ngIf="i > 0"
+                        type="button"
+                        mat-icon-button
+                        color="warn"
+                        (click)="onRemoveGuest(i)"
+                        [attr.aria-label]="'common.delete' | transloco"
+                    >
+                        <mat-icon svgIcon="heroicons_solid:trash"></mat-icon>
+                    </button>
+                </div>
+
+                <div
+                    class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2"
+                >
+                    <mat-form-field class="w-full" appearance="fill">
+                        <mat-label>{{ 'fields.firstName' | transloco }}</mat-label>
+                        <input matInput formControlName="prenom" />
+                        <mat-error
+                            *ngIf="guest.get('prenom').hasError('required')"
+                        >
+                            {{ 'validation.required.firstName' | transloco }}
+                        </mat-error>
+                        <mat-error
+                            *ngIf="guest.get('prenom').hasError('minlength')"
+                        >
+                            {{
+                                'validation.minLength'
+                                    | transloco
+                                        : {
+                                              requiredLength:
+                                                  guest.get('prenom').errors
+                                                      ?.minlength
+                                                      .requiredLength
+                                          }
+                            }}
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="w-full" appearance="fill">
+                        <mat-label>{{ 'fields.lastName' | transloco }}</mat-label>
+                        <input matInput formControlName="nom" />
+                        <mat-error
+                            *ngIf="guest.get('nom').hasError('required')"
+                        >
+                            {{ 'validation.required.lastName' | transloco }}
+                        </mat-error>
+                        <mat-error
+                            *ngIf="guest.get('nom').hasError('minlength')"
+                        >
+                            {{
+                                'validation.minLength'
+                                    | transloco
+                                        : {
+                                              requiredLength:
+                                                  guest.get('nom').errors
+                                                      ?.minlength
+                                                      .requiredLength
+                                          }
+                            }}
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="w-full" appearance="fill">
+                        <mat-label>{{ 'fields.phone' | transloco }}</mat-label>
+                        <input matInput formControlName="telephone" />
+                        <mat-error
+                            *ngIf="guest.get('telephone').hasError('required')"
+                        >
+                            {{ 'validation.required.phone' | transloco }}
+                        </mat-error>
+                        <mat-error
+                            *ngIf="guest.get('telephone').hasError('minlength')"
+                        >
+                            {{
+                                'validation.minLength'
+                                    | transloco
+                                        : {
+                                              requiredLength:
+                                                  guest.get('telephone').errors
+                                                      ?.minlength
+                                                      .requiredLength
+                                          }
+                            }}
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="w-full" appearance="fill">
+                        <mat-label>{{ 'fields.email' | transloco }}</mat-label>
+                        <input matInput formControlName="email" />
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+
+        <button
+            type="button"
+            mat-stroked-button
+            color="primary"
+            (click)="onAddGuest()"
+        >
+            <mat-icon svgIcon="heroicons_solid:plus"></mat-icon>
+            <span>{{ 'delegations.actions.addGuest' | transloco }}</span>
+        </button>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+        <button type="button" mat-button (click)="onCancel()">
+            {{ 'common.cancel' | transloco }}
+        </button>
+        <button
+            type="submit"
+            mat-flat-button
+            color="primary"
+            [disabled]="saving"
+        >
+            {{ 'common.save' | transloco }}
+        </button>
+    </mat-dialog-actions>
+</form>

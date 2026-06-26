@@ -15,7 +15,7 @@ export class DelegationService {
     constructor(private _httpClient: HttpClient) {}
 
     getAllDelagations(params: RequestParams): Observable<Pageable<Delegation>> {
-        Object.entries(([key, value]) => {
+        Object.entries(params).forEach(([key, value]) => {
             if (!value) {
                 delete params[key];
             }

@@ -64,7 +64,11 @@
     "delegations": {
         "title": "إدارة الوفود",
         "empty": "لا توجد وفود",
+        "actions": {
+            "addGuest": "إضافة ضيف"
+        },
         "form": {
+            "createFromReservationTitle": "إنشاء وفد",
             "newTitle": "وفد جديد",
             "editTitle": "تعديل الوفد",
             "information": "معلومات الوفد",
@@ -252,6 +256,7 @@
         "confirmDelete": "هل تريد حذف حجز {{firstName}} {{lastName}}؟",
         "actions": {
             "book": "حجز",
+            "createDelegation": "وفد جديد",
             "export": "تصدير"
         },
         "filters": {
@@ -378,10 +383,13 @@
         }
     },
     "validation": {
+        "minLength": "أدخل {{requiredLength}} أحرف على الأقل.",
+        "minZero": "يجب أن تكون القيمة أكبر من أو تساوي 0.",
         "required": {
             "address": "العنوان مطلوب.",
             "firstName": "الاسم الشخصي مطلوب.",
             "lastName": "الاسم العائلي مطلوب.",
+            "level": "المستوى مطلوب.",
             "manager": "المسؤول مطلوب.",
             "name": "الاسم مطلوب.",
             "phone": "رقم الهاتف مطلوب.",

@@ -10,12 +10,32 @@
                         {{ 'residences.pavilions.fields.name' | transloco }}
                     </mat-label>
                     <input matInput type="text" formControlName="libelle" />
+                    <mat-error *ngIf="f.libelle.touched && f.libelle.errors?.required">
+                        {{ 'validation.required.name' | transloco }}
+                    </mat-error>
+                    <mat-error *ngIf="f.libelle.touched && f.libelle.errors?.minlength">
+                        {{
+                            'validation.minLength'
+                                | transloco
+                                    : {
+                                          requiredLength:
+                                              f.libelle.errors?.minlength
+                                                  ?.requiredLength
+                                      }
+                        }}
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field class="w-full" appearance="fill">
                     <mat-label>
                         {{ 'residences.pavilions.fields.level' | transloco }}
                     </mat-label>
                     <input type="number" matInput formControlName="niveau" />
+                    <mat-error *ngIf="f.niveau.touched && f.niveau.errors?.required">
+                        {{ 'validation.required.level' | transloco }}
+                    </mat-error>
+                    <mat-error *ngIf="f.niveau.touched && f.niveau.errors?.min">
+                        {{ 'validation.minZero' | transloco }}
+                    </mat-error>
                 </mat-form-field>
             </div>
             <ng-container formArrayName="chambres">

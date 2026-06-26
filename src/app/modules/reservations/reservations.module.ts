@@ -8,6 +8,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ReservationListComponent } from './reservation-list/reservation-list.component';
 import { ReservationFormComponent } from './reservation-form/reservation-form.component';
 import { ReservationEditComponent } from './reservation-edit/reservation-edit.component';
+import { ReservationDelegationDialogComponent } from './reservation-delegation-dialog/reservation-delegation-dialog.component';
 
 @NgModule({
     declarations: [
@@ -15,6 +16,7 @@ import { ReservationEditComponent } from './reservation-edit/reservation-edit.co
         ReservationListComponent,
         ReservationFormComponent,
         ReservationEditComponent,
+        ReservationDelegationDialogComponent,
     ],
     imports: [
         SharedModule,

@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { translateApiError } from '@core/i18n/api-error-message';
 import { Pavillon } from '@core/model/pavillon.model';
 import { Residence } from '@core/model/residence.model';
 import { PavillonService } from '@core/service/pavillon/pavillon.service';
@@ -42,6 +43,7 @@ export class ResidencesPavillonAddComponent implements OnInit {
 
     onSubmit(): void {
         if (this.pavillonForm.invalid) {
+            this.pavillonForm.markAllAsTouched();
             return;
         }
         this.pavillonForm.disable();
@@ -65,6 +67,14 @@ export class ResidencesPavillonAddComponent implements OnInit {
             },
             error: (err: any) => {
                 this.pavillonForm.enable();
+                this._snackBar.open(
+                    translateApiError(this._translocoService, err),
+                    '',
+                    {
+                        panelClass: ['bg-red-500', 'text-white'],
+                        duration: 4000,
+                    }
+                );
                 console.error(err);
             },
         });

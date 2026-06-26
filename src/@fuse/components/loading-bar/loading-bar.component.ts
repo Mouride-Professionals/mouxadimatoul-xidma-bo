@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { Subject, takeUntil } from 'rxjs';
+import { asyncScheduler, observeOn, Subject, takeUntil } from 'rxjs';
 import { FuseLoadingService } from '@fuse/services/loading';
 
 @Component({
@@ -51,19 +51,28 @@ export class FuseLoadingBarComponent implements OnChanges, OnInit, OnDestroy
     {
         // Subscribe to the service
         this._fuseLoadingService.mode$
-            .pipe(takeUntil(this._unsubscribeAll))
+            .pipe(
+                observeOn(asyncScheduler),
+                takeUntil(this._unsubscribeAll)
+            )
             .subscribe((value) => {
                 this.mode = value;
             });
 
         this._fuseLoadingService.progress$
-            .pipe(takeUntil(this._unsubscribeAll))
+            .pipe(
+                observeOn(asyncScheduler),
+                takeUntil(this._unsubscribeAll)
+            )
             .subscribe((value) => {
                 this.progress = value;
             });
 
         this._fuseLoadingService.show$
-            .pipe(takeUntil(this._unsubscribeAll))
+            .pipe(
+                observeOn(asyncScheduler),
+                takeUntil(this._unsubscribeAll)
+            )
             .subscribe((value) => {
                 this.show = value;
             });

@@ -1,0 +1,25 @@
+.reservation-delegation-dialog {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: min(42rem, 100%);
+}
+
+.reservation-delegation-dialog__guest {
+    border: 1px solid var(--fuse-border);
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.reservation-delegation-dialog__guest-header {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+
+    h3 {
+        font-size: 1rem;
+        font-weight: 600;
+        margin: 0;
+    }
+}

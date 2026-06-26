@@ -116,18 +116,50 @@
                         <mat-divider></mat-divider>
                     </div>
                 </div>
-                <div class="w-full">
+                <div class="w-full flex flex-col sm:flex-row sm:items-start gap-3">
                     <mat-form-field class="w-full" appearance="fill">
                         <mat-label>{{ 'fields.delegation' | transloco }}</mat-label>
                         <mat-select
                             formControlName="delegation"
-                            (ngModelChange)="onChoiceDelegation()"
+                            (selectionChange)="onChoiceDelegation()"
                         >
                             <mat-option
                                 *ngFor="let d of delegations$ | async"
                                 [value]="d"
                                 >{{ d.nom }}</mat-option
                             >
+                        </mat-select>
+                    </mat-form-field>
+                    <button
+                        type="button"
+                        mat-stroked-button
+                        color="primary"
+                        class="w-full sm:w-auto sm:mt-2"
+                        (click)="onCreateDelegation()"
+                    >
+                        <mat-icon svgIcon="heroicons_solid:plus"></mat-icon>
+                        <span class="kh-button-label">
+                            {{
+                                'reservations.actions.createDelegation'
+                                    | transloco
+                            }}
+                        </span>
+                    </button>
+                </div>
+                <div
+                    class="col-span-full w-full flex items-center responsive-table"
+                    *ngIf="inviteDelegations.length > 0"
+                >
+                    <mat-form-field class="w-full md:max-w-md" appearance="fill">
+                        <mat-label>{{ 'fields.host' | transloco }}</mat-label>
+                        <mat-select formControlName="accueillant">
+                            <mat-option
+                                *ngFor="let acc of accueillants"
+                                [value]="acc"
+                            >
+                                {{ acc.utilisateur.prenom | titlecase }} -
+                                {{ acc.utilisateur.nom | uppercase }}
+                            </mat-option>
                         </mat-select>
                     </mat-form-field>
                 </div>
@@ -151,12 +183,6 @@
                                 <th>{{ 'fields.guest' | transloco }}</th>
                                 <th class="whitespace-nowrap">
                                     {{ 'fields.room' | transloco }}
-                                </th>
-                                <th class="whitespace-nowrap">
-                                    {{ 'fields.host' | transloco }}
-                                </th>
-                                <th class="whitespace-nowrap">
-                                    {{ 'fields.manager' | transloco }}
                                 </th>
                                 <th class="text-center">
                                     <span class="kh-inline-icon">
@@ -233,58 +259,6 @@
                                                     'reservations.form.availablePlaces'
                                                         | transloco
                                                 }}
-                                            </mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-                                </td>
-                                <td class="whitespace-nowrap">
-                                    <mat-form-field
-                                        class="w-full fuse-mat-rounded fuse-mat-dense fuse-mat-no-subscript"
-                                        appearance="fill"
-                                    >
-                                        <mat-select
-                                            [placeholder]="
-                                                'fields.host' | transloco
-                                            "
-                                            formControlName="accueillant"
-                                        >
-                                            <mat-option
-                                                *ngFor="let acc of accueillants"
-                                                [value]="acc"
-                                            >
-                                                {{
-                                                    acc.utilisateur.prenom
-                                                        | titlecase
-                                                }}
-                                                -
-                                                {{
-                                                    acc.utilisateur.nom
-                                                        | uppercase
-                                                }}
-                                            </mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-                                </td>
-                                <td class="whitespace-nowrap">
-                                    <mat-form-field
-                                        class="w-full fuse-mat-rounded fuse-mat-dense fuse-mat-no-subscript"
-                                        appearance="fill"
-                                    >
-                                        <mat-select
-                                            [placeholder]="
-                                                'fields.roomManager'
-                                                    | transloco
-                                            "
-                                            formControlName="responsable"
-                                        >
-                                            <mat-option
-                                                *ngFor="
-                                                    let resp of responsables
-                                                "
-                                                [value]="resp"
-                                            >
-                                                {{ resp.prenom | titlecase }} -
-                                                {{ resp.nom | uppercase }}
                                             </mat-option>
                                         </mat-select>
                                     </mat-form-field>

@@ -64,7 +64,11 @@
     "delegations": {
         "title": "Gestion des délégations",
         "empty": "Pas de délégation",
+        "actions": {
+            "addGuest": "Ajouter un invité"
+        },
         "form": {
+            "createFromReservationTitle": "Créer une délégation",
             "newTitle": "Nouvelle délégation",
             "editTitle": "Modifier la délégation",
             "information": "Information de la délégation",
@@ -252,6 +256,7 @@
         "confirmDelete": "Voulez-vous supprimer la réservation de {{firstName}} {{lastName}} ?",
         "actions": {
             "book": "Réserver",
+            "createDelegation": "Nouvelle délégation",
             "export": "Exporter"
         },
         "filters": {
@@ -378,10 +383,13 @@
         }
     },
     "validation": {
+        "minLength": "Saisissez au moins {{requiredLength}} caractères.",
+        "minZero": "La valeur doit être supérieure ou égale à 0.",
         "required": {
             "address": "L'adresse est obligatoire.",
             "firstName": "Le prénom est obligatoire.",
             "lastName": "Le nom est obligatoire.",
+            "level": "Le niveau est obligatoire.",
             "manager": "Le responsable est obligatoire.",
             "name": "Le nom est obligatoire.",
             "phone": "Le téléphone est obligatoire.",
