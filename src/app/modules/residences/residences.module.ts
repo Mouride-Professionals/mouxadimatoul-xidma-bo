@@ -10,6 +10,8 @@ import { ResidencesPavillonAddComponent } from './residences-pavillon-add/reside
 import { ResidencesChambreFormComponent } from './residences-chambre-form/residences-chambre-form.component';
 import { ResidencesEditComponent } from './residences-edit/residences-edit.component';
 import { ResidencesEditImageComponent } from './residences-edit-image/residences-edit-image.component';
+import { ResidencesTeamComponent } from './residences-team/residences-team.component';
+import { ResidencesAssignmentFormComponent } from './residences-assignment-form/residences-assignment-form.component';
 
 @NgModule({
     declarations: [
@@ -21,6 +23,8 @@ import { ResidencesEditImageComponent } from './residences-edit-image/residences
         ResidencesChambreFormComponent,
         ResidencesEditComponent,
         ResidencesEditImageComponent,
+        ResidencesTeamComponent,
+        ResidencesAssignmentFormComponent,
     ],
     imports: [SharedModule, RouterModule.forChild(residenceRoutes)],
 })

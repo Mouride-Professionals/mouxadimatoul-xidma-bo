@@ -23,8 +23,8 @@ export class UtilisateurComponent implements OnInit {
 
     roleItems: { labelKey: string; value: string }[] = [
         { labelKey: 'common.all', value: '' },
-        { labelKey: 'roles.admin', value: 'admin' },
-        { labelKey: 'roles.responsable', value: 'responsable' },
+        { labelKey: 'roles.admin', value: 'ADMIN' },
+        { labelKey: 'roles.khidmaAgent', value: 'KHIDMA_AGENT' },
     ];
 
     role: string = '';

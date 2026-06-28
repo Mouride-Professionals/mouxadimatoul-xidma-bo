@@ -1,399 +1,446 @@
 {
-    "auth": {
-        "login": {
-            "title": "Espace d'administration",
-            "phone": "Téléphone",
-            "password": "Mot de passe",
-            "forgotPassword": "Mot de passe oublié ?",
-            "togglePasswordVisibility": "Afficher ou masquer le mot de passe",
-            "submit": "Se connecter",
-            "error": {
-                "invalidCredentials": "Numéro ou mot de passe incorrect"
-            },
-            "validation": {
-                "phoneRequired": "Numéro de téléphone obligatoire",
-                "phoneInvalid": "Numéro de téléphone incorrect",
-                "passwordRequired": "Mot de passe obligatoire"
-            }
-        }
+  "auth": {
+    "login": {
+      "title": "Espace d'administration",
+      "phone": "Téléphone",
+      "password": "Mot de passe",
+      "forgotPassword": "Mot de passe oublié ?",
+      "togglePasswordVisibility": "Afficher ou masquer le mot de passe",
+      "submit": "Se connecter",
+      "error": {
+        "invalidCredentials": "Numéro ou mot de passe incorrect"
+      },
+      "validation": {
+        "phoneRequired": "Numéro de téléphone obligatoire",
+        "phoneInvalid": "Numéro de téléphone incorrect",
+        "passwordRequired": "Mot de passe obligatoire"
+      }
+    }
+  },
+  "common": {
+    "actions": "Actions",
+    "add": "Ajouter",
+    "all": "Tous",
+    "back": "Retour",
+    "backToList": "Retour à la liste",
+    "cancel": "Annuler",
+    "close": "Fermer",
+    "confirmation": "Confirmation",
+    "delete": "Supprimer",
+    "details": "Détail",
+    "edit": "Éditer",
+    "id": "ID",
+    "new": "Nouveau",
+    "no": "NON",
+    "firstPage": "Première page",
+    "lastPage": "Dernière page",
+    "nextPage": "Page suivante",
+    "page": "Page {{page}}",
+    "previousPage": "Page précédente",
+    "save": "Enregistrer",
+    "search": "Recherche",
+    "yes": "OUI",
+    "loading": "Chargement..."
+  },
+  "dashboard": {
+    "title": "Tableau de bord",
+    "filters": {
+      "residence": "Choisir une résidence"
     },
-    "common": {
-        "actions": "Actions",
-        "add": "Ajouter",
-        "all": "Tous",
-        "back": "Retour",
-        "backToList": "Retour à la liste",
-        "cancel": "Annuler",
-        "close": "Fermer",
-        "confirmation": "Confirmation",
-        "delete": "Supprimer",
-        "details": "Détail",
-        "edit": "Éditer",
-        "id": "ID",
-        "new": "Nouveau",
-        "no": "NON",
-        "firstPage": "Première page",
-        "lastPage": "Dernière page",
-        "nextPage": "Page suivante",
-        "page": "Page {{page}}",
-        "previousPage": "Page précédente",
-        "save": "Enregistrer",
-        "search": "Recherche",
-        "yes": "OUI"
+    "stats": {
+      "pavilions": "Pavillons",
+      "rooms": "Chambres",
+      "delegations": "Délégations",
+      "reservations": "Réservations"
     },
-    "dashboard": {
-        "title": "Tableau de bord",
-        "filters": {
-            "residence": "Choisir une résidence"
-        },
-        "stats": {
-            "pavilions": "Pavillons",
-            "rooms": "Chambres",
-            "delegations": "Délégations",
-            "reservations": "Réservations"
-        },
-        "charts": {
-            "availableRooms": "Chambre disponible",
-            "availableRoomsByPavilion": "Les chambres disponibles par pavillon"
-        },
-        "actions": {
-            "createReservation": "Faire une réservation",
-            "roomStatus": "État des chambres"
-        }
+    "charts": {
+      "availableRooms": "Chambre disponible",
+      "availableRoomsByPavilion": "Les chambres disponibles par pavillon"
     },
-    "delegations": {
-        "title": "Gestion des délégations",
-        "empty": "Pas de délégation",
-        "actions": {
-            "addGuest": "Ajouter un invité"
-        },
-        "form": {
-            "createFromReservationTitle": "Créer une délégation",
-            "newTitle": "Nouvelle délégation",
-            "editTitle": "Modifier la délégation",
-            "information": "Information de la délégation",
-            "guestFirstNamePlaceholder": "Prénom invité {{index}}",
-            "guestLastNamePlaceholder": "Nom invité {{index}}",
-            "guestEmailPlaceholder": "Email invité {{index}}"
-        },
-        "members": {
-            "addTitle": "Ajouter un membre",
-            "editTitle": "Modifier un membre"
-        },
-        "messages": {
-            "created": "La délégation {{name}} est bien ajoutée",
-            "updated": "Délégation modifiée avec succès"
-        }
+    "actions": {
+      "createReservation": "Faire une réservation",
+      "roomStatus": "État des chambres"
+    }
+  },
+  "delegations": {
+    "title": "Gestion des délégations",
+    "empty": "Pas de délégation",
+    "actions": {
+      "addGuest": "Ajouter un invité"
     },
-    "language": {
-        "select": "Changer de langue",
-        "fr": "Français",
-        "ar": "العربية"
+    "form": {
+      "createFromReservationTitle": "Créer une délégation",
+      "newTitle": "Nouvelle délégation",
+      "editTitle": "Modifier la délégation",
+      "information": "Information de la délégation",
+      "guestFirstNamePlaceholder": "Prénom invité {{index}}",
+      "guestLastNamePlaceholder": "Nom invité {{index}}",
+      "guestEmailPlaceholder": "Email invité {{index}}"
     },
-    "events": {
-        "title": "Gestion des événements",
-        "form": {
-            "addTitle": "Ajouter un événement",
-            "editTitle": "Modifier un événement"
-        }
+    "members": {
+      "addTitle": "Ajouter un membre",
+      "editTitle": "Modifier un membre"
     },
-    "errors": {
-        "backend": {
-            "ACCUEILLANT_ID_REQUIRED": "L'identifiant de l'accueillant est obligatoire.",
-            "ACCUEILLANT_NOT_FOUND": "L'accueillant demandé est introuvable.",
-            "ACCUEILLANT_RESIDENCE_REQUIRED": "La résidence de l'accueillant est obligatoire.",
-            "AUTH_BAD_CREDENTIALS": "Identifiants incorrects",
-            "CHAMBRE_CAPACITY_POSITIVE": "Le nombre de places doit être positif.",
-            "CHAMBRE_CAPACITY_REQUIRED": "Le nombre de places est obligatoire.",
-            "CHAMBRE_ID_REQUIRED": "L'identifiant de la chambre est obligatoire.",
-            "CHAMBRE_NOT_FOUND": "La chambre demandée est introuvable.",
-            "CHAMBRE_NUMBER_REQUIRED": "Le numéro de la chambre est obligatoire.",
-            "CHAMBRE_PAVILLON_ID_REQUIRED": "L'identifiant du pavillon est obligatoire.",
-            "CHAMBRE_PAVILLON_REQUIRED": "Le pavillon est obligatoire.",
-            "DELEGATION_LEADER_REQUIRED": "Le chef de délégation est obligatoire.",
-            "DELEGATION_NAME_REQUIRED": "Le nom de la délégation est obligatoire.",
-            "DELEGATION_NOT_FOUND": "La délégation demandée est introuvable.",
-            "DELEGATION_SIZE_REQUIRED": "Le nombre de personnes est obligatoire.",
-            "ENTITY_NOT_FOUND": "La ressource demandée est introuvable.",
-            "EVENEMENT_NAME_REQUIRED": "Le nom de l'événement est obligatoire.",
-            "EVENEMENT_NOT_FOUND": "L'événement demandé est introuvable.",
-            "GENERIC": "Une erreur est survenue. Veuillez réessayer.",
-            "INVITE_DELEGATION_REQUIRED": "La délégation de l'invité est obligatoire.",
-            "INVITE_FIRST_NAME_REQUIRED": "Le prénom de l'invité est obligatoire.",
-            "INVITE_LAST_NAME_REQUIRED": "Le nom de l'invité est obligatoire.",
-            "INVITE_NOT_FOUND": "L'invité demandé est introuvable.",
-            "INVITE_PHONE_REQUIRED": "Le téléphone de l'invité est obligatoire.",
-            "PAVILLON_LABEL_REQUIRED": "Le libellé du pavillon est obligatoire.",
-            "PAVILLON_NOT_FOUND": "Le pavillon demandé est introuvable.",
-            "PAVILLON_RESIDENCE_REQUIRED": "Le pavillon doit être relié à une résidence.",
-            "RESERVATION_ARRIVAL_DATE_REQUIRED": "La date d'entrée est obligatoire.",
-            "RESERVATION_DEPARTURE_DATE_REQUIRED": "La date de sortie est obligatoire.",
-            "RESERVATION_EVENT_REQUIRED": "L'événement est obligatoire.",
-            "RESERVATION_GUESTS_REQUIRED": "Ajoutez au moins un invité.",
-            "RESERVATION_GUEST_FIRST_NAME_REQUIRED": "Le prénom de l'invité est obligatoire.",
-            "RESERVATION_GUEST_LAST_NAME_REQUIRED": "Le nom de l'invité est obligatoire.",
-            "RESERVATION_GUEST_PHONE_REQUIRED": "Le téléphone de l'invité est obligatoire.",
-            "RESERVATION_GUEST_ROOM_REQUIRED": "La chambre de l'invité est obligatoire.",
-            "RESERVATION_NOT_FOUND": "La réservation demandée est introuvable.",
-            "RESERVATION_PERIOD_REQUIRED": "La période est obligatoire.",
-            "RESIDENCE_ADDRESS_REQUIRED": "L'adresse est obligatoire.",
-            "RESIDENCE_LABEL_REQUIRED": "Le libellé de la résidence est obligatoire.",
-            "RESIDENCE_MANAGER_FIRST_NAME_REQUIRED": "Le prénom du responsable est obligatoire.",
-            "RESIDENCE_MANAGER_LAST_NAME_REQUIRED": "Le nom du responsable est obligatoire.",
-            "RESIDENCE_MANAGER_PHONE_REQUIRED": "Le téléphone du responsable est obligatoire.",
-            "RESIDENCE_MANAGER_REQUIRED": "Le responsable est obligatoire.",
-            "RESIDENCE_NOT_FOUND": "La résidence demandée est introuvable.",
-            "RESIDENCE_PHONE_REQUIRED": "Le téléphone de la résidence est obligatoire.",
-            "RESPONSABLE_FIRST_NAME_REQUIRED": "Le prénom du responsable est obligatoire.",
-            "RESPONSABLE_LAST_NAME_REQUIRED": "Le nom du responsable est obligatoire.",
-            "RESPONSABLE_NOT_FOUND": "Le responsable demandé est introuvable.",
-            "RESPONSABLE_PHONE_REQUIRED": "Le téléphone du responsable est obligatoire.",
-            "RESPONSABLE_RESIDENCE_REQUIRED": "La résidence du responsable est obligatoire.",
-            "ROLE_ADMIN_NOT_FOUND": "Le rôle admin est introuvable.",
-            "ROLE_RESPONSABLE_NOT_FOUND": "Le rôle responsable est introuvable.",
-            "USER_FIRST_NAME_REQUIRED": "Le prénom est obligatoire.",
-            "USER_ID_REQUIRED": "L'identifiant utilisateur est obligatoire.",
-            "USER_LAST_NAME_REQUIRED": "Le nom est obligatoire.",
-            "USER_NOT_AUTHENTICATED": "L'utilisateur n'est pas connecté.",
-            "USER_NOT_FOUND": "L'utilisateur demandé est introuvable.",
-            "USER_PHONE_REQUIRED": "Le téléphone est obligatoire.",
-            "VALIDATION_ACCUEILLANT_INVALID": "Les informations de l'accueillant sont invalides.",
-            "VALIDATION_CHAMBRE_INVALID": "Les informations de la chambre sont invalides.",
-            "VALIDATION_DELEGATION_INVALID": "Les informations de la délégation sont invalides.",
-            "VALIDATION_EVENEMENT_INVALID": "Les informations de l'événement sont invalides.",
-            "VALIDATION_INVALID_ENTITY": "Les informations envoyées sont invalides.",
-            "VALIDATION_INVITE_INVALID": "Les informations de l'invité sont invalides.",
-            "VALIDATION_PAVILLON_INVALID": "Les informations du pavillon sont invalides.",
-            "VALIDATION_RESERVATION_INVALID": "Les informations de la réservation sont invalides.",
-            "VALIDATION_RESIDENCE_INVALID": "Les informations de la résidence sont invalides.",
-            "VALIDATION_RESPONSABLE_INVALID": "Les informations du responsable sont invalides.",
-            "VALIDATION_UTILISATEUR_INVALID": "Les informations de l'utilisateur sont invalides."
-        }
+    "messages": {
+      "created": "La délégation {{name}} est bien ajoutée",
+      "updated": "Délégation modifiée avec succès"
+    }
+  },
+  "language": {
+    "select": "Changer de langue",
+    "fr": "Français",
+    "ar": "العربية"
+  },
+  "events": {
+    "title": "Gestion des événements",
+    "form": {
+      "addTitle": "Ajouter un événement",
+      "editTitle": "Modifier un événement"
+    }
+  },
+  "errors": {
+    "backend": {
+      "ACCUEILLANT_ID_REQUIRED": "L'identifiant de l'accueillant est obligatoire.",
+      "ACCUEILLANT_NOT_FOUND": "L'accueillant demandé est introuvable.",
+      "ACCUEILLANT_RESIDENCE_REQUIRED": "La résidence de l'accueillant est obligatoire.",
+      "AUTH_BAD_CREDENTIALS": "Identifiants incorrects",
+      "CHAMBRE_CAPACITY_POSITIVE": "Le nombre de places doit être positif.",
+      "CHAMBRE_CAPACITY_REQUIRED": "Le nombre de places est obligatoire.",
+      "CHAMBRE_ID_REQUIRED": "L'identifiant de la chambre est obligatoire.",
+      "CHAMBRE_NOT_FOUND": "La chambre demandée est introuvable.",
+      "CHAMBRE_NUMBER_REQUIRED": "Le numéro de la chambre est obligatoire.",
+      "CHAMBRE_PAVILLON_ID_REQUIRED": "L'identifiant du pavillon est obligatoire.",
+      "CHAMBRE_PAVILLON_REQUIRED": "Le pavillon est obligatoire.",
+      "DELEGATION_LEADER_REQUIRED": "Le chef de délégation est obligatoire.",
+      "DELEGATION_NAME_REQUIRED": "Le nom de la délégation est obligatoire.",
+      "DELEGATION_NOT_FOUND": "La délégation demandée est introuvable.",
+      "DELEGATION_SIZE_REQUIRED": "Le nombre de personnes est obligatoire.",
+      "ENTITY_NOT_FOUND": "La ressource demandée est introuvable.",
+      "EVENEMENT_NAME_REQUIRED": "Le nom de l'événement est obligatoire.",
+      "EVENEMENT_NOT_FOUND": "L'événement demandé est introuvable.",
+      "GENERIC": "Une erreur est survenue. Veuillez réessayer.",
+      "INVITE_DELEGATION_REQUIRED": "La délégation de l'invité est obligatoire.",
+      "INVITE_FIRST_NAME_REQUIRED": "Le prénom de l'invité est obligatoire.",
+      "INVITE_LAST_NAME_REQUIRED": "Le nom de l'invité est obligatoire.",
+      "INVITE_NOT_FOUND": "L'invité demandé est introuvable.",
+      "INVITE_PHONE_REQUIRED": "Le téléphone de l'invité est obligatoire.",
+      "PAVILLON_LABEL_REQUIRED": "Le libellé du pavillon est obligatoire.",
+      "PAVILLON_NOT_FOUND": "Le pavillon demandé est introuvable.",
+      "PAVILLON_RESIDENCE_REQUIRED": "Le pavillon doit être relié à une résidence.",
+      "RESERVATION_ARRIVAL_DATE_REQUIRED": "La date d'entrée est obligatoire.",
+      "RESERVATION_DEPARTURE_DATE_REQUIRED": "La date de sortie est obligatoire.",
+      "RESERVATION_EVENT_REQUIRED": "L'événement est obligatoire.",
+      "RESERVATION_GUESTS_REQUIRED": "Ajoutez au moins un invité.",
+      "RESERVATION_GUEST_FIRST_NAME_REQUIRED": "Le prénom de l'invité est obligatoire.",
+      "RESERVATION_GUEST_LAST_NAME_REQUIRED": "Le nom de l'invité est obligatoire.",
+      "RESERVATION_GUEST_PHONE_REQUIRED": "Le téléphone de l'invité est obligatoire.",
+      "RESERVATION_GUEST_ROOM_REQUIRED": "La chambre de l'invité est obligatoire.",
+      "RESERVATION_NOT_FOUND": "La réservation demandée est introuvable.",
+      "RESERVATION_PERIOD_REQUIRED": "La période est obligatoire.",
+      "RESIDENCE_ADDRESS_REQUIRED": "L'adresse est obligatoire.",
+      "RESIDENCE_LABEL_REQUIRED": "Le libellé de la résidence est obligatoire.",
+      "RESIDENCE_MANAGER_FIRST_NAME_REQUIRED": "Le prénom du responsable est obligatoire.",
+      "RESIDENCE_MANAGER_LAST_NAME_REQUIRED": "Le nom du responsable est obligatoire.",
+      "RESIDENCE_MANAGER_PHONE_REQUIRED": "Le téléphone du responsable est obligatoire.",
+      "RESIDENCE_MANAGER_REQUIRED": "Le responsable est obligatoire.",
+      "RESIDENCE_NOT_FOUND": "La résidence demandée est introuvable.",
+      "RESIDENCE_PHONE_REQUIRED": "Le téléphone de la résidence est obligatoire.",
+      "RESPONSABLE_FIRST_NAME_REQUIRED": "Le prénom du responsable est obligatoire.",
+      "RESPONSABLE_LAST_NAME_REQUIRED": "Le nom du responsable est obligatoire.",
+      "RESPONSABLE_NOT_FOUND": "Le responsable demandé est introuvable.",
+      "RESPONSABLE_PHONE_REQUIRED": "Le téléphone du responsable est obligatoire.",
+      "RESPONSABLE_RESIDENCE_REQUIRED": "La résidence du responsable est obligatoire.",
+      "ROLE_ADMIN_NOT_FOUND": "Le rôle admin est introuvable.",
+      "ROLE_RESPONSABLE_NOT_FOUND": "Le rôle responsable est introuvable.",
+      "USER_FIRST_NAME_REQUIRED": "Le prénom est obligatoire.",
+      "USER_ID_REQUIRED": "L'identifiant utilisateur est obligatoire.",
+      "USER_LAST_NAME_REQUIRED": "Le nom est obligatoire.",
+      "USER_NOT_AUTHENTICATED": "L'utilisateur n'est pas connecté.",
+      "USER_NOT_FOUND": "L'utilisateur demandé est introuvable.",
+      "USER_PHONE_REQUIRED": "Le téléphone est obligatoire.",
+      "VALIDATION_ACCUEILLANT_INVALID": "Les informations de l'accueillant sont invalides.",
+      "VALIDATION_CHAMBRE_INVALID": "Les informations de la chambre sont invalides.",
+      "VALIDATION_DELEGATION_INVALID": "Les informations de la délégation sont invalides.",
+      "VALIDATION_EVENEMENT_INVALID": "Les informations de l'événement sont invalides.",
+      "VALIDATION_INVALID_ENTITY": "Les informations envoyées sont invalides.",
+      "VALIDATION_INVITE_INVALID": "Les informations de l'invité sont invalides.",
+      "VALIDATION_PAVILLON_INVALID": "Les informations du pavillon sont invalides.",
+      "VALIDATION_RESERVATION_INVALID": "Les informations de la réservation sont invalides.",
+      "VALIDATION_RESIDENCE_INVALID": "Les informations de la résidence sont invalides.",
+      "VALIDATION_RESPONSABLE_INVALID": "Les informations du responsable sont invalides.",
+      "VALIDATION_UTILISATEUR_INVALID": "Les informations de l'utilisateur sont invalides."
+    }
+  },
+  "fields": {
+    "accommodation": "Logement",
+    "address": "Adresse",
+    "arrivalDate": "Date d'arrivée",
+    "ceremony": "Cérémonie",
+    "ceremonyPresence": "Présence cérémonie",
+    "delegation": "Délégation",
+    "delegationLeader": "Chef de délégation",
+    "delegationName": "Nom de la délégation",
+    "departureDate": "Date de sortie",
+    "description": "Description",
+    "email": "Email",
+    "event": "Événement",
+    "eventName": "Nom de l'événement",
+    "firstName": "Prénom",
+    "guest": "Invité",
+    "host": "Accueillant",
+    "lastName": "Nom",
+    "manager": "Responsable",
+    "name": "Nom",
+    "pavilion": "Pavillon",
+    "peopleCount": "Nombre de pers.",
+    "peopleCountShort": "Nbr personnes",
+    "phone": "Téléphone",
+    "whatsapp": "WhatsApp",
+    "residence": "Résidence",
+    "role": "Rôle",
+    "room": "Chambre",
+    "roomManager": "Responsable chambre",
+    "stayPeriod": "Période séjour",
+    "status": "Statut"
+  },
+  "hosts": {
+    "title": "Gestion des accueillants",
+    "empty": "Pas d'accueillant",
+    "form": {
+      "addTitle": "Ajouter un accueillant",
+      "editTitle": "Modifier un accueillant"
+    },
+    "messages": {
+      "created": "Accueillant ajouté avec succès !",
+      "updated": "Accueillant modifié avec succès !"
+    }
+  },
+  "guests": {
+    "title": "Gestion des invités",
+    "form": {
+      "addTitle": "Ajouter un invité"
+    }
+  },
+  "layout": {
+    "logoAlt": "Logo Moukhadimatoul Khidma",
+    "openNavigation": "Ouvrir le menu"
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "users": "Gestion des utilisateurs",
+    "residences": "Résidences",
+    "reservations": "Réservations",
+    "events": "Événements",
+    "delegations": "Délégations",
+    "hosts": "Accueillants",
+    "roomManagers": "Responsables des chambres"
+  },
+  "profile": {
+    "personalInfo": "Information personnelle",
+    "description": "Profil de l'utilisateur.",
+    "changePassword": "Changer le mot de passe.",
+    "newPassword": "Nouveau mot de passe",
+    "confirmPassword": "Confirmer le mot de passe",
+    "validation": {
+      "passwordRequired": "Le mot de passe est obligatoire",
+      "passwordConfirmationRequired": "La confirmation du mot de passe est requise",
+      "passwordsMustMatch": "Les mots de passe doivent correspondre"
+    }
+  },
+  "roles": {
+    "admin": "Administrateur",
+    "responsable": "Responsable",
+    "accueillant": "Accueillant",
+    "khidmaAgent": "Agent Khidma",
+    "khidma_agent": "Agent Khidma"
+  },
+  "reservations": {
+    "title": "Gestion des réservations",
+    "empty": "Pas de réservation",
+    "confirmDelete": "Voulez-vous supprimer la réservation de {{firstName}} {{lastName}} ?",
+    "actions": {
+      "book": "Réserver",
+      "createDelegation": "Nouvelle délégation",
+      "export": "Exporter"
+    },
+    "filters": {
+      "event": "Choisir un événement",
+      "officialCeremony": "Cérémonie officielle",
+      "year": "Choisir une année"
+    },
+    "form": {
+      "addTitle": "Nouvelle réservation",
+      "editTitle": "Modifier la réservation",
+      "information": "Information de la réservation",
+      "guestsInformation": "Information des invités",
+      "from": "Du",
+      "to": "Au",
+      "guestRoom": "Chambre invité",
+      "availablePlaces": "place(s) disponible(s)",
+      "selectAllGuests": "Sélectionner tous les invités",
+      "selectGuest": "Sélectionner {{name}}",
+      "markAllCeremonyPresence": "Marquer tous les invités présents à la cérémonie",
+      "markCeremonyPresence": "Présence à la cérémonie pour {{name}}"
+    },
+    "messages": {
+      "created": "{{count}} réservation(s) effectuée(s)",
+      "deleted": "Réservation supprimée",
+      "exported": "Exportation réussie",
+      "updated": "Réservation modifiée"
+    }
+  },
+  "residences": {
+    "title": "Résidences",
+    "empty": "Pas de résidence",
+    "imageAlt": "Image de la résidence",
+    "coverAlt": "Couverture de la résidence",
+    "pavilionCount": "{{count}} pavillon(s)",
+    "actions": {
+      "chooseImage": "Choisir image",
+      "list": "Liste des résidences",
+      "removeImage": "Effacer image"
     },
     "fields": {
-        "accommodation": "Logement",
-        "address": "Adresse",
-        "arrivalDate": "Date d'arrivée",
-        "ceremony": "Cérémonie",
-        "ceremonyPresence": "Présence cérémonie",
-        "delegation": "Délégation",
-        "delegationLeader": "Chef de délégation",
-        "delegationName": "Nom de la délégation",
-        "departureDate": "Date de sortie",
-        "description": "Description",
-        "email": "Email",
-        "event": "Événement",
-        "eventName": "Nom de l'événement",
-        "firstName": "Prénom",
-        "guest": "Invité",
-        "host": "Accueillant",
-        "lastName": "Nom",
-        "manager": "Responsable",
-        "name": "Nom",
-        "pavilion": "Pavillon",
-        "peopleCount": "Nombre de pers.",
-        "peopleCountShort": "Nbr personnes",
-        "phone": "Téléphone",
-        "residence": "Résidence",
-        "role": "Rôle",
-        "room": "Chambre",
-        "roomManager": "Responsable chambre",
-        "stayPeriod": "Période séjour",
-        "status": "Statut"
+      "manager": "Responsable résidence",
+      "name": "Nom résidence",
+      "phone": "Téléphone résidence"
     },
-    "hosts": {
-        "title": "Gestion des accueillants",
-        "empty": "Pas d'accueillant",
-        "form": {
-            "addTitle": "Ajouter un accueillant",
-            "editTitle": "Modifier un accueillant"
-        },
-        "messages": {
-            "created": "Accueillant ajouté avec succès !",
-            "updated": "Accueillant modifié avec succès !"
-        }
+    "form": {
+      "addTitle": "Ajouter une résidence",
+      "editTitle": "Modifier la résidence"
     },
-    "guests": {
-        "title": "Gestion des invités",
-        "form": {
-            "addTitle": "Ajouter un invité"
-        }
+    "images": {
+      "editPlaceholder": "Modification de l'image de la résidence"
     },
-    "layout": {
-        "logoAlt": "Logo Moukhadimatoul Khidma",
-        "openNavigation": "Ouvrir le menu"
+    "messages": {
+      "created": "Résidence créée avec succès",
+      "updated": "La résidence est modifiée avec succès"
     },
-    "navigation": {
-        "dashboard": "Dashboard",
-        "users": "Gestion des utilisateurs",
-        "residences": "Résidences",
-        "reservations": "Réservations",
-        "events": "Événements",
-        "delegations": "Délégations",
-        "hosts": "Accueillants",
-        "roomManagers": "Responsables des chambres"
+    "pavilions": {
+      "add": "Ajouter pavillon",
+      "empty": "Pas de pavillon",
+      "fields": {
+        "level": "Niveau",
+        "name": "Nom du pavillon"
+      },
+      "form": {
+        "addTitle": "Ajouter un nouveau pavillon"
+      },
+      "messages": {
+        "created": "Pavillon créé avec succès"
+      }
     },
-    "profile": {
-        "personalInfo": "Information personnelle",
-        "description": "Profil de l'utilisateur.",
-        "changePassword": "Changer le mot de passe.",
-        "newPassword": "Nouveau mot de passe",
-        "confirmPassword": "Confirmer le mot de passe",
-        "validation": {
-            "passwordRequired": "Le mot de passe est obligatoire",
-            "passwordConfirmationRequired": "La confirmation du mot de passe est requise",
-            "passwordsMustMatch": "Les mots de passe doivent correspondre"
-        }
+    "rooms": {
+      "add": "Ajouter une chambre",
+      "block": "Bloquer",
+      "empty": "Pas de chambres",
+      "floor": "Palier",
+      "floorNumber": "{{floor}}e étage",
+      "form": {
+        "addTitle": "Ajouter une nouvelle chambre",
+        "editTitle": "Modifier la chambre"
+      },
+      "groundFloor": "Rez-de-chaussée",
+      "messages": {
+        "created": "La chambre a été bien créée",
+        "updated": "La chambre a été bien modifiée"
+      },
+      "number": "Numéro de chambre",
+      "numberPlaceholder": "Numéro chambre {{index}}",
+      "placeCount": "{{count}} personne(s)",
+      "places": "Nombre de places",
+      "placesPlaceholder": "Nombre de places chambre {{index}}",
+      "title": "Chambres"
     },
-    "roles": {
-        "admin": "Administrateur",
-        "responsable": "Responsable",
-        "accueillant": "Accueillant"
-    },
-    "reservations": {
-        "title": "Gestion des réservations",
-        "empty": "Pas de réservation",
-        "confirmDelete": "Voulez-vous supprimer la réservation de {{firstName}} {{lastName}} ?",
-        "actions": {
-            "book": "Réserver",
-            "createDelegation": "Nouvelle délégation",
-            "export": "Exporter"
-        },
-        "filters": {
-            "event": "Choisir un événement",
-            "officialCeremony": "Cérémonie officielle",
-            "year": "Choisir une année"
-        },
-        "form": {
-            "addTitle": "Nouvelle réservation",
-            "editTitle": "Modifier la réservation",
-            "information": "Information de la réservation",
-            "guestsInformation": "Information des invités",
-            "from": "Du",
-            "to": "Au",
-            "guestRoom": "Chambre invité",
-            "availablePlaces": "place(s) disponible(s)",
-            "selectAllGuests": "Sélectionner tous les invités",
-            "selectGuest": "Sélectionner {{name}}",
-            "markAllCeremonyPresence": "Marquer tous les invités présents à la cérémonie",
-            "markCeremonyPresence": "Présence à la cérémonie pour {{name}}"
-        },
-        "messages": {
-            "created": "{{count}} réservation(s) effectuée(s)",
-            "deleted": "Réservation supprimée",
-            "exported": "Exportation réussie",
-            "updated": "Réservation modifiée"
-        }
-    },
-    "residences": {
-        "title": "Résidences",
-        "empty": "Pas de résidence",
-        "imageAlt": "Image de la résidence",
-        "coverAlt": "Couverture de la résidence",
-        "pavilionCount": "{{count}} pavillon(s)",
-        "actions": {
-            "chooseImage": "Choisir image",
-            "list": "Liste des résidences",
-            "removeImage": "Effacer image"
-        },
-        "fields": {
-            "manager": "Responsable résidence",
-            "name": "Nom résidence",
-            "phone": "Téléphone résidence"
-        },
-        "form": {
-            "addTitle": "Ajouter une résidence",
-            "editTitle": "Modifier la résidence"
-        },
-        "images": {
-            "editPlaceholder": "Modification de l'image de la résidence"
-        },
-        "messages": {
-            "created": "Résidence créée avec succès",
-            "updated": "La résidence est modifiée avec succès"
-        },
-        "pavilions": {
-            "add": "Ajouter pavillon",
-            "empty": "Pas de pavillon",
-            "fields": {
-                "level": "Niveau",
-                "name": "Nom du pavillon"
-            },
-            "form": {
-                "addTitle": "Ajouter un nouveau pavillon"
-            },
-            "messages": {
-                "created": "Pavillon créé avec succès"
-            }
-        },
-        "rooms": {
-            "add": "Ajouter une chambre",
-            "block": "Bloquer",
-            "empty": "Pas de chambres",
-            "floor": "Palier",
-            "floorNumber": "{{floor}}e étage",
-            "form": {
-                "addTitle": "Ajouter une nouvelle chambre",
-                "editTitle": "Modifier la chambre"
-            },
-            "groundFloor": "Rez-de-chaussée",
-            "messages": {
-                "created": "La chambre a été bien créée",
-                "updated": "La chambre a été bien modifiée"
-            },
-            "number": "Numéro de chambre",
-            "numberPlaceholder": "Numéro chambre {{index}}",
-            "placeCount": "{{count}} personne(s)",
-            "places": "Nombre de places",
-            "placesPlaceholder": "Nombre de places chambre {{index}}",
-            "title": "Chambres"
-        },
-        "tooltips": {
-            "editImage": "Modifier l'image de la résidence",
-            "editInfo": "Modifier les infos de la résidence"
-        }
-    },
-    "roomManagers": {
-        "title": "Gestion des responsables des chambres",
-        "empty": "Pas de responsable",
-        "form": {
-            "addTitle": "Ajouter un responsable",
-            "editTitle": "Modifier un responsable"
-        },
-        "messages": {
-            "updated": "Responsable modifié avec succès !"
-        }
-    },
-    "userMenu": {
-        "open": "Ouvrir le menu utilisateur",
-        "signedInAs": "Connecté en tant que",
-        "profile": "Mon profil",
-        "signOut": "Déconnexion"
-    },
-    "users": {
-        "title": "Gestion des utilisateurs",
-        "empty": "Pas d'utilisateur",
-        "confirmStatus": "Voulez-vous changer le statut de l'utilisateur ?",
-        "form": {
-            "addTitle": "Ajouter un utilisateur",
-            "editTitle": "Modifier un utilisateur"
-        },
-        "messages": {
-            "created": "Utilisateur ajouté avec succès !"
-        }
-    },
-    "validation": {
-        "minLength": "Saisissez au moins {{requiredLength}} caractères.",
-        "minZero": "La valeur doit être supérieure ou égale à 0.",
-        "required": {
-            "address": "L'adresse est obligatoire.",
-            "firstName": "Le prénom est obligatoire.",
-            "lastName": "Le nom est obligatoire.",
-            "level": "Le niveau est obligatoire.",
-            "manager": "Le responsable est obligatoire.",
-            "name": "Le nom est obligatoire.",
-            "phone": "Le téléphone est obligatoire.",
-            "residence": "La résidence est obligatoire."
-        }
+    "tooltips": {
+      "editImage": "Modifier l'image de la résidence",
+      "editInfo": "Modifier les infos de la résidence"
     }
+  },
+  "roomManagers": {
+    "title": "Gestion des responsables des chambres",
+    "empty": "Pas de responsable",
+    "form": {
+      "addTitle": "Ajouter un responsable",
+      "editTitle": "Modifier un responsable"
+    },
+    "messages": {
+      "updated": "Responsable modifié avec succès !"
+    }
+  },
+  "userMenu": {
+    "open": "Ouvrir le menu utilisateur",
+    "signedInAs": "Connecté en tant que",
+    "profile": "Mon profil",
+    "signOut": "Déconnexion"
+  },
+  "users": {
+    "title": "Gestion des utilisateurs",
+    "empty": "Pas d'utilisateur",
+    "confirmStatus": "Voulez-vous changer le statut de l'utilisateur ?",
+    "form": {
+      "addTitle": "Ajouter un utilisateur",
+      "editTitle": "Modifier un utilisateur"
+    },
+    "messages": {
+      "created": "Utilisateur ajouté avec succès !"
+    }
+  },
+  "validation": {
+    "minLength": "Saisissez au moins {{requiredLength}} caractères.",
+    "minZero": "La valeur doit être supérieure ou égale à 0.",
+    "required": {
+      "address": "L'adresse est obligatoire.",
+      "agent": "L'agent est obligatoire.",
+      "firstName": "Le prénom est obligatoire.",
+      "lastName": "Le nom est obligatoire.",
+      "level": "Le niveau est obligatoire.",
+      "manager": "Le responsable est obligatoire.",
+      "name": "Le nom est obligatoire.",
+      "phone": "Le téléphone est obligatoire.",
+      "residence": "La résidence est obligatoire.",
+      "responsibilities": "Au moins une responsabilité est obligatoire."
+    }
+  },
+  "assignments": {
+    "team": "Équipe Khidma",
+    "title": "Gestion de l'équipe",
+    "empty": "Aucun agent assigné à cette résidence",
+    "confirmDelete": "Voulez-vous retirer {{name}} de l'équipe de cette résidence ?",
+    "rotationCount": "{{count}} créneau(x) de rotation",
+    "responsibilities": {
+      "ACCUEILLANT": "Accueillant",
+      "RESPONSABLE_DELEGATION": "Responsable Délégation",
+      "CHEF_CHAMBRE": "Chef de Chambre"
+    },
+    "days": {
+      "MONDAY": "Lundi",
+      "TUESDAY": "Mardi",
+      "WEDNESDAY": "Mercredi",
+      "THURSDAY": "Jeudi",
+      "FRIDAY": "Vendredi",
+      "SATURDAY": "Samedi",
+      "SUNDAY": "Dimanche"
+    },
+    "form": {
+      "addTitle": "Ajouter un agent",
+      "editTitle": "Modifier l'assignation",
+      "agent": "Agent",
+      "responsibilities": "Responsabilités",
+      "startDate": "Date de début",
+      "endDate": "Date de fin",
+      "rotation": "Rotation",
+      "rotationHint": "Sans créneau = présence permanente à cette résidence.",
+      "addSlot": "Ajouter un créneau",
+      "day": "Jour",
+      "fromTime": "De",
+      "toTime": "À",
+      "allDays": "Tous les jours"
+    },
+    "messages": {
+      "created": "Agent assigné avec succès",
+      "updated": "Assignation modifiée avec succès",
+      "deleted": "Assignation supprimée avec succès"
+    }
+  }
 }

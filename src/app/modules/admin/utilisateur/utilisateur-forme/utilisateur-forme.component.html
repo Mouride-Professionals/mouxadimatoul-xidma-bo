@@ -64,6 +64,22 @@
                     {{ 'validation.required.phone' | transloco }}
                 </mat-error>
             </mat-form-field>
+            <mat-form-field class="col-span-1 w-full">
+                <mat-label for="whatsapp">{{
+                    'fields.whatsapp' | transloco
+                }}</mat-label>
+                <input
+                    matInput
+                    maxlength="9"
+                    name="whatsapp"
+                    formControlName="whatsapp"
+                />
+                <mat-icon
+                    class="icon-size-5"
+                    matSuffix
+                    [svgIcon]="'heroicons_solid:phone'"
+                ></mat-icon>
+            </mat-form-field>
             <div class="col-span-full flex justify-end items-center gap-4">
                 <button
                     mat-flat-button

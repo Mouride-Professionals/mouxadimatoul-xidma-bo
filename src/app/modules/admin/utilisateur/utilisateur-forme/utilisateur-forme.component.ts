@@ -55,7 +55,7 @@ export class UtilisateurFormeComponent implements OnInit {
                 this.data?.telephone,
                 Validators.required
             ),
-            // role: new FormControl(this.data?.role, Validators.required),
+            whatsapp: new FormControl(this.data?.whatsapp ?? null),
         });
     }
 

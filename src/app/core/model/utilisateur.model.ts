@@ -1,10 +1,11 @@
-import {Role} from '@core/model/role.model';
+export type AccountType = 'ADMIN' | 'KHIDMA_AGENT';
 
 export type Utilisateur = {
     id: number;
     nom: string;
     prenom: string;
     telephone: string;
+    whatsapp: string;
     statut: boolean;
-    role: Role;
+    accountType: AccountType;
 };

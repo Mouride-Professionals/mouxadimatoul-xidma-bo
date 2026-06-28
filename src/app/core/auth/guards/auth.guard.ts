@@ -102,8 +102,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
                     map(
                         (res: AuthModel) =>
                             res.roles.includes('ROLE_ADMIN') ||
-                            res.roles.includes('ROLE_RESPONSABLE') ||
-                            res.roles.includes('ROLE_ACCUEILLANT')
+                            res.roles.includes('ROLE_KHIDMA_AGENT')
                     )
                 );
             })

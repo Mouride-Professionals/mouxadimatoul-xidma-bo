@@ -84,112 +84,105 @@
             </div>
         </div>
     </div>
-    <div class="w-full p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-4 gap-4 sm:gap-6">
-        <div class="flex lg:col-span-1 lg:flex-col gap-3 overflow-x-auto lg:overflow-visible pb-1 lg:pb-0">
-            <fuse-card
-                class="p-3 min-w-56 lg:min-w-0 w-full flex items-center justify-center"
-                *ngIf="pavillons.length <= 0"
-            >
-                <span>{{ 'residences.pavilions.empty' | transloco }}</span>
-            </fuse-card>
-            <fuse-card
-                class="p-3 min-w-44 lg:min-w-0 w-full flex items-center justify-between gap-3 cursor-pointer"
-                [ngClass]="{
-                    'bg-secondary text-white': p.id === pavillonSelected?.id
-                }"
-                *ngFor="let p of pavillons"
-                (click)="onChangePavillon(p)"
-            >
-                <span>{{ p.libelle | titlecase }}</span>
-            </fuse-card>
-            <button
-                class="min-w-44 lg:min-w-0"
-                mat-stroked-button
-                color="primary"
-                (click)="onOpenPavillonModal()"
-            >
-                <mat-icon
-                    svgIcon="heroicons_solid:plus"
-                    class="text-white"
-                ></mat-icon>
-                <span>{{ 'residences.pavilions.add' | transloco }}</span>
-            </button>
-        </div>
-        <fuse-card
-            class="lg:col-span-3 w-full p-4 flex flex-col gap-4"
-        >
-            <div class="w-full flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                <h2 class="text-2xl font-serif">
-                    {{ 'residences.rooms.title' | transloco }}
-                </h2>
-                <button
-                    class="w-full sm:w-auto"
-                    mat-raised-button
-                    color="primary"
-                    *ngIf="pavillons.length > 0"
-                    (click)="onOpenChambreModal()"
-                >
-                    <mat-icon svgIcon="heroicons_solid:plus"></mat-icon>
-                    <span>{{ 'common.new' | transloco }}</span>
-                </button>
-            </div>
-            <div
-                class="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
-                *ngIf="data$ | async as data"
-            >
-                <fuse-card
-                    *ngIf="data.empty"
-                    class="col-span-full w-full p-3 flex justify-center items-center"
-                >
-                    <span>{{ 'residences.rooms.empty' | transloco }}</span>
-                </fuse-card>
-                <fuse-card
-                    class="w-full p-3 flex flex-col gap-2"
-                    *ngFor="let c of data.content"
-                >
-                    <div class="flex justify-end items-center">
-                        <!-- <span class="text-lg font-medium">{{ c.numero }}</span> -->
-                        <button
-                            mat-icon-button
-                            [matMenuTriggerFor]="menuChambre"
-                            [matMenuTriggerData]="{ chambre: c }"
-                            [attr.aria-label]="'common.actions' | transloco"
+    <div class="w-full p-4 sm:p-6">
+        <mat-tab-group animationDuration="0ms">
+            <!-- Tab 1: Chambres -->
+            <mat-tab [label]="'residences.rooms.title' | transloco">
+                <div class="pt-4 grid grid-cols-1 lg:grid-cols-4 gap-4 sm:gap-6">
+                    <div class="flex lg:col-span-1 lg:flex-col gap-3 overflow-x-auto lg:overflow-visible pb-1 lg:pb-0">
+                        <fuse-card
+                            class="p-3 min-w-56 lg:min-w-0 w-full flex items-center justify-center"
+                            *ngIf="pavillons.length <= 0"
                         >
-                            <mat-icon
-                                svgIcon="heroicons_solid:dots-vertical"
-                            ></mat-icon>
+                            <span>{{ 'residences.pavilions.empty' | transloco }}</span>
+                        </fuse-card>
+                        <fuse-card
+                            class="p-3 min-w-44 lg:min-w-0 w-full flex items-center justify-between gap-3 cursor-pointer"
+                            [ngClass]="{ 'bg-secondary text-white': p.id === pavillonSelected?.id }"
+                            *ngFor="let p of pavillons"
+                            (click)="onChangePavillon(p)"
+                        >
+                            <span>{{ p.libelle | titlecase }}</span>
+                        </fuse-card>
+                        <button
+                            class="min-w-44 lg:min-w-0"
+                            mat-stroked-button
+                            color="primary"
+                            (click)="onOpenPavillonModal()"
+                        >
+                            <mat-icon svgIcon="heroicons_solid:plus" class="text-white"></mat-icon>
+                            <span>{{ 'residences.pavilions.add' | transloco }}</span>
                         </button>
                     </div>
-                    <div class="flex items-center gap-2">
-                        <mat-icon
-                            svgIcon="heroicons_solid:home"
-                            class="icon-size-5"
-                        ></mat-icon>
-                        <span class="text-lg font-light">{{
-                            c.reference
-                        }}</span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <mat-icon
-                            svgIcon="heroicons_solid:users"
-                            class="icon-size-5"
-                        ></mat-icon>
-                        <span class="text-lg font-light"
-                            >{{
-                                'residences.rooms.placeCount'
-                                    | transloco : { count: c.nombrePlace }
-                            }}</span
+                    <fuse-card class="lg:col-span-3 w-full p-4 flex flex-col gap-4">
+                        <div class="w-full flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                            <h2 class="text-2xl font-serif">
+                                {{ 'residences.rooms.title' | transloco }}
+                            </h2>
+                            <button
+                                class="w-full sm:w-auto"
+                                mat-raised-button
+                                color="primary"
+                                *ngIf="pavillons.length > 0"
+                                (click)="onOpenChambreModal()"
+                            >
+                                <mat-icon svgIcon="heroicons_solid:plus"></mat-icon>
+                                <span>{{ 'common.new' | transloco }}</span>
+                            </button>
+                        </div>
+                        <div
+                            class="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
+                            *ngIf="data$ | async as data"
                         >
-                    </div>
-                </fuse-card>
-                <ng-container *ngIf="data.totalElements > size">
-                    <paginator
-                        [pageable]="data"
-                        (pageEvent)="onPageChange($event)"
-                    ></paginator>
-                </ng-container>
-            </div>
-        </fuse-card>
+                            <fuse-card
+                                *ngIf="data.empty"
+                                class="col-span-full w-full p-3 flex justify-center items-center"
+                            >
+                                <span>{{ 'residences.rooms.empty' | transloco }}</span>
+                            </fuse-card>
+                            <fuse-card
+                                class="w-full p-3 flex flex-col gap-2"
+                                *ngFor="let c of data.content"
+                            >
+                                <div class="flex justify-end items-center">
+                                    <button
+                                        mat-icon-button
+                                        [matMenuTriggerFor]="menuChambre"
+                                        [matMenuTriggerData]="{ chambre: c }"
+                                        [attr.aria-label]="'common.actions' | transloco"
+                                    >
+                                        <mat-icon svgIcon="heroicons_solid:dots-vertical"></mat-icon>
+                                    </button>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <mat-icon svgIcon="heroicons_solid:home" class="icon-size-5"></mat-icon>
+                                    <span class="text-lg font-light">{{ c.reference }}</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <mat-icon svgIcon="heroicons_solid:users" class="icon-size-5"></mat-icon>
+                                    <span class="text-lg font-light">{{
+                                        'residences.rooms.placeCount' | transloco : { count: c.nombrePlace }
+                                    }}</span>
+                                </div>
+                            </fuse-card>
+                            <ng-container *ngIf="data.totalElements > size">
+                                <paginator [pageable]="data" (pageEvent)="onPageChange($event)"></paginator>
+                            </ng-container>
+                        </div>
+                    </fuse-card>
+                </div>
+            </mat-tab>
+
+            <!-- Tab 2: Equipe Khidma -->
+            <mat-tab [label]="'assignments.team' | transloco">
+                <div class="pt-4">
+                    <app-residences-team
+                        *ngIf="residence"
+                        [residenceId]="residence.id"
+                    ></app-residences-team>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
     </div>
 </div>
 

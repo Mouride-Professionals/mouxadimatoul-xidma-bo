@@ -9,7 +9,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
         icon: 'mat_solid:dashboard',
         link: '/dashboard',
         meta: {
-            roles: ['ROLE_ADMIN', 'ROLE_RESPONSABLE', 'ROLE_ACCUEILLANT'],
+            roles: ['ROLE_ADMIN', 'ROLE_KHIDMA_AGENT', 'ROLE_KHIDMA_AGENT'],
             translationKey: 'navigation.dashboard',
         },
     },
@@ -31,7 +31,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
         icon: 'mat_solid:home',
         link: 'residences',
         meta: {
-            roles: ['ROLE_ADMIN', 'ROLE_RESPONSABLE'],
+            roles: ['ROLE_ADMIN', 'ROLE_KHIDMA_AGENT'],
             translationKey: 'navigation.residences',
         },
     },
@@ -42,7 +42,7 @@ export const defaultNavigation: FuseNavigationItem[] = [
         icon: 'heroicons_solid:bookmark',
         link: 'reservations',
         meta: {
-            roles: ['ROLE_ADMIN', 'ROLE_RESPONSABLE', 'ROLE_ACCUEILLANT'],
+            roles: ['ROLE_ADMIN', 'ROLE_KHIDMA_AGENT', 'ROLE_KHIDMA_AGENT'],
             translationKey: 'navigation.reservations',
         },
     },
@@ -102,32 +102,30 @@ export const defaultNavigation: FuseNavigationItem[] = [
         icon: 'heroicons_outline:user-group',
         link: '/delegations',
         meta: {
-            roles: ['ROLE_ADMIN', 'ROLE_RESPONSABLE', 'ROLE_ACCUEILLANT'],
+            roles: ['ROLE_ADMIN', 'ROLE_KHIDMA_AGENT', 'ROLE_KHIDMA_AGENT'],
             translationKey: 'navigation.delegations',
         },
     },
-    {
-        id: 'accueillants',
-        title: 'navigation.hosts',
-        type: 'basic',
-        icon: 'heroicons_outline:user-group',
-        link: '/accueillants',
-        meta: {
-            roles: ['ROLE_ADMIN', 'ROLE_RESPONSABLE'],
-            translationKey: 'navigation.hosts',
-        },
-    },
-    {
-        id: 'responsables',
-        title: 'navigation.roomManagers',
-        type: 'basic',
-        icon: 'heroicons_outline:user-group',
-        link: '/responsables',
-        meta: {
-            roles: ['ROLE_ADMIN', 'ROLE_RESPONSABLE'],
-            translationKey: 'navigation.roomManagers',
-        },
-    },
+    // Accueillants and Responsables nav entries removed — Phase 2 replaces
+    // these standalone screens with the Équipe Khidma assignment model
+    // (agents are assigned per residence with responsibilities from the
+    // residence detail screen). Re-enable if legacy screens are needed.
+    // {
+    //     id: 'accueillants',
+    //     title: 'navigation.hosts',
+    //     type: 'basic',
+    //     icon: 'heroicons_outline:user-group',
+    //     link: '/accueillants',
+    //     meta: { roles: ['ROLE_ADMIN', 'ROLE_KHIDMA_AGENT'], translationKey: 'navigation.hosts' },
+    // },
+    // {
+    //     id: 'responsables',
+    //     title: 'navigation.roomManagers',
+    //     type: 'basic',
+    //     icon: 'heroicons_outline:user-group',
+    //     link: '/responsables',
+    //     meta: { roles: ['ROLE_ADMIN', 'ROLE_KHIDMA_AGENT'], translationKey: 'navigation.roomManagers' },
+    // },
     /*{
         id: 'dons',
         title: 'Gestion des dons',

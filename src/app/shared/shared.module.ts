@@ -18,6 +18,7 @@ import { SummarizePipe } from './pipes/summarize/summarize.pipe';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatTabsModule } from '@angular/material/tabs';
 import {
     MAT_MOMENT_DATE_FORMATS,
     MomentDateAdapter,
@@ -47,6 +48,7 @@ const LIST_MODULES = [
     MatTooltipModule,
     MatDividerModule,
     MatDatepickerModule,
+    MatTabsModule,
     NgApexchartsModule,
     TranslocoModule,
 ];

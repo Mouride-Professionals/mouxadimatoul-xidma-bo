@@ -11,7 +11,7 @@
                 (click)="openModal()"
             >
                 <mat-icon
-                    class="icon-size-5"
+                    class="icon-size-5 text-white"
                     [svgIcon]="'heroicons_solid:plus-circle'"
                 ></mat-icon>
                 <span class="kh-button-label">
@@ -79,7 +79,7 @@
                     <td>{{ user.prenom }}</td>
                     <td>{{ user.nom }}</td>
                     <td>{{ user.telephone }}</td>
-                    <td>{{ 'roles.' + user.role.libelle | transloco }}</td>
+                    <td>{{ 'roles.' + user.accountType?.toLowerCase() | transloco }}</td>
                     <td>
                         <mat-slide-toggle
                             (click)="confirmStatut(user.id)"

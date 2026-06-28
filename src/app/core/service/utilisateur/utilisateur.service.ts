@@ -63,10 +63,10 @@ export class UtilisateurService {
     // liste de tous les utilisateurs
     getAllUsers(
         params: RequestParams,
-        role: string
+        accountType?: string
     ): Observable<Pageable<Utilisateur>> {
         return this._http.get<Pageable<Utilisateur>>(API_URL, {
-            params: { ...params, role },
+            params: { ...params, ...(accountType ? { accountType } : {}) },
         });
     }
 }
