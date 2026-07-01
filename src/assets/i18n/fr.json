@@ -38,6 +38,7 @@
     "page": "Page {{page}}",
     "previousPage": "Page précédente",
     "save": "Enregistrer",
+    "saveAndAddAnother": "+ Ajouter une autre",
     "search": "Recherche",
     "yes": "OUI",
     "loading": "Chargement..."
@@ -98,7 +99,9 @@
     "title": "Gestion des événements",
     "form": {
       "addTitle": "Ajouter un événement",
-      "editTitle": "Modifier un événement"
+      "editTitle": "Modifier un événement",
+      "dateDebut": "Date de début",
+      "dateFin": "Date de fin"
     }
   },
   "errors": {

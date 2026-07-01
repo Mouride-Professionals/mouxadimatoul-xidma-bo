@@ -91,13 +91,24 @@
         <button
             class="w-full sm:w-auto"
             mat-flat-button
-            (click)="onExportation()"
-            color="accent"
+            color="primary"
             [disabled]="date.invalid || !event || !residence"
+            [matMenuTriggerFor]="exportMenu"
         >
-            <mat-icon svgIcon="mat_solid:upload_file" class="kh-inline-icon"></mat-icon>
-            <span>{{ 'reservations.actions.export' | transloco }}</span>
+            <mat-icon svgIcon="mat_solid:upload_file" class="kh-inline-icon text-white"></mat-icon>
+            <span class="text-white">{{ 'reservations.actions.export' | transloco }}</span>
+            <mat-icon class="icon-size-4 ml-1 text-white">arrow_drop_down</mat-icon>
         </button>
+        <mat-menu #exportMenu="matMenu">
+            <button mat-menu-item (click)="onExportation()">
+                <mat-icon svgIcon="mat_solid:table_view" class="icon-size-5 text-green-600"></mat-icon>
+                <span>Excel</span>
+            </button>
+            <button mat-menu-item (click)="onExportPdf()">
+                <mat-icon svgIcon="mat_solid:picture_as_pdf" class="icon-size-5 text-red-600"></mat-icon>
+                <span>PDF</span>
+            </button>
+        </mat-menu>
     </div>
 
     <ng-container *ngIf="data$ | async as data">

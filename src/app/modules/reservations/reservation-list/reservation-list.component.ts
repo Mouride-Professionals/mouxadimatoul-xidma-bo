@@ -90,35 +90,45 @@ export class ReservationListComponent implements OnInit {
     }
 
     onExportation(): void {
+        this._export(
+            this._reservationService.exportation(this.residence, this._exportParams()),
+            'application/vnd.ms-excel'
+        );
+    }
+
+    onExportPdf(): void {
+        this._export(
+            this._reservationService.exportPdf(this.residence, this._exportParams()),
+            'application/pdf'
+        );
+    }
+
+    private _exportParams() {
+        return {
+            year: moment(this.date.value).toDate().getFullYear(),
+            event: this.event,
+            presence: this.presence,
+            locale: this._languageService.activeLanguage,
+        };
+    }
+
+    private _export(request: any, mimeType: string): void {
         if (this.date.invalid || !this.residence || !this.event) {
             return;
         }
-        this._reservationService
-            .exportation(this.residence, {
-                year: moment(this.date.value).toDate().getFullYear(),
-                event: this.event,
-                presence: this.presence,
-                locale: this._languageService.activeLanguage,
-            })
-            .subscribe((responseMessage: any) => {
-                const element = document.createElement('a');
-                const file: Blob = new Blob([responseMessage], {
-                    type: 'application/vnd.ms-excel',
-                });
-                element.href = URL.createObjectURL(file);
-                document.body.appendChild(element);
-                element.click();
-                this._snackBar.open(
-                    this._translocoService.translate(
-                        'reservations.messages.exported'
-                    ),
-                    '',
-                    {
-                        panelClass: ['bg-green-500', 'text-white'],
-                        duration: 2000,
-                    }
-                );
-            });
+        request.subscribe((responseMessage: any) => {
+            const file: Blob = new Blob([responseMessage], { type: mimeType });
+            const element = document.createElement('a');
+            element.href = URL.createObjectURL(file);
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+            this._snackBar.open(
+                this._translocoService.translate('reservations.messages.exported'),
+                '',
+                { panelClass: ['bg-green-500', 'text-white'], duration: 2000 }
+            );
+        });
     }
 
     onPresence(): void {

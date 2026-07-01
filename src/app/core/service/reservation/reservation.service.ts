@@ -58,6 +58,21 @@ export class ReservationService {
         );
     }
 
+    exportPdf(
+        residence: number,
+        params: {
+            year: number;
+            event: number;
+            presence: -1 | 1;
+            locale?: 'fr' | 'ar';
+        }
+    ): Observable<any> {
+        return this._httpClient.get(
+            `${API_URL}/exportation/pdf/residence/${residence}`,
+            { responseType: 'arraybuffer' as 'json', params }
+        );
+    }
+
     getAllByPeriodAndPavillon(
         debut: Date,
         fin: Date,

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { AuthService } from '@core/auth/auth.service';
 import { Residence } from '@core/model/residence.model';
 import { ResidenceService } from '@core/service/residence/residence.service';
 import { Observable } from 'rxjs';
+import { environment } from 'environments/environment';
 
 @Component({
     selector: 'app-residences-list',
@@ -17,8 +17,7 @@ export class ResidencesListComponent implements OnInit {
     constructor(
         private _residenceService: ResidenceService,
         private _router: Router,
-        private _authService: AuthService,
-        private _sanitizer: DomSanitizer
+        private _authService: AuthService
     ) {
         if (
             !this._authService.getRoles().includes('ROLE_ADMIN') &&
@@ -35,11 +34,9 @@ export class ResidencesListComponent implements OnInit {
         this.getResidences();
     }
 
-    getImage(res: Residence): any {
+    getImage(res: Residence): string {
         return res.image
-            ? this._sanitizer.bypassSecurityTrustUrl(
-                  `data:${res.image.type};base64,${res.image.fichier}`
-              )
+            ? `${environment.apiUrl}/ressources/${res.image.id}`
             : 'assets/images/default.png';
     }
 

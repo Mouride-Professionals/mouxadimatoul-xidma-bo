@@ -37,6 +37,8 @@ export class FormEvenementComponent implements OnInit {
     eventForm(): void {
         this.form = new FormGroup({
             libelle: new FormControl(this.data?.libelle, Validators.required),
+            dateDebut: new FormControl(this.data?.dateDebut ?? null),
+            dateFin: new FormControl(this.data?.dateFin ?? null),
         });
     }
 

@@ -1,33 +1,43 @@
-<h2 mat-dialog-title>{{ titleKey | transloco }}</h2>
-<form [formGroup]="form" (ngSubmit)="saveEvent()">
-    <div class="w-full flex flex-col space-y-4">
-        <mat-form-field class="w-full gt-xs:pr-3">
-            <mat-label>{{ 'fields.eventName' | transloco }}</mat-label>
-            <input matInput name="libelle" formControlName="libelle" />
-            <mat-icon class="icon-size-5" matSuffix [svgIcon]="'event'">
-            </mat-icon>
-            <mat-error
-                *ngIf="
-                    formEvent.libelle.touched &&
-                    formEvent.libelle.errors?.required
-                "
-                class="error-message"
-            >
-                {{ 'validation.required.name' | transloco }}
-            </mat-error>
-        </mat-form-field>
-        <div class="flex justify-end items-center gap-3">
-            <button
-                mat-flat-button
-                mat-dialog-close
-                class="bg-red-600 text-white"
-                type="button"
-            >
-                {{ 'common.cancel' | transloco }}
-            </button>
-            <button mat-flat-button [disabled]="form.invalid" color="primary">
-                {{ 'common.save' | transloco }}
-            </button>
+<h2 mat-dialog-title class="text-2xl font-semibold">{{ titleKey | transloco }}</h2>
+<div mat-dialog-content>
+    <form [formGroup]="form" (ngSubmit)="saveEvent()">
+        <div class="w-full flex flex-col space-y-4 py-2">
+            <mat-form-field class="w-full" appearance="fill">
+                <mat-label>{{ 'fields.eventName' | transloco }}</mat-label>
+                <input matInput name="libelle" formControlName="libelle" />
+                <mat-error *ngIf="formEvent.libelle.touched && formEvent.libelle.errors?.required">
+                    {{ 'validation.required.name' | transloco }}
+                </mat-error>
+            </mat-form-field>
+
+            <div class="w-full flex flex-col sm:flex-row gap-4">
+                <mat-form-field class="w-full" appearance="fill">
+                    <mat-label>{{ 'events.form.dateDebut' | transloco }}</mat-label>
+                    <input matInput [matDatepicker]="pickerDebut" formControlName="dateDebut" />
+                    <mat-datepicker-toggle matSuffix [for]="pickerDebut"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerDebut></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field class="w-full" appearance="fill">
+                    <mat-label>{{ 'events.form.dateFin' | transloco }}</mat-label>
+                    <input matInput [matDatepicker]="pickerFin" formControlName="dateFin" />
+                    <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerFin></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="w-full flex flex-col sm:flex-row gap-4 sm:items-center">
+                <button mat-flat-button color="primary" [disabled]="form.invalid">
+                    {{ 'common.save' | transloco }}
+                </button>
+                <button
+                    mat-flat-button
+                    class="bg-red-600 text-white"
+                    type="button"
+                    mat-dialog-close
+                >
+                    {{ 'common.cancel' | transloco }}
+                </button>
+            </div>
         </div>
-    </div>
-</form>
+    </form>
+</div>

@@ -45,7 +45,11 @@
         >
             <mat-icon [svgIcon]="'event'"></mat-icon>
             <div class="flex-1 min-w-0">
-                <span>{{ event.libelle }}</span>
+                <p class="font-medium truncate">{{ event.libelle }}</p>
+                <p *ngIf="event.dateDebut || event.dateFin" class="text-sm text-secondary mt-0.5">
+                    {{ event.dateDebut | date:'dd/MM/yyyy' }}
+                    <ng-container *ngIf="event.dateFin"> — {{ event.dateFin | date:'dd/MM/yyyy' }}</ng-container>
+                </p>
             </div>
             <button
                 mat-icon-button

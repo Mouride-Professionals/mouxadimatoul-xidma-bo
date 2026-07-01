@@ -38,6 +38,7 @@
     "page": "الصفحة {{page}}",
     "previousPage": "الصفحة السابقة",
     "save": "حفظ",
+    "saveAndAddAnother": "حفظ وإضافة أخرى",
     "search": "بحث",
     "yes": "نعم",
     "loading": "جارٍ التحميل..."
@@ -98,7 +99,9 @@
     "title": "إدارة الأحداث",
     "form": {
       "addTitle": "إضافة حدث",
-      "editTitle": "تعديل حدث"
+      "editTitle": "تعديل حدث",
+      "dateDebut": "تاريخ البداية",
+      "dateFin": "تاريخ النهاية"
     }
   },
   "errors": {

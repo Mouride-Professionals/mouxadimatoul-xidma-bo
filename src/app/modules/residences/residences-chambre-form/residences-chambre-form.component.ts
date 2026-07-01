@@ -28,6 +28,7 @@ export class ResidencesChambreFormComponent implements OnInit {
 
     titleKey: string = 'residences.rooms.form.addTitle';
     isEdit = false;
+    private _anySaved = false;
 
     constructor(
         private _matDialogRef: MatDialogRef<ResidencesChambreFormComponent>,
@@ -35,7 +36,7 @@ export class ResidencesChambreFormComponent implements OnInit {
         private _snackBar: MatSnackBar,
         private _translocoService: TranslocoService,
         @Inject(MAT_DIALOG_DATA)
-        private _data: { chambre?: Chambre; pavillons: Pavillon[] }
+        private _data: { chambre?: Chambre; pavillons: Pavillon[]; selectedPavillon?: Pavillon }
     ) {}
 
     get f(): any {
@@ -50,6 +51,9 @@ export class ResidencesChambreFormComponent implements OnInit {
             this.titleKey = 'residences.rooms.form.editTitle';
             this.chambreForm.patchValue(this.chambre);
             this.f.pavillon.disable();
+        } else if (this._data.selectedPavillon) {
+            this.chambreForm.patchValue({ pavillon: this._data.selectedPavillon });
+            this.onSelectPavillon();
         }
     }
 
@@ -125,9 +129,38 @@ export class ResidencesChambreFormComponent implements OnInit {
         }
     }
 
+    onSubmitAndAddAnother(): void {
+        if (this.chambreForm.invalid) {
+            return;
+        }
+        this.chambreForm.disable();
+        const chambre = { ...this.chambreForm.value };
+        this._chambreService.createChambre(chambre).subscribe({
+            next: () => {
+                this._snackBar.open(
+                    this._translocoService.translate(
+                        'residences.rooms.messages.created'
+                    ),
+                    '',
+                    { panelClass: ['bg-green-500', 'text-white'], duration: 3000 }
+                );
+                const pavillon = this.chambreForm.get('pavillon').value;
+                const niveau = this.chambreForm.get('niveau').value;
+                const nombrePlace = this.chambreForm.get('nombrePlace').value;
+                this._anySaved = true;
+                this.chambreForm.enable();
+                this.chambreForm.reset({ pavillon, niveau, nombrePlace });
+            },
+            error: (err: any) => {
+                this.chambreForm.enable();
+                console.error(err);
+            },
+        });
+    }
+
     onReset(): void {
         this.chambreForm.reset();
-        this._matDialogRef.close();
+        this._matDialogRef.close(this._anySaved);
     }
 
     onComparePavillon = (p1: Pavillon, p2: Pavillon): boolean =>

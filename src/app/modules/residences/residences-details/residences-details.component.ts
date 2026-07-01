@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Residence } from '@core/model/residence.model';
+import { environment } from 'environments/environment';
 import { ResidenceService } from '@core/service/residence/residence.service';
 import { ResidencesPavillonAddComponent } from '../residences-pavillon-add/residences-pavillon-add.component';
 import { ResidencesChambreFormComponent } from '../residences-chambre-form/residences-chambre-form.component';
@@ -25,7 +25,7 @@ export class ResidencesDetailsComponent implements OnInit {
     chambres: Chambre[] = [];
     pavillons: Pavillon[] = [];
     pavillonSelected: Pavillon;
-    imageResidence: string | SafeUrl = 'assets/images/default.png';
+    imageResidence: string = 'assets/images/default.png';
 
     page: number = 0;
     size: number = 9;
@@ -34,8 +34,7 @@ export class ResidencesDetailsComponent implements OnInit {
         private _route: ActivatedRoute,
         private _residenceService: ResidenceService,
         private _chambreService: ChambreService,
-        private _matDialog: MatDialog,
-        private _sanitizer: DomSanitizer
+        private _matDialog: MatDialog
     ) {}
 
     ngOnInit(): void {
@@ -50,10 +49,7 @@ export class ResidencesDetailsComponent implements OnInit {
                         this.pavillonSelected = res.pavillons[0];
                         this.loadChambres();
                         if (res.image) {
-                            this.imageResidence =
-                                this._sanitizer.bypassSecurityTrustUrl(
-                                    `data:${res.image.type};base64,${res.image.fichier}`
-                                );
+                            this.imageResidence = `${environment.apiUrl}/ressources/${res.image.id}`;
                         }
                     });
             }
@@ -124,6 +120,7 @@ export class ResidencesDetailsComponent implements OnInit {
                 data: {
                     chambre,
                     pavillons: this.pavillons,
+                    selectedPavillon: chambre ? null : this.pavillonSelected,
                 },
             })
             .afterClosed()
