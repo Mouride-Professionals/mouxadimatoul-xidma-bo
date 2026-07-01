@@ -4,6 +4,7 @@ import { Responsable } from './responsable.model';
 export type Chambre = {
     id: number;
     numero: number;
+    niveau: number;
     nombrePlace: number;
     placeReservee: number;
     placeChoisie?: number;

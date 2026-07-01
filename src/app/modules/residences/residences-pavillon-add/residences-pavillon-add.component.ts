@@ -8,12 +8,16 @@ import { Residence } from '@core/model/residence.model';
 import { PavillonService } from '@core/service/pavillon/pavillon.service';
 import { TranslocoService } from '@ngneat/transloco';
 
+export type PavillonDialogData = { residence: Residence; pavillon?: Pavillon };
+
 @Component({
     selector: 'app-residences-pavillon-add',
     templateUrl: './residences-pavillon-add.component.html',
     styleUrls: ['./residences-pavillon-add.component.scss'],
 })
 export class ResidencesPavillonAddComponent implements OnInit {
+    isEditMode = false;
+
     pavillonForm: FormGroup = new FormGroup({
         libelle: new FormControl('', [
             Validators.required,
@@ -28,7 +32,7 @@ export class ResidencesPavillonAddComponent implements OnInit {
         private _pavillonService: PavillonService,
         private _snackBar: MatSnackBar,
         private _translocoService: TranslocoService,
-        @Inject(MAT_DIALOG_DATA) private residence: Residence
+        @Inject(MAT_DIALOG_DATA) public data: PavillonDialogData
     ) {}
 
     get f(): any {
@@ -39,7 +43,15 @@ export class ResidencesPavillonAddComponent implements OnInit {
         return this.pavillonForm.controls['chambres'] as FormArray;
     }
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        if (this.data.pavillon) {
+            this.isEditMode = true;
+            this.pavillonForm.patchValue({
+                libelle: this.data.pavillon.libelle,
+                niveau: this.data.pavillon.niveau,
+            });
+        }
+    }
 
     onSubmit(): void {
         if (this.pavillonForm.invalid) {
@@ -49,19 +61,26 @@ export class ResidencesPavillonAddComponent implements OnInit {
         this.pavillonForm.disable();
         const pavillon: Pavillon = {
             ...this.pavillonForm.value,
-            residence: this.residence,
+            residence: this.data.residence,
         };
-        this._pavillonService.createPavillon(pavillon).subscribe({
+
+        const request$ = this.isEditMode
+            ? this._pavillonService.updatePavillon(this.data.pavillon.id, {
+                  ...pavillon,
+                  id: this.data.pavillon.id,
+              })
+            : this._pavillonService.createPavillon(pavillon);
+
+        request$.subscribe({
             next: (pav: Pavillon) => {
                 this._snackBar.open(
                     this._translocoService.translate(
-                        'residences.pavilions.messages.created'
+                        this.isEditMode
+                            ? 'residences.pavilions.messages.updated'
+                            : 'residences.pavilions.messages.created'
                     ),
                     '',
-                    {
-                        panelClass: ['bg-green-500', 'text-white'],
-                        duration: 3000,
-                    }
+                    { panelClass: ['bg-green-500', 'text-white'], duration: 3000 }
                 );
                 this._matDialogRef.close(pav);
             },
@@ -70,10 +89,7 @@ export class ResidencesPavillonAddComponent implements OnInit {
                 this._snackBar.open(
                     translateApiError(this._translocoService, err),
                     '',
-                    {
-                        panelClass: ['bg-red-500', 'text-white'],
-                        duration: 4000,
-                    }
+                    { panelClass: ['bg-red-500', 'text-white'], duration: 4000 }
                 );
                 console.error(err);
             },

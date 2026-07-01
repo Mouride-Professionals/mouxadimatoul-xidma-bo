@@ -113,12 +113,12 @@
                 ></mat-icon>
             </mat-form-field>
             <div class="w-full flex flex-col sm:flex-row gap-4 sm:items-center">
-                <button mat-raised-button color="primary">
+                <button mat-flat-button color="primary">
                     {{ 'common.save' | transloco }}
                 </button>
                 <button
-                    mat-raised-button
-                    color="warn"
+                    mat-flat-button
+                    class="bg-red-600 text-white"
                     type="button"
                     (click)="onReset()"
                 >

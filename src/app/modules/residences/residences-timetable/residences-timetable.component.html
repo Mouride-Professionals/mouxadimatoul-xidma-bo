@@ -3,8 +3,8 @@
     <!-- Toolbar (hidden on print) -->
     <div class="w-full flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 no-print">
         <h2 class="text-2xl font-serif">{{ 'assignments.timetable.title' | transloco }}</h2>
-        <button mat-raised-button color="primary" (click)="print()">
-            <mat-icon svgIcon="mat_solid:print"></mat-icon>
+        <button mat-flat-button color="primary" class="text-white" (click)="print()">
+            <mat-icon class="icon-size-5 text-white" svgIcon="mat_solid:print"></mat-icon>
             <span class="kh-button-label">{{ 'assignments.timetable.export' | transloco }}</span>
         </button>
     </div>

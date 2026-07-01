@@ -165,7 +165,7 @@
 
                 <div class="kh-form-actions">
                     <button
-                        mat-raised-button
+                        mat-flat-button
                         class="w-full sm:max-w-60"
                         color="primary"
                         [disabled]="delegationForm.invalid"
@@ -173,9 +173,8 @@
                         {{ 'common.save' | transloco }}
                     </button>
                     <button
-                        mat-raised-button
-                        class="w-full sm:max-w-60"
-                        color="warn"
+                        mat-flat-button
+                        class="w-full sm:max-w-60 bg-red-600 text-white"
                     >
                         {{ 'common.cancel' | transloco }}
                     </button>

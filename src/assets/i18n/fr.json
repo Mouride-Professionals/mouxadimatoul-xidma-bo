@@ -55,7 +55,10 @@
     },
     "charts": {
       "availableRooms": "Chambre disponible",
-      "availableRoomsByPavilion": "Les chambres disponibles par pavillon"
+      "availableRoomsByPavilion": "Les chambres disponibles par pavillon",
+      "occupancy": "Taux d'occupation des chambres",
+      "available": "Disponibles",
+      "occupied": "Occupées"
     },
     "actions": {
       "createReservation": "Faire une réservation",
@@ -331,10 +334,12 @@
         "name": "Nom du pavillon"
       },
       "form": {
-        "addTitle": "Ajouter un nouveau pavillon"
+        "addTitle": "Ajouter un nouveau pavillon",
+        "editTitle": "Modifier le pavillon"
       },
       "messages": {
-        "created": "Pavillon créé avec succès"
+        "created": "Pavillon créé avec succès",
+        "updated": "Pavillon modifié avec succès"
       }
     },
     "rooms": {
@@ -348,6 +353,7 @@
         "editTitle": "Modifier la chambre"
       },
       "groundFloor": "Rez-de-chaussée",
+      "selectPavilionFirst": "Sélectionnez d'abord un pavillon",
       "messages": {
         "created": "La chambre a été bien créée",
         "updated": "La chambre a été bien modifiée"

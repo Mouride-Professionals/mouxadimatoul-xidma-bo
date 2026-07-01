@@ -55,7 +55,10 @@
     },
     "charts": {
       "availableRooms": "الغرف المتاحة",
-      "availableRoomsByPavilion": "الغرف المتاحة حسب الجناح"
+      "availableRoomsByPavilion": "الغرف المتاحة حسب الجناح",
+      "occupancy": "نسبة إشغال الغرف",
+      "available": "متاحة",
+      "occupied": "مشغولة"
     },
     "actions": {
       "createReservation": "إنشاء حجز",
@@ -331,10 +334,12 @@
         "name": "اسم الجناح"
       },
       "form": {
-        "addTitle": "إضافة جناح جديد"
+        "addTitle": "إضافة جناح جديد",
+        "editTitle": "تعديل الجناح"
       },
       "messages": {
-        "created": "تم إنشاء الجناح بنجاح"
+        "created": "تم إنشاء الجناح بنجاح",
+        "updated": "تم تعديل الجناح بنجاح"
       }
     },
     "rooms": {
@@ -348,6 +353,7 @@
         "editTitle": "تعديل الغرفة"
       },
       "groundFloor": "الطابق الأرضي",
+      "selectPavilionFirst": "اختر الجناح أولاً",
       "messages": {
         "created": "تم إنشاء الغرفة بنجاح",
         "updated": "تم تعديل الغرفة بنجاح"

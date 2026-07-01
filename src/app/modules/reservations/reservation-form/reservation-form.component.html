@@ -95,7 +95,7 @@
                     <mat-form-field class="w-full" appearance="fill">
                         <mat-label>{{ 'fields.residence' | transloco }}</mat-label>
                         <mat-select
-                            (ngModelChange)="onLoadChambre(); onLoadHotes()"
+                            (selectionChange)="onLoadChambre(); onLoadHotes()"
                             formControlName="residence"
                         >
                             <mat-option
@@ -107,7 +107,7 @@
                     </mat-form-field>
                 </div>
 
-                <!-- Info réservation -->
+                <!-- Info invités -->
                 <div class="kh-form-section">
                     <h2 class="text-xl font-semibold">
                         {{ 'reservations.form.guestsInformation' | transloco }}
@@ -116,7 +116,7 @@
                         <mat-divider></mat-divider>
                     </div>
                 </div>
-                <div class="w-full flex flex-col sm:flex-row sm:items-start gap-3">
+                <div class="col-span-full w-full flex flex-col gap-2">
                     <mat-form-field class="w-full" appearance="fill">
                         <mat-label>{{ 'fields.delegation' | transloco }}</mat-label>
                         <mat-select
@@ -130,24 +130,21 @@
                             >
                         </mat-select>
                     </mat-form-field>
-                    <button
-                        type="button"
-                        mat-stroked-button
-                        color="primary"
-                        class="w-full sm:w-auto sm:mt-2"
-                        (click)="onCreateDelegation()"
-                    >
-                        <mat-icon svgIcon="heroicons_solid:plus"></mat-icon>
-                        <span class="kh-button-label">
-                            {{
-                                'reservations.actions.createDelegation'
-                                    | transloco
-                            }}
-                        </span>
-                    </button>
+                    <div class="flex justify-end">
+                        <button
+                            type="button"
+                            mat-flat-button
+                            [color]="'primary'"
+                            class="text-white whitespace-nowrap"
+                            (click)="onCreateDelegation()"
+                        >
+                            <mat-icon class="icon-size-5 text-white" [svgIcon]="'heroicons_solid:plus-circle'"></mat-icon>
+                            <span class="kh-button-label">{{ 'reservations.actions.createDelegation' | transloco }}</span>
+                        </button>
+                    </div>
                 </div>
                 <div
-                    class="col-span-full w-full flex items-center responsive-table"
+                    class="col-span-full w-full flex items-center"
                     *ngIf="inviteDelegations.length > 0"
                 >
                     <mat-form-field class="w-full md:max-w-md" appearance="fill">
@@ -284,9 +281,9 @@
                     </table>
                 </div>
 
-                <div class="kh-form-actions">
+                <div class="kh-form-actions col-span-full">
                     <button
-                        mat-raised-button
+                        mat-flat-button
                         class="w-full sm:max-w-60"
                         color="primary"
                         [disabled]="reservationForm.invalid"

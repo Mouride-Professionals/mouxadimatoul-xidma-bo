@@ -103,15 +103,23 @@
                             (click)="onChangePavillon(p)"
                         >
                             <span>{{ p.libelle | titlecase }}</span>
+                            <button
+                                mat-icon-button
+                                type="button"
+                                [attr.aria-label]="'common.edit' | transloco"
+                                (click)="onEditPavillonModal(p); $event.stopPropagation()"
+                            >
+                                <mat-icon class="icon-size-4" svgIcon="heroicons_solid:pencil-alt"></mat-icon>
+                            </button>
                         </fuse-card>
                         <button
                             class="min-w-44 lg:min-w-0"
-                            mat-stroked-button
-                            color="primary"
+                            mat-flat-button
+                            [color]="'primary'"
                             (click)="onOpenPavillonModal()"
                         >
-                            <mat-icon svgIcon="heroicons_solid:plus" class="text-white"></mat-icon>
-                            <span>{{ 'residences.pavilions.add' | transloco }}</span>
+                            <mat-icon class="icon-size-5 text-white" [svgIcon]="'heroicons_solid:plus-circle'"></mat-icon>
+                            <span class="kh-button-label">{{ 'residences.pavilions.add' | transloco }}</span>
                         </button>
                     </div>
                     <fuse-card class="lg:col-span-3 w-full p-4 flex flex-col gap-4">
@@ -120,14 +128,14 @@
                                 {{ 'residences.rooms.title' | transloco }}
                             </h2>
                             <button
-                                class="w-full sm:w-auto"
-                                mat-raised-button
-                                color="primary"
+                                class="w-full sm:w-auto text-white"
+                                mat-flat-button
+                                [color]="'primary'"
                                 *ngIf="pavillons.length > 0"
                                 (click)="onOpenChambreModal()"
                             >
-                                <mat-icon svgIcon="heroicons_solid:plus"></mat-icon>
-                                <span>{{ 'common.new' | transloco }}</span>
+                                <mat-icon class="icon-size-5 text-white" [svgIcon]="'heroicons_solid:plus-circle'"></mat-icon>
+                                <span class="kh-button-label">{{ 'common.new' | transloco }}</span>
                             </button>
                         </div>
                         <div

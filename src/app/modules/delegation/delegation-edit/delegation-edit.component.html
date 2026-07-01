@@ -16,15 +16,15 @@
             <div class="w-full flex flex-col sm:flex-row gap-4 sm:items-center">
                 <button
                     [disabled]="delegationForm.invalid"
-                    mat-raised-button
+                    mat-flat-button
                     color="primary"
                 >
                     {{ 'common.save' | transloco }}
                 </button>
                 <button
                     type="button"
-                    mat-raised-button
-                    color="warn"
+                    mat-flat-button
+                    class="bg-red-600 text-white"
                     (click)="onClose()"
                 >
                     {{ 'common.cancel' | transloco }}

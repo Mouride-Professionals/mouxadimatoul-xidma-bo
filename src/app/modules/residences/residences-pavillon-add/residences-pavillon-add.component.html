@@ -1,5 +1,5 @@
 <h2 mat-dialog-title class="text-2xl font-semibold">
-    {{ 'residences.pavilions.form.addTitle' | transloco }}
+    {{ (isEditMode ? 'residences.pavilions.form.editTitle' : 'residences.pavilions.form.addTitle') | transloco }}
 </h2>
 <div mat-dialog-content>
     <form [formGroup]="pavillonForm" (ngSubmit)="onSubmit()">
@@ -38,7 +38,7 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-            <ng-container formArrayName="chambres">
+            <ng-container formArrayName="chambres" *ngIf="!isEditMode">
                 <div
                     *ngFor="let cForm of chambres.controls; let i = index"
                     [formGroup]="cForm"
@@ -78,7 +78,7 @@
                 </div>
             </ng-container>
 
-            <div class="w-full flex justify-center items-center">
+            <div class="w-full flex justify-center items-center" *ngIf="!isEditMode">
                 <button
                     mat-icon-button
                     type="button"
@@ -93,12 +93,12 @@
             </div>
 
             <div class="w-full flex flex-col sm:flex-row gap-4 sm:items-center">
-                <button mat-raised-button color="primary">
+                <button mat-flat-button color="primary">
                     {{ 'common.save' | transloco }}
                 </button>
                 <button
-                    mat-raised-button
-                    color="warn"
+                    mat-flat-button
+                    class="bg-red-600 text-white"
                     type="button"
                     (click)="onReset()"
                 >

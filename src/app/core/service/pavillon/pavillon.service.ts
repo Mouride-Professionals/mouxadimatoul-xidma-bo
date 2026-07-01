@@ -16,6 +16,10 @@ export class PavillonService {
         return this._httpClient.post<Pavillon>(API_URL, pavillon);
     }
 
+    updatePavillon(id: number, pavillon: Pavillon): Observable<Pavillon> {
+        return this._httpClient.put<Pavillon>(`${API_URL}/${id}`, pavillon);
+    }
+
     getPavillonsByResidence(idRes: number): Observable<Pavillon[]> {
         return this._httpClient.get<Pavillon[]>(
             `${API_URL}/residence/${idRes}`

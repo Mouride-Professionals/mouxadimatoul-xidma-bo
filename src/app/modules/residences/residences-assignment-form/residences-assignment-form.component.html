@@ -110,10 +110,10 @@
 
             <!-- Actions -->
             <div class="w-full flex flex-col sm:flex-row gap-3">
-                <button mat-raised-button color="warn" type="button" (click)="onCancel()">
+                <button mat-flat-button class="bg-red-600 text-white" type="button" (click)="onCancel()">
                     {{ 'common.cancel' | transloco }}
                 </button>
-                <button mat-raised-button color="primary" type="submit">
+                <button mat-flat-button color="primary" type="submit">
                     {{ 'common.save' | transloco }}
                 </button>
             </div>

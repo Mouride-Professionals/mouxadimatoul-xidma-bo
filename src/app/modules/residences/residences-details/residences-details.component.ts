@@ -88,7 +88,7 @@ export class ResidencesDetailsComponent implements OnInit {
         this._matDialog
             .open(ResidencesPavillonAddComponent, {
                 panelClass: ['w-full', 'max-w-120'],
-                data: this.residence,
+                data: { residence: this.residence },
             })
             .afterClosed()
             .subscribe((pavillon: Pavillon) => {
@@ -96,6 +96,23 @@ export class ResidencesDetailsComponent implements OnInit {
                     this.pavillons.push(pavillon);
                     this.pavillonSelected = pavillon;
                     this.loadChambres();
+                }
+            });
+    }
+
+    onEditPavillonModal(p: Pavillon): void {
+        this._matDialog
+            .open(ResidencesPavillonAddComponent, {
+                panelClass: ['w-full', 'max-w-120'],
+                data: { residence: this.residence, pavillon: p },
+            })
+            .afterClosed()
+            .subscribe((updated: Pavillon) => {
+                if (updated) {
+                    const idx = this.pavillons.findIndex(pav => pav.id === updated.id);
+                    if (idx !== -1) {
+                        this.pavillons[idx] = { ...this.pavillons[idx], ...updated };
+                    }
                 }
             });
     }

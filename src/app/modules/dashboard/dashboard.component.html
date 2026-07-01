@@ -3,92 +3,73 @@
         <h2 class="text-2xl sm:text-3xl font-semibold leading-tight">
             {{ 'dashboard.title' | transloco }}
         </h2>
-        <mat-form-field
-            *ngIf="role === 'ROLE_ADMIN'"
-            class="w-full sm:w-72 fuse-mat-no-subcript fuse-mat-rounded fuse-mat-dense"
-        >
-            <mat-select
-                [placeholder]="'dashboard.filters.residence' | transloco"
-                (selectionChange)="onFilterData()"
-                [(ngModel)]="residence"
-                name="residence"
+        <div class="flex flex-wrap items-center gap-2">
+            <mat-form-field
+                *ngIf="role === 'ROLE_ADMIN'"
+                class="w-full sm:w-72 fuse-mat-no-subcript fuse-mat-rounded fuse-mat-dense"
             >
-                <mat-option [value]="null">---</mat-option>
-                <mat-option
-                    *ngFor="let item of residences$ | async"
-                    [value]="item.id"
+                <mat-select
+                    [placeholder]="'dashboard.filters.residence' | transloco"
+                    (selectionChange)="onFilterData()"
+                    [(ngModel)]="residence"
+                    name="residence"
                 >
-                    {{ item.libelle }}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
+                    <mat-option [value]="null">---</mat-option>
+                    <mat-option
+                        *ngFor="let item of residences$ | async"
+                        [value]="item.id"
+                    >
+                        {{ item.libelle }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <a class="w-full sm:w-auto text-white"
+               mat-flat-button
+               routerLink="/reservations/reserver"
+               [color]="'primary'"
+            >
+                <mat-icon class="icon-size-5 text-white" [svgIcon]="'heroicons_solid:plus-circle'"></mat-icon>
+                <span class="kh-button-label">{{ 'dashboard.actions.createReservation' | transloco }}</span>
+            </a>
+        </div>
     </div>
 
     <div class="w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
-        <ng-container *ngIf="total$ | async as total">
-            <div
-                class="w-full px-4 py-3 bg-white shadow flex justify-between items-center"
-            >
-                <div class="flex flex-col space-y-1">
-                    <h5 class="text-md font-medium text-gray-400">
-                        {{ 'dashboard.stats.pavilions' | transloco }}
-                    </h5>
-                    <h3 class="text-lg font-semibold text-gray-600">
-                        {{ total.pavillons }}
-                    </h3>
-                </div>
-                <!-- <button
-                        class="p-3 rounded-full bg-amber-200 text-amber-500 flex items-center justify-center"
-                    >
-                        <svg-icon
-                            src="assets/icons/agent.svg"
-                            svgClass="w-5 h-5"
-                        ></svg-icon>
-                    </button> -->
-            </div>
-            <div
-                class="w-full px-4 py-3 bg-white shadow flex justify-between items-center"
-            >
-                <div class="flex flex-col space-y-1">
-                    <h5 class="text-md font-medium text-gray-400">
-                        {{ 'dashboard.stats.rooms' | transloco }}
-                    </h5>
-                    <h3 class="text-lg font-semibold text-gray-600">
-                        {{ total.chambres }}
-                    </h3>
-                </div>
-            </div>
-            <div
-                class="w-full px-4 py-3 bg-white shadow flex justify-between items-center"
-            >
-                <div class="flex flex-col space-y-1">
-                    <h5 class="text-md font-medium text-gray-400">
-                        {{ 'dashboard.stats.delegations' | transloco }}
-                    </h5>
-                    <h3 class="text-lg font-semibold text-gray-600">
-                        {{ total.delegations }}
-                    </h3>
-                </div>
-            </div>
-            <div
-                class="w-full px-4 py-3 bg-white shadow flex justify-between items-center"
-            >
-                <div class="flex flex-col space-y-1">
-                    <h5 class="text-md font-medium text-gray-400">
-                        {{ 'dashboard.stats.reservations' | transloco }}
-                    </h5>
-                    <h3 class="text-lg font-semibold text-gray-600">
-                        {{ total.reservations }}
-                    </h3>
-                </div>
-            </div>
+        <ng-container *ngIf="totalStats">
+            <app-card-count
+                [name]="'dashboard.stats.pavilions' | transloco"
+                [count]="totalStats.pavillons"
+                iconName="heroicons_solid:home"
+                iconBgClass="bg-white"
+                iconColorClass="text-amber-600"
+            ></app-card-count>
+            <app-card-count
+                [name]="'dashboard.stats.rooms' | transloco"
+                [count]="totalStats.chambres"
+                iconName="heroicons_solid:key"
+                iconBgClass="bg-white"
+                iconColorClass="text-blue-600"
+            ></app-card-count>
+            <app-card-count
+                [name]="'dashboard.stats.delegations' | transloco"
+                [count]="totalStats.delegations"
+                iconName="heroicons_solid:user-group"
+                iconBgClass="bg-white"
+                iconColorClass="text-green-600"
+            ></app-card-count>
+            <app-card-count
+                [name]="'dashboard.stats.reservations' | transloco"
+                [count]="totalStats.reservations"
+                iconName="heroicons_solid:calendar"
+                iconBgClass="bg-white"
+                iconColorClass="text-purple-600"
+            ></app-card-count>
         </ng-container>
 
         <div class="col-span-full flex flex-col flex-auto space-y-4">
             <h2 class="text-xl sm:text-2xl font-semibold leading-tight">
                 {{ 'dashboard.charts.availableRoomsByPavilion' | transloco }}
             </h2>
-
             <fuse-card
                 class="flex p-4 flex-col flex-auto"
                 *ngIf="chambreDispoChart"
@@ -108,6 +89,28 @@
                     [tooltip]="chambreDispoChart.tooltip"
                     [xaxis]="chambreDispoChart.xaxis"
                     [yaxis]="chambreDispoChart.yaxis"
+                ></apx-chart>
+            </fuse-card>
+        </div>
+
+        <div class="col-span-full flex flex-col flex-auto space-y-4">
+            <h2 class="text-xl sm:text-2xl font-semibold leading-tight">
+                {{ 'dashboard.charts.occupancy' | transloco }}
+            </h2>
+            <fuse-card
+                class="flex p-4 flex-col flex-auto"
+                *ngIf="occupancyChart"
+            >
+                <apx-chart
+                    class="flex-auto w-full h-64 sm:h-80"
+                    [chart]="occupancyChart.chart"
+                    [colors]="occupancyChart.colors"
+                    [dataLabels]="occupancyChart.dataLabels"
+                    [labels]="occupancyChart.labels"
+                    [legend]="occupancyChart.legend"
+                    [plotOptions]="occupancyChart.plotOptions"
+                    [series]="occupancyChart.series"
+                    [tooltip]="occupancyChart.tooltip"
                 ></apx-chart>
             </fuse-card>
         </div>

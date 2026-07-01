@@ -5,10 +5,8 @@ import { ResidenceService } from '@core/service/residence/residence.service';
 import { ChambreDispo } from '@core/service/stats/chambre-dispo.stats';
 import { StatsService } from '@core/service/stats/stats.service';
 import { TotalStats } from '@core/service/stats/total.stats';
-import {
-    ApexOptions,
-} from 'ng-apexcharts';
-import { Observable, Subject, takeUntil } from 'rxjs';
+import { ApexOptions } from 'ng-apexcharts';
+import { forkJoin, Observable, Subject, takeUntil } from 'rxjs';
 import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
@@ -18,9 +16,10 @@ import { TranslocoService } from '@ngneat/transloco';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
     residences$: Observable<Residence[]>;
-    total$: Observable<TotalStats>;
+    totalStats: TotalStats | null = null;
 
     chambreDispoChart: ApexOptions;
+    occupancyChart: ApexOptions;
     chambreDispos: ChambreDispo[] = [];
 
     residence = 1;
@@ -48,6 +47,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
                 if (this.chambreDispos.length) {
                     this._prepareChartChambreDispo();
                 }
+                if (this.totalStats) {
+                    this._prepareOccupancyChart();
+                }
             });
     }
 
@@ -57,13 +59,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
 
     onFilterData(): void {
-        this.total$ = this._statService.getTotalByResidence(this.residence);
-        this._statService
-            .getchambreDispoByResidence(this.residence)
-            .subscribe((res: ChambreDispo[]) => {
-                this.chambreDispos = res;
-                this._prepareChartChambreDispo();
-            });
+        forkJoin({
+            total: this._statService.getTotalByResidence(this.residence),
+            chambres: this._statService.getchambreDispoByResidence(this.residence),
+        }).subscribe(({ total, chambres }) => {
+            this.totalStats = total;
+            this.chambreDispos = chambres;
+            this._prepareChartChambreDispo();
+            this._prepareOccupancyChart();
+        });
     }
 
     private _prepareChartChambreDispo(): void {
@@ -73,12 +77,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
                 foreColor: 'inherit',
                 height: '100%',
                 type: 'bar',
-                toolbar: {
-                    show: false,
-                },
-                zoom: {
-                    enabled: false,
-                },
+                toolbar: { show: false },
+                zoom: { enabled: false },
             },
             colors: ['#4CAF50'],
             dataLabels: {
@@ -89,67 +89,78 @@ export class DashboardComponent implements OnInit, OnDestroy {
                     colors: ['#4CAF50'],
                 },
                 enabledOnSeries: [0],
-                background: {
-                    borderWidth: 0,
-                },
+                background: { borderWidth: 0 },
             },
-            grid: {
-                borderColor: 'var(--fuse-border)',
-            },
+            grid: { borderColor: 'var(--fuse-border)' },
             labels: this.chambreDispos.map((c: ChambreDispo) => c.pavillon),
-            legend: {
-                show: false,
-            },
+            legend: { show: false },
             plotOptions: {
-                bar: {
-                    dataLabels: {
-                        position: 'top', // top, center, bottom
-                    },
-                },
+                bar: { dataLabels: { position: 'top' } },
             },
             series: [
                 {
                     name: this._translocoService.translate(
                         'dashboard.charts.availableRooms'
                     ),
-                    data: this.chambreDispos.map(
-                        (c: ChambreDispo) => c.chambres
-                    ),
+                    data: this.chambreDispos.map((c: ChambreDispo) => c.chambres),
                 },
             ],
             states: {
-                hover: {
-                    filter: {
-                        type: 'darken',
-                        value: 0.75,
-                    },
-                },
+                hover: { filter: { type: 'darken', value: 0.75 } },
             },
-            tooltip: {
-                followCursor: true,
-                theme: 'dark',
-            },
+            tooltip: { followCursor: true, theme: 'dark' },
             xaxis: {
-                axisBorder: {
-                    show: false,
-                },
-                axisTicks: {
-                    color: 'var(--fuse-border)',
-                },
-                labels: {
-                    style: {
-                        colors: 'var(--fuse-text-secondary)',
-                    },
-                },
-                tooltip: {
-                    enabled: false,
-                },
+                axisBorder: { show: false },
+                axisTicks: { color: 'var(--fuse-border)' },
+                labels: { style: { colors: 'var(--fuse-text-secondary)' } },
+                tooltip: { enabled: false },
             },
             yaxis: {
                 labels: {
                     offsetX: -16,
-                    style: {
-                        colors: 'var(--fuse-text-secondary)',
+                    style: { colors: 'var(--fuse-text-secondary)' },
+                },
+            },
+        };
+    }
+
+    private _prepareOccupancyChart(): void {
+        if (!this.totalStats) return;
+        const available = this.chambreDispos.reduce((sum, c) => sum + c.chambres, 0);
+        const occupied = Math.max(0, this.totalStats.chambres - available);
+        this.occupancyChart = {
+            chart: {
+                fontFamily: 'inherit',
+                foreColor: 'inherit',
+                height: '100%',
+                type: 'donut',
+            },
+            series: [available, occupied],
+            labels: [
+                this._translocoService.translate('dashboard.charts.available'),
+                this._translocoService.translate('dashboard.charts.occupied'),
+            ],
+            colors: ['#4CAF50', '#F44336'],
+            legend: {
+                position: 'bottom',
+                labels: { colors: 'var(--fuse-text-secondary)' },
+            },
+            dataLabels: { enabled: true },
+            tooltip: { theme: 'dark' },
+            plotOptions: {
+                pie: {
+                    donut: {
+                        size: '70%',
+                        labels: {
+                            show: true,
+                            total: {
+                                show: true,
+                                label: this._translocoService.translate(
+                                    'dashboard.stats.rooms'
+                                ),
+                                color: 'var(--fuse-text-secondary)',
+                            },
+                        },
                     },
                 },
             },
