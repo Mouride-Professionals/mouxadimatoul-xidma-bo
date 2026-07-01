@@ -43,4 +43,5 @@ jobs:
         if: env.DROPLET_HOST != '' && env.DROPLET_SSH_PRIVATE_KEY != ''
         run: |
           ssh -i ~/.ssh/khidma_deploy_key root@"$DROPLET_HOST" \
-            "cd $APP_DIR && docker compose pull bo && docker compose up -d bo && docker image prune -f"
+            "echo '${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}' | docker login registry.digitalocean.com -u '${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}' --password-stdin \
+            && cd $APP_DIR && docker compose pull bo && docker compose up -d bo && docker image prune -f"
