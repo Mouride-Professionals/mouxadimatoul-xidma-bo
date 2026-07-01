@@ -12,6 +12,7 @@ import { SharedModule } from 'app/shared/shared.module';
 import { ClassicLayoutComponent } from './classic.component';
 import { UserModule } from 'app/layout/common/user/user.module';
 import { LanguageSelectorModule } from 'app/layout/common/language-selector/language-selector.module';
+import { GlobalSearchModule } from 'app/layout/common/global-search/global-search.module';
 
 @NgModule({
     declarations: [ClassicLayoutComponent],
@@ -27,6 +28,7 @@ import { LanguageSelectorModule } from 'app/layout/common/language-selector/lang
         FuseNavigationModule,
         UserModule,
         LanguageSelectorModule,
+        GlobalSearchModule,
         SharedModule,
     ],
     exports: [ClassicLayoutComponent],

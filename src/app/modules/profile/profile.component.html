@@ -108,6 +108,17 @@
             </div>
             <!-- Actions -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+                <!-- Current password -->
+                <div class="w-full md:col-span-3">
+                    <mat-form-field class="fuse-mat-no-subscript w-full md:max-w-sm">
+                        <mat-label>{{ 'profile.currentPassword' | transloco }}</mat-label>
+                        <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:lock-closed'" matPrefix></mat-icon>
+                        <input matInput type="password" [formControlName]="'currentPassword'" autocomplete="current-password" />
+                        <mat-error *ngIf="resetPasswordForm.get('currentPassword').hasError('required')">
+                            {{ 'profile.validation.currentPasswordRequired' | transloco }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
                 <!-- Prénom -->
                 <div class="w-full">
                     <mat-form-field class="fuse-mat-no-subscript w-full">

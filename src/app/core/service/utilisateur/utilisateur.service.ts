@@ -50,6 +50,20 @@ export class UtilisateurService {
         );
     }
 
+    changePassword(id: number, password: string): Observable<void> {
+        return this._http.put<void>(
+            `${API_URL}/${id}/password`,
+            { password }
+        );
+    }
+
+    changeOwnPassword(currentPassword: string, newPassword: string): Observable<void> {
+        return this._http.put<void>(
+            `${API_URL}/me/password`,
+            { currentPassword, newPassword }
+        );
+    }
+
     getUserById(id: number): Observable<Utilisateur> {
         return this._http.get<Utilisateur>(`${API_URL}/${id}`);
     }

@@ -4,6 +4,50 @@
 /* ----------------------------------------------------------------------------------------------------- */
 
 
+@page {
+    margin: 1cm;
+}
+
+@media print {
+    fuse-vertical-navigation,
+    .mat-tab-header,
+    .mat-mdc-tab-header,
+    .no-print {
+        display: none !important;
+    }
+
+    .mat-tab-body:not(.mat-tab-body-active),
+    .mat-mdc-tab-body:not(.mat-mdc-tab-body-active) {
+        display: none !important;
+    }
+
+    .mat-tab-body-wrapper,
+    .mat-tab-body-content {
+        height: auto !important;
+        overflow: visible !important;
+    }
+
+    .table th,
+    .table td {
+        padding: 6px 8px !important;
+        font-size: 11px !important;
+    }
+
+    .responsive-table {
+        overflow: visible !important;
+    }
+}
+
+.mat-select-panel,
+.mat-autocomplete-panel {
+    @apply bg-white dark:bg-gray-800 rounded-lg shadow-lg #{'!important'};
+}
+
+.mat-autocomplete-panel .group-header {
+    @apply opacity-100 text-xs font-semibold text-gray-400 uppercase tracking-wide cursor-default #{'!important'};
+    pointer-events: none;
+}
+
 .responsive-table {
     @apply relative overflow-x-auto rounded-lg;
     -webkit-overflow-scrolling: touch;

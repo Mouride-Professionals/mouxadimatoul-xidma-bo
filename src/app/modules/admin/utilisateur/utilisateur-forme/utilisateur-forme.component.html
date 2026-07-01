@@ -80,6 +80,92 @@
                     [svgIcon]="'heroicons_solid:phone'"
                 ></mat-icon>
             </mat-form-field>
+            <mat-form-field class="col-span-1 w-full">
+                <mat-label>{{ 'fields.role' | transloco }}</mat-label>
+                <mat-select formControlName="accountType">
+                    <mat-option value="KHIDMA_AGENT">
+                        {{ 'roles.khidmaAgent' | transloco }}
+                    </mat-option>
+                    <mat-option value="ADMIN">
+                        {{ 'roles.admin' | transloco }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <!-- Password fields — create: required / edit: optional reset -->
+            <ng-container *ngIf="isEdit">
+                <div class="col-span-1 border-t pt-3">
+                    <p class="text-sm text-gray-500 mb-3">{{ 'users.form.passwordResetHint' | transloco }}</p>
+                </div>
+                <mat-form-field class="col-span-1 w-full">
+                    <mat-label>{{ 'fields.newPassword' | transloco }}</mat-label>
+                    <input
+                        matInput
+                        type="password"
+                        formControlName="password"
+                        autocomplete="new-password"
+                    />
+                    <mat-icon class="icon-size-5" matSuffix [svgIcon]="'heroicons_solid:lock-closed'"></mat-icon>
+                    <mat-error *ngIf="formUser.password.touched && formUser.password.errors?.minlength">
+                        {{ 'validation.minLength' | transloco : { requiredLength: 6 } }}
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="col-span-1 w-full">
+                    <mat-label>{{ 'fields.confirmPassword' | transloco }}</mat-label>
+                    <input
+                        matInput
+                        type="password"
+                        formControlName="confirmPassword"
+                        autocomplete="new-password"
+                    />
+                    <mat-icon class="icon-size-5" matSuffix [svgIcon]="'heroicons_solid:lock-closed'"></mat-icon>
+                    <mat-error *ngIf="form.errors?.passwordsMustMatch && formUser.confirmPassword.touched">
+                        {{ 'validation.passwordsMustMatch' | transloco }}
+                    </mat-error>
+                </mat-form-field>
+            </ng-container>
+            <ng-container *ngIf="!isEdit">
+                <mat-form-field class="col-span-1 w-full">
+                    <mat-label>{{ 'fields.password' | transloco }}</mat-label>
+                    <input
+                        matInput
+                        type="password"
+                        formControlName="password"
+                        autocomplete="new-password"
+                    />
+                    <mat-icon
+                        class="icon-size-5"
+                        matSuffix
+                        [svgIcon]="'heroicons_solid:lock-closed'"
+                    ></mat-icon>
+                    <mat-error *ngIf="formUser.password.touched && formUser.password.errors?.required">
+                        {{ 'validation.required.password' | transloco }}
+                    </mat-error>
+                    <mat-error *ngIf="formUser.password.touched && formUser.password.errors?.minlength">
+                        {{ 'validation.minLength' | transloco : { requiredLength: 6 } }}
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="col-span-1 w-full">
+                    <mat-label>{{ 'fields.confirmPassword' | transloco }}</mat-label>
+                    <input
+                        matInput
+                        type="password"
+                        formControlName="confirmPassword"
+                        autocomplete="new-password"
+                    />
+                    <mat-icon
+                        class="icon-size-5"
+                        matSuffix
+                        [svgIcon]="'heroicons_solid:lock-closed'"
+                    ></mat-icon>
+                    <mat-error *ngIf="formUser.confirmPassword.touched && formUser.confirmPassword.errors?.required">
+                        {{ 'validation.required.confirmPassword' | transloco }}
+                    </mat-error>
+                    <mat-error *ngIf="form.errors?.passwordsMustMatch && formUser.confirmPassword.touched">
+                        {{ 'validation.passwordsMustMatch' | transloco }}
+                    </mat-error>
+                </mat-form-field>
+            </ng-container>
+
             <div class="col-span-full flex justify-end items-center gap-4">
                 <button
                     mat-flat-button

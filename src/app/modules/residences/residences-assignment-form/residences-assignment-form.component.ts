@@ -32,7 +32,7 @@ export class ResidencesAssignmentFormComponent implements OnInit {
 
     form: FormGroup = new FormGroup({
         agentId: new FormControl<number | null>(null, Validators.required),
-        responsibilities: new FormControl<Responsibility[]>([], Validators.required),
+        responsibilities: new FormControl<Responsibility | null>(null, Validators.required),
         startDate: new FormControl<string | null>(null),
         endDate: new FormControl<string | null>(null),
         rotationSlots: new FormArray([]),
@@ -64,7 +64,7 @@ export class ResidencesAssignmentFormComponent implements OnInit {
             const a = this.data.assignment;
             this.form.patchValue({
                 agentId: a.agent.id,
-                responsibilities: a.responsibilities,
+                responsibilities: a.responsibilities[0] ?? null,
                 startDate: a.startDate ?? null,
                 endDate: a.endDate ?? null,
             });
@@ -96,7 +96,7 @@ export class ResidencesAssignmentFormComponent implements OnInit {
         const request = {
             agentId: v.agentId,
             residenceId: this.data.residenceId,
-            responsibilities: v.responsibilities,
+            responsibilities: [v.responsibilities],
             startDate: v.startDate,
             endDate: v.endDate,
             rotationSlots: v.rotationSlots,
@@ -131,6 +131,19 @@ export class ResidencesAssignmentFormComponent implements OnInit {
 
     onCancel(): void {
         this._dialogRef.close();
+    }
+
+    isAgentUnavailable(agent: Utilisateur): boolean {
+        if (!agent.hasAssignment) return false;
+        // In edit mode, the currently assigned agent stays selectable
+        return this.data.assignment?.agent?.id !== agent.id;
+    }
+
+    agentTooltip(agent: Utilisateur): string {
+        if (!this.isAgentUnavailable(agent)) return '';
+        return this._transloco.translate('assignments.form.agentUnavailable', {
+            residence: agent.assignedResidenceName,
+        });
     }
 
     responsibilityLabel(r: Responsibility): string {

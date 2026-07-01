@@ -1,16 +1,19 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { UtilisateurService } from '@core/service/utilisateur/utilisateur.service';
 import { Utilisateur } from '@core/model/utilisateur.model';
-import { RoleService } from '@core/service/role/role.service';
-import { Role } from '@core/model/role.model';
-import { Observable, map } from 'rxjs';
 import {
     MAT_DIALOG_DATA,
     MatDialogRef,
 } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslocoService } from '@ngneat/transloco';
+
+function passwordsMatch(group: AbstractControl): ValidationErrors | null {
+    const pw = group.get('password')?.value;
+    const confirm = group.get('confirmPassword')?.value;
+    return pw && confirm && pw !== confirm ? { passwordsMustMatch: true } : null;
+}
 @Component({
     selector: 'app-utilisateur-forme',
     templateUrl: './utilisateur-forme.component.html',
@@ -48,15 +51,30 @@ export class UtilisateurFormeComponent implements OnInit {
     }
 
     userForm(): void {
-        this.form = new FormGroup({
-            prenom: new FormControl(this.data?.prenom, Validators.required),
-            nom: new FormControl(this.data?.nom, Validators.required),
-            telephone: new FormControl(
-                this.data?.telephone,
-                Validators.required
-            ),
-            whatsapp: new FormControl(this.data?.whatsapp ?? null),
-        });
+        this.form = new FormGroup(
+            {
+                prenom: new FormControl(this.data?.prenom, Validators.required),
+                nom: new FormControl(this.data?.nom, Validators.required),
+                telephone: new FormControl(
+                    this.data?.telephone,
+                    Validators.required
+                ),
+                whatsapp: new FormControl(this.data?.whatsapp ?? null),
+                accountType: new FormControl(
+                    this.data?.accountType ?? 'KHIDMA_AGENT',
+                    Validators.required
+                ),
+                password: new FormControl(
+                    null,
+                    this.isEdit ? [Validators.minLength(6)] : [Validators.required, Validators.minLength(6)]
+                ),
+                confirmPassword: new FormControl(
+                    null,
+                    this.isEdit ? [] : [Validators.required]
+                ),
+            },
+            { validators: passwordsMatch }
+        );
     }
 
     saveUser(): void {
@@ -65,8 +83,9 @@ export class UtilisateurFormeComponent implements OnInit {
         }
         console.log(!this.isEdit);
         if (!this.isEdit) {
+            const { confirmPassword, ...payload } = this.form.value;
             this._utilisateurService
-                .createUser(this.form.value)
+                .createUser(payload)
                 .subscribe((res: Utilisateur) => {
                     this._snackBar.open(
                         this._translocoService.translate(
@@ -82,15 +101,21 @@ export class UtilisateurFormeComponent implements OnInit {
                     this._matDialogRef.close(true);
                 });
         } else {
-            const _data: Utilisateur = {
-                ...this.data,
-                ...this.form.value,
-            };
-            this._utilisateurService
-                .updateUser(_data)
-                .subscribe((res: Utilisateur) => {
-                    console.log('res', res);
-                });
+            const pw: string = this.form.value.password;
+            if (pw) {
+                this._utilisateurService
+                    .changePassword(this.data.id, pw)
+                    .subscribe(() => {
+                        this._snackBar.open(
+                            this._translocoService.translate('users.messages.passwordChanged'),
+                            '',
+                            { panelClass: ['bg-green-500', 'text-white'], duration: 3000 }
+                        );
+                        this._matDialogRef.close(false);
+                    });
+            } else {
+                this._matDialogRef.close(false);
+            }
         }
     }
     // Get all Roles

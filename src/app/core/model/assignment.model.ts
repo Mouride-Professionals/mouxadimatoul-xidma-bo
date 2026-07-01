@@ -1,7 +1,7 @@
 import { Residence } from './residence.model';
 import { Utilisateur } from './utilisateur.model';
 
-export type Responsibility = 'ACCUEILLANT' | 'RESPONSABLE_DELEGATION' | 'CHEF_CHAMBRE';
+export type Responsibility = 'ACCUEILLANT' | 'RESPONSABLE_DELEGATION' | 'CHEF_CHAMBRE' | 'RESPONSABLE_RESIDENCE';
 
 export type DayOfWeek = 'MONDAY' | 'TUESDAY' | 'WEDNESDAY' | 'THURSDAY' | 'FRIDAY' | 'SATURDAY' | 'SUNDAY';
 
@@ -23,6 +23,7 @@ export type Assignment = {
 };
 
 export const ALL_RESPONSIBILITIES: Responsibility[] = [
+    'RESPONSABLE_RESIDENCE',
     'ACCUEILLANT',
     'RESPONSABLE_DELEGATION',
     'CHEF_CHAMBRE',

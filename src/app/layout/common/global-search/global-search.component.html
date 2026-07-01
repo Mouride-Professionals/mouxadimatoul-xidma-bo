@@ -1,0 +1,63 @@
+<div class="relative">
+    <mat-form-field
+        class="fuse-mat-no-subscript fuse-mat-rounded fuse-mat-dense w-40 sm:w-64"
+        appearance="fill"
+    >
+        <mat-icon
+            class="icon-size-5"
+            matPrefix
+            [svgIcon]="'heroicons_solid:search'"
+        ></mat-icon>
+        <input
+            matInput
+            [formControl]="searchCtrl"
+            [matAutocomplete]="searchPanel"
+            [placeholder]="'search.placeholder' | transloco"
+            autocomplete="off"
+        />
+    </mat-form-field>
+
+    <mat-autocomplete
+        #searchPanel="matAutocomplete"
+        [displayWith]="displayFn"
+        panelWidth="360px"
+    >
+        <!-- Searching indicator -->
+        <mat-option *ngIf="searching" disabled>
+            <span class="text-gray-400 text-sm">{{ 'common.loading' | transloco }}</span>
+        </mat-option>
+
+        <!-- No results -->
+        <mat-option
+            *ngIf="!searching && !queryTooShort && !hasResults"
+            disabled
+        >
+            <span class="text-gray-400 text-sm">{{ 'search.empty' | transloco }}</span>
+        </mat-option>
+
+        <!-- Result groups -->
+        <ng-container *ngFor="let group of groups">
+            <!-- Group header -->
+            <mat-option disabled class="group-header">
+                <div class="flex items-center gap-2">
+                    <mat-icon class="icon-size-4" [svgIcon]="group.icon"></mat-icon>
+                    <span>{{ group.labelKey | transloco }}</span>
+                </div>
+            </mat-option>
+            <!-- Group items -->
+            <mat-option
+                *ngFor="let item of group.items"
+                [value]="''"
+                (click)="navigate(item)"
+                class="h-auto pl-8"
+            >
+                <div class="flex flex-col leading-tight py-1">
+                    <span class="font-medium text-sm">{{ item.label | titlecase }}</span>
+                    <span class="text-xs text-gray-400" *ngIf="item.sublabel">
+                        {{ item.sublabel }}
+                    </span>
+                </div>
+            </mat-option>
+        </ng-container>
+    </mat-autocomplete>
+</div>

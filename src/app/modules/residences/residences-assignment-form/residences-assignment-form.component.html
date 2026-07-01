@@ -11,9 +11,17 @@
             <mat-form-field class="w-full" appearance="fill">
                 <mat-label>{{ 'assignments.form.agent' | transloco }}</mat-label>
                 <mat-select formControlName="agentId">
-                    <mat-option *ngFor="let a of agents" [value]="a.id">
+                    <mat-option
+                        *ngFor="let a of agents"
+                        [value]="a.id"
+                        [disabled]="isAgentUnavailable(a)"
+                        [matTooltip]="agentTooltip(a)"
+                    >
                         {{ a.prenom | titlecase }} {{ a.nom | uppercase }} —
                         {{ a.telephone }}
+                        <span *ngIf="isAgentUnavailable(a)" class="text-xs text-gray-400 ml-1">
+                            ({{ a.assignedResidenceName }})
+                        </span>
                     </mat-option>
                 </mat-select>
                 <mat-error *ngIf="form.controls['agentId'].touched && form.controls['agentId'].errors?.['required']">
@@ -24,7 +32,7 @@
             <!-- Responsibilities -->
             <mat-form-field class="w-full" appearance="fill">
                 <mat-label>{{ 'assignments.form.responsibilities' | transloco }}</mat-label>
-                <mat-select formControlName="responsibilities" multiple>
+                <mat-select formControlName="responsibilities">
                     <mat-option *ngFor="let r of allResponsibilities" [value]="r">
                         {{ responsibilityLabel(r) }}
                     </mat-option>

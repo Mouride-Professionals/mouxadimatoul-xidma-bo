@@ -8,4 +8,6 @@ export type Utilisateur = {
     whatsapp: string;
     statut: boolean;
     accountType: AccountType;
+    hasAssignment?: boolean;
+    assignedResidenceName?: string;
 };

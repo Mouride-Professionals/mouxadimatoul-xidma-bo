@@ -12,6 +12,7 @@ import { ResidencesEditComponent } from './residences-edit/residences-edit.compo
 import { ResidencesEditImageComponent } from './residences-edit-image/residences-edit-image.component';
 import { ResidencesTeamComponent } from './residences-team/residences-team.component';
 import { ResidencesAssignmentFormComponent } from './residences-assignment-form/residences-assignment-form.component';
+import { ResidencesTimetableComponent } from './residences-timetable/residences-timetable.component';
 
 @NgModule({
     declarations: [
@@ -25,6 +26,7 @@ import { ResidencesAssignmentFormComponent } from './residences-assignment-form/
         ResidencesEditImageComponent,
         ResidencesTeamComponent,
         ResidencesAssignmentFormComponent,
+        ResidencesTimetableComponent,
     ],
     imports: [SharedModule, RouterModule.forChild(residenceRoutes)],
 })

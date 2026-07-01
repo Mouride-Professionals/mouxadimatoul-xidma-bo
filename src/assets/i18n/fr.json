@@ -196,6 +196,9 @@
     "peopleCountShort": "Nbr personnes",
     "phone": "Téléphone",
     "whatsapp": "WhatsApp",
+    "password": "Mot de passe",
+    "newPassword": "Nouveau mot de passe",
+    "confirmPassword": "Confirmer le mot de passe",
     "residence": "Résidence",
     "role": "Rôle",
     "room": "Chambre",
@@ -241,10 +244,14 @@
     "changePassword": "Changer le mot de passe.",
     "newPassword": "Nouveau mot de passe",
     "confirmPassword": "Confirmer le mot de passe",
+    "currentPassword": "Mot de passe actuel",
     "validation": {
       "passwordRequired": "Le mot de passe est obligatoire",
+      "currentPasswordRequired": "Le mot de passe actuel est obligatoire",
       "passwordConfirmationRequired": "La confirmation du mot de passe est requise",
-      "passwordsMustMatch": "Les mots de passe doivent correspondre"
+      "passwordsMustMatch": "Les mots de passe doivent correspondre",
+      "passwordChanged": "Mot de passe modifié avec succès.",
+      "passwordError": "Mot de passe actuel incorrect."
     }
   },
   "roles": {
@@ -382,8 +389,14 @@
       "addTitle": "Ajouter un utilisateur",
       "editTitle": "Modifier un utilisateur"
     },
+    "form": {
+      "addTitle": "Ajouter un utilisateur",
+      "editTitle": "Modifier un utilisateur",
+      "passwordResetHint": "Laissez vide pour ne pas modifier le mot de passe."
+    },
     "messages": {
-      "created": "Utilisateur ajouté avec succès !"
+      "created": "Utilisateur ajouté avec succès !",
+      "passwordChanged": "Mot de passe modifié avec succès !"
     }
   },
   "validation": {
@@ -399,8 +412,18 @@
       "name": "Le nom est obligatoire.",
       "phone": "Le téléphone est obligatoire.",
       "residence": "La résidence est obligatoire.",
-      "responsibilities": "Au moins une responsabilité est obligatoire."
-    }
+      "responsibilities": "Au moins une responsabilité est obligatoire.",
+      "password": "Le mot de passe est obligatoire.",
+      "confirmPassword": "La confirmation du mot de passe est obligatoire."
+    },
+    "passwordsMustMatch": "Les mots de passe ne correspondent pas."
+  },
+  "search": {
+    "placeholder": "Recherche globale...",
+    "empty": "Aucun résultat",
+    "residences": "Résidences",
+    "delegations": "Délégations",
+    "agents": "Agents Khidma"
   },
   "assignments": {
     "team": "Équipe Khidma",
@@ -409,6 +432,7 @@
     "confirmDelete": "Voulez-vous retirer {{name}} de l'équipe de cette résidence ?",
     "rotationCount": "{{count}} créneau(x) de rotation",
     "responsibilities": {
+      "RESPONSABLE_RESIDENCE": "Responsable de Résidence",
       "ACCUEILLANT": "Accueillant",
       "RESPONSABLE_DELEGATION": "Responsable Délégation",
       "CHEF_CHAMBRE": "Chef de Chambre"
@@ -426,6 +450,7 @@
       "addTitle": "Ajouter un agent",
       "editTitle": "Modifier l'assignation",
       "agent": "Agent",
+      "agentUnavailable": "Déjà assigné à {{residence}}",
       "responsibilities": "Responsabilités",
       "startDate": "Date de début",
       "endDate": "Date de fin",
@@ -441,6 +466,12 @@
       "created": "Agent assigné avec succès",
       "updated": "Assignation modifiée avec succès",
       "deleted": "Assignation supprimée avec succès"
+    },
+    "timetable": {
+      "title": "Planning",
+      "export": "Exporter PDF",
+      "permanent": "Permanent",
+      "empty": "Aucune planification définie pour cette résidence"
     }
   }
 }

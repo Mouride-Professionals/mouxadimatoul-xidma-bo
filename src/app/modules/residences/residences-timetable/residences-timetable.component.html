@@ -1,0 +1,82 @@
+<div class="w-full flex flex-col gap-4">
+
+    <!-- Toolbar (hidden on print) -->
+    <div class="w-full flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 no-print">
+        <h2 class="text-2xl font-serif">{{ 'assignments.timetable.title' | transloco }}</h2>
+        <button mat-raised-button color="primary" (click)="print()">
+            <mat-icon svgIcon="mat_solid:print"></mat-icon>
+            <span class="kh-button-label">{{ 'assignments.timetable.export' | transloco }}</span>
+        </button>
+    </div>
+
+    <!-- Print-only header -->
+    <div class="print-only">
+        <h1 class="text-2xl font-bold">{{ residenceName | titlecase }}</h1>
+        <p class="text-gray-500">{{ 'assignments.timetable.title' | transloco }}</p>
+        <mat-divider class="my-2"></mat-divider>
+    </div>
+
+    <!-- Loading -->
+    <fuse-card *ngIf="loading" class="w-full p-4 flex justify-center items-center">
+        <span class="text-gray-400">{{ 'common.loading' | transloco }}</span>
+    </fuse-card>
+
+    <!-- Empty -->
+    <fuse-card *ngIf="!loading && rows.length === 0" class="w-full p-4 flex justify-center items-center">
+        <span>{{ 'assignments.timetable.empty' | transloco }}</span>
+    </fuse-card>
+
+    <!-- Timetable -->
+    <div class="responsive-table" *ngIf="!loading && rows.length > 0">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="whitespace-nowrap">{{ 'assignments.form.agent' | transloco }}</th>
+                    <th
+                        *ngFor="let day of days"
+                        class="text-center whitespace-nowrap"
+                    >
+                        {{ dayLabel(day) }}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let row of rows">
+                    <td class="whitespace-nowrap">
+                        <div class="font-semibold">
+                            {{ row.assignment.agent.prenom | titlecase }}
+                            {{ row.assignment.agent.nom | uppercase }}
+                        </div>
+                        <div class="flex flex-wrap gap-1 mt-1">
+                            <span
+                                *ngFor="let r of row.assignment.responsibilities"
+                                class="px-2 py-0.5 rounded-full text-xs font-medium bg-primary text-white"
+                            >
+                                {{ responsibilityLabel(r) }}
+                            </span>
+                        </div>
+                    </td>
+                    <td *ngFor="let day of days" class="text-center">
+                        <ng-container *ngIf="row.cells[day].permanent">
+                            <span class="px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                {{ 'assignments.timetable.permanent' | transloco }}
+                            </span>
+                        </ng-container>
+                        <ng-container *ngIf="!row.cells[day].permanent">
+                            <div
+                                *ngFor="let t of row.cells[day].lines"
+                                class="text-xs font-medium whitespace-nowrap"
+                            >
+                                {{ t }}
+                            </div>
+                            <span
+                                *ngIf="row.cells[day].lines.length === 0"
+                                class="text-gray-300 text-lg leading-none"
+                            >—</span>
+                        </ng-container>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

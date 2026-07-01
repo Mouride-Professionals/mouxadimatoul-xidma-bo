@@ -196,6 +196,9 @@
     "peopleCountShort": "عدد الأشخاص",
     "phone": "الهاتف",
     "whatsapp": "واتساب",
+    "password": "كلمة المرور",
+    "newPassword": "كلمة المرور الجديدة",
+    "confirmPassword": "تأكيد كلمة المرور",
     "residence": "الإقامة",
     "role": "الدور",
     "room": "الغرفة",
@@ -241,10 +244,14 @@
     "changePassword": "تغيير كلمة المرور.",
     "newPassword": "كلمة المرور الجديدة",
     "confirmPassword": "تأكيد كلمة المرور",
+    "currentPassword": "كلمة المرور الحالية",
     "validation": {
       "passwordRequired": "كلمة المرور مطلوبة",
+      "currentPasswordRequired": "كلمة المرور الحالية مطلوبة",
       "passwordConfirmationRequired": "تأكيد كلمة المرور مطلوب",
-      "passwordsMustMatch": "يجب أن تتطابق كلمتا المرور"
+      "passwordsMustMatch": "يجب أن تتطابق كلمتا المرور",
+      "passwordChanged": "تم تغيير كلمة المرور بنجاح.",
+      "passwordError": "كلمة المرور الحالية غير صحيحة."
     }
   },
   "roles": {
@@ -382,8 +389,14 @@
       "addTitle": "إضافة مستخدم",
       "editTitle": "تعديل مستخدم"
     },
+    "form": {
+      "addTitle": "إضافة مستخدم",
+      "editTitle": "تعديل مستخدم",
+      "passwordResetHint": "اتركه فارغاً للإبقاء على كلمة المرور الحالية."
+    },
     "messages": {
-      "created": "تمت إضافة المستخدم بنجاح!"
+      "created": "تمت إضافة المستخدم بنجاح!",
+      "passwordChanged": "تم تغيير كلمة المرور بنجاح!"
     }
   },
   "validation": {
@@ -399,8 +412,18 @@
       "name": "الاسم مطلوب.",
       "phone": "رقم الهاتف مطلوب.",
       "residence": "الإقامة مطلوبة.",
-      "responsibilities": "يجب اختيار مسؤولية واحدة على الأقل."
-    }
+      "responsibilities": "يجب اختيار مسؤولية واحدة على الأقل.",
+      "password": "كلمة المرور مطلوبة.",
+      "confirmPassword": "تأكيد كلمة المرور مطلوب."
+    },
+    "passwordsMustMatch": "كلمتا المرور غير متطابقتين."
+  },
+  "search": {
+    "placeholder": "بحث شامل...",
+    "empty": "لا توجد نتائج",
+    "residences": "الإقامات",
+    "delegations": "الوفود",
+    "agents": "أعضاء الخدمة"
   },
   "assignments": {
     "team": "فريق الخدمة",
@@ -409,6 +432,7 @@
     "confirmDelete": "هل تريد إزالة {{name}} من فريق هذه الإقامة؟",
     "rotationCount": "{{count}} فترة دوام",
     "responsibilities": {
+      "RESPONSABLE_RESIDENCE": "مسؤول الإقامة",
       "ACCUEILLANT": "مستقبِل",
       "RESPONSABLE_DELEGATION": "مسؤول الوفد",
       "CHEF_CHAMBRE": "مسؤول الغرفة"
@@ -426,6 +450,7 @@
       "addTitle": "إضافة عضو",
       "editTitle": "تعديل التكليف",
       "agent": "العضو",
+      "agentUnavailable": "مُعيَّن بالفعل في {{residence}}",
       "responsibilities": "المسؤوليات",
       "startDate": "تاريخ البداية",
       "endDate": "تاريخ النهاية",
@@ -441,6 +466,12 @@
       "created": "تم تكليف العضو بنجاح",
       "updated": "تم تعديل التكليف بنجاح",
       "deleted": "تم حذف التكليف بنجاح"
+    },
+    "timetable": {
+      "title": "الجدول الزمني",
+      "export": "تصدير PDF",
+      "permanent": "دائم",
+      "empty": "لا يوجد جدول زمني محدد لهذه الإقامة"
     }
   }
 }

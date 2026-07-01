@@ -1,5 +1,5 @@
 <div class="w-full min-h-full flex flex-col flex-auto">
-    <div class="w-full min-h-80 sm:h-90 overflow-hidden relative group/header">
+    <div class="w-full min-h-80 sm:h-90 overflow-hidden relative group/header no-print">
         <img
             [src]="imageResidence"
             [alt]="'residences.coverAlt' | transloco"
@@ -180,6 +180,17 @@
                         *ngIf="residence"
                         [residenceId]="residence.id"
                     ></app-residences-team>
+                </div>
+            </mat-tab>
+
+            <!-- Tab 3: Planning -->
+            <mat-tab [label]="'assignments.timetable.title' | transloco">
+                <div class="pt-4">
+                    <app-residences-timetable
+                        *ngIf="residence"
+                        [residenceId]="residence.id"
+                        [residenceName]="residence.libelle"
+                    ></app-residences-timetable>
                 </div>
             </mat-tab>
         </mat-tab-group>
